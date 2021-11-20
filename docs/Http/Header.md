@@ -41,5 +41,5 @@ This class contains lots of usefull methods for defines header in current reques
     'js'    =>  'application/javascript; charset=utf-8',  # Js
     'json'  =>  'application/json; charset=utf-8',        # Json
     'yml'   =>  'application/x-yaml; charset=utf-8'       # Yaml
-];
+]
 ```

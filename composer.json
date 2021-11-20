@@ -1,5 +1,5 @@
 {
-    "name": "kekefreedog/K_utilities",
+    "name": "kekefreedog/luckyphp",
     "description": "All essential tools in PHP for my own development",
     "require": {
         "symfony/yaml": "^5.3",
