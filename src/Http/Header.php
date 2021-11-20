@@ -9,7 +9,45 @@
  * permission of Kévin Zarshenas @kekefreedog
  *******************************************************/
 
-/** Kutilities
+/** Namespace
  * 
  */
 namespace  Kutilities\Http;
+
+/** Class page
+ * 
+ */
+abstract class Header{
+
+    /** Set a header
+     * 
+     */
+    public function set(string $type = "") :bool {
+
+        # Check if type is defined and is in constant
+        if(!$type || !in_array($type, self::CONTENT_TYPE))
+
+            # Return false
+            return false;
+
+        # Set header
+        header("Content-Type: ".self::CONTENT_TYPE[$type]);
+
+        # Return true
+        return true;
+
+    }
+
+    /** Constant where is stored content type
+     * 
+     */
+    const CONTENT_TYPE = [
+        # Js
+        'js'    =>  'application/javascript; charset=utf-8',
+        # Json
+        'json'  =>  'application/json',
+        # Yaml
+        'yml'   =>  'application/x-yaml'
+    ];
+
+}

@@ -1,0 +1,8 @@
+{
+    "name": "kekefreedog/K_utilities",
+    "description": "All essential tools in PHP for my own development",
+    "require": {
+        "symfony/yaml": "^5.3",
+        "mezon/router": "^1.3"
+    }
+}
