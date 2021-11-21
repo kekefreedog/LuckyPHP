@@ -41,3 +41,10 @@ Sorry, no action is associated to the current file :
 ```
 
 ### 3. private ***function*** **setup**
+
+
+## Constants
+
+### 1. public ***const*** **NAME_PROHIBITED**
+- List all application names not allowed : 
+``['Server','src','luckyphp','kekefreedog','vendor','bin']``
