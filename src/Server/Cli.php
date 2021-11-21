@@ -124,7 +124,7 @@ class Cli{
         # Get last name
         $nameSupposed = empty($folders) ? "" : array_pop($folders);
 
-        # Ask name
+        # 1. Ask name
         while( 
             in_array(
                 (
@@ -139,9 +139,14 @@ class Cli{
                     
             echo '"'.$this->data['name'].'" is not allowed ! ⚠️'.PHP_EOL;
 
+        # Check $this->data['name']
+        if(!$this->data['name'])
+
+            # Set value
+            $this->data['name'] = $nameSupposed ? $nameSupposed : 'LuckyApp';
 
 
-        # Ask name
+        # 2. Ask if you want to use Kmaterialize
         while( 
             !in_array(
                 (
@@ -153,6 +158,31 @@ class Cli{
         )
                     
             echo '"'.$this->data['k_materialize'].'" is not valid ! ⚠️'.PHP_EOL;
+
+
+        # 3. Ask if you want to use interal auth
+        while( 
+            !in_array(
+                (
+                    $this->data['auth_internal'] = 
+                        readline('3. Use internal auth script ? [Yes] or [No] : ')
+                    ),
+                ['Yes', 'No']
+            )
+        )
+                    
+            echo '"'.$this->data['k_materialize'].'" is not valid ! ⚠️'.PHP_EOL;
+
+        # Echo en
+        echo 
+            PHP_EOL,
+            "------------------------------------------------(✔️ )".PHP_EOL,
+            PHP_EOL,
+            'We are ready to create "'.$this->data['name'].'"'.PHP_EOL
+        ;
+
+        # Ready to create 
+        readline('Press [enter] key and let\'s go ! 🔥🔥🔥');
 
 
     }
