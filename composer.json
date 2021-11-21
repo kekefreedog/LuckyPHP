@@ -1,7 +1,16 @@
 {
     "name": "kekefreedog/luckyphp",
+    "type": "library",
     "description": "All essential tools in PHP for my own development",
+    "keywords": [],
+    "authors": [
+        {
+            "name": "Kévin Zarshenas",
+            "email": "kevin.zarshenas@gmail.com"
+        }
+    ],
     "require": {
+        "php": ">=7.2.5",
         "symfony/yaml": "^5.3",
         "mezon/router": "^1.3"
     }
