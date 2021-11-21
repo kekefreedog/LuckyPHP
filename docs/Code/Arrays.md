@@ -3,8 +3,8 @@
 ## Info
 
 ```php
-namespace  Kutilities\Code;     # Name Space
-public class Arrays{}           # Class name
+namespace  Kutilities\Code\Arrays;  # Name Space
+public class Arrays{}               # Class name
 ```
 
 ## Description

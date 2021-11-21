@@ -3,8 +3,8 @@
 ## Info
 
 ```php
-namespace  Kutilities\Http;     # Name Space
-abstract class Header{}         # Class name
+namespace  Kutilities\Http\Header;  # Name Space
+abstract class Header{}             # Class name
 ```
 
 ## Description

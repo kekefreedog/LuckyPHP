@@ -3,8 +3,8 @@
 ## Info
 
 ```php
-namespace  Kutilities\Server;   # Name Space
-abstract class Config{}         # Class name
+namespace  Kutilities\Server\Config;    # Name Space
+abstract class Config{}                 # Class name
 ```
 
 ## Dependance

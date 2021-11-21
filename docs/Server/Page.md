@@ -3,8 +3,8 @@
 ## Info
 
 ```php
-namespace  Kutilities\Server;   # Name Space
-abstract class Page{}           # Class name
+namespace  Kutilities\Server\Page;  # Name Space
+abstract class Page{}               # Class name
 ```
 
 ## Description
