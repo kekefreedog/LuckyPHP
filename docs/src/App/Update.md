@@ -1,14 +1,14 @@
-# ***Class*** **Structure**
+# ***Class*** **Update**
 
 ## Info
 
 ```php
-namespace  Kutilities\Code\Structure;   # Name Space
-public class Structure{}                # Class name
+namespace  Kutilities\App\Update;    # Name Space
+public class Update{}                # Class name
 ```
 
 ## Description
-This class contains methods for process files and folder and create complex folder schema.
+This class contains methods for update the app.
 
 ## Methods
 

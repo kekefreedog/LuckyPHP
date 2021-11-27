@@ -26,83 +26,152 @@ class Structure{
      *
      * @param array $structure
      * @param string $path
+     * @param string $action 'create', 'update' or 'delete'
      * @return void
      */
-    public function tree_folder_file_create($structure, $path=__DIR__){
+    public function treeFolderGenerator($structure = [], $path = '/', $action = 'create'){
 
-        # Iteration of folder in structure
-        foreach ($structure as $folder => $sub_folder)
+        # Check parameters
+        if(
+            empty($structure) ||
+            !in_array($action, ['create', 'update', 'delete']) ||
+            !$path
+        )
+            return false;
         
-            # If subfolder
-            if (is_array($sub_folder)):
 
-                $new_path = "{$path}/{$folder}";
+        # Iteration of folder on root of structure
+        foreach ($structure as $content)
 
-                if ( ! is_dir($new_path))
+            # Check action
+            if(in_array($action, ['create', 'update'])){
 
-                    mkdir($new_path);
+                # check path exist
+                if(!is_dir($path))
 
-                call_user_func(__FUNCTION__, $sub_folder, $new_path);
-            
-            else:
-            
-                $new_path = "{$path}/{$sub_folder}";
+                    # Create folder
+                    mkdir($path, 0777, true);
 
-                if ( ! is_dir($new_path))
+                # Check file
+                if(
+                    isset($content['files']) &&
+                    is_array($content['files']) &&
+                    !empty($content['files'])
+                )
 
-                    mkdir($new_path);
-            
-            endif;
+                    # Iteration des files
+                    foreach ($content['files'] as $key => $value) {
+                        
+
+
+                    }
+
+                # Check file
+                if(
+                    isset($content['folders']) &&
+                    is_array($content['folders']) &&
+                    !empty($content['folders'])
+                )
+
+                    #Iteration folders
+                    foreach ($content['folders'] as $foldername => $foldercontent)
+
+                        # Call function
+                        call_user_func(__FUNCTION__, $foldercontent, $path.$foldername, $action);
+
+            # Action Delete
+            }elseif($action == 'delete')
+
+                # Check path is not root "/"
+                if($path !== "/")
+
+                    unlink($path);
         
     }
 
+    /**
+     * 
+     * Creation of specific file
+     * 
+     */
+
+        /** .htaccess
+         * 
+         * Write the htaccess file on www folder
+         * @param bool $overwrite
+         * 
+         */
+        public function htaccessWrite($overwrite = false){
+
+            # Get path where write the file
+            $path = scandir('./');
+
+        }
+
+    /**
+     * 
+     * Creation of specific file end
+     * 
+     */
+
     /** Application structure
+     * 
      * 
      */
     public const STRUCTURE_APP = [
 
         "@root" =>  [
-            'www'   =>  [
-                'folders'   =>  [
-                    'app'       =>  [
+            'folders'=>  [
+                'www'   =>  [
+                    'folders'   =>  [
+                        'app'       =>  [
 
-                    ],
-                    'api'       =>  [
+                        ],
+                        'api'       =>  [
 
+                        ],
                     ],
-                ],
-                'files'      =>  [
-                    '.htaccess' =>  [
-                    ],
-                    'index.php' =>  [
+                    'files'      =>  [
+                        '.htaccess' =>  [
+                            'function'  =>  [
+                                'name'      =>  'htaccessWrite',
+                                'parameters'=>  [
+                                    true,
+                                ],
+                            ],
+                        ],
+                        'index.php' =>  [
+                        ]
+
                     ]
 
-                ]
-
-            ],
-            'resources' =>  [
-                'css'       =>  [
                 ],
-                'js'        =>  [
-                ],
-                'hbs'       =>  [
-                ],
-                'md'        =>  [
-                ],
-            ],
-            'config'    =>  [
-                'files'      =>  [
-                    'settings.yml' =>  [
+                'resources' =>  [
+                    'folders'   =>  [
+                        'css'       =>  [
+                        ],
+                        'js'        =>  [
+                        ],
+                        'hbs'       =>  [
+                        ],
+                        'md'        =>  [
+                        ],
                     ],
-                ]
-            ],
-            'logs'      =>  [
+                ],
+                'config'    =>  [
+                    'files'      =>  [
+                        'app.yml' =>  [
+                        ],
+                    ]
+                ],
+                'logs'      =>  [
 
-            ],
-            'storage'   =>  [
+                ],
+                'storage'   =>  [
 
+                ],
             ],
-        ]
+        ],
 
     ];
 
