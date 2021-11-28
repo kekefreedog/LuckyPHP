@@ -3,7 +3,7 @@
 ## Info
 
 ```php
-namespace  Kutilities\Server\Root;  # Name Space
+namespace  LuckyPHP\Server\Root;  # Name Space
 abstract class Root{}               # Class name
 ```
 

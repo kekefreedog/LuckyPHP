@@ -3,7 +3,7 @@
 ## Info
 
 ```php
-namespace  Kutilities\Server\Page;  # Name Space
+namespace  LuckyPHP\Server\Page;  # Name Space
 abstract class Page{}               # Class name
 ```
 

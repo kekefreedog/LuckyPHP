@@ -3,7 +3,7 @@
 ## Info
 
 ```php
-namespace  Kutilities\App\Setup;    # Name Space
+namespace  LuckyPHP\App\Setup;    # Name Space
 public class Setup{}                # Class name
 ```
 

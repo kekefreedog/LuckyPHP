@@ -3,7 +3,7 @@
 ## Info
 
 ```php
-namespace  Kutilities\Code\Arrays;  # Name Space
+namespace  LuckyPHP\Code\Arrays;  # Name Space
 public class Arrays{}               # Class name
 ```
 

@@ -3,7 +3,7 @@
  * Copyright (C) 2019-2021 Kévin Zarshenas
  * kevin.zarshenas@gmail.com
  * 
- * This file is part of Double Screen.
+ * This file is part of LuckyPHP.
  * 
  * This code can not be copied and/or distributed without the express
  * permission of Kévin Zarshenas @kekefreedog
@@ -12,7 +12,7 @@
 /** Namespace
  * 
  */
-namespace  Kutilities\Server;
+namespace  LuckyPHP\Server;
 
 /** Class page
  * 
@@ -57,8 +57,8 @@ class Cli{
             "    /____/\_,_/\__/_/\_\\_,  /_/  /_//_/_/          ".PHP_EOL,
             "                       /___/                       ".PHP_EOL,
             PHP_EOL,
-            "👋 Welcome to LuckyPHP, my own development toolkit for".PHP_EOL,
-            "developed beautiful web applications.".PHP_EOL,
+            "👋 Welcome to LuckyPHP, my own development toolkit".PHP_EOL,
+            "for developed beautiful web applications.".PHP_EOL,
             PHP_EOL
         ;
 

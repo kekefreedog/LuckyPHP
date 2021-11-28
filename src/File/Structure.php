@@ -3,7 +3,7 @@
  * Copyright (C) 2019-2021 Kévin Zarshenas
  * kevin.zarshenas@gmail.com
  * 
- * This file is part of Double Screen.
+ * This file is part of LuckyPHP.
  * 
  * This code can not be copied and/or distributed without the express
  * permission of Kévin Zarshenas @kekefreedog
@@ -12,7 +12,7 @@
 /** Namespace
  * 
  */
-namespace  Kutilities\File\Structure;
+namespace  LuckyPHP\File;
 
 /** Class page
  * 
@@ -29,63 +29,104 @@ class Structure{
      * @param string $action 'create', 'update' or 'delete'
      * @return void
      */
-    public function treeFolderGenerator($structure = [], $path = '/', $action = 'create'){
+    public function treeFolderGenerator($folders = [], $path = '/', $action = 'create'){
 
-        # Check parameters
+        # Check path has / at the end
+        $path = rtrim($path, '/').'/';
+
+        # Check arguments
         if(
-            empty($structure) ||
-            !in_array($action, ['create', 'update', 'delete']) ||
-            !$path
+            !in_array($action, ['create', 'update', 'delete'])
         )
             return false;
-        
 
-        # Iteration of folder on root of structure
-        foreach ($structure as $content)
+        # Iteration of folders
+        foreach($folders as $folderName => $folderContent):
 
-            # Check action
+            # Create folder of the root folder if not exist
             if(in_array($action, ['create', 'update'])){
-
+    
                 # check path exist
-                if(!is_dir($path))
+                if(!is_dir($path.$folderName))
+    
+                    # Create current folder
+                    mkdir($path.$folderName, 0777, true);
 
-                    # Create folder
-                    mkdir($path, 0777, true);
-
-                # Check file
+                # Check files
                 if(
-                    isset($content['files']) &&
-                    is_array($content['files']) &&
-                    !empty($content['files'])
+                    isset($folderContent['files']) &&
+                    is_array($folderContent['files']) &&
+                    !empty($folderContent['files'])
                 )
 
                     # Iteration des files
-                    foreach ($content['files'] as $key => $value) {
-                        
+                    foreach ($folderContent['files'] as $filename => $fileContent) {
 
+                        # Get path of the current file
+                        $filepath = rtrim($path, '/').'/'.$filename;
+                        
+                        # Check source
+                        if(
+                            isset($fileContent['source']) && 
+                            $fileContent['source'] && 
+                            file_exists($fileContent['source']) 
+                        ){
+
+                            # Check if update
+                            if($action == 'update' && file_exists($filepath))
+
+                                # Check copy
+                                if(!copy($fileContent['source'], $filepath)){
+
+                                    # Erreur de copy
+
+                                }
+
+                        }elseif(
+                            isset($fileContent['function']['name']) && 
+                            $fileContent['function']['name'] && 
+                            method_exists($this, $fileContent['function']['name'])
+                        ){
+
+                            # Open current file
+                            $currentFile = fopen($filepath, "w");
+
+                            # Get new content
+                            $newContent = $this->{$fileContent['function']['name']}(...($fileContent['function']['parameters'] ?? []));
+
+                            # Clear content of file
+                            ftruncate($currentFile, 0);
+
+                            # Put new content into file
+                            fwrite($currentFile, $newContent);
+
+                            # Close file
+                            fclose($currentFile);
+
+                        }
 
                     }
 
-                # Check file
+                # Check if subfolders
                 if(
-                    isset($content['folders']) &&
-                    is_array($content['folders']) &&
-                    !empty($content['folders'])
+                    isset($folderContent['folders']) &&
+                    is_array($folderContent['folders']) &&
+                    !empty($folderContent['folders'])
                 )
 
-                    #Iteration folders
-                    foreach ($content['folders'] as $foldername => $foldercontent)
+                    # Call function
+                    $this->treeFolderGenerator($folderContent['folders'], $path.$folderName, $action);
 
-                        # Call function
-                        call_user_func(__FUNCTION__, $foldercontent, $path.$foldername, $action);
-
-            # Action Delete
+            # Action delete
             }elseif($action == 'delete')
 
                 # Check path is not root "/"
-                if($path !== "/")
+                if($path.$folderName !== "/")
 
-                    unlink($path);
+                    # Delete folder
+                    unlink($path.$folderName);
+
+        endforeach;
         
     }
 
@@ -104,7 +145,9 @@ class Structure{
         public function htaccessWrite($overwrite = false){
 
             # Get path where write the file
-            $path = scandir('./');
+            // $path = scandir('./');
+
+            return 'toto';
 
         }
 
@@ -120,7 +163,7 @@ class Structure{
      */
     public const STRUCTURE_APP = [
 
-        "@root" =>  [
+        "/" =>  [
             'folders'=>  [
                 'www'   =>  [
                     'folders'   =>  [
@@ -133,9 +176,10 @@ class Structure{
                     ],
                     'files'      =>  [
                         '.htaccess' =>  [
+                            'source'    =>  null,
                             'function'  =>  [
                                 'name'      =>  'htaccessWrite',
-                                'parameters'=>  [
+                                'arguments'=>  [
                                     true,
                                 ],
                             ],

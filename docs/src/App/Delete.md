@@ -3,7 +3,7 @@
 ## Info
 
 ```php
-namespace  Kutilities\App\Delete;    # Name Space
+namespace  LuckyPHP\App\Delete;    # Name Space
 public class Delete{}                # Class name
 ```
 

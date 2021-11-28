@@ -6,7 +6,7 @@
 ## Execute
 - Since the root of your project, open a terminal and execute this command :
 ```shell
-php -f bin\setup.phpphp -f bin\setup.php
+php -f bin/setup.php
 ```
 ```shell
        __            __        ___  __ _____       

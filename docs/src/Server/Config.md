@@ -3,7 +3,7 @@
 ## Info
 
 ```php
-namespace  Kutilities\Server\Config;    # Name Space
+namespace  LuckyPHP\Server\Config;    # Name Space
 abstract class Config{}                 # Class name
 ```
 

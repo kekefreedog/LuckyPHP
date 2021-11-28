@@ -3,7 +3,7 @@
 ## Info
 
 ```php
-namespace  Kutilities\Code\Strings; # Name Space
+namespace  LuckyPHP\Code\Strings; # Name Space
 public class Strings{}              # Class name
 ```
 

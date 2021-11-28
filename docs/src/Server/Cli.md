@@ -3,7 +3,7 @@
 ## Info
 
 ```php
-namespace  Kutilities\Server\Cli;   # Name Space
+namespace  LuckyPHP\Server\Cli;   # Name Space
 abstract class Cli{}                # Class name
 ```
 
