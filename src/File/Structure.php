@@ -63,7 +63,7 @@ class Structure{
                     foreach ($folderContent['files'] as $filename => $fileContent) {
 
                         # Get path of the current file
-                        $filepath = rtrim($path, '/').'/'.$filename;
+                        $filepath = rtrim($path, '/').'/'.rtrim($folderName, '/').'/'.$filename;
                         
                         # Check source
                         if(
@@ -144,10 +144,15 @@ class Structure{
          */
         public function htaccessWrite($overwrite = false){
 
-            # Get path where write the file
-            // $path = scandir('./');
+            # Declare reponse
+            $reponse =
+                "RewriteEngine on".PHP_EOL.
+                "RewriteRule ^www/app/.*$ /www/app/ [R=301,L]".PHP_EOL.
+                "RewriteRule ^www/api/.*$ /www/api/ [R=301,L]".PHP_EOL
+            ;
 
-            return 'toto';
+            # Return reponse
+            return $reponse;
 
         }
 
