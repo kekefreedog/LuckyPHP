@@ -74,6 +74,53 @@ class Strings{
 		/* Return value */
 		return strtolower(preg_replace(array_keys($utf8), array_values($utf8), $string));
 	}
+
+	/** Process data
+	 * 
+	 * @param string $url
+	 */
+	public function process_https(string $url = ''):string {
+        
+		# Check url start by https
+        if(substr(trim($url), 0, 8) == "https://"):
+        
+            return trim($url);
+            
+		# Check url stat bu http
+        elseif(substr(trim($url), 0, 7) == "http://"):
+            
+            return str_replace('http://', 'https://', trim($url));
+            
+		# Other case
+        else:
+            
+            return 'https://'.trim($url);
+            
+        endif;
+
+	}
+
+	/** Check if is email
+	 * 
+	 * @param string $email
+	 */
+	public function process_email(string $email = ''):string {
+
+		# check if email
+		return filter_var($email, FILTER_VALIDATE_EMAIL) ? $email : '';
+
+	}
+
+	/** Check if is bool
+	 * 
+	 * @param string|bool $email
+	 */
+	public function process_bool($bool = false):bool {
+
+		# check if email
+		return filter_var($bool, FILTER_VALIDATE_BOOL) ? true : false;
+
+	}
 	
 
 }
