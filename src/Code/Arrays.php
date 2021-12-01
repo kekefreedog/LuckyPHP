@@ -71,12 +71,17 @@ class Arrays{
 				# Explode key
 				$explode = explode($separator, $k, 2);
 
-				# Set array
-				$array[$explode[0]] = self::stretch(
-					[
-						$explode[1] => $v
-					],
-					$separator
+				# Array merge
+				$array[$explode[0]] = array_merge(	# A tester
+					(
+						$array[$explode[0]] ?? []
+					),
+					self::stretch(
+						[
+							$explode[1] => $v
+						],
+						$separator
+					)
 				);
 
 				# Unset old key
