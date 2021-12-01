@@ -18,6 +18,11 @@ namespace  LuckyPHP\App;
  * 
  */
 use LuckyPHP\Code\Forms;
+use LuckyPHP\Code\Arrays;
+use LuckyPHP\File\Structure;
+use LuckyPHP\Kit\Config;
+use LuckyPHP\Kit\Structure AS StructureKit;
+use Symfony\Component\Yaml\Yaml;
 
 /** Class Setup
  * 
@@ -34,55 +39,6 @@ class Setup{
      */
     private $load = [];
 
-    /** Default input
-     * 
-     */
-    public $default_config = [
-        # App
-        [
-            'name'      =>  'app_name',
-            'type'      =>  'VARCHAR',
-            'default'   =>  'LuckyApp',
-        ],
-        [
-            'name'      =>  'app_description',
-            'type'      =>  'VARCHAR',
-            'default'   =>  '',
-        ],
-        [
-            'name'      =>  'app_website',
-            'type'      =>  'VARCHAR',
-            'process'   =>  'url',
-            'default'   =>  '',
-        ],
-        [
-            'name'      =>  'app_website_alt',
-            'type'      =>  'VARCHAR',
-            'process'   =>  'url',
-            'default'   =>  '',
-        ],
-        [
-            'name'      =>  'app_admin_email',
-            'type'      =>  'VARCHAR',
-            'process'   =>  'email',
-            'default'   =>  '',
-        ],
-        # Css
-        [
-            'name'      =>  'css_framework',
-            'type'      =>  'VARCHAR',
-            'admit'     =>  ['Kmaterialize'],
-            'default'   =>  'Kmaterialize',
-        ],
-        # Auth
-        [
-            'name'      =>  'php_auth',
-            'type'      =>  'VARCHAR',
-            'admit'     =>  ['Kauth'],
-            'default'   =>  'Kauth',
-        ],
-    ];
-
     /** Construct
      * 
      * 
@@ -90,11 +46,41 @@ class Setup{
      */
     public function __construct($input){
 
+        # Structure Setup
+        $this->structureSetup();
+
+        # Set up config
+        $this->configSetup($input);
+
+        # Database Setup
+        # $this->databaseSetup();
+        
+    }
+
+    /** Structure Set
+     * 
+     */
+    private function structureSetup(){
+
+        # New structure
+        $this->load['structure'] ?: new Structure();
+
+        # Create folder structure
+        $this->load['structure']->treeFolderGenerator(StructureKit::APP);
+
+
+    }
+
+    /** Config Set
+     * 
+     */
+    private function configSetup($input = []){
+
         # New form
         $this->load['forms'] ?: new Forms;
 
         # Iteration de $this->default
-        foreach ($this->default_config AS $content)
+        foreach (Config::CONFIG AS $content)
 
             # Set input
             $this->input[$content['name']] = 
@@ -107,31 +93,19 @@ class Setup{
 
                         # Set default value
                         $content['default'];
-        
-    }
 
-    /** Config Set
-     * 
-     */
-    private function configSetup(){
+        # Convert _ to multidimensional array
+        $this->input = Arrays::stretch("_", $this->input);
 
-        
-
-    }
-
-    /** Structure Set
-     * 
-     */
-    private function structureSetup(){
-
-
+        # Wrtie input in config > app.yml
+        file_put_contents('/config/app.yml', Yaml::dump($this->input));
 
     }
 
     /** Database Set
      * 
      */
-    private function DatabaseSetup(){
+    private function databaseSetup(){
 
         
 

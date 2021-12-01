@@ -144,7 +144,7 @@ class Structure{
          */
         public function htaccessWrite($overwrite = false){
 
-            # Declare reponse
+            # Set reponse
             $reponse =
                 "RewriteEngine on".PHP_EOL.
                 "RewriteRule ^www/app/.*$ /www/app/ [R=301,L]".PHP_EOL.
@@ -156,72 +156,23 @@ class Structure{
 
         }
 
+        /** config write
+         * 
+         */
+        public function configWrite(){
+
+            # Set reponse
+            $reponse = "";
+
+            # Return reponse
+            return $reponse;
+
+        }
+
     /**
      * 
      * Creation of specific file end
      * 
      */
-
-    /** Application structure
-     * 
-     * 
-     */
-    public const STRUCTURE_APP = [
-
-        "/" =>  [
-            'folders'=>  [
-                'www'   =>  [
-                    'folders'   =>  [
-                        'app'       =>  [
-
-                        ],
-                        'api'       =>  [
-
-                        ],
-                    ],
-                    'files'      =>  [
-                        '.htaccess' =>  [
-                            'source'    =>  null,
-                            'function'  =>  [
-                                'name'      =>  'htaccessWrite',
-                                'arguments'=>  [
-                                    true,
-                                ],
-                            ],
-                        ],
-                        'index.php' =>  [
-                        ]
-
-                    ]
-
-                ],
-                'resources' =>  [
-                    'folders'   =>  [
-                        'css'       =>  [
-                        ],
-                        'js'        =>  [
-                        ],
-                        'hbs'       =>  [
-                        ],
-                        'md'        =>  [
-                        ],
-                    ],
-                ],
-                'config'    =>  [
-                    'files'      =>  [
-                        'app.yml' =>  [
-                        ],
-                    ]
-                ],
-                'logs'      =>  [
-
-                ],
-                'storage'   =>  [
-
-                ],
-            ],
-        ],
-
-    ];
 
 }

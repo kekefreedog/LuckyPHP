@@ -24,7 +24,7 @@ class Arrays{
      * Check if key contains needle
 	 * 
 	 */
-	public function in_array_strpos(array $array = [], string $needle = ""):bool {
+	public static function in_array_strpos(array $array = [], string $needle = ""):bool {
 
 		# Set reponse
 		$reponse = false;
@@ -48,10 +48,45 @@ class Arrays{
     /** Filter array by key value
      * 
      */
-    function filter_by_key_value($array, $key, $keyValue){
+    public static function filter_by_key_value($array, $key, $keyValue){
 		return array_filter($array, function ($var) use ($keyValue, $key) {
 			return ($var[$key] == $keyValue);
 		});
+	}
+
+	/** Array Stretch
+	 * 
+	 * @param string $separator by default "__"
+	 * @param array $array array to process
+	 * @return array
+	 */
+	public static function stretch($array = [], $separator = "_"):array {
+
+		# Iteration
+		foreach($array as $k => $v)
+
+			# Check if separator in key
+			if(strpos($k, $separator) !== false):
+
+				# Explode key
+				$explode = explode($separator, $k, 2);
+
+				# Set array
+				$array[$explode[0]] = self::stretch(
+					[
+						$explode[1] => $v
+					],
+					$separator
+				);
+
+				# Unset old key
+				unset($array[$k]);
+			
+			endif;
+
+		# Return array
+		return $array;
+
 	}
 
 }

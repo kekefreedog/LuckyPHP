@@ -3,7 +3,7 @@
 ## Info
 
 ```php
-namespace  LuckyPHP\Code\Structure;   # Name Space
+namespace  LuckyPHP\Code\Structure;     # Name Space
 public class Structure{}                # Class name
 ```
 
@@ -16,36 +16,8 @@ This class contains methods for process files and folder and create complex fold
 - Create folder with sub-folders
 - Copy file and rename them in folder concerned
 
-## Constants
+### 2. public ***function*** **htaccessWrite**
+- Write .htacces in www folder
 
-### 1. private ***const*** **STRUCTURE_APP**
-- Correspond to the folder/file structure generate by LuckyPHP
-- "@root" correspond of the root of the application
-- Exemple of use :
-```yml
---- # Structure exemple
-#Name of the folder
-- folderName:
-    # Children folders
-    - folders :
-        # Same structure the foldername
-        - foldername :  
-            - folders : 
-                ...
-            - files : 
-                ...
-    # Children files
-    - files :
-        # Name of file
-        - filename :
-            # Source of the file
-            - src : ...
-            # Function for get the content of the file
-            - function :
-                # Name of the function 
-                - name : function
-                # parameters for this function in order
-                - parameters : 
-                    - ...
-                    - ...
-```
+### 3. public ***function*** **configWrite**
+- Write empty config file "app.yml" in config folder

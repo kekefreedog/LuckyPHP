@@ -12,10 +12,11 @@ This class contains methods for setup the app.
 
 ## Methods
 
-### 1. public ***function*** **tree_folder_file_create**
-- Create folder with sub-folders
-- Copy file and rename them in folder concerned
+### 1. private ***function*** **structureSetup**
+- Create the structure folder of the app
 
-## Constants
+### 2. private ***function*** **configSetup**
+- Fill the config file app.yml in config folder
 
-### 1. private ***const*** **STRUCTURE_APP**
+### 3. private ***function*** **databaseSetup**
+- Do nothin yet
