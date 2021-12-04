@@ -3,8 +3,8 @@
 ## Info
 
 ```php
-namespace  LuckyPHP\Server\Config;    # Name Space
-abstract class Config{}                 # Class name
+namespace  LuckyPHP\Server\Config;  # Name Space
+abstract class Config{}             # Class name
 ```
 
 ## Dependance
