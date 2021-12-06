@@ -24,7 +24,7 @@ class Pages{
     /** Home
      * 
      */
-    public static function actionHome(){
+    public function actionHome(){
 
         echo 'hello';
 
