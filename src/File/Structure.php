@@ -146,9 +146,13 @@ class Structure{
 
             # Set reponse
             $reponse =
+                "# Enable rerwrite".PHP_EOL.
                 "RewriteEngine on".PHP_EOL.
-                "RewriteRule ^www/app/.*$ /www/app/ [R=301,L]".PHP_EOL.
-                "RewriteRule ^www/api/.*$ /www/api/ [R=301,L]".PHP_EOL
+                PHP_EOL.
+                "# Convert subfolder to url get value and redirect to .index".PHP_EOL.
+                "RewriteCond %{REQUEST_FILENAME} !-f".PHP_EOL.
+                "RewriteCond %{REQUEST_FILENAME} !-d".PHP_EOL.
+                "RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]".PHP_EOL
             ;
 
             # Return reponse

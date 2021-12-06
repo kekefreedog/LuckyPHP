@@ -37,7 +37,7 @@ class Structure{
                         ],
                     ],
                     'files'      =>  [
-                        /* '.htaccess' =>  [
+                        '.htaccess' =>  [
                             'source'    =>  null,
                             'function'  =>  [
                                 'name'      =>  'htaccessWrite',
@@ -45,7 +45,7 @@ class Structure{
                                     true,
                                 ],
                             ],
-                        ], */
+                        ],
                         'index.php' =>  [
                             'function'  =>  [
                                 'name'      =>  'indexWrite'
