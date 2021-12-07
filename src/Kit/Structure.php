@@ -27,15 +27,8 @@ class Structure{
 
         "/" =>  [
             'folders'=>  [
+                # Public folder
                 'www'   =>  [
-                    'folders'   =>  [
-                        'app'       =>  [
-
-                        ],
-                        'api'       =>  [
-
-                        ],
-                    ],
                     'files'      =>  [
                         '.htaccess' =>  [
                             'source'    =>  null,
@@ -55,18 +48,27 @@ class Structure{
                     ]
 
                 ],
+                # Ressources in css, js, hbs, md... or any other language
                 'resources' =>  [
                     'folders'   =>  [
-                        'css'       =>  [
-                        ],
-                        'js'        =>  [
-                        ],
-                        'hbs'       =>  [
-                        ],
-                        'md'        =>  [
-                        ],
+                        'css'       =>  [],
+                        'js'        =>  [],
+                        'hbs'       =>  [],
+                        'md'        =>  [],
                     ],
                 ],
+                # Script that define your app
+                'src' =>  [
+                    'files'     =>  [
+                        'Model.php'         =>  [],
+                        'View'              =>  [],
+                        'Controller.php'    =>  [],
+                    ],
+                    'folders'   =>  [
+                        'Page'      =>  []
+                    ],
+                ],
+                # Config of your app
                 'config'    =>  [
                     'files'      =>  [
                         'app.yml' =>  [
@@ -76,9 +78,22 @@ class Structure{
                         ],
                     ]
                 ],
-                'logs'      =>  [
-
+                # Wiki of the app
+                'wiki'      =>  [
+                    'folders'=>  [
+                        'app'       =>  [],
+                        'api'       =>  [],
+                        'src'       =>  [],
+                    ],
                 ],
+                # Logs from the app and framework
+                'logs'      =>  [
+                    'folders'=>  [
+                        'app.log'       =>  [],
+                        'luckuphp.log'  =>  [],
+                    ]
+                ],
+                # All media
                 'storage'   =>  [
 
                 ],

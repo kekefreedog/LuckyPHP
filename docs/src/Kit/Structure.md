@@ -19,14 +19,6 @@ This class contains constant for structure folder
     "/" =>  [
         'folders'=>  [
             'www'   =>  [
-                'folders'   =>  [
-                    'app'       =>  [
-
-                    ],
-                    'api'       =>  [
-
-                    ],
-                ],
                 'files'      =>  [
                     '.htaccess' =>  [
                         'source'    =>  null,
