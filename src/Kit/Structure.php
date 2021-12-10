@@ -61,7 +61,7 @@ class Structure{
                 'src' =>  [
                     'files'     =>  [
                         'Model.php'         =>  [],
-                        'View'              =>  [],
+                        'View.php'          =>  [],
                         'Controller.php'    =>  [],
                     ],
                     'folders'   =>  [
@@ -78,8 +78,8 @@ class Structure{
                         ],
                     ]
                 ],
-                # Wiki of the app
-                'wiki'      =>  [
+                # Documentation of the app
+                'docs'      =>  [
                     'folders'=>  [
                         'app'       =>  [],
                         'api'       =>  [],
