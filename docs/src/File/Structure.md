@@ -21,3 +21,17 @@ This class contains methods for process files and folder and create complex fold
 
 ### 3. public ***function*** **configWrite**
 - Write empty config file "app.yml" in config folder
+
+### 4. public ***function*** **composerUpdate**
+- Update "composer.json" on the root of the project by adding the below code :
+    ```json
+    {
+        "autoload": {
+            "psr-4": {
+                "App\\": [
+                    "src/"
+                ]
+            }
+        }
+    }
+    ```

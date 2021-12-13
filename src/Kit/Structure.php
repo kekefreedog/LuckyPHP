@@ -60,9 +60,11 @@ class Structure{
                 # Script that define your app
                 'src' =>  [
                     'files'     =>  [
+                        'Kernel.php'         =>  [],
                         'Model.php'         =>  [],
-                        'View.php'          =>  [],
+                        'Viewer.php'          =>  [],
                         'Controller.php'    =>  [],
+                        'App.php'           =>  [],
                     ],
                     'folders'   =>  [
                         'Page'      =>  []
@@ -90,7 +92,7 @@ class Structure{
                 'logs'      =>  [
                     'folders'=>  [
                         'app.log'       =>  [],
-                        'luckuphp.log'  =>  [],
+                        'luckyphp.log'  =>  [],
                     ]
                 ],
                 # All media
@@ -98,6 +100,13 @@ class Structure{
 
                 ],
             ],
+            'files' =>  [
+                'composer.json' =>  [
+                    'function'      => [
+                        'name'          =>  'composerUpdate',
+                    ]
+                ]
+            ]
         ],
 
     ];

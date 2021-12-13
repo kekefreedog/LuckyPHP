@@ -12,7 +12,7 @@
 /** Namespace
  * 
  */
-namespace  LuckyPHP\Site;
+namespace LuckyPHP\Site;
 
 /** Class page
  * 

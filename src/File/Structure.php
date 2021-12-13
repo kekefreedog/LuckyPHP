@@ -214,6 +214,54 @@ class Structure{
 
         }
 
+        /** Update composer.json
+         * 
+         */
+        public function composerUpdate(){
+
+            // Path of the file
+            $filePath = '../../../composer.json';
+            # A remplacer par __ROOT_APP__."/composer.json";
+
+            // Check composer.json exist
+            if(is_file($filePath));
+
+            // Read composer.json
+            $object = $raw = file_get_contents($filePath);
+
+            /** Update object check if content has :
+             * 
+             *  "autoload": {
+             *      "psr-4": {
+             *          "App\\": [
+             *              "src/"
+             *          ]
+             *      }
+             *  }
+             * 
+             */
+            if(
+                $object &&
+                isset($object["autoload"]["psr-4"]["App\\"]) && 
+                is_array(isset($object["autoload"]["psr-4"]["App\\"])) && 
+                in_array("src/", (array)$object["autoload"]["psr-4"]["App\\"])
+            )
+                return true;
+
+            $object["autoload"]["psr-4"]["App\\"][] = "src/";
+
+            // Check if update change anything
+            if($object === $raw)
+                return true;
+
+            // Write new object in file
+            file_put_contents($filePath, $object);
+
+            // Return true
+            return true;
+
+        }
+
     /**
      * 
      * Creation of specific file end
