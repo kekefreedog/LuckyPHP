@@ -1,0 +1,120 @@
+<?php declare(strict_types=1);
+/*******************************************************
+ * Copyright (C) 2019-2021 Kévin Zarshenas
+ * kevin.zarshenas@gmail.com
+ * 
+ * This file is part of LuckyPHP.
+ * 
+ * This code can not be copied and/or distributed without the express
+ * permission of Kévin Zarshenas @kekefreedog
+ *******************************************************/
+
+/** Register The Auto Loader (composer)
+ * 
+ */
+require __DIR__.'/../vendor/autoload.php';
+
+/** Use extra classes
+ * 
+ */
+use App\Kernel;
+use App\Controller;
+use App\Viewer;
+
+/** Class for manage the workflow of the app
+ * 
+ */
+class App extends Kernel{
+
+    /** Cconstruct
+     * 
+     */
+    public function __construct(){
+        
+        /** Check if the app is useable
+         * Check php
+         * Check database
+         * 
+         */
+        self::sanityCheck();
+
+        /** Read the config of the app
+         *  - Set config in $this->config
+         *  - Define global variable :
+         *      __ROOT_APP__ root of the app 
+         *      __ROOT_WWW__ root of the www folder
+         * 
+         */
+        $this->configSet();
+
+        /** Read the application kernel
+         * (search cache or generate it)
+         * - Execute the construct function in parent
+         * - Set cache in $this->cache
+         * 
+         */
+        parent::__construct();
+
+        /** Execute the controller
+         * 
+         */
+        $this->controller = new Controller(
+            $this->config,
+            $this->cache,
+        );
+
+        /** Get view
+         * 
+         */
+        $this->viewer = new Viewer(
+            $this->config,
+            $this->cache,
+            $this->controller->request,
+            $this->controller->reponse
+        );
+
+    }
+
+}
+
+/** Create app instance
+ * 
+ */
+$app = new App();
+
+/* * * Custom action post MVC here
+ * -------------------------------------- *
+ */
+
+# ...
+ 
+/*
+ * -------------------------------------- *
+ * * */
+
+
+/* * * Set header and body of the page
+ * -------------------------------------- *
+ */
+//$app->viewer->header;
+//$app->viewer->body;
+print_r($app->config);
+/*
+ * -------------------------------------- *
+ * * */
+
+
+/* * * Custom action to execute at the end
+ * -------------------------------------- *
+ */
+
+# ...
+ 
+/*
+ * -------------------------------------- *
+ * * */
+
+/** Return App
+ * 
+ */
+return $app;

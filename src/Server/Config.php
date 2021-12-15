@@ -24,7 +24,7 @@ use Symfony\Component\Yaml\Yaml;
  * @dependance root 
  * 
  */
-abstract class Config{
+class Config{
 
     /** Read config
      * 
@@ -38,7 +38,10 @@ abstract class Config{
             $this->serverRoot = (new Root)->get();
 
         # If file
-        if(strpos($fileOrName, '/') === false && strpos($fileOrName, '.') === false)
+        if(
+            strpos($fileOrName, '/') !== false && 
+            strpos($fileOrName, '.') !== false
+        )
 
             # Set path
             $path = str_replace(
@@ -72,7 +75,7 @@ abstract class Config{
      * 
      */
     public const CONFIG_PATH = [
-        'settings'  =>  '{{root}}/../config/settings.yml'
+        'settings'  =>  '../config/settings.yml'
     ];
 
 }
