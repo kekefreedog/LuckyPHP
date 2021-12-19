@@ -258,7 +258,7 @@ class Structure{
                 return $raw;
 
             // Return object
-            return json_encode($object);
+            return json_encode($object, JSON_PRETTY_PRINT);
 
         }
 
