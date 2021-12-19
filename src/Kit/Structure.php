@@ -40,9 +40,7 @@ class Structure{
                             ],
                         ],
                         'index.php' =>  [
-                            'function'  =>  [
-                                'name'      =>  'indexWrite'
-                            ],
+                            'source'    =>  '/src/Kit/Php/index.php',
                         ]
 
                     ]
@@ -60,11 +58,21 @@ class Structure{
                 # Script that define your app
                 'src' =>  [
                     'files'     =>  [
-                        'Kernel.php'         =>  [],
-                        'Model.php'         =>  [],
-                        'Viewer.php'          =>  [],
-                        'Controller.php'    =>  [],
-                        'App.php'           =>  [],
+                        'Kernel.php'         =>  [
+                            'source'    =>  '/src/Kit/Php/Kernel.php',
+                        ],
+                        /* 'Model.php'         =>  [
+                            'source'    =>  '/src/Kit/Php/Kernel.php',
+                        ], */
+                        'Viewer.php'          =>  [
+                            'source'    =>  '/src/Kit/Php/Viewer.php',
+                        ],
+                        'Controller.php'    =>  [
+                            'source'    =>  '/src/Kit/Php/Controller.php',
+                        ],
+                        'App.php'           =>  [
+                            'source'    =>  '/src/Kit/Php/App.php',
+                        ],
                     ],
                     'folders'   =>  [
                         'Page'      =>  []
@@ -100,6 +108,7 @@ class Structure{
 
                 ],
             ],
+            # Update composer
             'files' =>  [
                 'composer.json' =>  [
                     'function'      => [

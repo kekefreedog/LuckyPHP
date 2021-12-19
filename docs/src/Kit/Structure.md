@@ -21,7 +21,6 @@ This class contains constant for structure folder
             'www'   =>  [
                 'files'      =>  [
                     '.htaccess' =>  [
-                        'source'    =>  null,
                         'function'  =>  [
                             'name'      =>  'htaccessWrite',
                             'arguments'=>  [
@@ -30,6 +29,7 @@ This class contains constant for structure folder
                         ],
                     ],
                     'index.php' =>  [
+                        'source'    =>  '/src/Kit/Php/index.php',
                     ]
 
                 ]

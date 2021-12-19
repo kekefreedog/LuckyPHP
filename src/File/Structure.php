@@ -68,15 +68,28 @@ class Structure{
                         # Check source
                         if(
                             isset($fileContent['source']) && 
-                            $fileContent['source'] && 
-                            file_exists($fileContent['source']) 
+                            $fileContent['source']
                         ){
+                                
+                            if(file_exists($fileContent['source'])){
+
+                                $filepathsource = $fileContent['source'];
+
+                            }elseif(file_exists('/vendor/kekefreedog/luckyphp'.$fileContent['source'])){
+
+                                $filepathsource = '/vendor/kekefreedog/luckyphp'.$fileContent['source'];
+
+                            }else{
+
+                                continue;
+
+                            }
 
                             # Check if update
                             if($action == 'update' && file_exists($filepath))
 
                                 # Check copy
-                                if(!copy($fileContent['source'], $filepath)){
+                                if(!copy($filepathsource, $filepath)){
 
                                     # Erreur de copy
 
