@@ -68,6 +68,7 @@ class Structure{
                         # Check source
                         if(
                             isset($fileContent['source']) && 
+                            $fileContent['source'] !== null &&
                             $fileContent['source']
                         ){
                                 
@@ -101,20 +102,11 @@ class Structure{
                             method_exists($this, $fileContent['function']['name'])
                         ){
 
-                            # Open current file
-                            $currentFile = fopen($filepath, "w");
-
                             # Get new content
-                            $newContent = $this->{$fileContent['function']['name']}(...($fileContent['function']['parameters'] ?? []));
+                            $newContent = $this->{$fileContent['function']['name']}(...([$filepath] + ($fileContent['function']['parameters'] ?? [])));
 
-                            # Clear content of file
-                            ftruncate($currentFile, 0);
-
-                            # Put new content into file
-                            fwrite($currentFile, $newContent);
-
-                            # Close file
-                            fclose($currentFile);
+                            # Put new content in file
+                            file_put_contents($filepath, $newContent);
 
                         }
 
@@ -230,16 +222,15 @@ class Structure{
         /** Update composer.json
          * 
          */
-        public function composerUpdate(){
-
-            // Path of the file
-            $filePath = __ROOT_APP__.'composer.json';
+        public function composerUpdate($filepath){
 
             // Check composer.json exist
-            if(is_file($filePath));
+            if(is_file($filepath));
 
-            // Read composer.json
-            $object = $raw = file_get_contents($filePath);
+            // Get raw data
+            $raw = file_get_contents($filepath);
+
+            $object = json_decode($raw, true);
 
             /** Update object check if content has :
              * 
@@ -258,19 +249,16 @@ class Structure{
                 is_array(isset($object["autoload"]["psr-4"]["App\\"])) && 
                 in_array("src/", (array)$object["autoload"]["psr-4"]["App\\"])
             )
-                return true;
+                return $raw;
 
             $object["autoload"]["psr-4"]["App\\"][] = "src/";
 
             // Check if update change anything
-            if($object === $raw)
-                return true;
+            if(json_encode($object) === $raw)
+                return $raw;
 
-            // Write new object in file
-            file_put_contents($filePath, $object);
-
-            // Return true
-            return true;
+            // Return object
+            return json_encode($object);
 
         }
 

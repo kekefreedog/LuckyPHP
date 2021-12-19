@@ -31,7 +31,6 @@ class Structure{
                 'www'   =>  [
                     'files'      =>  [
                         '.htaccess' =>  [
-                            'source'    =>  null,
                             'function'  =>  [
                                 'name'      =>  'htaccessWrite',
                                 'arguments'=>  [
