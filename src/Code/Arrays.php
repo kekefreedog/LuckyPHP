@@ -62,32 +62,35 @@ class Arrays{
 	 */
 	public static function stretch($array = [], $separator = "_"):array {
 
-		# Iteration
-		foreach($array as $k => $v)
+		# Check array
+		if(is_array($array) && !empty($array))
 
-			# Check if separator in key
-			if(strpos($k, $separator) !== false):
+			# Iteration
+			foreach($array as $k => $v)
 
-				# Explode key
-				$explode = explode($separator, $k, 2);
+				# Check if separator in key
+				if(strpos($k, $separator) !== false):
 
-				# Array merge
-				$array[$explode[0]] = array_merge(	# A tester
-					(
-						$array[$explode[0]] ?? []
-					),
-					self::stretch(
-						[
-							$explode[1] => $v
-						],
-						$separator
-					)
-				);
+					# Explode key
+					$explode = explode($separator, $k, 2);
 
-				# Unset old key
-				unset($array[$k]);
-			
-			endif;
+					# Array merge
+					$array[$explode[0]] = array_merge(	# A tester
+						(
+							$array[$explode[0]] ?? []
+						),
+						self::stretch(
+							[
+								$explode[1] => $v
+							],
+							$separator
+						)
+					);
+
+					# Unset old key
+					unset($array[$k]);
+				
+				endif;
 
 		# Return array
 		return $array;

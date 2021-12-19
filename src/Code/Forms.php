@@ -25,7 +25,7 @@ class Forms{
      * @param array $params Parameters of value to process
      * @param array $options Optionnal other parameters
      */
-    function process_input($input = '', array $params = [], array $options = []):array{
+    public static function process_input($input = '', array $params = [], array $options = []):array{
 
         # Set result
         $result = [

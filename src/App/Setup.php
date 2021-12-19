@@ -83,9 +83,6 @@ class Setup{
      */
     private function configSetup($input = []){
 
-        # New form
-        $this->load['forms'] = new Forms();
-
         # Iteration de $this->default
         foreach (ConfigKit::CONFIG AS $content)
 
@@ -96,10 +93,10 @@ class Setup{
                 isset($input[$content['name']]) ?
 
                     # Process input
-                    $this->load['forms']->process_input($input[$content['name']], $content) :
+                    Forms::process_input($input[$content['name']], $content) :
 
                         # Set default value
-                        $content['default'];
+                        $content['default'] ?? null;
 
         # Convert _ to multidimensional array
         $this->input = Arrays::stretch("_", $this->input);
