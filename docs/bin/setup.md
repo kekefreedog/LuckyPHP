@@ -3,10 +3,17 @@
 ## Description
 - First script to execute for create the architecture of the site web.
 
-## Execute
+## Installation guide
+### 1. Composer
+- On the root of your project, open a terminal and execute the bellow command :
+```sh
+composer require kekefreedog/luckyphp:"dev-main" 
+```
+
+### 2. Execute
 - Since the root of your project, open a terminal and execute this command :
 ```shell
-php -f bin/setup.php
+php -f vendor/kekefreedog/luckyphp/bin/setup.php
 ```
 ```shell
        __            __        ___  __ _____       

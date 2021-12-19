@@ -20,8 +20,9 @@ namespace  LuckyPHP\App;
 use LuckyPHP\Code\Forms;
 use LuckyPHP\Code\Arrays;
 use LuckyPHP\File\Structure;
-use LuckyPHP\Kit\Config;
-use LuckyPHP\Kit\Structure AS StructureKit;
+use LuckyPHP\Server\Config;
+use LuckyPHP\Kit\Config as ConfigKit;
+use LuckyPHP\Kit\Structure as StructureKit;
 use Symfony\Component\Yaml\Yaml;
 
 /** Class Setup
@@ -44,7 +45,14 @@ class Setup{
      * 
      * @param array $input input for create app
      */
-    public function __construct($input){
+    public function __construct($input, $directory = "/"){
+
+        # Define roots
+        Config::defineRoots([
+            'app'       =>  $directory,
+            'www'       =>  $directory.'www/',
+            'luckyphp'  =>  $directory.'vendor/kekefreedog/luckyphp/',
+        ]);
 
         # Structure Setup
         $this->structureSetup();
@@ -63,11 +71,10 @@ class Setup{
     private function structureSetup(){
 
         # New structure
-        $this->load['structure'] ?: new Structure();
+        $this->load['structure'] = new Structure();
 
         # Create folder structure
-        $this->load['structure']->treeFolderGenerator(StructureKit::APP);
-
+        $this->load['structure']->treeFolderGenerator(StructureKit::APP, __ROOT_APP__);
 
     }
 
@@ -77,10 +84,10 @@ class Setup{
     private function configSetup($input = []){
 
         # New form
-        $this->load['forms'] ?: new Forms;
+        $this->load['forms'] = new Forms();
 
         # Iteration de $this->default
-        foreach (Config::CONFIG AS $content)
+        foreach (ConfigKit::CONFIG AS $content)
 
             # Set input
             $this->input[$content['name']] = 

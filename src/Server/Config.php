@@ -71,6 +71,33 @@ class Config{
 
     }
 
+    /** Define roots
+     * 
+     * Define root from array
+     * exemple of input :
+     * 
+     * @param array $roots
+     * 
+     */
+    public static function defineRoots(array $roots = []){
+
+        # Check array
+        if(empty($roots))
+            return false;
+
+        # Iteration root
+        foreach($roots as $rootName => $rootValue)
+
+            # Check root name and root value
+            if($rootName && $rootValue)
+
+                # Define root
+                define('__ROOT_'.strtoupper($rootName).'__', $rootValue);
+
+        # Return true;
+
+    }
+
     /** Default file config
      * 
      */

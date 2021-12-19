@@ -43,6 +43,7 @@ class App extends Kernel{
          *  - Define global variable :
          *      __ROOT_APP__ root of the app 
          *      __ROOT_WWW__ root of the www folder
+         *      __ROOT_LUCKYPHP__ root of the vendor LuckyPHP
          * 
          */
         $this->configSet();

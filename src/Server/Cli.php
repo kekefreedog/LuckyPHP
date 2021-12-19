@@ -184,6 +184,8 @@ class Cli{
         # Ready to create 
         readline('Press [enter] key and let\'s go ! 🔥🔥🔥');
 
+        # Script for setup the project
+        new \LuckyPHP\App\Setup($this->data, __DIR__."/../../../../../");
 
     }
 

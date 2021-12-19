@@ -233,8 +233,7 @@ class Structure{
         public function composerUpdate(){
 
             // Path of the file
-            $filePath = '../../../composer.json';
-            # A remplacer par __ROOT_APP__."/composer.json";
+            $filePath = __ROOT_APP__.'composer.json';
 
             // Check composer.json exist
             if(is_file($filePath));
