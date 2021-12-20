@@ -124,12 +124,13 @@ class Setup{
     private function composerUpdate(){
 
         # Update composer
-        echo PHP_EOL.'--| composer-message |--';
+        echo PHP_EOL.'--| composer-message |--'.PHP_EOL;
         shell_exec('composer update');
         echo PHP_EOL.'------------------------';
         
         # Display message
         echo 
+            PHP_EOL.
             'Composer updated'.
             PHP_EOL
         ;

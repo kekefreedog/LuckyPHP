@@ -75,11 +75,16 @@ class Config{
      * 
      * Define root from array
      * exemple of input :
+     * [
+     *      'app'       =>  $directory,
+     *      'www'       =>  $directory.'www/',
+     *      'luckyphp'  =>  $directory.'vendor/kekefreedog/luckyphp/',
+     * ]
      * 
      * @param array $roots
      * 
      */
-    public static function defineRoots(array $roots = []){
+    public static function defineRoots(array $roots = []):bool {
 
         # Check array
         if(empty($roots))
@@ -95,6 +100,7 @@ class Config{
                 define('__ROOT_'.strtoupper($rootName).'__', $rootValue);
 
         # Return true;
+        return true;
 
     }
 

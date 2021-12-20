@@ -44,6 +44,9 @@ class Kernel{
         # Check PHP version
         SanityCheck::checkPHPVersion("7.0.0");
 
+        # Check Host is allowed
+        SanityCheck::checkHost();
+
         # Check MySQL version
         SanityCheck::checkMySQLVersion("1.0.0");
         
@@ -74,14 +77,12 @@ class Kernel{
         * -------------------------------------- *
         * * */
 
-        # Set __ROOT_APP__
-        define('__ROOT_APP__', __DIR__.'/../');
-
-        # Set __ROOT_WWW__
-        define('__ROOT_WWW__', __DIR__);
-
-        # Set __ROOT_WWW__
-        define('__ROOT_LUCKYPHP__', __DIR__.'/vendor/kekefreedog/luckyphp/');
+        # Set default root
+        Config::defineRoots([
+            'app'       =>  __DIR__.'/../',
+            'www'       =>  __DIR__,
+            'luckyphp'  =>  __DIR__.'/vendor/kekefreedog/luckyphp/',
+        ]);
 
         /* * * Define custom name constant
         * -------------------------------------- *

@@ -33,6 +33,7 @@ class App extends Kernel{
         
         /** Check if the app is useable
          * Check php
+         * Check if the host host is allowed or not allowed
          * Check database
          * 
          */

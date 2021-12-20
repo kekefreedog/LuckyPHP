@@ -58,47 +58,71 @@ class Config{
                     'process'   =>  'email',
                     'default'   =>  '',
                 ],
-        # Css
-            # Framework
-            [
-                'name'      =>  'app_css_framework',
-                'type'      =>  'VARCHAR',
-                'admit'     =>  ['Kmaterialize'],
-                'default'   =>  'Kmaterialize',
-            ],
-        # Auth
-            # Type
-            [
-                'name'      =>  'app_auth_type',
-                'type'      =>  'VARCHAR',
-                'admit'     =>  ['Kauth'],
-                'default'   =>  'Kauth',
-            ],
-        # Database
-            # Type
-            [
-                'name'      =>  'app_database_type',
-                'type'      =>  'VARCHAR',
-                'admit'     =>  ['pdo'],
-                'default'   =>  'pdo'
-                
-            ],
-            # Type
-            [
-                'name'      =>  'app_database_dbname',
-                'type'      =>  'VARCHAR',
-                'default'   =>  'kevinzar_{{app_name}}',
-            ],
-            # User
-            [
-                'name'      =>  'app_database_user',
-                'type'      =>  'VARCHAR',
-            ],
-            # Password
-            [
-                'name'      =>  'app_database_password',
-                'type'      =>  'VARCHAR',
-            ],
+            # Hosts
+                # Allowed
+                [
+                    'name'      =>  'app_hosts_allowed',
+                    'type'      =>  'ARRAY',
+                    'default'   =>  ['*'],
+                ],
+                # Excluded
+                [
+                    'name'      =>  'app_hosts_excluded',
+                    'type'      =>  'ARRAY',
+                    'default'   =>  [],
+                ],
+            # Css
+                # Framework
+                [
+                    'name'      =>  'app_css_framework',
+                    'type'      =>  'VARCHAR',
+                    'admit'     =>  ['Kmaterialize'],
+                    'default'   =>  'Kmaterialize',
+                ],
+            # Auth
+                # Type
+                [
+                    'name'      =>  'app_auth_type',
+                    'type'      =>  'VARCHAR',
+                    'admit'     =>  ['Kauth'],
+                    'default'   =>  'Kauth',
+                ],
+            # Database
+                # Engine
+                [
+                    'name'      =>  'app_database_engine',
+                    'type'      =>  'VARCHAR',
+                    'admit'     =>  ['pdo'],
+                    'default'   =>  'pdo'
+                ],
+                # Type
+                [
+                    'name'      =>  'app_database_name',
+                    'type'      =>  'VARCHAR',
+                    'default'   =>  'kevinzar_{{app_name}}',
+                ],
+                # User
+                [
+                    'name'      =>  'app_database_user',
+                    'type'      =>  'VARCHAR',
+                ],
+                # Password
+                [
+                    'name'      =>  'app_database_password',
+                    'type'      =>  'VARCHAR',
+                ],
+                # Password
+                [
+                    'name'      =>  'app_database_host',
+                    'type'      =>  'VARCHAR',
+                    'default'   =>  '127.0.0.1'
+                ],
+                # Password
+                [
+                    'name'      =>  'app_database_port',
+                    'type'      =>  'INT',
+                    'default'   =>  '5432'
+                ],
     ];
 
 }

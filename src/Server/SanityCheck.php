@@ -63,4 +63,16 @@ class SanityCheck{
 
     }
 
+    /** Check if the current host is allowed
+     * 
+     */
+    public static function checkHost(){
+
+        # Get server name
+        $serverName = $_SERVER['SERVER_NAME'];
+
+        echo $serverName;
+
+    }
+
 }
