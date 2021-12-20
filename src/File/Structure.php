@@ -71,14 +71,14 @@ class Structure{
                             $fileContent['source'] !== null &&
                             $fileContent['source']
                         ){
-                                
-                            if(file_exists($fileContent['source'])){
 
-                                $filepathsource = $fileContent['source'];
+                            if(file_exists(__ROOT_LUCKYPHP__.$fileContent['source'])){
 
-                            }elseif(file_exists('/vendor/kekefreedog/luckyphp'.$fileContent['source'])){
+                                $filepathsource = __ROOT_LUCKYPHP__.$fileContent['source'];
 
-                                $filepathsource = '/vendor/kekefreedog/luckyphp'.$fileContent['source'];
+                            }elseif(file_exists(__ROOT_LUCKYPHP__.'vendor/kekefreedog/luckyphp'.$fileContent['source'])){
+
+                                $filepathsource = __ROOT_LUCKYPHP__.'vendor/kekefreedog/luckyphp'.$fileContent['source'];
 
                             }else{
 
@@ -86,15 +86,12 @@ class Structure{
 
                             }
 
-                            # Check if update
-                            if($action == 'update' && file_exists($filepath))
+                            # Check copy
+                            if(!copy($filepathsource, $filepath)){
 
-                                # Check copy
-                                if(!copy($filepathsource, $filepath)){
+                                # Erreur de copy
 
-                                    # Erreur de copy
-
-                                }
+                            }
 
                         }elseif(
                             isset($fileContent['function']['name']) && 

@@ -102,7 +102,7 @@ class Setup{
         $this->input = Arrays::stretch($this->input, "_");
 
         # Wrtie input in config > app.yml
-        file_put_contents(__ROOT_APP__.'/config/app.yml', Yaml::dump($this->input));
+        file_put_contents(__ROOT_APP__.'config/app.yml', Yaml::dump($this->input));
 
     }
 

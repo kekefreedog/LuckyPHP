@@ -39,7 +39,7 @@ class Structure{
                             ],
                         ],
                         'index.php' =>  [
-                            'source'    =>  '/src/Kit/Php/index.php',
+                            'source'    =>  'src/Kit/Php/index.php',
                         ]
 
                     ]
@@ -58,19 +58,19 @@ class Structure{
                 'src' =>  [
                     'files'     =>  [
                         'Kernel.php'         =>  [
-                            'source'    =>  '/src/Kit/Php/Kernel.php',
+                            'source'    =>  'src/Kit/Php/Kernel.php',
                         ],
                         /* 'Model.php'         =>  [
                             'source'    =>  '/src/Kit/Php/Kernel.php',
                         ], */
                         'Viewer.php'          =>  [
-                            'source'    =>  '/src/Kit/Php/Viewer.php',
+                            'source'    =>  'src/Kit/Php/Viewer.php',
                         ],
                         'Controller.php'    =>  [
-                            'source'    =>  '/src/Kit/Php/Controller.php',
+                            'source'    =>  'src/Kit/Php/Controller.php',
                         ],
                         'App.php'           =>  [
-                            'source'    =>  '/src/Kit/Php/App.php',
+                            'source'    =>  'src/Kit/Php/App.php',
                         ],
                     ],
                     'folders'   =>  [
