@@ -250,7 +250,7 @@ class Structure{
             )
                 return $raw;
 
-            $object["autoload"]["psr-4"]["App\\"][] = "src/";
+            $object["autoload"]["psr-4"]["App\\"] = ["src/"];
 
             // Check if update change anything
             if(json_encode($object) === $raw)
