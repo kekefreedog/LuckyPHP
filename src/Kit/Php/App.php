@@ -99,7 +99,8 @@ $app = new App();
  */
 //$app->viewer->header;
 //$app->viewer->body;
-print_r($app->config);
+// print_r($app->config);
+print_r('Hello world');
 /*
  * -------------------------------------- *
  * * */
