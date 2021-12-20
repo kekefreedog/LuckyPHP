@@ -124,7 +124,9 @@ class Setup{
     private function composerUpdate(){
 
         # Update composer
+        echo PHP_EOL;
         shell_exec('composer update');
+        echo PHP_EOL;
         
         # Display message
         echo 
