@@ -157,7 +157,7 @@ class Structure{
                 "#  This code can not be copied and/or distributed without the express".PHP_EOL.
                 "#  permission of Kévin Zarshenas @kekefreedog".PHP_EOL.
                 "# ******************************************************".PHP_EOL.
-                "# Enable rerwrite".PHP_EOL.
+                "# Enable rewrite".PHP_EOL.
                 "RewriteEngine on".PHP_EOL.
                 PHP_EOL.
                 "# Convert subfolder to root get value and redirect to .index".PHP_EOL.

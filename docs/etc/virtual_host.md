@@ -20,6 +20,13 @@
     ServerAdmin admin@email.com
     DocumentRoot "/Users/Sites/test/www"
     ServerName luckyphp.test
+    <Directory "/Users/Sites/test/www">
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride all
+        Order Deny,Allow
+        Allow from all
+        Require all granted
+    </Directory>
 </VirtualHost> 
 ```
 - **ServerAdmin** is email of the admin

@@ -105,7 +105,7 @@ class Setup{
         $this->input = Arrays::stretch($this->input, "_");
 
         # Wrtie input in config > app.yml
-        file_put_contents(__ROOT_APP__.'config/app.yml', Yaml::dump($this->input));
+        file_put_contents(__ROOT_APP__.'config/app.yml', Yaml::dump($this->input, 2));
 
     }
 
@@ -124,13 +124,12 @@ class Setup{
     private function composerUpdate(){
 
         # Update composer
-        echo PHP_EOL;
+        echo PHP_EOL.'--| composer-message |--';
         shell_exec('composer update');
-        echo PHP_EOL;
+        echo PHP_EOL.'------------------------';
         
         # Display message
         echo 
-            PHP_EOL.
             'Composer updated'.
             PHP_EOL
         ;
