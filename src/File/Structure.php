@@ -243,8 +243,10 @@ class Structure{
             if(
                 $object &&
                 isset($object["autoload"]["psr-4"]["App\\"]) && 
-                is_array(isset($object["autoload"]["psr-4"]["App\\"])) && 
-                in_array("src/", (array)$object["autoload"]["psr-4"]["App\\"])
+                is_array(isset($object["autoload"]["psr-4"]["App\\"])) && (
+                    in_array("src/", (array)$object["autoload"]["psr-4"]["App\\"]) ||
+                    in_array("src\/", (array)$object["autoload"]["psr-4"]["App\\"])
+                )
             )
                 return $raw;
 

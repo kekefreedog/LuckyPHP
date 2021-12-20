@@ -60,41 +60,41 @@ class Arrays{
 	 * @param array $array array to process
 	 * @return array
 	 */
-	public static function stretch($array = [], $separator = "_"):array {
+	public static function stretch($array = [], $separator = "_") {
 
+		# Declare result as array
+		$result = [];
+	
 		# Check array
 		if(is_array($array) && !empty($array))
-
+	;
 			# Iteration
 			foreach($array as $k => $v)
 
 				# Check if separator in key
-				if(strpos($k, $separator) !== false):
+				if(strpos($k, $separator) !== false){
 
 					# Explode key
 					$explode = explode($separator, $k, 2);
-
-					# Array merge
-					$array[$explode[0]] = array_merge(	# A tester
-						(
-							$array[$explode[0]] ?? []
-						),
-						self::stretch(
-							[
-								$explode[1] => $v
-							],
-							$separator
-						)
+					
+					# Declare new dimension array
+					if(!isset($result[$explode[0]]))
+						$result[$explode[0]] = [];
+						
+					# Set value and call function recursively
+					$result[$explode[0]] = array_merge_recursive(
+						$result[$explode[0]],
+						self::stretch([$explode[1]=>$v], $separator)
 					);
-
-					# Unset old key
-					unset($array[$k]);
 				
-				endif;
-
+				}else
+					
+					# Set value of the current key
+					$result[$k] = $v;
+	
 		# Return array
-		return $array;
-
+		return $result;
+	
 	}
 
 }
