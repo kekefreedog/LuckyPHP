@@ -62,6 +62,9 @@ class Setup{
 
         # Database Setup
         # $this->databaseSetup();
+
+        # Composer Update
+        $this->composerUpdate();
         
     }
 
@@ -112,6 +115,23 @@ class Setup{
     private function databaseSetup(){
 
         
+
+    }
+
+    /** Update composer
+     * 
+     */
+    private function composerUpdate(){
+
+        # Update composer
+        shell_exec('composer update');
+        
+        # Display message
+        echo 
+            PHP_EOL.
+            'Composer updated'.
+            PHP_EOL
+        ;
 
     }
 
