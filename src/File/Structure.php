@@ -14,10 +14,15 @@
  */
 namespace  LuckyPHP\File;
 
+/** Dépendances
+ * 
+ */
+use LuckyPHP\File\Files;
+
 /** Class page
  * 
  */
-class Structure{
+class Structure extends Files{
 
     /**
      * Creates directories based on the array given
@@ -105,6 +110,11 @@ class Structure{
                             # Put new content in file
                             file_put_contents($filepath, $newContent);
 
+                        }else{
+
+                            # Create empty file
+                            file_put_contents($filepath, '');
+
                         }
 
                     }
@@ -131,140 +141,5 @@ class Structure{
         endforeach;
         
     }
-
-    /**
-     * 
-     * Creation of specific file
-     * 
-     */
-
-        /** .htaccess
-         * 
-         * Write the htaccess file on www folder
-         * @param bool $overwrite
-         * 
-         */
-        public function htaccessWrite($overwrite = false){
-
-            # Set reponse
-            $reponse =
-                "# ******************************************************".PHP_EOL.
-                "#  Copyright (C) 2019-2021 Kévin Zarshenas".PHP_EOL.
-                "#  kevin.zarshenas@gmail.com".PHP_EOL.
-                "#  ".PHP_EOL.
-                "#  This file is part of LuckyPHP.".PHP_EOL.
-                "#  ".PHP_EOL.
-                "#  This code can not be copied and/or distributed without the express".PHP_EOL.
-                "#  permission of Kévin Zarshenas @kekefreedog".PHP_EOL.
-                "# ******************************************************".PHP_EOL.
-                "# Enable rewrite".PHP_EOL.
-                "RewriteEngine on".PHP_EOL.
-                PHP_EOL.
-                "# Convert subfolder to root get value and redirect to .index".PHP_EOL.
-                "RewriteCond %{REQUEST_FILENAME} !-f".PHP_EOL.
-                "RewriteCond %{REQUEST_FILENAME} !-d".PHP_EOL.
-                "RewriteRule ^(.*)$ index.php?root=$1 [QSA,L]".PHP_EOL
-            ;
-
-            # Return reponse
-            return $reponse;
-
-        }
-
-        /** config write
-         * 
-         */
-        public function configWrite(){
-
-            # Set reponse
-            $reponse = "";
-
-            # Return reponse
-            return $reponse;
-
-        }
-
-        /** index.php
-         * 
-         * Write the index.php file on www folder
-         * 
-         */
-        public function indexWrite(){
-
-            # Set reponse
-            $reponse =
-                "<?php declare(strict_types=1);".PHP_EOL.
-                "/*******************************************************".PHP_EOL.
-                " * Copyright (C) 2019-2021 Kévin Zarshenas".PHP_EOL.
-                " * kevin.zarshenas@gmail.com".PHP_EOL.
-                " * ".PHP_EOL.
-                " * This file is part of LuckyPHP.".PHP_EOL.
-                " * ".PHP_EOL.
-                " * This code can not be copied and/or distributed without the express".PHP_EOL.
-                " * permission of Kévin Zarshenas @kekefreedog".PHP_EOL.
-                " *******************************************************/".PHP_EOL.
-                "# Autoload (composer)".PHP_EOL.
-                "require_once '../vendor/autoload.php';".PHP_EOL.
-                "# Load App Initialization".PHP_EOL.
-                "use App\Init;".PHP_EOL.
-                "# New App Initialization ".PHP_EOL.
-                "new Init();".PHP_EOL
-            ;
-
-            # Return reponse
-            return $reponse;
-
-        }
-
-        /** Update composer.json
-         * 
-         */
-        public function composerUpdate($filepath){
-
-            // Check composer.json exist
-            if(is_file($filepath));
-
-            // Get raw data
-            $raw = file_get_contents($filepath);
-
-            $object = json_decode($raw, true);
-
-            /** Update object check if content has :
-             * 
-             *  "autoload": {
-             *      "psr-4": {
-             *          "App\\": [
-             *              "src/"
-             *          ]
-             *      }
-             *  }
-             * 
-             */
-            if(
-                $object &&
-                isset($object["autoload"]["psr-4"]["App\\"]) && 
-                is_array(isset($object["autoload"]["psr-4"]["App\\"])) && (
-                    in_array("src/", (array)$object["autoload"]["psr-4"]["App\\"]) ||
-                    in_array("src\/", (array)$object["autoload"]["psr-4"]["App\\"])
-                )
-            )
-                return $raw;
-
-            $object["autoload"]["psr-4"]["App\\"] = ["src/"];
-
-            // Check if update change anything
-            if(json_encode($object) === $raw)
-                return $raw;
-
-            // Return object
-            return json_encode($object, JSON_PRETTY_PRINT);
-
-        }
-
-    /**
-     * 
-     * Creation of specific file end
-     * 
-     */
 
 }

@@ -97,9 +97,11 @@ class Structure{
                 ],
                 # Logs from the app and framework
                 'logs'      =>  [
-                    'folders'=>  [
-                        'app.log'       =>  [],
-                        'luckyphp.log'  =>  [],
+                    'files'=>  [
+                        'app.log'       =>  [
+                        ],
+                        'luckyphp.log'  =>  [
+                        ],
                     ]
                 ],
                 # All media
