@@ -17,6 +17,7 @@ namespace  LuckyPHP\Server;
 /** Dependance
  * 
  */
+use LuckyPHP\Server\Exception;
 use Symfony\Component\Yaml\Yaml;
 
 /** Class page
@@ -29,45 +30,43 @@ class Config{
     /** Read config
      * 
      */
-    public function read($fileOrName = ""):array {
+    public static function read($input = ""):array {
 
-        # Check server Root
-        if(!isset($this->serverRoot) || !$this->serverRoot)
 
-            // Set server root
-            $this->serverRoot = (new Root)->get();
-
-        # If file
+        # If input is a path
         if(
-            strpos($fileOrName, '/') !== false && 
-            strpos($fileOrName, '.') !== false
-        )
+            strpos($input, '/') !== false && 
+            strpos($input, '.') !== false
+        ){
 
             # Set path
-            $path = str_replace(
-                ["{{root}}", " "],
-                [$this->serverRoot['directory'], ''],
-                $fileOrName
-            );
+            $path = __ROOT_APP__.$input;
 
-        elseif($fileOrName && in_array($fileOrName, self::CONFIG_PATH))
+            
+        }else
+        # If input is the name of the config
+        if($input && in_array($input, self::CONFIG_PATH)){
 
             # Set path
-            $path = self::CONFIG_PATH[$fileOrName];
+            $path = __ROOT_APP__.self::CONFIG_PATH[$input];
 
-        else
+        }else
+        # Else error
+        {
 
-            # Return false
-            return [];
+            # Set exception
+            throw new Exception("You are trying to load an invalid config \"$input\"", 500);
 
-        # Parse file
-        $value = file_exists($path) ? 
-            Yaml::parseFile($path) : 
-                [];
+        }
 
-        # Return $value
-        return $value;
+        # Check if file of the config exist
+        if(!file_exists($path))
+            
+            # Set exception
+            throw new Exception("The config you are trying to open doesn't exists \"$path\"", 500);
 
+        # Parse the config
+        return Yaml::parseFile($path);
 
     }
 
@@ -108,7 +107,7 @@ class Config{
      * 
      */
     public const CONFIG_PATH = [
-        'settings'  =>  '../config/settings.yml'
+        'settings'  =>  'config/settings.yml'
     ];
 
 }

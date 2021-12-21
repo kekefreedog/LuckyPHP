@@ -14,11 +14,12 @@
  */
 namespace App;
 
-/** Use others classs
+/** Dependance
  * 
  */
-use LuckyPHP\Server\SanityCheck;
 use LuckyPHP\Server\Config;
+use LuckyPHP\Server\Exception;
+use LuckyPHP\Server\SanityCheck;
 
 
 /** Class for manage the workflow of the app
@@ -36,46 +37,10 @@ class Kernel{
 
     }
 
-    /** Sanity Check
+    /** Define roots
      * 
      */
-    protected static function sanityCheck(){
-
-        # Check PHP version
-        SanityCheck::checkPHPVersion("7.0.0");
-
-        # Check Host is allowed
-        SanityCheck::checkHost();
-
-        # Check MySQL version
-        SanityCheck::checkMySQLVersion("1.0.0");
-        
-    }
-
-    /** Set config of the app
-     * 
-     */
-    protected function configSet(){
-
-        # Declare config parameters
-        $this->config = [];
-
-        # New config
-        $config = new Config();
-
-        # Read config settings
-        $this->config[$config::CONFIG_PATH['settings']] = $config->read($config::CONFIG_PATH['settings']);
-
-
-        /* * * Read custom config
-        * -------------------------------------- *
-        */
-
-        # Set __...__
-        
-        /*
-        * -------------------------------------- *
-        * * */
+    public static function rootsDefine(){
 
         # Set default root
         Config::defineRoots([
@@ -84,7 +49,52 @@ class Kernel{
             'luckyphp'  =>  __DIR__.'/vendor/kekefreedog/luckyphp/',
         ]);
 
-        /* * * Define custom name constant
+    }
+
+    /** Sanity Check
+     * 
+     */
+    protected static function sanityCheck(){
+        
+        try {
+
+            # Check PHP version
+            SanityCheck::checkPHPVersion("7.0.0");
+
+            # Check Host is allowed
+            SanityCheck::checkHost();
+
+            # Check MySQL version
+            SanityCheck::checkMySQLVersion("1.0.0");
+
+        }catch(Exception $e){
+
+            # Mettre en place redirection
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+
+        }
+        
+    }
+
+    /** Set config of the app
+     * 
+     */
+    protected function configSet(){
+        
+        try {
+
+            # Read config settings
+            $this->config[Config::CONFIG_PATH['settings']] = Config::read(Config::CONFIG_PATH['settings']);
+
+        }catch(Exception $e){
+
+            # Mettre en place redirection
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+
+        }
+
+
+        /* * * Read custom config
         * -------------------------------------- *
         */
 

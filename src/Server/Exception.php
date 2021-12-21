@@ -52,7 +52,7 @@ interface InterfaceException{
  * @source https://www.php.net/manual/en/language.exceptions.php
  * 
  */
-abstract class Exception extends \Exception implements InterfaceException{
+class Exception extends \Exception implements InterfaceException{
 
     // Exception message
     protected $message = 'Unknown exception';
@@ -102,16 +102,3 @@ abstract class Exception extends \Exception implements InterfaceException{
     }
 
 }
-
-/** Code list
- * 
- */
-const EXCEPTION_CODE_LIST = [
-
-    # SanityCheck/checkPHPVersion
-    1   =>  [
-        "code"      =>  1,
-        "message"   =>  "Please check the current PHP version",
-    ],
-
-];

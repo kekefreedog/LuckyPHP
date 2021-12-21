@@ -17,12 +17,8 @@ namespace  LuckyPHP\Server;
 /** Dependance
  * 
  */
-use Symfony\Component\Yaml\Yaml;
-
-/** Call other class
- * 
- */
 use LuckyPHP\Server\Exception;
+use Symfony\Component\Yaml\Yaml;
 
 /** Class Sanity Check
  * 
@@ -43,7 +39,7 @@ class SanityCheck{
         # Return error if result false
         if(!$result)
 
-            throw new Exception("Please check the current PHP version is higher than $minVersion", 1);
+            throw new Exception("Please check the current PHP version is higher than $minVersion", 501);
 
         # Return true
         return true;
@@ -61,7 +57,7 @@ class SanityCheck{
         # Return error if result false
         if(!$result)
 
-            throw new Exception("Please check the current PHP version is higher than $minVersion", 1);
+            throw new Exception("Please check the current PHP version is higher than $minVersion", 501);
 
         # Return true
         return true;
@@ -80,7 +76,7 @@ class SanityCheck{
         if(file_exists(__ROOT_APP__.'config/app.yml')){
 
             # Declare reponse
-            $reponse = true;
+            $result = true;
 
             # Parse config
             $configApp = Yaml::parseFile(__ROOT_APP__.'config/app.yml');
@@ -102,8 +98,8 @@ class SanityCheck{
                 )
             ){
 
-                # Set reponse
-                $reponse = false;
+                # Set result
+                $result = false;
 
             }else
             /** 2. In allowed and not in excluded
@@ -119,8 +115,8 @@ class SanityCheck{
                 )
             ){
 
-                # Set reponse
-                $reponse = true;
+                # Set result
+                $result = true;
 
             }else
             /** 3. Not in allowed and in excluded
@@ -136,10 +132,10 @@ class SanityCheck{
                 )
             ){
 
-                # Set reponse
-                $reponse = false;
+                # Set result
+                $result = false;
 
-            }
+            }else
             /** 4. Else not allowed and not exluded
              * 
              */
@@ -156,17 +152,22 @@ class SanityCheck{
                 # If empty hostAllowed and hostExcluded
                 if(empty($hostAllowed) && empty($hostExcluded)){
 
-                    # Set reponse
-                    $reponse = true;
+                    # Set result
+                    $result = true;
 
                 }else{
 
-                    # Set reponse
-                    $reponse = false;
+                    # Set result
+                    $result = false;
 
                 }
 
             }
+
+            # Check if current host is not allowed
+            if(!$result)
+
+                throw new Exception("The current host \"$serverName\" is not allowed by the current app", 1);
 
         }
 

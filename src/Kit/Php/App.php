@@ -30,6 +30,11 @@ class App extends Kernel{
      * 
      */
     public function __construct(){
+
+        /** Define roots contants of the app
+         * 
+         */
+        self::rootsDefine();
         
         /** Check if the app is useable
          * Check php
