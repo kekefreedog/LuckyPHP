@@ -14,6 +14,10 @@
  */
 namespace App;
 
+/** Dependances
+ * 
+ */
+use LuckyPHP\Server\Rooter;
 
 /** Class of the controller
  * 
@@ -30,6 +34,9 @@ class Controller{
 
         # Set Controller
         $this->reponse = [];
+
+        # New rooter
+        $this->rooter = new Rooter();
 
     } 
 

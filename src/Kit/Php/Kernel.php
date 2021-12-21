@@ -84,7 +84,7 @@ class Kernel{
         try {
 
             # Read config of the app
-            $this->config[Config::CONFIG_PATH['app']] = Config::read(Config::CONFIG_PATH['app']);
+            $this->config = Config::read(Config::CONFIG_PATH['app']);
 
         }catch(Exception $e){
 

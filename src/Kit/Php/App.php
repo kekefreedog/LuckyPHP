@@ -32,6 +32,10 @@ class App extends Kernel{
     public function __construct(){
 
         /** Define roots contants of the app
+         * Define global variable :
+         *  __ROOT_APP__ root of the app 
+         *  __ROOT_WWW__ root of the www folder
+         *  __ROOT_LUCKYPHP__ root of the vendor LuckyPHP
          * 
          */
         self::rootsDefine();
@@ -45,19 +49,15 @@ class App extends Kernel{
         self::sanityCheck();
 
         /** Read the config of the app
-         *  - Set config in $this->config
-         *  - Define global variable :
-         *      __ROOT_APP__ root of the app 
-         *      __ROOT_WWW__ root of the www folder
-         *      __ROOT_LUCKYPHP__ root of the vendor LuckyPHP
+         * - Set config in $this->config
          * 
          */
         $this->configSet();
 
         /** Read the application kernel
          * (search cache or generate it)
-         * - Execute the construct function in parent
-         * - Set cache in $this->cache
+         *  - Execute the construct function in parent
+         *  - Set cache in $this->cache
          * 
          */
         parent::__construct();
@@ -103,10 +103,7 @@ $app = new App();
 /* * * Set header and body of the page
  * -------------------------------------- *
  */
-//$app->viewer->header;
-//$app->viewer->body;
-// print_r($app->config);
-print_r('Hello world');
+
 /*
  * -------------------------------------- *
  * * */

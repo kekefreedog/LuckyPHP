@@ -17,7 +17,7 @@ namespace  LuckyPHP\Server;
 /** Dependance
  * 
  */
-use Mezon\Router\Router;
+use Mezon\Router\Router AS MezonRooter;
 
 /** Class page
  * 
@@ -26,6 +26,20 @@ use Mezon\Router\Router;
  */
 class Rooter{
 
+    # Declare instance
+    private $instance = null;
+
+    /** Constructor
+     * 
+     */
+    public function __construct(){
+        
+        # Set instance
+        $instance = new MezonRooter();
+
+        var_dump($instance->getListOfSupportedRequestMethods());
+
+    }
 
 
 }
