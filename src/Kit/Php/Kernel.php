@@ -83,8 +83,8 @@ class Kernel{
         
         try {
 
-            # Read config settings
-            $this->config[Config::CONFIG_PATH['settings']] = Config::read(Config::CONFIG_PATH['settings']);
+            # Read config of the app
+            $this->config[Config::CONFIG_PATH['app']] = Config::read(Config::CONFIG_PATH['app']);
 
         }catch(Exception $e){
 
