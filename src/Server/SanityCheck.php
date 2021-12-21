@@ -14,6 +14,11 @@
  */
 namespace  LuckyPHP\Server;
 
+/** Dependance
+ * 
+ */
+use Symfony\Component\Yaml\Yaml;
+
 /** Call other class
  * 
  */
@@ -70,6 +75,102 @@ class SanityCheck{
 
         # Get server name
         $serverName = $_SERVER['SERVER_NAME'];
+
+        # Check if config > app exists
+        if(file_exists(__ROOT_APP__.'config/app.yml')){
+
+            # Declare reponse
+            $reponse = true;
+
+            # Parse config
+            $configApp = Yaml::parseFile(__ROOT_APP__.'config/app.yml');
+
+            # Set hosts allowed and excluded
+            $hostAllowed = $configApp['app']['hosts']['allowed'] ?? ['*'];
+            $hostExcluded = $configApp['app']['hosts']['excluded'] ?? [];
+
+            /** 1. In allowed and in excluded
+             * 
+             */
+            if(
+                (
+                    in_array($configApp, $hostAllowed) ||
+                    in_array('*', $hostAllowed)
+                ) && (
+                    in_array($configApp, $hostExcluded) ||
+                    in_array('*', $hostExcluded)
+                )
+            ){
+
+                # Set reponse
+                $reponse = false;
+
+            }else
+            /** 2. In allowed and not in excluded
+             * 
+             */
+            if(
+                (
+                    in_array($configApp, $hostAllowed) ||
+                    in_array('*', $hostAllowed)
+                ) && (
+                    !in_array($configApp, $hostExcluded) ||
+                    !in_array('*', $hostExcluded)
+                )
+            ){
+
+                # Set reponse
+                $reponse = true;
+
+            }else
+            /** 3. Not in allowed and in excluded
+             * 
+             */
+            if(
+                (
+                    !in_array($configApp, $hostAllowed) ||
+                    !in_array('*', $hostAllowed)
+                ) && (
+                    in_array($configApp, $hostExcluded) ||
+                    in_array('*', $hostExcluded)
+                )
+            ){
+
+                # Set reponse
+                $reponse = false;
+
+            }
+            /** 4. Else not allowed and not exluded
+             * 
+             */
+            if(
+                (
+                    !in_array($configApp, $hostAllowed) ||
+                    !in_array('*', $hostAllowed)
+                ) && (
+                    !in_array($configApp, $hostExcluded) ||
+                    !in_array('*', $hostExcluded)
+                )
+            ){
+
+                # If empty hostAllowed and hostExcluded
+                if(empty($hostAllowed) && empty($hostExcluded)){
+
+                    # Set reponse
+                    $reponse = true;
+
+                }else{
+
+                    # Set reponse
+                    $reponse = false;
+
+                }
+
+            }
+
+        }
+
+        
 
         echo $serverName;
 

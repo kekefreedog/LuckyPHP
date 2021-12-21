@@ -126,7 +126,7 @@ class Setup{
         # Update composer
         echo PHP_EOL.'--| composer-message |--'.PHP_EOL;
         shell_exec('composer update');
-        echo PHP_EOL.'------------------------';
+        echo '------------------------'.PHP_EOL;
         
         # Display message
         echo 
