@@ -171,10 +171,6 @@ class SanityCheck{
 
         }
 
-        
-
-        echo $serverName;
-
     }
 
 }
