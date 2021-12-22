@@ -45,8 +45,8 @@ class Kernel{
         # Set default root
         Config::defineRoots([
             'app'       =>  __DIR__.'/../',
-            'www'       =>  __DIR__,
-            'luckyphp'  =>  __DIR__.'/vendor/kekefreedog/luckyphp/',
+            'www'       =>  __DIR__.'/../www',
+            'luckyphp'  =>  __DIR__.'/../vendor/kekefreedog/luckyphp/',
         ]);
 
     }
