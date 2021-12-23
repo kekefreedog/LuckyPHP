@@ -137,7 +137,7 @@ class Cli{
             )
         )
                     
-            echo '"'.$this->data['name'].'" is not allowed ! ⚠️'.PHP_EOL;
+            echo '"'.$this->data['app_name'].'" is not allowed ! ⚠️'.PHP_EOL;
 
         # Check $this->data['name']
         if(!$this->data['app_name'])
@@ -196,14 +196,14 @@ class Cli{
             )
         )
                     
-            echo '"'.$this->data['k_materialize'].'" is not valid ! ⚠️'.PHP_EOL;
+            echo '"'.$this->data['auth_internal'].'" is not valid ! ⚠️'.PHP_EOL;
 
         # Echo en
         echo 
             PHP_EOL,
             "------------------------------------------------(✔️ )".PHP_EOL,
             PHP_EOL,
-            'We are ready to create "'.$this->data['name'].'"'.PHP_EOL
+            'We are ready to create "'.$this->data['app_name'].'"'.PHP_EOL
         ;
 
         # Ready to create 
