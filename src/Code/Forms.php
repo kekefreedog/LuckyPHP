@@ -36,10 +36,18 @@ class Forms{
         # Type varchar
         if(substr(trim($params['type']), 0, 7) == "VARCHAR"):
 
-            # return (is_string($input) || is_numeric($input)) ? trim($input) : "";
+            # Check & clean string
+            $result['value'] = (is_string($input) || is_numeric($input)) ? 
+                trim($input) : 
+                    "";
         
         # Type Array
         elseif(substr(trim($params['type']), 0, 5) == "ARRAY"):
+
+            # Check & clean array
+            $result['value'] = is_array($input) ?
+                $input :
+                    [];
 
         endif;
 

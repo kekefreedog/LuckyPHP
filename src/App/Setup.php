@@ -99,7 +99,7 @@ class Setup{
                 isset($input[$content['name']]) ?
 
                     # Process input
-                    Forms::process_input($input[$content['name']], $content) :
+                    Forms::process_input($input[$content['name']], $content)['value'] :
 
                         # Set default value
                         $content['default'] ?? null;
@@ -127,16 +127,9 @@ class Setup{
     private function composerUpdate(){
 
         # Update composer
-        echo PHP_EOL.'--| composer-message |--'.PHP_EOL;
+        echo PHP_EOL.'(📦)-[ UPDATING COMPOSER ]----------------------------'.PHP_EOL;
         shell_exec('composer update');
-        echo '------------------------'.PHP_EOL;
-        
-        # Display message
-        echo 
-            PHP_EOL.
-            'Composer updated'.
-            PHP_EOL
-        ;
+        echo "------------------------------------------------(✔️ )".PHP_EOL;
 
     }
 
@@ -146,14 +139,14 @@ class Setup{
     private function npmUpdate(){
 
         # Update composer
-        echo PHP_EOL.'--| npm-message |--'.PHP_EOL;
+        echo PHP_EOL.'(📦)-[ UPDATING NPM ]-----------------------'.PHP_EOL;
         shell_exec('npm update');
-        echo '------------------------'.PHP_EOL;
+        echo "------------------------------------------------(✔️ )".PHP_EOL;
         
         # Display message
         echo 
             PHP_EOL.
-            'Npm updated'.
+            'You app is ready for action ! ✨'.
             PHP_EOL
         ;
 
