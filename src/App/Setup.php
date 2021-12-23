@@ -147,6 +147,7 @@ class Setup{
         echo 
             PHP_EOL.
             'You app is ready for action ! ✨'.
+            PHP_EOL.
             PHP_EOL
         ;
 

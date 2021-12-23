@@ -181,7 +181,9 @@ class Cli{
                 echo '"'.$this->data['app_css_framework_branch'].'" is not valid ! ⚠️'.PHP_EOL;
 
             # Set css framwork branch (depending of the precedent answer)
-            $this->data['app_css_framework_source'] = $this->data['app_css_framework_source'] ? 'advanced' : 'basic'; 
+            $this->data['app_css_framework_branch'] = intval($this->data['app_css_framework_branch']) ? 
+                'advanced' : 
+                    'basic'; 
 
         }
 
