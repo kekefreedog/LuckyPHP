@@ -37,7 +37,7 @@ class Rooter{
         # Set instance
         $instance = new MezonRooter();
 
-        var_dump($instance->getListOfSupportedRequestMethods());
+        var_dump($instance);
 
     }
 

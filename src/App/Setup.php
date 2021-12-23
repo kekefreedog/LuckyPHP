@@ -127,9 +127,16 @@ class Setup{
     private function composerUpdate(){
 
         # Update composer
-        echo PHP_EOL.'(📦)-[ UPDATING COMPOSER ]----------------------------'.PHP_EOL;
+        echo 
+            PHP_EOL.'
+            (📦 )-[ UPDATING COMPOSER ]---------------------------'.
+            PHP_EOL
+        ;
         shell_exec('composer update');
-        echo "------------------------------------------------(✔️ )".PHP_EOL;
+        echo 
+            "------------------------------------------------(✔️ )".
+            PHP_EOL
+        ;
 
     }
 
@@ -139,14 +146,21 @@ class Setup{
     private function npmUpdate(){
 
         # Update composer
-        echo PHP_EOL.'(📦)-[ UPDATING NPM ]-----------------------'.PHP_EOL;
+        echo 
+            PHP_EOL.
+            '(📦 )-[ UPDATING NPM ]-------------------------------'.
+            PHP_EOL
+        ;
         shell_exec('npm update');
-        echo "------------------------------------------------(✔️ )".PHP_EOL;
+        echo 
+            "------------------------------------------------(✔️ )".
+            PHP_EOL
+        ;
         
         # Display message
         echo 
             PHP_EOL.
-            'You app is ready for action ! ✨'.
+            '✨  You app is ready for action ! ✨'.
             PHP_EOL.
             PHP_EOL
         ;
