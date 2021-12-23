@@ -73,12 +73,34 @@ class Config{
                 ],
             # Css
                 # Framework
-                [
-                    'name'      =>  'app_css_framework',
-                    'type'      =>  'VARCHAR',
-                    'admit'     =>  ['Kmaterialize'],
-                    'default'   =>  'Kmaterialize',
-                ],
+                    # Source
+                    [
+                        'name'      =>  'app_css_framework_source',
+                        'type'      =>  'VARCHAR',
+                        'default'   =>  null,
+                        //'default'   =>  'github',
+                    ],
+                    # Author
+                    [
+                        'name'      =>  'app_css_framework_author',
+                        'type'      =>  'VARCHAR',
+                        'default'   =>  null,
+                        //'default'   =>  'kekefreedog',
+                    ],
+                    # Package
+                    [
+                        'name'      =>  'app_css_framework_package',
+                        'type'      =>  'VARCHAR',
+                        'default'   =>  null,
+                        //'default'   =>  'Kmaterialize',
+                    ],
+                    # Package
+                    [
+                        'name'      =>  'app_css_framework_branch',
+                        'type'      =>  'VARCHAR',
+                        'default'   =>  null,
+                        //'default'   =>  'advanced',
+                    ],
             # Auth
                 # Type
                 [

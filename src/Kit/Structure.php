@@ -115,6 +115,11 @@ class Structure{
                     'function'      => [
                         'name'          =>  'composerUpdate',
                     ]
+                ],
+                'package.json'  =>  [
+                    'function'      => [
+                        'name'          =>  'packageUpdate',
+                    ]
                 ]
             ]
         ],

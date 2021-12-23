@@ -128,7 +128,7 @@ class Cli{
         while( 
             in_array(
                 (
-                    $this->data['name'] = 
+                    $this->data['app_name'] = 
                         trim(
                             readline('1. Name of your application : '.($nameSupposed ? '('.$nameSupposed.') ' : ''))
                         )
@@ -140,25 +140,50 @@ class Cli{
             echo '"'.$this->data['name'].'" is not allowed ! ⚠️'.PHP_EOL;
 
         # Check $this->data['name']
-        if(!$this->data['name'])
+        if(!$this->data['app_name'])
 
             # Set value
-            $this->data['name'] = $nameSupposed ? $nameSupposed : 'LuckyApp';
+            $this->data['app_name'] = $nameSupposed ? $nameSupposed : 'LuckyApp';
 
 
-        # 2. Ask if you want to use Kmaterialize
+        # 2-1. Ask if you want to use Kmaterialize
         while( 
             !in_array(
                 (
-                    $this->data['k_materialize'] = 
-                        readline('2. Do you want use Kmaterialize ? [Yes] or [No] : ')
+                    $kmaterialize = 
+                        readline('2-1. Do you want use Kmaterialize ? [Yes] or [No] : ')
                     ),
                 ['Yes', 'No']
             )
         )
                     
-            echo '"'.$this->data['k_materialize'].'" is not valid ! ⚠️'.PHP_EOL;
+            echo '"'.$kmaterialize.'" is not valid ! ⚠️'.PHP_EOL;
 
+        # Check if users want use Kmaterialize
+        if($kmaterialize == 'Yes'){
+
+            # Set css framework
+            $this->data['app_css_framework_source'] = "github";
+            $this->data['app_css_framework_author'] = "kekefreedog";
+            $this->data['app_css_framework_package'] = "Kmaterialize";
+
+            # 2-2. Ask if user wants use Kmaterialize basic or advanced
+            while( 
+                !in_array(
+                    (
+                        $this->data['app_css_framework_branch'] = 
+                            readline('2-2. Load Kmaterialize Basic [0] or Advanced [1] ? [0] or [1] : ')
+                        ),
+                    ['0', 0, '1', 1]
+                )
+            )
+                        
+                echo '"'.$this->data['app_css_framework_branch'].'" is not valid ! ⚠️'.PHP_EOL;
+
+            # Set css framwork branch (depending of the precedent answer)
+            $this->data['app_css_framework_source'] = $this->data['app_css_framework_source'] ? 'advanced' : 'basic'; 
+
+        }
 
         # 3. Ask if you want to use interal auth
         while( 

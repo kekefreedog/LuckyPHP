@@ -103,11 +103,17 @@ class Files{
     public function composerUpdate($filepath){
 
         // Check composer.json exist
-        if(is_file($filepath));
-        // Get raw data
-        $raw = file_get_contents($filepath);
+        if(is_file($filepath)){
 
-        $object = json_decode($raw, true);
+            // Get raw data
+            $raw = file_get_contents($filepath);
+
+            // Parse json
+            $object = json_decode($raw, true);
+
+        }else
+
+            $object = [];
 
         /** Update object :
          * 
@@ -131,5 +137,48 @@ class Files{
 
     }
 
+    /** Update package.json
+     * 
+     */
+    public function packageUpdate($filepath){
+
+        /** Info package
+         * 
+         */
+        $source = "github";
+        $author = "kekefreedog";
+        $package = "Kmaterialize";
+        $branch = "advanced";
+
+        // Check composer.json exist
+        if(is_file($filepath)){
+
+            // Get raw data
+            $raw = file_get_contents($filepath);
+
+            // Parse json
+            $object = json_decode($raw, true);
+
+        }else
+
+            $object = [];
+
+        # Set default object
+        /** Set dependency
+         * 
+         * Exemple :
+         * {
+         *      "dependencies": {
+         *         "kmaterialize": "github:kekefreedog/Kmaterialize#advanced"
+         *      }
+         *  }
+         * 
+         */
+        $object["dependencies"][$package] = ($source&&$branch?"$source:$author/":"").$package.($branch?"#$branch":"");
+
+        # Return object
+        return json_encode($object, JSON_PRETTY_PRINT);
+
+    }
 
 }
