@@ -65,6 +65,9 @@ class Setup{
 
         # Composer Update
         $this->composerUpdate();
+
+        # Npm Update
+        $this->npmUpdate();
         
     }
 
@@ -132,6 +135,25 @@ class Setup{
         echo 
             PHP_EOL.
             'Composer updated'.
+            PHP_EOL
+        ;
+
+    }
+
+    /** Update composer
+     * 
+     */
+    private function npmUpdate(){
+
+        # Update composer
+        echo PHP_EOL.'--| npm-message |--'.PHP_EOL;
+        shell_exec('npm update');
+        echo '------------------------'.PHP_EOL;
+        
+        # Display message
+        echo 
+            PHP_EOL.
+            'Npm updated'.
             PHP_EOL
         ;
 
