@@ -54,11 +54,11 @@ class Setup{
             'luckyphp'  =>  $directory.'vendor/kekefreedog/luckyphp/',
         ]);
 
-        # Set up config
-        $this->configSetup($input);
-
         # Structure Setup
         $this->structureSetup();
+
+        # Set up config
+        $this->configSetup($input);
 
         # Database Setup
         # $this->databaseSetup();
@@ -112,9 +112,6 @@ class Setup{
 
         # Convert _ to multidimensional array
         $this->input = Arrays::stretch($this->input, "_");
-
-        # Check if config file exist and create it if necessary
-        if (!is_dir(__ROOT_APP__.'config')) mkdir(__ROOT_APP__.'config', 0777, true);
 
         # Wrtie input in config > app.yml
         file_put_contents(__ROOT_APP__.'config/app.yml', "# Configuration of the app".PHP_EOL.Yaml::dump($this->input, 10));
