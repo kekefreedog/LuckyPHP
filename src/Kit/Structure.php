@@ -131,7 +131,7 @@ class Structure{
                             ],
                         ],
                         # Routes of the app
-                        'rootes.yml' =>  [
+                        'routes.yml' =>  [
                             'function'  =>  [
                                 'name'      =>  'routesWrite',
                             ],

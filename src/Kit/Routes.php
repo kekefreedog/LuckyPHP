@@ -60,7 +60,7 @@ class Routes{
 
         /* Page not found */
         [
-            'name'      =>  ['Page not found'],
+            'name'      =>  'Page not found',
             'route'     =>  [
                 '/*/'
             ],
