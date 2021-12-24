@@ -105,7 +105,7 @@ class Structure extends Files{
                         ){
 
                             # Get new content
-                            $newContent = $this->{$fileContent['function']['name']}(...([$filepath] + ($fileContent['function']['parameters'] ?? [])));
+                            $newContent = $this->{$fileContent['function']['name']}(...([$filepath] + ($fileContent['function']['arguments'] ?? [])));
 
                             # Put new content in file
                             file_put_contents($filepath, $newContent);
