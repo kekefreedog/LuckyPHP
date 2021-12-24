@@ -129,7 +129,7 @@ class Setup{
         # Update composer
         echo 
             PHP_EOL.
-            '(📦 )-[ UPDATING COMPOSER ]---------------------------'.
+            '(📦 )-[ UPDATING COMPOSER ]--------------------------'.
             PHP_EOL
         ;
         shell_exec('composer update');
