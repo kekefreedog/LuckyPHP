@@ -113,6 +113,9 @@ class Setup{
         # Convert _ to multidimensional array
         $this->input = Arrays::stretch($this->input, "_");
 
+        # Check if config file exist and create it if necessary
+        if (!is_dir(__ROOT_APP__.'config/app.yml')) mkdir(__ROOT_APP__.'config/app.yml');
+
         # Wrtie input in config > app.yml
         file_put_contents(__ROOT_APP__.'config/app.yml', "# Configuration of the app".PHP_EOL.Yaml::dump($this->input, 10));
 
