@@ -160,7 +160,7 @@ class Setup{
         # Display message
         echo 
             PHP_EOL.
-            '✨  You app is ready for action ! ✨'.
+            '✨  Your app is ready for action ! ✨'.
             PHP_EOL.
             PHP_EOL
         ;

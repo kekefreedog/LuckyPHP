@@ -21,6 +21,7 @@ class Files{
 
     /** Header
      * 
+     * Using /** *//*
      */
     public static function header(){
 
@@ -42,17 +43,41 @@ class Files{
 
     }
 
+    /** Header alt
+     * 
+     * Using #
+     */
+    public static function headerAlt(){
+
+        # Set result
+        $result = 
+            "# ******************************************************".
+            "#  Copyright (C) 2019-2021 Kévin Zarshenas".
+            "#  kevin.zarshenas@gmail.com".
+            "#  ".
+            "#  This file is part of LuckyPHP.".
+            "#  ".
+            "#  This code can not be copied and/or distributed without the express".
+            "#  permission of Kévin Zarshenas @kekefreedog".
+            "# ******************************************************"
+        ;
+
+        # Return result
+        return $result;
+
+    }
+
     /** .htaccess
      * 
      * Write the htaccess file on www folder
      * @param bool $overwrite
      * 
      */
-    public function htaccessWrite($overwrite = false){
+    public function htaccessWrite(){
 
         # Set reponse
         $reponse =
-            $this->header().
+            $this->headerAlt().
             "# Enable rewrite".PHP_EOL.
             "RewriteEngine on".PHP_EOL.
             PHP_EOL.
