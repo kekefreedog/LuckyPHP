@@ -19,6 +19,29 @@ namespace  LuckyPHP\File;
  */
 class Files{
 
+    /** Header
+     * 
+     */
+    public static function header(){
+
+        # Set result
+        $result =
+            "/*******************************************************".PHP_EOL.
+            " * Copyright (C) 2019-2021 Kévin Zarshenas".PHP_EOL.
+            " * kevin.zarshenas@gmail.com".PHP_EOL.
+            " *".PHP_EOL.
+            " * This file is part of LuckyPHP.".PHP_EOL.
+            " *".PHP_EOL.
+            " * This code can not be copied and/or distributed without the express".PHP_EOL.
+            " * permission of Kévin Zarshenas @kekefreedog".PHP_EOL.
+            " *******************************************************/".PHP_EOL
+        ;
+
+        # Return result
+        return $result;
+
+    }
+
     /** .htaccess
      * 
      * Write the htaccess file on www folder
@@ -29,15 +52,7 @@ class Files{
 
         # Set reponse
         $reponse =
-            "# ******************************************************".PHP_EOL.
-            "#  Copyright (C) 2019-2021 Kévin Zarshenas".PHP_EOL.
-            "#  kevin.zarshenas@gmail.com".PHP_EOL.
-            "#  ".PHP_EOL.
-            "#  This file is part of LuckyPHP.".PHP_EOL.
-            "#  ".PHP_EOL.
-            "#  This code can not be copied and/or distributed without the express".PHP_EOL.
-            "#  permission of Kévin Zarshenas @kekefreedog".PHP_EOL.
-            "# ******************************************************".PHP_EOL.
+            $this->header().
             "# Enable rewrite".PHP_EOL.
             "RewriteEngine on".PHP_EOL.
             PHP_EOL.
@@ -75,15 +90,7 @@ class Files{
         # Set reponse
         $reponse =
             "<?php declare(strict_types=1);".PHP_EOL.
-            "/*******************************************************".PHP_EOL.
-            " * Copyright (C) 2019-2021 Kévin Zarshenas".PHP_EOL.
-            " * kevin.zarshenas@gmail.com".PHP_EOL.
-            " * ".PHP_EOL.
-            " * This file is part of LuckyPHP.".PHP_EOL.
-            " * ".PHP_EOL.
-            " * This code can not be copied and/or distributed without the express".PHP_EOL.
-            " * permission of Kévin Zarshenas @kekefreedog".PHP_EOL.
-            " *******************************************************/".PHP_EOL.
+            $this->header().
             "# Autoload (composer)".PHP_EOL.
             "require_once '../vendor/autoload.php';".PHP_EOL.
             "# Load App Initialization".PHP_EOL.
@@ -164,20 +171,43 @@ class Files{
             $object = [];
 
         # Set default object
-        /** Set dependency
-         * 
-         * Exemple :
-         * {
-         *      "dependencies": {
-         *         "kmaterialize": "github:kekefreedog/Kmaterialize#advanced"
-         *      }
-         *  }
-         * 
-         */
+
+        # Set dependency
         $object["dependencies"][$package] = ($source&&$branch?"$source:$author/":"").$package.($branch?"#$branch":"");
+
+        # Set dev dependencies
+        $object["devDependencies"]["css-loader"]="^6.5.1";
+        $object["devDependencies"]["file-loader"]="^6.2.0";
+        $object["devDependencies"]["remove-files-webpack-plugin"]="^1.5.0";
+        $object["devDependencies"]["style-loader"]="^3.3.1";
+        $object["devDependencies"]["url-loader"]="^4.1.1";
+        $object["devDependencies"]["webpack"]="^5.65.0";
+        $object["devDependencies"]["webpack-cli"]="^4.9.1";
+
+        # Set scripts
+        $object["scripts"]["webpack-dev"] = "webpack --mode development";
+        $object["scripts"]["webpack-build"] = "webpack --mode production";
+        $object["scripts"]["webpack-watch"] = "webpack --watch --mode=development";
 
         # Return object
         return json_encode($object, JSON_PRETTY_PRINT);
+
+    }
+
+    /** Js Import Write
+     * 
+     * Write simple js file with one import
+     */
+    public function jsImportWrite($filepath, $import){
+
+        # Prepare result
+        $result =
+            $this->header().
+            $import ? "import \"$import\";" : ""
+        ;
+
+        # Return result
+        return $result;
 
     }
 

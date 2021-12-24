@@ -48,8 +48,52 @@ class Structure{
                 # Ressources in css, js, hbs, md... or any other language
                 'resources' =>  [
                     'folders'   =>  [
-                        'css'       =>  [],
-                        'js'        =>  [],
+                        'css'       =>  [
+                            'files'   =>  [
+                                'style.css' =>  [
+                                    'function'  =>  [
+                                        'name'      =>  'header',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        'js'        =>  [
+                            'folders'   =>  [
+                                'style'     =>  [
+                                    'files'     => [
+                                        'framework.js' =>  [
+                                            'function'  =>  [
+                                                'name'      =>  'jsImportWrite',
+                                                'arguments'=>  [
+                                                    "./../../../node_modules/Kmaterialize/dist/css/materialize-vd1-min.css"
+                                                ],
+                                            ],
+                                        ],
+                                        'components.js' =>  [
+                                            'function'  =>  [
+                                                'name'      =>  'jsImportWrite',
+                                                'arguments'=>  [
+                                                    "./../../../node_modules/Kmaterialize/dist/css/materialize-vd2-min.css"
+                                                ],
+                                            ],
+                                        ],
+                                        'style.js' =>  [
+                                            'function'  =>  [
+                                                'name'      =>  'jsImportWrite',
+                                                'arguments'=>  [
+                                                    "./../../css/style.css"
+                                                ],
+                                            ],
+                                        ],
+                                    ]
+                                ],
+                            ],
+                            'files'     =>  [
+                                'app.js'         =>  [
+                                    'source'    =>  'src/Kit/Js/app.js',
+                                ],
+                            ]
+                        ],
                         'hbs'       =>  [],
                         'md'        =>  [],
                     ],
@@ -120,7 +164,10 @@ class Structure{
                     'function'      => [
                         'name'          =>  'packageUpdate',
                     ]
-                ]
+                ], 
+                'webpack.config.js' =>  [
+                    'source'    =>  'src/Kit/Js/webpack.config.js',
+                ],
             ]
         ],
 

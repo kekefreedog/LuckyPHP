@@ -25,6 +25,27 @@ class Viewer{
      */
     public function __construct($config = [], $cache = [], $request = [], $reponse = []){
 
+        echo 
+            "<!doctype html>".PHP_EOL.
+            "<html>".PHP_EOL.
+            "<head>".PHP_EOL.
+            "    <title>Getting Started With Webpack</title>".PHP_EOL.
+            "</head>".PHP_EOL.
+            "<body>".PHP_EOL.
+            "    <div class=\"row\">".PHP_EOL.
+            "       <div class=\"col s12\">".PHP_EOL.
+            "            <div class=\"card\">".PHP_EOL.
+            "                <div class=\"card-content\">".PHP_EOL.
+            "                    <p>Hello</p>".PHP_EOL.
+            "                </div>".PHP_EOL.
+            "            </div>".PHP_EOL.
+            "        </div>".PHP_EOL.
+            "    </div>".PHP_EOL.
+            "    <script src=\"js/index.js\"></script>".PHP_EOL.
+            "</body>".PHP_EOL.
+            "</html>"
+        ;
+
     } 
 
 }
