@@ -9,9 +9,9 @@
  *******************************************************/
 
 /* Import CSS */
-import('./style/style');
 import('./style/framework');
 import('./style/components');
+import('./style/style');
 
 /* Script JS */
 console.log('Welcome in your app !');

@@ -23,6 +23,7 @@ use LuckyPHP\File\Structure;
 use LuckyPHP\Server\Config;
 use LuckyPHP\Kit\Config as ConfigKit;
 use LuckyPHP\Kit\Structure as StructureKit;
+use LuckyPHP\Kit\Routes as RoutesKit;
 use Symfony\Component\Yaml\Yaml;
 
 /** Class Setup
@@ -59,6 +60,9 @@ class Setup{
 
         # Set up config
         $this->configSetup($input);
+
+        # Write routes
+        $this->routesWrite();
 
         # Database Setup
         # $this->databaseSetup();
@@ -115,6 +119,16 @@ class Setup{
 
         # Wrtie input in config > app.yml
         file_put_contents(__ROOT_APP__.'config/app.yml', "# Configuration of the app".PHP_EOL.Yaml::dump($this->input, 10));
+
+    }
+
+    /** Config Set
+     * 
+     */
+    private function routesWrite(){
+
+        # Wrtie input in config > app.yml
+        file_put_contents(__ROOT_APP__.'config/routes.yml', "# Rootes of the app".PHP_EOL.Yaml::dump(RoutesKit::DEFAULT, 10));
 
     }
 

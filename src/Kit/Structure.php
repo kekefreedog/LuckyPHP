@@ -124,9 +124,16 @@ class Structure{
                 # Config of your app
                 'config'    =>  [
                     'files'      =>  [
+                        # Settings of the app
                         'app.yml' =>  [
                             'function'  =>  [
                                 'name'      =>  'configWrite',
+                            ],
+                        ],
+                        # Routes of the app
+                        'rootes.yml' =>  [
+                            'function'  =>  [
+                                'name'      =>  'routesWrite',
                             ],
                         ],
                     ]
