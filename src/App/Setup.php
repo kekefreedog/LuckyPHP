@@ -68,6 +68,12 @@ class Setup{
 
         # Npm Update
         $this->npmUpdate();
+
+        # Web Pack Builder
+        $this->webpackBuilder();
+
+        # App Ready
+        $this->appReady();
         
     }
 
@@ -156,6 +162,32 @@ class Setup{
             "------------------------------------------------(✔️ )".
             PHP_EOL
         ;
+
+    }
+
+    /** WebpackBuilder
+     * 
+     */
+    private function webpackBuilder(){
+
+        # Update composer
+        echo 
+            PHP_EOL.
+            '(📦 )-[ BULDING PACKAGE WITH WEBPACK ]----------------'.
+            PHP_EOL
+        ;
+        shell_exec('npm run webpack-build');
+        echo 
+            "------------------------------------------------(✔️ )".
+            PHP_EOL
+        ;
+
+    }
+
+    /** App ready
+     * 
+     */
+    private function appReady(){
         
         # Display message
         echo 
