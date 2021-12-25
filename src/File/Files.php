@@ -257,8 +257,10 @@ class Files{
         ).".php";
 
         # Set className
-        $className = ucfirst(end(explode('/', str_replace(".php", "", $name))));
-
+        $className = explode('/', $name);
+        $className = end($className);
+        $className = ucfirst(str_replace(".php", "", $className));
+;
         # Set content
         $content = 
             "<?php declare(strict_types=1);".PHP_EOL.
