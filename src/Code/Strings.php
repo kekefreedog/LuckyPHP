@@ -41,7 +41,7 @@ class Strings{
 	 * 
 	 */
 	public static function snakeToCamel($string = '', bool $capitalizeFirstCharacter = false):string {
-		$str = str_replace(['_', ' '], '', ucwords($string, '_'));
+		$str = str_replace('_', '', ucwords($string, '_'));
 		if (!$capitalizeFirstCharacter) {
 			$str = lcfirst($str);
 		}

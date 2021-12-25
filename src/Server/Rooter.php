@@ -165,7 +165,7 @@ class Rooter{
     public static function routeCallbackCheck($name, $exception = true){
 
         # Set name from arguments
-        $name = "\App\Controllers\\".Strings::snakeToCamel($name, true)."Action";
+        $name = "\App\Controllers\\".Strings::snakeToCamel(str_replace(" ", "_", $name), true)."Action";
 
         # Check class of callback exists
         if(!class_exists($name) && $exception)
