@@ -17,7 +17,10 @@ namespace  LuckyPHP\Server;
 /** Dependance
  * 
  */
+use Symfony\Component\HttpFoundation\Request;
 use Mezon\Router\Router AS MezonRooter;
+use LuckyPHP\Server\Config;
+use LuckyPHP\Front\Html;
 
 /** Class page
  * 
@@ -29,13 +32,68 @@ class Rooter{
     # Declare instance
     private $instance = null;
 
+    # Routes config
+    private $config = [];
+
+    # Public
+    public $request = null;
+
     /** Constructor
      * 
      */
     public function __construct(){
+
+        # New Rooter
+        $this->instanceCreate();
+
+        # Set Routes Config
+        $this->configRoutesSet();
+
+        # Prepare request
+        $this->requestPrepare();
+
+        Html::print($this->config);
+        
+        Html::print($this->request);
+
+    }
+
+    /** Create instance
+     *  
+     */
+    private function instanceCreate(){
         
         # Set instance
-        $instance = new MezonRooter();
+        $this->instance = new MezonRooter();
+
+    }
+
+    /** Set Routes Config
+     * 
+     */
+    private function configRoutesSet(){
+        
+        try {
+
+            # Get routes config
+            $this->config = Config::read("config/routes.yml");
+
+        }catch(Exception $e){
+
+            # Mettre en place redirection
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+
+        }
+
+    }
+
+    /** Prepare request
+     * 
+     */
+    private function requestPrepare(){
+
+        # Read request
+        $this->request = Request::createFromGlobals();
 
     }
 

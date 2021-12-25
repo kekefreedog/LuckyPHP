@@ -19,54 +19,76 @@ namespace  LuckyPHP\Kit;
  */
 class Routes{
 
-    /** All the default pages
-     * 
+    /** All the default routes
+     *      
      */
     public const DEFAULT = [
 
-        /**
-         * App
+        /** Routes of the pages
+         * 
+         * Exemple :
+         *      - name : '' Part of the title of the page
+         *      - route : All the route patterns that redirect to the current page
+         *      - methods : All methods allow for the current rout, methods allowed : GET, get, POST, post, PUT, put, DELETE, delete, OPTION, option, PATCH, patch, *
+         *      - callback : By default it will execute [name][Method]Action but we can add other callback here
          */
+        'routes'    =>  [
 
-        /* Index */
-        [
-            'name'      =>  'Home',
-            'route'     =>  [
-                '/index/'
+            /**
+             * App
+             */
+
+            /* Index */
+            [
+                'name'      =>  'Home',
+                'route'     =>  [
+                    '/index/'
+                ],
+                'methods'   =>  [
+                    'get',
+                ],
             ],
-            'methods'   =>  [
-                'get',
+
+            /**
+             * Api
+             */
+
+            /* Info */
+            [
+                'name'      =>  'Info',
+                'route'     =>  [
+                    '/api/'
+                ],
+                'methods'   =>  [
+                    'get'
+                ]
             ],
+
+            /**
+             * All the others pages
+             */
+
+            /* Page not found */
+            [
+                'name'      =>  'Page not found',
+                'route'     =>  [
+                    '/*/'
+                ],
+                'methods'   =>  [
+                    '*'
+                ],
+                'callbacks' =>  [
+                    'error404',
+                ]
+            ]
+
         ],
 
-        /**
-         * Api
+        /** Methods allowed
+         * 
          */
-
-        /* Info */
-        [
-            'name'      =>  'Info',
-            'route'     =>  [
-                '/api/'
-            ],
-            'methods'   =>  [
-                'get'
-            ]
-        ],
-
-        /**
-         * All the others pages
-         */
-
-        /* Page not found */
-        [
-            'name'      =>  'Page not found',
-            'route'     =>  [
-                '/*/'
-            ],
-            'methods'   =>  [
-                'get'
-            ]
+        'methods'   =>  [
+            'GET', 'POST', 'PUT', 'DELETE', 'OPTION', 'PATCH'
         ]
 
     ];
