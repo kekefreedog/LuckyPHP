@@ -261,7 +261,7 @@ class Files{
 
         # Set content
         $content = 
-            "<?php declare(strict_types=1);".
+            "<?php declare(strict_types=1);".PHP_EOL.
             self::header().
             PHP_EOL.
             "/** Namespace".PHP_EOL.

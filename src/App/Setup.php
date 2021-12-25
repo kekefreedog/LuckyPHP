@@ -139,7 +139,7 @@ class Setup{
         foreach(RoutesKit::DEFAULT['routes'] as $key => $route):
 
             # Check route name
-            $route['name'] = isset($route['name']) || empty($route['name']) ?
+            $route['name'] = !isset($route['name']) || empty($route['name']) ?
                 'route_'.$key :
                     $route['name'];
 
