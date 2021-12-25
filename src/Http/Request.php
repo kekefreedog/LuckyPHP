@@ -12,30 +12,28 @@
 /** Namespace
  * 
  */
-namespace App;
+namespace  LuckyPHP\Http;
 
-/** Dependances
+/** Dependance
  * 
  */
-use LuckyPHP\Http\Request;
-use LuckyPHP\Server\Rooter;
+use Symfony\Component\HttpFoundation\Request as RequestSymfony;
 
-/** Class of the controller
+/** Class page
+ * 
+ * @dependance root 
  * 
  */
-class Controller{
+class Request{
 
     /** Constructor
      * 
      */
-    public function __construct($config = [], $cache = []){
+    public function __construct(){
 
-        # New Request
-        $this->request = new Request();
-
-        # New Rooter
-        $this->rooter = new Rooter();
-
-    } 
+        /* Get request and put in data */
+        $this->data = RequestSymfony::createFromGlobals();
+        
+    }
 
 }

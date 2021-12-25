@@ -78,9 +78,8 @@ class Exception extends \Exception implements InterfaceException{
     public function __construct($message = null, $code = 0){
 
         // Check message
-        if (!$message) {
+        if (!$message)
             throw new $this('Unknown '.get_class($this));
-        }
 
         // Construct parent
         parent::__construct($message, $code);
