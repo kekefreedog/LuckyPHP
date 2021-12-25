@@ -118,7 +118,7 @@ class Structure{
                         ],
                     ],
                     'folders'   =>  [
-                        'Page'      =>  []
+                        'Controllers'   =>  []
                     ],
                 ],
                 # Config of your app

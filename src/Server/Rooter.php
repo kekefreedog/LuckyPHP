@@ -20,7 +20,7 @@ namespace  LuckyPHP\Server;
 use Mezon\Router\Router AS MezonRooter;
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Server\Config;
-use LuckyPHP\Front\Html;
+use LuckyPHP\Code\Strings;
 
 /** Class page
  * 
@@ -48,8 +48,6 @@ class Rooter{
 
         # Request set
         $this->requestSet($request);
-
-        # Check cache
         
 
     }
@@ -80,6 +78,103 @@ class Rooter{
             echo 'Exception reçue : ',  $e->getMessage(), "\n";
 
         }
+
+        # Check or fill methods 
+        $this->config['methods'] = isset($this->config['methods']) ?
+            array_map('strtoupper', $this->config['methods']) :
+                [];
+
+    }
+
+    /** Set request
+     * 
+     */
+    private function requestSet($request){
+
+        # Set request
+        $this->request = $request;
+
+    }
+
+    /** Put routes in router
+     * 
+     */
+    private function routerFill(){
+
+        # Check methods and routes
+        if(empty($this->config['routes']) || empty($this->config['methods']))
+            return false;
+
+        # Iteration des routes
+        foreach($this->config['routes'] as $key => $route){
+
+            # Check route name
+            $route['name'] = isset($route['name']) || empty($route['name']) ?
+                'route_'.$key :
+                    $route['name'];
+
+            # Convert route to array if string
+            if(is_string($route['route'])) 
+                $route['route'] = [$route['route']];
+
+            # Convert methods to array if string
+            if(is_string($route['methods']))
+                $route['methods'] = [$route['methods']];
+
+            # Filter methods by methods allowed
+            $route['methods'] = array_filter(
+                $route['methods'], 
+                function($v){
+                    return in_array(strtoupper($v), $this->config['methods']);
+                }
+            );
+
+            # Check route and methods not empty
+            if(empty($route['route']) || empty($route['methods']))
+                continue;
+
+            # Iteration des routes
+            foreach($route['route'] as $pattern)
+
+                # Iteration des methods
+                foreach ($route['methods'] as $method) {
+
+                    # Check if call back exist
+                    $callbackName = $this->routeCallbackCheck($route['name']);
+
+                    # Add Route in Router
+                    $this->instance->addRoute(
+                        $pattern,
+                        function(string $route, array $parameters) use ($callbackName){
+                            new $callbackName($route, $parameters);
+                        },
+                        strtoupper($method),
+                        $route['name']
+                    );
+
+                }
+
+        }
+
+    }
+
+    /** Check if class callback exists
+     * 
+     * @return string
+     */
+    public static function routeCallbackCheck($name, $exception = true){
+
+        # Set name from arguments
+        $name = "\App\Controllers\\".Strings::snakeToCamel($name, true)."Action";
+
+        # Check class of callback exists
+        if(!class_exists($name) && $exception)
+
+            # Set exception
+            throw new Exception("There is not class assiociate to the current root \"$name\"", 500);
+
+        # Return name of the class
+        return $name;
 
     }
 

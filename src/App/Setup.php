@@ -17,14 +17,15 @@ namespace  LuckyPHP\App;
 /** Use other library
  * 
  */
+use LuckyPHP\File\Files;
 use LuckyPHP\Code\Forms;
 use LuckyPHP\Code\Arrays;
-use LuckyPHP\File\Structure;
 use LuckyPHP\Server\Config;
+use LuckyPHP\File\Structure;
+use Symfony\Component\Yaml\Yaml;
 use LuckyPHP\Kit\Config as ConfigKit;
 use LuckyPHP\Kit\Structure as StructureKit;
 use LuckyPHP\Kit\Routes as RoutesKit;
-use Symfony\Component\Yaml\Yaml;
 
 /** Class Setup
  * 
@@ -129,6 +130,22 @@ class Setup{
 
         # Wrtie input in config > app.yml
         file_put_contents(__ROOT_APP__.'config/routes.yml', "# Rootes of the app".PHP_EOL.Yaml::dump(RoutesKit::DEFAULT, 10));
+
+        # Check RoutesKit::DEFAULT routes
+        if(!isset(RoutesKit::DEFAULT['routes']) || empty(RoutesKit::DEFAULT['routes']))
+            return;
+
+        # Iteration of routes
+        foreach(RoutesKit::DEFAULT['routes'] as $key => $route):
+
+            # Check route name
+            $route['name'] = isset($route['name']) || empty($route['name']) ?
+                'route_'.$key :
+                    $route['name'];
+
+            Files::controllerWrite($route);
+
+        endforeach;
 
     }
 

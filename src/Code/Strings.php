@@ -21,8 +21,10 @@ class Strings{
 
 	/** Camel to Snake
 	 * 
+	 * 	result => toto_titi
+	 * 
 	 */
-	public function camelToSnake(string $input = ''):string {
+	public static function camelToSnake(string $input = ''):string {
 		preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $input, $matches);
 		$ret = $matches[0];
 		foreach ($ret as &$match) {
@@ -33,8 +35,12 @@ class Strings{
 
 	/** Snake to Camel
 	 * 
+	 * result =>
+	 * 		totoTiti
+	 * 		TotoTiti
+	 * 
 	 */
-	public function snakeToCamel($string = '', bool $capitalizeFirstCharacter = false):string {
+	public static function snakeToCamel($string = '', bool $capitalizeFirstCharacter = false):string {
 		$str = str_replace('_', '', ucwords($string, '_'));
 		if (!$capitalizeFirstCharacter) {
 			$str = lcfirst($str);

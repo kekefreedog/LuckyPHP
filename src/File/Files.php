@@ -14,6 +14,11 @@
  */
 namespace  LuckyPHP\File;
 
+/** Dependance
+ * 
+ */
+use LuckyPHP\Server\Rooter;
+
 /** Class Files
  * 
  */
@@ -51,15 +56,15 @@ class Files{
 
         # Set result
         $result = 
-            "# ******************************************************".
-            "#  Copyright (C) 2019-2021 Kévin Zarshenas".
-            "#  kevin.zarshenas@gmail.com".
-            "#  ".
-            "#  This file is part of LuckyPHP.".
-            "#  ".
-            "#  This code can not be copied and/or distributed without the express".
-            "#  permission of Kévin Zarshenas @kekefreedog".
-            "# ******************************************************"
+            "# ******************************************************".PHP_EOL.
+            "#  Copyright (C) 2019-2021 Kévin Zarshenas".PHP_EOL.
+            "#  kevin.zarshenas@gmail.com".PHP_EOL.
+            "#  ".PHP_EOL.
+            "#  This file is part of LuckyPHP.".PHP_EOL.
+            "#  ".PHP_EOL.
+            "#  This code can not be copied and/or distributed without the express".PHP_EOL.
+            "#  permission of Kévin Zarshenas @kekefreedog".PHP_EOL.
+            "# ******************************************************".PHP_EOL
         ;
 
         # Return result
@@ -233,6 +238,53 @@ class Files{
 
         # Return result
         return $result;
+
+    }
+
+    /** Controller Write
+     * 
+     */
+    public static function controllerWrite($route){
+
+        # Get name of current route
+        $name = ltrim(
+            str_replace(
+                ["App", "\\"],
+                ["src", "/"],
+                Rooter::routeCallbackCheck($route['name'], false)
+            ),
+            "/"
+        ).".php";
+
+        # Set className
+        $className = ucfirst(end(explode('/', str_replace(".php", "", $name))));
+
+        # Set content
+        $content = 
+            "<?php declare(strict_types=1);".
+            self::header().
+            PHP_EOL.
+            "/** Namespace".PHP_EOL.
+            " *".PHP_EOL.
+            " */".PHP_EOL.
+            "namespace App\Controllers;".PHP_EOL.
+            PHP_EOL.
+            "/** Class for manage the workflow of the app".PHP_EOL.
+            " *".PHP_EOL.
+            " */".PHP_EOL.
+            "class ".$className."{".PHP_EOL.PHP_EOL.
+            "    /** Constructor".PHP_EOL.
+            "     *".PHP_EOL. 
+            "     */".PHP_EOL.
+            "    public function __construct(){".PHP_EOL.PHP_EOL.
+            "        # Return Hello".PHP_EOL.
+            "        return \"Hello\";".PHP_EOL.PHP_EOL.
+            "    }".PHP_EOL.
+            "}"
+        ;
+
+        # Put content in server
+        file_put_contents(__ROOT_APP__.$name, $content);
 
     }
 
