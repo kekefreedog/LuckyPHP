@@ -69,23 +69,23 @@ abstract class Controller{
         # Set route
         $this->route = [
             'current'   =>  [
-                'pattern'   =>  $array['current'],
-                'method'   =>  $_SERVER['REQUEST_METHOD'],
-                'name'      =>  $array['name'],
+                'pattern'   =>  $array['current'] ?? null,
+                'method'    =>  $_SERVER['REQUEST_METHOD'] ?? null,
+                'name'      =>  $array['name'] ?? null,
             ],
             'config'    =>  [
-                'methods'   =>  $array['methods'],
-                'patterns'  =>  $array['patterns'],
+                'methods'   =>  $array['methods'] ?? [],
+                'patterns'  =>  $array['patterns'] ?? [],
                 'reponse'   =>  [
-                    'default'       =>  $array['reponse'],
-                    'Content-Type'  =>  Header::getContentType($array['type'])
+                    'default'       =>  $array['reponse'] ?? null,
+                    'Content-Type'  =>  !isset($array['reponse']) ? null : Header::getContentType($array['response'])
                 ]
             ]
         ];
 
     }
 
-    /** Prepare route
+    /** Prepare request
      * 
      */
     private function requestPrepare($obj){
