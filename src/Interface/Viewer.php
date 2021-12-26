@@ -37,4 +37,14 @@ interface Viewer{
      */
     public function getResponseType():string;
 
+    /** Set Response Content
+     * 
+     */
+    public function setResponseContent();
+
+    /** Response Execute
+     * 
+     */
+    public function reponseExecute();
+
 }

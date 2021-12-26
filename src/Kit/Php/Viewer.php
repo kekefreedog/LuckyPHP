@@ -35,6 +35,8 @@ class Viewer extends ViewerBase implements ViewerInterface {
          */
         parent::__construct(...$arguments);
 
+        $this->reponseExecute();
+
     } 
 
 }

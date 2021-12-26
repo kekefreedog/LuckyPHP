@@ -47,13 +47,13 @@ abstract class Header{
     public static function getContentType(string $type = ""):string {
 
         # Check if type is defined and is in constant
-        if(!$type || !in_array($type, self::CONTENT_TYPE))
+        if(!$type || !array_key_exists($type, Header::CONTENT_TYPE))
 
             # Return false
             return "";
 
         # Set response
-        $reponse = self::CONTENT_TYPE[strtolower($type)];
+        $reponse = Header::CONTENT_TYPE[strtolower($type)];
 
         # Return response
         return $reponse;

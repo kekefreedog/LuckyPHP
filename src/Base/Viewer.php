@@ -14,10 +14,16 @@
  */
 namespace  LuckyPHP\Base;
 
+/** Dependances
+ * 
+ */
+use LuckyPHP\Server\Exception;
+
 /** Dependance
  * 
  */
 use Symfony\Component\HttpFoundation\Response;
+use LuckyPHP\File\Json;
 
 /** Class Viewer
  * 
@@ -81,6 +87,18 @@ abstract class Viewer{
             ['content-type' => $this->getContentType()]
         );
 
+        print_r($this->getContentType());
+
+    }
+
+    /** Set response content
+     * 
+     */
+    public function setResponseContent(){
+
+        # Set content
+        $this->response->setContent($this->content);
+
     }
 
     /** Execute Response
@@ -88,7 +106,19 @@ abstract class Viewer{
      */
     public function reponseExecute(){
 
-        # Execute callback
+        # Get content
+        $content = $this->response->getContent();
+
+        # Check content type Json
+        if(
+            $this->getResponseType() == "json" && 
+            !Json::check($content)
+        )
+
+            # Set exception
+            throw new Exception("Your content must be a Json if you want return a Json", 500);
+
+        # Execute callback if not null
         if($this->callback !== null)
             ($this->callback)();
 
