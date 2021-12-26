@@ -47,7 +47,7 @@ class Routes{
                 'methods'   =>  [
                     'get',
                 ],
-                'reponse'   =>  'html',
+                'reponse'   =>  'html'
             ],
 
             /**
@@ -63,7 +63,7 @@ class Routes{
                 'methods'   =>  [
                     'get'
                 ],
-                'reponse'   =>  'json',
+                'reponse'   =>  'json'
             ],
 
             /**
@@ -78,9 +78,9 @@ class Routes{
                 ],
                 'methods'   =>  [
                     '*'
-                ]
                 ],
-            'reponse'   =>  'html',
+                'reponse'   =>  'html',
+            ],
 
         ],
 
