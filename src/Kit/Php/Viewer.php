@@ -36,7 +36,7 @@ class Viewer{
             "       <div class=\"col s12\">".PHP_EOL.
             "            <div class=\"card\">".PHP_EOL.
             "                <div class=\"card-content\">".PHP_EOL.
-            "                    <p>Hello</p>".PHP_EOL.
+            "                    <p>$reponse</p>".PHP_EOL.
             "                </div>".PHP_EOL.
             "            </div>".PHP_EOL.
             "        </div>".PHP_EOL.
