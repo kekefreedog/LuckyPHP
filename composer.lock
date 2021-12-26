@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d2f37977f6700ab3010ed59f410d23fc",
+    "content-hash": "1c6112809f5f91b77eac58aa65296285",
     "packages": [
         {
             "name": "catfan/medoo",
@@ -591,30 +591,28 @@
         },
         {
             "name": "zordius/lightncandy",
-            "version": "dev-master",
+            "version": "v1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zordius/lightncandy.git",
-                "reference": "f3b32a5317f4f78c4e80fe5c35b40820e14d4644"
+                "reference": "b451f73e8b5c73e62e365997ba3c993a0376b72a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zordius/lightncandy/zipball/f3b32a5317f4f78c4e80fe5c35b40820e14d4644",
-                "reference": "f3b32a5317f4f78c4e80fe5c35b40820e14d4644",
+                "url": "https://api.github.com/repos/zordius/lightncandy/zipball/b451f73e8b5c73e62e365997ba3c993a0376b72a",
+                "reference": "b451f73e8b5c73e62e365997ba3c993a0376b72a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=7.1.0"
             },
             "require-dev": {
-                "php-coveralls/php-coveralls": "^2.1",
                 "phpunit/phpunit": ">=7"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.6-dev"
+                    "dev-master": "1.2.5-dev"
                 }
             },
             "autoload": {
@@ -643,17 +641,15 @@
             ],
             "support": {
                 "issues": "https://github.com/zordius/lightncandy/issues",
-                "source": "https://github.com/zordius/lightncandy/tree/master"
+                "source": "https://github.com/zordius/lightncandy/tree/v1.2.6"
             },
-            "time": "2021-07-11T10:35:19+00:00"
+            "time": "2021-07-11T04:52:41+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "zordius/lightncandy": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
