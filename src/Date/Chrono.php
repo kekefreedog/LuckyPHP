@@ -86,16 +86,16 @@ class Chrono{
             $hours = (int)($time[0]/60/60);
             $minutes = (int)($time[0]/60)-$hours*60;
             $seconds = (int)$time[0]-$hours*60*60-$minutes*60;
-            $milliseconds = substr($time[1], 4, 4) >= 5 ?
-            ((int)substr($time[1], 0, 3) + 1) :
-                ((int)substr($time[1], 0, 3));
+            $milliseconds = substr($time[1], 5, 5) >= 5 ?
+            ((int)substr($time[1], 0, 4) + 1) :
+                ((int)substr($time[1], 0, 4));
 
             # Set response
             $response = 
                 (($hours < 10 ? 0 : '').$hours).'h'.
                 (($minutes < 10 ? 0 : '').$minutes).'m'.
                 (($seconds < 10 ? 0 : '').$seconds).'s'.
-                $milliseconds
+                $milliseconds.'ms'
             ;
 
         endif;
