@@ -146,7 +146,7 @@ class Rooter{
                     $this->instance->addRoute(
                         $pattern,
                         function(string $route, array $parameters) use ($callbackName){
-                            new $callbackName($route, $parameters);
+                            $this->constroller = new $callbackName($route, $parameters);
                         },
                         strtoupper($method),
                         $route['name']
@@ -175,6 +175,23 @@ class Rooter{
 
         # Return name of the class
         return $name;
+
+    }
+
+    /** Get Reponse
+     * 
+     */
+    public function responseGet($uri = ""){
+
+        # Check current uri
+        if(!$uri)
+            $uri = $_SERVER['REQUEST_URI'];
+
+        # Call courrent route
+        $this->instance->callRoute($uri);
+
+        # Return reponse
+        return $this->constroller->response();
 
     }
 

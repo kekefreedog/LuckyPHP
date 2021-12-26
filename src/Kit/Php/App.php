@@ -77,7 +77,7 @@ class App extends Kernel{
             $this->config,
             $this->cache,
             $this->controller->request,
-            $this->controller->reponse
+            $this->controller->response
         );
 
     }

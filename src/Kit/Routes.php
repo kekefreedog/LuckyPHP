@@ -76,9 +76,6 @@ class Routes{
                 ],
                 'methods'   =>  [
                     '*'
-                ],
-                'callbacks' =>  [
-                    'error404',
                 ]
             ]
 

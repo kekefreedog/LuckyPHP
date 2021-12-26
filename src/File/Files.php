@@ -279,8 +279,15 @@ class Files{
             "     *".PHP_EOL. 
             "     */".PHP_EOL.
             "    public function __construct(){".PHP_EOL.PHP_EOL.
-            "        # Return Hello".PHP_EOL.
-            "        return \"Hello\";".PHP_EOL.PHP_EOL.
+            "        # Set name".PHP_EOL.
+            '        $this->name="'.$className.'";'.PHP_EOL.PHP_EOL.
+            "    }".PHP_EOL.PHP_EOL.
+            "    /** Response".PHP_EOL.
+            "     *".PHP_EOL. 
+            "     */".PHP_EOL.
+            "    public function response(){".PHP_EOL.PHP_EOL.
+            "        # Return reponse".PHP_EOL.
+            '        return $this->name;'.PHP_EOL.PHP_EOL.
             "    }".PHP_EOL.
             "}"
         ;
