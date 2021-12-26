@@ -165,11 +165,6 @@ class Files{
          */
         $object["autoload"]["psr-4"]["App\\"] = ["src/"];
 
-        /** Update prefer stable
-         * 
-         */
-        $object["prefer-stable"] = false;
-
         // Check if update change anything
         if(json_encode($object) === $raw)
             return $raw;
