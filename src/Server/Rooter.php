@@ -48,7 +48,9 @@ class Rooter{
 
         # Request set
         $this->requestSet($request);
-        
+
+        # Push routes in Rooter
+        $this->routerFill();
 
     }
 
@@ -120,6 +122,10 @@ class Rooter{
             # Convert methods to array if string
             if(is_string($route['methods']))
                 $route['methods'] = [$route['methods']];
+
+            # Check if * in methods
+            if(in_array('*', $route['methods']))
+                $route['methods'] =$this->config['methods'];
 
             # Filter methods by methods allowed
             $route['methods'] = array_filter(
