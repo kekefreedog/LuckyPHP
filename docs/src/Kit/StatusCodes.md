@@ -15,4 +15,5 @@ This class contains all status codes supports by the application
 ### 1. public ***const*** **GET**
 - List of status codes
     - 401 : Unauthorized
+    - 500 : Internal Server Error
     - 501 : Not Implemented

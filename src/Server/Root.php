@@ -16,6 +16,7 @@ namespace  LuckyPHP\Server;
 
 /** Class page
  * 
+ * @deprecated
  */
 class Root{
 
@@ -33,6 +34,7 @@ class Root{
 
     /** Set root
      *  
+	 * @deprecated
      */
     private function set (){
 
@@ -90,6 +92,7 @@ class Root{
 
     /** Get root
      * 
+	 * @deprecated
      */
     public function get():array {
 

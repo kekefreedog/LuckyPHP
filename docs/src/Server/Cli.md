@@ -41,10 +41,15 @@ Sorry, no action is associated to the current file :
 ```
 
 ### 3. private ***function*** **setup**
-
+- Ask user differents informations for create a LuckyApp :
+      - Name of the app (check if the name of the app is allowed)
+      - The framework
+      - The Auth system
 
 ## Constants
 
 ### 1. public ***const*** **NAME_PROHIBITED**
 - List all application names not allowed : 
-``['Server','src','luckyphp','kekefreedog','vendor','bin']``
+```php
+['Server','src','luckyphp','kekefreedog','vendor','bin']
+```

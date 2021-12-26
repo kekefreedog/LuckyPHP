@@ -17,7 +17,7 @@ namespace  LuckyPHP\Front;
 /** Class page
  * 
  */
-abstract class Html{
+class Html{
 
     /** Print Message
      * 

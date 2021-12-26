@@ -51,20 +51,88 @@ public const CONFIG = [
                 'process'   =>  'email',
                 'default'   =>  '',
             ],
-        # Admin
-            # Email
+        # Hosts
+            # Allowed
             [
-                'name'      =>  'app_hosts',
+                'name'      =>  'app_hosts_allowed',
                 'type'      =>  'ARRAY',
                 'default'   =>  ['*'],
             ],
+            # Excluded
+            [
+                'name'      =>  'app_hosts_excluded',
+                'type'      =>  'ARRAY',
+                'default'   =>  [],
+            ],
         # Css
             # Framework
+                # Source
+                [
+                    'name'      =>  'app_css_framework_source',
+                    'type'      =>  'VARCHAR',
+                    'default'   =>  null,
+                    //'default'   =>  'github',
+                ],
+                # Author
+                [
+                    'name'      =>  'app_css_framework_author',
+                    'type'      =>  'VARCHAR',
+                    'default'   =>  null,
+                    //'default'   =>  'kekefreedog',
+                ],
+                # Package
+                [
+                    'name'      =>  'app_css_framework_package',
+                    'type'      =>  'VARCHAR',
+                    'default'   =>  null,
+                    //'default'   =>  'Kmaterialize',
+                ],
+                # Branch
+                [
+                    'name'      =>  'app_css_framework_branch',
+                    'type'      =>  'VARCHAR',
+                    'default'   =>  null,
+                    //'default'   =>  'advanced',
+                ],
+        # Templates
+            # Engine
+                # php
+                    # Source
+                    [
+                        'name'      =>  'app_template_engine_php_source',
+                        'type'      =>  'VARCHAR',
+                        'default'   =>  'github',
+                    ],
+                    # Author
+                    [
+                        'name'      =>  'app_template_engine_php_author',
+                        'type'      =>  'VARCHAR',
+                        'default'   =>  'zordius',
+                    ],
+                    # Package
+                    [
+                        'name'      =>  'app_template_engine_php_package',
+                        'type'      =>  'VARCHAR',
+                        'default'   =>  'lightncandy',
+                    ],
+                # js
+                    # Package
+                    [
+                        'name'      =>  'app_template_engine_js_package',
+                        'type'      =>  'VARCHAR',
+                        'default'   =>  'handlebars',
+                    ],
+            # ressources
             [
-                'name'      =>  'app_css_framework',
+                'name'      =>  'app_template_root',
                 'type'      =>  'VARCHAR',
-                'admit'     =>  ['Kmaterialize'],
-                'default'   =>  'Kmaterialize',
+                'default'   =>  '/resources/hbs',
+            ],
+            # ressources
+            [
+                'name'      =>  'app_template_extension',
+                'type'      =>  'VARCHAR',
+                'default'   =>  'hbs',
             ],
         # Auth
             # Type

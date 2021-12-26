@@ -12,25 +12,25 @@ This class contains methods for process strings
 
 ## Methods
 
-### 1. public ***function*** **camelToSnake**
+### 1. public static ***function*** **camelToSnake**
 - Convert camel to snake
 - Exemple : CamelCaseName -> camel_case_name
 
-### 2. public ***function*** **snakeToCamel**
+### 2. public static ***function*** **snakeToCamel**
 - Convert snake to camel
 - Exemple : camel_case_name -> camelCaseName
 - If capitalizeFirstCharacter is enable : camel_case_name -> CamelCaseName
 
-### 3. public ***function*** **clean**
+### 3. public static ***function*** **clean**
 - Clean all specials characters in string
 
-### 4. public ***function*** **process_https**
+### 4. public static ***function*** **process_https**
 - Check url given start by https://
 
-### 5. public ***function*** **process_https**
+### 5. public static ***function*** **process_https**
 - Check email given is value
 - If true return email else return empty string
 
-### 6. public ***function*** **process_bool**
+### 6. public static ***function*** **process_bool**
 - Check if value given is boolean
 - If boolean type true return true else return false

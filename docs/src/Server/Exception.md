@@ -3,10 +3,10 @@
 ## Info
 
 ```php
-namespace  LuckyPHP\Server\Exception;   # Name Space
-interface InterfaceException{}          # Interface name
-public class Exception{}                # Class name
+namespace       LuckyPHP\Server\Exception;  # Name Space
+interface       InterfaceException{}        # Interface name
+public class    Exception{}                 # Class name
 ```
 
 ## Description
-This class contains methods for manage Exception
+- This class is extend from \Exception and contains all methods for manage Exception

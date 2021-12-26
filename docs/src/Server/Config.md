@@ -17,7 +17,23 @@ This class contains lots of usefull methods for determine root of the current pa
 
 ### 1. private ***function*** **read**
 - Read settings file with path or name
-- If {{root}} is include in path name, it will be replace by root
+
+### 2. public static ***function*** **defineRoots**
+- Define root as global variable
+- Bellow an exemple of input :
+```php
+[
+    'app'       =>  $directory,
+    'www'       =>  $directory.'www/',
+    'luckyphp'  =>  $directory.'vendor/kekefreedog/luckyphp/',
+]
+```
+- At final we will be able to access to those variable, just using :
+```php
+__ROOT_APP__
+__ROOT_WWW__
+__ROOT_LUCKYPHP__
+```
 
 ## Constants
 
@@ -25,6 +41,7 @@ This class contains lots of usefull methods for determine root of the current pa
 - List of all settings path with name
 ```php
 [
-    'settings'  =>  '{{root}}/../config/settings.yml'
+    'app'   =>  'config/app.yml',
+    'routes'=>  'config/routes.yml'
 ]
 ```

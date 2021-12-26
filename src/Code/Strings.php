@@ -52,7 +52,7 @@ class Strings{
 	 * 
 	 * src : https://www.codegrepper.com/code-examples/php/php+remove+all+special+characters+from+string
 	 */
-	public function clean(string $string = ''):string {
+	public static function clean(string $string = ''):string {
 		/* Reg Ex */
 		$utf8 = [
 			'/[áàâãªä]/u'   =>   'a',
@@ -85,7 +85,7 @@ class Strings{
 	 * 
 	 * @param string $url
 	 */
-	public function process_https(string $url = ''):string {
+	public static function process_https(string $url = ''):string {
         
 		# Check url start by https
         if(substr(trim($url), 0, 8) == "https://"):
@@ -110,7 +110,7 @@ class Strings{
 	 * 
 	 * @param string $email
 	 */
-	public function process_email(string $email = ''):string {
+	public static function process_email(string $email = ''):string {
 
 		# check if email
 		return filter_var($email, FILTER_VALIDATE_EMAIL) ? $email : '';
@@ -121,7 +121,7 @@ class Strings{
 	 * 
 	 * @param string|bool $email
 	 */
-	public function process_bool($bool = false):bool {
+	public static function process_bool($bool = false):bool {
 
 		# check if email
 		return filter_var($bool, FILTER_VALIDATE_BOOL) ? true : false;

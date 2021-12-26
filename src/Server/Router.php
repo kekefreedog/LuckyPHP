@@ -24,8 +24,6 @@ use LuckyPHP\Code\Strings;
 
 /** Class page
  * 
- * @dependance root 
- * 
  */
 class Router{
 
@@ -75,7 +73,7 @@ class Router{
         try {
 
             # Get routes config
-            $this->config = Config::read("config/routes.yml");
+            $this->config = Config::read(Config::CONFIG_PATH['routes']);
 
         }catch(Exception $e){
 

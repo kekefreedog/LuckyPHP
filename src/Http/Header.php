@@ -22,7 +22,7 @@ abstract class Header{
     /** Set a header
      * 
      */
-    public function set(string $type = "") :bool {
+    public static function set(string $type = "") :bool {
 
         # Check if type is defined and is in constant
         if(!$type || !in_array($type, self::CONTENT_TYPE))
@@ -64,7 +64,7 @@ abstract class Header{
      * 
      */
     const CONTENT_TYPE = [
-        # html
+        # Html
         'html'  =>  'text/html',
         # Js
         'js'    =>  'application/javascript',

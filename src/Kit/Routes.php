@@ -30,7 +30,7 @@ class Routes{
          *      - name : '' Part of the title of the page
          *      - patterns : All the route patterns that redirect to the current page
          *      - methods : All methods allow for the current rout, methods allowed : GET, get, POST, post, PUT, put, DELETE, delete, OPTION, option, PATCH, patch, *
-         *      - callback : By default it will execute [name][Method]Action but we can add other callback here
+         *      - response : Type of response html / json ...
          */
         'routes'    =>  [
 

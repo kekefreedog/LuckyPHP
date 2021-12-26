@@ -1,4 +1,4 @@
-# ***Class*** **Root**
+# ***Class*** **Root** @deprecated
 
 ## Info
 

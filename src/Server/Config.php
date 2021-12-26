@@ -107,7 +107,8 @@ class Config{
      * 
      */
     public const CONFIG_PATH = [
-        'app'  =>  'config/app.yml'
+        'app'   =>  'config/app.yml',
+        'routes'=>  'config/routes.yml'
     ];
 
 }
