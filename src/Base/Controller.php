@@ -76,9 +76,11 @@ abstract class Controller{
             'config'    =>  [
                 'methods'   =>  $array['methods'] ?? [],
                 'patterns'  =>  $array['patterns'] ?? [],
-                'reponse'   =>  [
-                    'default'       =>  $array['reponse'] ?? null,
-                    'Content-Type'  =>  !isset($array['reponse']) ? null : Header::getContentType($array['response'])
+                'response'   =>  [
+                    'default'       =>  $array['response'] ?? null,
+                    'Content-Type'  =>  (!isset($array['response']) || $array['response'] === null) ?
+                        null :
+                            Header::getContentType($array['response'])
                 ]
             ]
         ];
