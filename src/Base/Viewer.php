@@ -67,12 +67,12 @@ abstract class Viewer{
 
     # Get Content Type
     public function getResponseType():string{
-        return $this->controller->getResponseType();
+        return $this->controller->callback->getResponseType();
     }
 
     # Get Content Type
     public function getContentType():string{
-        return $this->controller->getContentType();
+        return $this->controller->callback->getContentType();
     }
 
 }

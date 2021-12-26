@@ -17,7 +17,7 @@ namespace  LuckyPHP\Server;
 /** Dependance
  * 
  */
-use Mezon\Router\Router AS MezonRooter;
+use Mezon\Router\Router AS MezonRouter;
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Server\Config;
 use LuckyPHP\Code\Strings;
@@ -27,7 +27,7 @@ use LuckyPHP\Code\Strings;
  * @dependance root 
  * 
  */
-class Rooter{
+class Router{
 
     # Declare instance
     private $instance = null;
@@ -52,6 +52,9 @@ class Rooter{
         # Push routes in Rooter
         $this->routerFill();
 
+        # Execute Callback
+        $this->routerExecute();
+
     }
 
     /** Create instance
@@ -60,7 +63,7 @@ class Rooter{
     private function instanceCreate(){
         
         # Set instance
-        $this->instance = new MezonRooter();
+        $this->instance = new MezonRouter();
 
     }
 
@@ -192,10 +195,10 @@ class Rooter{
 
     }
 
-    /** Get Reponse
+    /** Execute callback
      * 
      */
-    public function responseGet($uri = ""){
+    private function routerExecute($uri = ""){
 
         # Check current uri
         if(!$uri)
@@ -207,8 +210,25 @@ class Rooter{
         # Call courrent route
         $this->instance->callRoute($uri);
 
+    }
+
+    /** Get Reponse
+     * 
+     */
+    public function getResponse(){
+
         # Return reponse
         return $this->constroller->response();
+
+    }
+
+    /** Get Reponse
+     * 
+     */
+    public function getCallback(){
+
+        # Return reponse
+        return $this->constroller;
 
     }
 

@@ -17,7 +17,7 @@ namespace App;
 /** Dependances
  * 
  */
-use LuckyPHP\Server\Rooter;
+use LuckyPHP\Server\Router;
 use LuckyPHP\Http\Request;
 
 /** Class of the controller
@@ -34,10 +34,13 @@ class Controller{
         $this->request = new Request();
 
         # New Rooter
-        $this->rooter = new Rooter($this->request);
+        $this->router = new Router($this->request);
 
         # Set response
-        $this->response = $this->rooter->responseGet();
+        $this->response = $this->router->getResponse();
+
+        # Set callback
+        $this->callback = $this->router->getCallback();
 
     } 
 

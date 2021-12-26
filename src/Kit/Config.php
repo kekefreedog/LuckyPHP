@@ -122,12 +122,6 @@ class Config{
                             'type'      =>  'VARCHAR',
                             'default'   =>  'lightncandy',
                         ],
-                        # Branch
-                        [
-                            'name'      =>  'app_template_engine_php_branch',
-                            'type'      =>  'VARCHAR',
-                            'default'   =>  'dev-master',
-                        ],
                     # js
                         # Package
                         [
@@ -139,7 +133,7 @@ class Config{
                 [
                     'name'      =>  'app_template_root',
                     'type'      =>  'VARCHAR',
-                    'default'   =>  'resources/hbs',
+                    'default'   =>  '/resources/hbs',
                 ],
                 # ressources
                 [
