@@ -14,37 +14,26 @@
  */
 namespace App;
 
+/** Dependances
+ * 
+ */
+use LuckyPHP\Base\Viewer as ViewerBase;
+use LuckyPHP\Interface\Viewer as ViewerInterface;
 
 /** Class of the viewer
  * 
  */
-class Viewer{
+class Viewer extends ViewerBase implements ViewerInterface {
 
     /** Constructor
      * 
      */
-    public function __construct($config = [], $cache = [], $request = [], $reponse = []){
+    public function __construct(...$arguments){
 
-        echo 
-            "<!doctype html>".PHP_EOL.
-            "<html>".PHP_EOL.
-            "<head>".PHP_EOL.
-            "    <title>Getting Started With Webpack</title>".PHP_EOL.
-            "</head>".PHP_EOL.
-            "<body>".PHP_EOL.
-            "    <div class=\"row\">".PHP_EOL.
-            "       <div class=\"col s12\">".PHP_EOL.
-            "            <div class=\"card\">".PHP_EOL.
-            "                <div class=\"card-content\">".PHP_EOL.
-            "                    <p>$reponse</p>".PHP_EOL.
-            "                </div>".PHP_EOL.
-            "            </div>".PHP_EOL.
-            "        </div>".PHP_EOL.
-            "    </div>".PHP_EOL.
-            "    <script src=\"js/index.js\"></script>".PHP_EOL.
-            "</body>".PHP_EOL.
-            "</html>"
-        ;
+        /** Parent constructor
+         * 
+         */
+        parent::__construct(...$arguments);
 
     } 
 

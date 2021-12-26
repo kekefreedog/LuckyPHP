@@ -136,9 +136,19 @@ abstract class Controller{
         return $this->route['config']['patterns'] ?? [];
     }
 
-    # Get content
+    # Get Content
     public function getContent(){
         return $this->content;
+    }
+
+    # Get Content Type
+    public function getResponseType():string{
+        return $this->route['config']['response']['default'];
+    }
+
+    # Get Content Type
+    public function getContentType():string{
+        return $this->route['config']['response']['Content-Type'];
     }
 
 }

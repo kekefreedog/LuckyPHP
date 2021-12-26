@@ -94,13 +94,59 @@ class Config{
                         'default'   =>  null,
                         //'default'   =>  'Kmaterialize',
                     ],
-                    # Package
+                    # Branch
                     [
                         'name'      =>  'app_css_framework_branch',
                         'type'      =>  'VARCHAR',
                         'default'   =>  null,
                         //'default'   =>  'advanced',
                     ],
+            # Templates
+                # Engine
+                    # php
+                        # Source
+                        [
+                            'name'      =>  'app_template_engine_php_source',
+                            'type'      =>  'VARCHAR',
+                            'default'   =>  'github',
+                        ],
+                        # Author
+                        [
+                            'name'      =>  'app_template_engine_php_author',
+                            'type'      =>  'VARCHAR',
+                            'default'   =>  'zordius',
+                        ],
+                        # Package
+                        [
+                            'name'      =>  'app_template_engine_php_package',
+                            'type'      =>  'VARCHAR',
+                            'default'   =>  'lightncandy',
+                        ],
+                        # Branch
+                        [
+                            'name'      =>  'app_template_engine_php_branch',
+                            'type'      =>  'VARCHAR',
+                            'default'   =>  'dev-master',
+                        ],
+                    # js
+                        # Package
+                        [
+                            'name'      =>  'app_template_engine_js_package',
+                            'type'      =>  'VARCHAR',
+                            'default'   =>  'handlebars',
+                        ],
+                # ressources
+                [
+                    'name'      =>  'app_template_root',
+                    'type'      =>  'VARCHAR',
+                    'default'   =>  'resources/hbs',
+                ],
+                # ressources
+                [
+                    'name'      =>  'app_template_extension',
+                    'type'      =>  'VARCHAR',
+                    'default'   =>  'hbs',
+                ],
             # Auth
                 # Type
                 [

@@ -14,46 +14,17 @@
  */
 namespace  LuckyPHP\Interface;
 
-/** Interface Controller
+/** Interface Viewer
  * 
  */
-interface Controller{
+interface Viewer{
 
-    /** Get current route pattern
+    /** Get response
      * 
      * @return string
      */
-    public function getRoutePattern():string;
-
-    /** Get all Patterns Allowed for the current root
-     * 
-     * @return array
-     */
-    public function getRoutePatterns():array;
-
-    /** Get current methods
-     * 
-     * @return string
-     */
-    public function getRouteMethod():string;
-
-    /** Get all methods allowed
-     * 
-     * @return array
-     */
-    public function getRouteMethods():array;
-
-    /** Get current name
-     * 
-     * @return string
-     */
-    public function getRouteName():string;
-
-    /** Get Content
-     * 
-     */
-    public function getContent();
-
+    public function getResponse();
+    
     /** Get Content Type
      * 
      * @return string

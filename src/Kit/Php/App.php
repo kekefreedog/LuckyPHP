@@ -79,10 +79,9 @@ class App extends Kernel{
          * 
          */
         $this->viewer = new Viewer(
+            $this->controller,
             $this->config,
             $this->cache,
-            $this->controller->request,
-            $this->controller->response
         );
 
         /** Stop chrono
