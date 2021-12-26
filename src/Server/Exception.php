@@ -14,38 +14,10 @@
  */
 namespace  LuckyPHP\Server;
 
-/** Interface of exception
- * 
- * @source https://www.php.net/manual/en/language.exceptions.php
+/** Dependances
  * 
  */
-interface InterfaceException{
-
-    /** Protected methods inherited from Exception class
-     * 
-     */
-    // Exception message
-    public function getMessage();
-
-    // User-defined Exception code
-    public function getCode();
-    // Source filename                
-    public function getFile();
-    // Source line
-    public function getLine();
-    // An array of the backtrace()
-    public function getTrace();
-    // Formated string of trace
-    public function getTraceAsString();
-   
-    /** Overrideable methods inherited from Exception class
-     * 
-     */
-    // formated string for display
-    public function __toString();
-    public function __construct($message = null, $code = 0);
-
-}
+use LuckyPHP\Interface\Exception as InterfaceException;
 
 /** Class for error
  * 

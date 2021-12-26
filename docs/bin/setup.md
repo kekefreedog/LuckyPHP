@@ -27,14 +27,21 @@ developed beautiful web applications.
 
 (🚀)-[ SETUP ]--------------------------------------
 ```
-1. First, application will ask you the name of your application. By default it takes the name of the root folder.
+1. First, application will ask you the name of your application. By default it takes the name of the root folder. By default it will propose the name of the current folder.
+
 ```shell
 1. Name of your application : (K_utilities)
 ```
-2. After it asks you if you want use Kmaterialize.
+
+2. 1 After it asks you if you want use Kmaterialize.
 ```shell
 2. Do you want use Kmaterialize ? [Yes] or [No] :
 ```
+2. 2 If you choose Kmaterialize, it propose to choose between the basic branch or the advance branch.
+```
+2-2. Load Kmaterialize Basic [0] or Advanced [1] ? 
+```
+
 3. Then it asks you if want use the internal Auth script or anther Auth (like Google...).
 ```shell
 3. Use internal auth script ? [Yes] or [No] :

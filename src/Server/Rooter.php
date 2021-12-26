@@ -116,8 +116,8 @@ class Rooter{
                     $route['name'];
 
             # Convert route to array if string
-            if(is_string($route['route'])) 
-                $route['route'] = [$route['route']];
+            if(is_string($route['patterns'])) 
+                $route['patterns'] = [$route['patterns']];
 
             # Convert methods to array if string
             if(is_string($route['methods']))
@@ -136,11 +136,11 @@ class Rooter{
             );
 
             # Check route and methods not empty
-            if(empty($route['route']) || empty($route['methods']))
+            if(empty($route['patterns']) || empty($route['methods']))
                 continue;
 
             # Iteration des routes
-            foreach($route['route'] as $pattern)
+            foreach($route['patterns'] as $pattern)
 
                 # Iteration des methods
                 foreach ($route['methods'] as $method) {

@@ -28,7 +28,7 @@ class Routes{
          * 
          * Exemple :
          *      - name : '' Part of the title of the page
-         *      - route : All the route patterns that redirect to the current page
+         *      - patterns : All the route patterns that redirect to the current page
          *      - methods : All methods allow for the current rout, methods allowed : GET, get, POST, post, PUT, put, DELETE, delete, OPTION, option, PATCH, patch, *
          *      - callback : By default it will execute [name][Method]Action but we can add other callback here
          */
@@ -41,7 +41,7 @@ class Routes{
             /* Index */
             [
                 'name'      =>  'Home',
-                'route'     =>  [
+                'patterns'  =>  [
                     '/index/'
                 ],
                 'methods'   =>  [
@@ -56,7 +56,7 @@ class Routes{
             /* Info */
             [
                 'name'      =>  'Info',
-                'route'     =>  [
+                'patterns'  =>  [
                     '/api/'
                 ],
                 'methods'   =>  [
@@ -71,7 +71,7 @@ class Routes{
             /* Page not found */
             [
                 'name'      =>  'Page not found',
-                'route'     =>  [
+                'patterns'  =>  [
                     '/*/'
                 ],
                 'methods'   =>  [
