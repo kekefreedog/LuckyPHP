@@ -19,11 +19,11 @@ namespace  LuckyPHP\Interface;
  */
 interface Viewer{
 
-    /** Get response
+    /** Get Data from controller
      * 
      * @return string
      */
-    public function getResponse();
+    public function getData();
     
     /** Get Content Type
      * 

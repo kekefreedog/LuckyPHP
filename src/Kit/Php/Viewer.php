@@ -17,8 +17,8 @@ namespace App;
 /** Dependances
  * 
  */
-use LuckyPHP\Base\Viewer as ViewerBase;
 use LuckyPHP\Interface\Viewer as ViewerInterface;
+use LuckyPHP\Base\Viewer as ViewerBase;
 
 /** Class of the viewer
  * 

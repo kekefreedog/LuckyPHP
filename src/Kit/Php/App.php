@@ -82,12 +82,10 @@ class App extends Kernel{
             $this->controller,
             $this->config,
             $this->cache,
+            function(){
+                $this->chronoStop();
+            }
         );
-
-        /** Stop chrono
-         * 
-         */
-        $this->chronoStop();
 
     }
 

@@ -64,8 +64,10 @@ abstract class Header{
      * 
      */
     const CONTENT_TYPE = [
+        # html
+        'html'  =>  'text/html',
         # Js
-        'js'    =>  'application/javascript; charset=utf-8',
+        'js'    =>  'application/javascript',
         # Json
         'json'  =>  'application/json',
         # Yaml

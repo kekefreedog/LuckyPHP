@@ -17,11 +17,19 @@ namespace  LuckyPHP\Base;
 /** Dependance
  * 
  */
+use Symfony\Component\HttpFoundation\Response;
 
 /** Class Viewer
  * 
  */
 abstract class Viewer{
+
+    /** Parameters
+     * 
+     */
+    public $content = null;
+    public $response = null;
+    public $callback = null;
 
     /** Constructor
      * 
@@ -30,6 +38,9 @@ abstract class Viewer{
 
         # Ingest arguments
         $this->argumentsIngest($arguments);
+
+        # ResponsePrepare
+        $this->responsePrepare();
 
     }
 
@@ -44,8 +55,8 @@ abstract class Viewer{
         # Ingest Controler request
         $this->request = $arguments[0]->request;
 
-        # Ingest Response
-        $this->response = $arguments[0]->response;
+        # Ingest Data
+        $this->data = $arguments[0]->response;
 
         # Ingest config
         $this->config = $arguments[1] ?? [];
@@ -53,15 +64,46 @@ abstract class Viewer{
         # Ingest cache
         $this->cache = $arguments[2] ?? [];
 
+        # Ingest callback
+        $this->callback = $arguments[4] ?? null;
+
     }
 
-    /** Get response
+    /** Prepare Response
      * 
      */
-    public function getResponse(){
+    private function responsePrepare(){
+
+        # New response
+        $this->response = new Response(
+            $this->content,
+            Response::HTTP_OK,
+            ['content-type' => $this->getContentType()]
+        );
+
+    }
+
+    /** Execute Response
+     * 
+     */
+    public function reponseExecute(){
+
+        # Execute callback
+        if($this->callback !== null)
+            ($this->callback)();
+
+        # Prepare response
+        $this->response->send();
+
+    }
+
+    /** Get data
+     * 
+     */
+    public function getData(){
 
         # Return response
-        return $this->response;
+        return $this->data;
 
     }
 
