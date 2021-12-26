@@ -288,7 +288,7 @@ class Files{
             '        # Parent constructor'.PHP_EOL.
             '        parent::__construct(...$arguments);'.PHP_EOL.PHP_EOL.
             '        # Set name'.PHP_EOL.
-            '        $this->name='.$className.';'.PHP_EOL.PHP_EOL.
+            '        $this->name="'.$className.'";'.PHP_EOL.PHP_EOL.
             '    }'.PHP_EOL.PHP_EOL.
             '    /** Response'.PHP_EOL.
             '     *'.PHP_EOL. 

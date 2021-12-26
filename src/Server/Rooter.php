@@ -198,6 +198,9 @@ class Rooter{
         if(!$uri)
             $uri = $_SERVER['REQUEST_URI'];
 
+        # Remove query string in uri
+        $uri = strtok($_SERVER["REQUEST_URI"], '?');
+
         # Call courrent route
         $this->instance->callRoute($uri);
 

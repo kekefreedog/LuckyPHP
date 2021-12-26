@@ -56,7 +56,17 @@ abstract class Controller{
     private function routePrepare($array){
 
         # Set route
-        $this->route = $array;
+        $this->route = [
+            'current'   =>  [
+                'pattern'   =>  $array['current'],
+                'method'   =>  $_SERVER['REQUEST_METHOD'],
+                'name'      =>  $array['name'],
+            ],
+            'config'    =>  [
+                'methods'   =>  $array['methods'],
+                'patterns'  =>  $array['patterns'],
+            ]
+        ];
 
     }
 
@@ -80,9 +90,29 @@ abstract class Controller{
 
     }
 
+    # Set Get Route Pattern
+    public function getRoutePattern():string{
+        return $this->route['current']['pattern'] ?? "";
+    }
 
-    /**
-     * 
-     */
+    # Set Get Route Method
+    public function getRouteMethod():string{
+        return $this->route['current']['method'] ?? "";
+    }
+
+    # Set Get Route Method
+    public function getRouteName():string{
+        return $this->route['current']['name'] ?? "";
+    }
+
+    # Set Get All Method Allowed
+    public function getRouteMethods():array{
+        return $this->route['config']['methods'] ?? [];
+    }
+
+    # Set Get All Patterns Allowed for the current root
+    public function getRoutePatterns():array{
+        return $this->route['config']['patterns'] ?? [];
+    }
 
 }
