@@ -17,7 +17,7 @@ namespace  LuckyPHP\File;
 /** Dependance
  * 
  */
-use LuckyPHP\Server\Rooter;
+use LuckyPHP\Server\Router;
 
 /** Class Files
  * 
@@ -251,7 +251,7 @@ class Files{
             str_replace(
                 ["App", "\\"],
                 ["src", "/"],
-                Rooter::routeCallbackCheck($route['name'], false)
+                Router::routeCallbackCheck($route['name'], false)
             ),
             "/"
         ).".php";
