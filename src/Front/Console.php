@@ -27,13 +27,13 @@ abstract class Console{
         /* Display message */
         echo 
             '<script type="text/javascript">'.
-                'console.debug('.
+                'console.debug("'.
                     (
                         is_array($message) ?
                             json_encode($message) :
                                 $message
                     ).
-                ');'.
+                '");'.
             '</script>'
         ;
 
@@ -47,13 +47,13 @@ abstract class Console{
         /* Display message */
         echo 
             '<script type="text/javascript">'.
-                'console.info('.
+                'console.info("'.
                     (
                         is_array($message) ?
                             json_encode($message) :
                                 $message
                     ).
-                ');'.
+                '");'.
             '</script>'
         ;
 
@@ -67,13 +67,13 @@ abstract class Console{
         /* Display message */
         echo 
             '<script type="text/javascript">'.
-                'console.log('.
+                'console.log("'.
                     (
                         is_array($message) ?
                             json_encode($message) :
                                 $message
                     ).
-                ');'.
+                '");'.
             '</script>'
         ;
 
@@ -87,13 +87,13 @@ abstract class Console{
         /* Display message */
         echo 
             '<script type="text/javascript">'.
-                'console.error('.
+                'console.error("'.
                     (
                         is_array($message) ?
                             json_encode($message) :
                                 $message
                     ).
-                ');'.
+                '");'.
             '</script>'
         ;
 
@@ -107,13 +107,13 @@ abstract class Console{
         /* Display message */
         echo 
             '<script type="text/javascript">'.
-                'console.warn('.
+                'console.warn("'.
                     (
                         is_array($message) ?
                             json_encode($message) :
                                 $message
                     ).
-                ');'.
+                '");'.
             '</script>'
         ;
 

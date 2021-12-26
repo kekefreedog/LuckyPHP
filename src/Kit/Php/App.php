@@ -18,8 +18,8 @@ require __DIR__.'/../vendor/autoload.php';
  * 
  */
 use App\Kernel;
-use App\Controller;
 use App\Viewer;
+use App\Controller;
 
 /** Class for manage the workflow of the app
  * 
@@ -30,6 +30,11 @@ class App extends Kernel{
      * 
      */
     public function __construct(){
+
+        /** Start chrono
+         * 
+         */
+        $this->chronoStart();
 
         /** Define roots contants of the app
          * Define global variable :
@@ -80,6 +85,11 @@ class App extends Kernel{
             $this->controller->response
         );
 
+        /** Stop chrono
+         * 
+         */
+        $this->chronoStop();
+
     }
 
 }
@@ -88,36 +98,6 @@ class App extends Kernel{
  * 
  */
 $app = new App();
-
-/* * * Custom action post MVC here
- * -------------------------------------- *
- */
-
-# ...
- 
-/*
- * -------------------------------------- *
- * * */
-
-
-/* * * Set header and body of the page
- * -------------------------------------- *
- */
-
-/*
- * -------------------------------------- *
- * * */
-
-
-/* * * Custom action to execute at the end
- * -------------------------------------- *
- */
-
-# ...
- 
-/*
- * -------------------------------------- *
- * * */
 
 /** Return App
  * 

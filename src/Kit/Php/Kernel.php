@@ -17,6 +17,8 @@ namespace App;
 /** Dependance
  * 
  */
+use LuckyPHP\Date\Chrono;
+use LuckyPHP\Front\Console;
 use LuckyPHP\Server\Config;
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Server\SanityCheck;
@@ -34,6 +36,29 @@ class Kernel{
         
         # Init cache
         $this->cacheInit();
+
+    }
+
+    /** Define Chrono
+     * 
+     */
+    public function chronoStart(){
+
+        # New Chrono
+        $this->chrono = new Chrono();
+
+    }
+
+    /** Get Time execution
+     * 
+     */
+    public function chronoStop(){
+
+        # Stop chrono
+        $this->chrono->stop();
+
+        # Get time clean
+        Console::info('Page loaded in '.$this->chrono->getTime());
 
     }
 

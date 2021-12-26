@@ -1,0 +1,108 @@
+<?php declare(strict_types=1);
+/*******************************************************
+ * Copyright (C) 2019-2021 Kévin Zarshenas
+ * kevin.zarshenas@gmail.com
+ * 
+ * This file is part of LuckyPHP.
+ * 
+ * This code can not be copied and/or distributed without the express
+ * permission of Kévin Zarshenas @kekefreedog
+ *******************************************************/
+
+/** LuckyPHP
+ * 
+ */
+namespace  LuckyPHP\Date;
+
+/** Class Controller
+ * 
+ */
+class Chrono{
+
+    /** Parameters
+     * 
+     */
+    public $start;
+    public $end;
+    public $time;
+
+    /** Constructor
+     * 
+     * @param bool
+     */
+    public function __construct(bool $start = true){
+
+        # Check start
+        if($start)
+
+            # Start chrono
+            $this->start();
+        
+    }
+
+    /** Start chrono
+     * 
+     */
+    public function start(){
+
+        # Start
+        $this->start = microtime(true); 
+
+    }
+    
+    /** Stop chrono
+     * 
+     */
+    public function stop(){
+
+        # End
+        $this->end = microtime(true);
+
+        # Calculate execution time
+        $this->time = $this->end - $this->start;
+
+        # Return time
+        return $this->time;
+
+    }
+
+    /** Get clean time
+     * 
+     * @param bool Raw or Clean time
+     */
+    public function getTime(bool $raw = false){
+
+        # check raw
+        if($raw):
+
+            # Set response
+            $response = $this->time;
+
+        else:
+
+            # Explode time
+            $time = explode('.', (string)$this->time);
+            
+            $hours = (int)($time[0]/60/60);
+            $minutes = (int)($time[0]/60)-$hours*60;
+            $seconds = (int)$time[0]-$hours*60*60-$minutes*60;
+            $milliseconds = substr($time[1], 4, 4) >= 5 ?
+            ((int)substr($time[1], 0, 3) + 1) :
+                ((int)substr($time[1], 0, 3));
+
+            # Set response
+            $response = 
+                (($hours < 10 ? 0 : '').$hours).'h'.
+                (($minutes < 10 ? 0 : '').$minutes).'m'.
+                (($seconds < 10 ? 0 : '').$seconds).'s'.
+                $milliseconds
+            ;
+
+        endif;
+
+        # Retourne la réponse
+        return $response;
+
+    }
+
+}
