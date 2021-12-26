@@ -49,4 +49,9 @@ interface Controller{
      */
     public function getRouteName():string;
 
+    /** Get Content
+     * 
+     */
+    public function getContent();
+
 }

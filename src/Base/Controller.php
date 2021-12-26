@@ -14,10 +14,21 @@
  */
 namespace  LuckyPHP\Base;
 
+/** Dependance
+ * 
+ */
+use LuckyPHP\Http\Header;
+use Symfony\Component\HttpFoundation\Response;
+
 /** Class Controller
  * 
  */
 abstract class Controller{
+
+    /** content parameters
+     * 
+     */
+    public $content;
 
     /** Constructor
      * 
@@ -33,19 +44,19 @@ abstract class Controller{
      * 
      */
     private function argumentsIngest($arguments){
-
-        # Set route
-        $this->routePrepare([
-            'current' =>  $arguments[0] ?? null,
-            ...$arguments[1] ?? []
-        ]);
-
+        
         # Set request
-        $this->requestPrepare($arguments[2] ?? null);
+        $this->requestPrepare($arguments[0] ?? null);
 
         # Set parameters
         $this->parametersPrepare([
-            ...$arguments[3]
+            ...$arguments[1]
+        ]);
+
+        # Set route
+        $this->routePrepare([
+            'current' =>  $arguments[3] ?? null,
+            ...$arguments[2] ?? []
         ]);
 
     }
@@ -65,6 +76,10 @@ abstract class Controller{
             'config'    =>  [
                 'methods'   =>  $array['methods'],
                 'patterns'  =>  $array['patterns'],
+                'reponse'   =>  [
+                    'default'       =>  $array['reponse'],
+                    'Content-Type'  =>  Header::getContentType($array['type'])
+                ]
             ]
         ];
 
@@ -90,6 +105,10 @@ abstract class Controller{
 
     }
 
+    /**
+     *  Public action
+     */
+
     # Set Get Route Pattern
     public function getRoutePattern():string{
         return $this->route['current']['pattern'] ?? "";
@@ -113,6 +132,11 @@ abstract class Controller{
     # Set Get All Patterns Allowed for the current root
     public function getRoutePatterns():array{
         return $this->route['config']['patterns'] ?? [];
+    }
+
+    # Get content
+    public function getContent(){
+        return $this->content;
     }
 
 }

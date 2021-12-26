@@ -38,6 +38,28 @@ abstract class Header{
 
     }
 
+    /** Get Content type value
+     * - Depending of the type given
+     * 
+     * @param string $type
+     * @return string
+     */
+    public static function getContentType(string $type = ""):string {
+
+        # Check if type is defined and is in constant
+        if(!$type || !in_array($type, self::CONTENT_TYPE))
+
+            # Return false
+            return "";
+
+        # Set response
+        $reponse = self::CONTENT_TYPE[strtolower($type)];
+
+        # Return response
+        return $reponse;
+
+    }
+
     /** Constant where is stored content type
      * 
      */
