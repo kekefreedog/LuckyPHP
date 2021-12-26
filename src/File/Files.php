@@ -263,33 +263,41 @@ class Files{
 ;
         # Set content
         $content = 
-            "<?php declare(strict_types=1);".PHP_EOL.
+            '<?php declare(strict_types=1);'.PHP_EOL.
             self::header().
             PHP_EOL.
-            "/** Namespace".PHP_EOL.
-            " *".PHP_EOL.
-            " */".PHP_EOL.
-            "namespace App\Controllers;".PHP_EOL.
+            '/** Namespace'.PHP_EOL.
+            ' *'.PHP_EOL.
+            ' */'.PHP_EOL.
+            'namespace App\Controllers;'.PHP_EOL.
             PHP_EOL.
-            "/** Class for manage the workflow of the app".PHP_EOL.
-            " *".PHP_EOL.
-            " */".PHP_EOL.
-            "class ".$className."{".PHP_EOL.PHP_EOL.
-            "    /** Constructor".PHP_EOL.
-            "     *".PHP_EOL. 
-            "     */".PHP_EOL.
-            "    public function __construct(){".PHP_EOL.PHP_EOL.
-            "        # Set name".PHP_EOL.
-            '        $this->name="'.$className.'";'.PHP_EOL.PHP_EOL.
-            "    }".PHP_EOL.PHP_EOL.
-            "    /** Response".PHP_EOL.
-            "     *".PHP_EOL. 
-            "     */".PHP_EOL.
-            "    public function response(){".PHP_EOL.PHP_EOL.
-            "        # Return reponse".PHP_EOL.
+            '/** Dependances'.PHP_EOL.
+            ' *'.PHP_EOL.
+            ' */'.PHP_EOL.
+            'use LuckyPHP\Base\Controller as ControllerBase;'.PHP_EOL.
+            'use LuckyPHP\Interface\Controller as ControllerInterface;'.PHP_EOL.
+            PHP_EOL.
+            '/** Class for manage the workflow of the app'.PHP_EOL.
+            ' *'.PHP_EOL.
+            ' */'.PHP_EOL.
+            'class '.$className.' extends ControllerBase implements ControllerInterface{'.PHP_EOL.PHP_EOL.
+            '    /** Constructor'.PHP_EOL.
+            '     *'.PHP_EOL. 
+            '     */'.PHP_EOL.
+            '    public function __construct(...$arguments){'.PHP_EOL.PHP_EOL.
+            '        # Parent constructor'.PHP_EOL.
+            '        parent::__construct(...$arguments);'.PHP_EOL.PHP_EOL.
+            '        # Set name'.PHP_EOL.
+            '        $this->name='.$className.';'.PHP_EOL.PHP_EOL.
+            '    }'.PHP_EOL.PHP_EOL.
+            '    /** Response'.PHP_EOL.
+            '     *'.PHP_EOL. 
+            '     */'.PHP_EOL.
+            '    public function response(){'.PHP_EOL.PHP_EOL.
+            '        # Return reponse'.PHP_EOL.
             '        return $this->name;'.PHP_EOL.PHP_EOL.
-            "    }".PHP_EOL.
-            "}"
+            '    }'.PHP_EOL.
+            '}'
         ;
 
         # Put content in server

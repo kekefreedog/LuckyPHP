@@ -151,8 +151,13 @@ class Rooter{
                     # Add Route in Router
                     $this->instance->addRoute(
                         $pattern,
-                        function(string $route, array $parameters) use ($callbackName){
-                            $this->constroller = new $callbackName($route, $parameters);
+                        function(string $currentRoute, array $parameters) use ($callbackName, $route){
+                            $this->constroller = new $callbackName(
+                                $currentRoute, 
+                                $route, 
+                                $this->request,
+                                $parameters
+                            );
                         },
                         strtoupper($method),
                         $route['name']
