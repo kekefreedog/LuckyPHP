@@ -34,6 +34,9 @@ class Exception extends \Exception implements InterfaceException{
     // User-defined exception code                       
     protected $code = 0;
 
+    // Source of the error LuckyPHP or App or Vendor
+    public $source = null;
+
     /** Construct
      * 
      */
@@ -46,27 +49,18 @@ class Exception extends \Exception implements InterfaceException{
         // Construct parent
         parent::__construct($message, $code);
 
+        // Set source
+        $this->setSource();
+
+        // Right in log file
+        $this->logWrite();
+
     }
    
     /** Convert to string
      * 
      */
     public function __toString(){
-
-        // Retourne message
-        return 
-            get_class($this).
-            " '{$this->message}' in {$this->file}({$this->line})\n".
-            "{$this->getTraceAsString()}"
-        ;
-
-    }
-
-    /** Display message as error message in javascript console
-     * 
-     * @return void
-     */
-    public function consoleError():void{
 
         # Code
         $code = $this->getCode();
@@ -92,8 +86,87 @@ class Exception extends \Exception implements InterfaceException{
         $message = "⚠️ [Error $code : ".StatusCodes::GET[$code]['title']."] ".
             $this->getMessage()." (on the file ../$file line ".$this->getLine().")";
 
+        // Retourne message
+        return $message;
+
+    }
+
+    /** Set Source
+     * 
+     */
+    private function setSource(){
+
+        # Get file
+        $file = $this->getFile();
+
+        # Replace antislash
+        $file = str_replace('\\', '/', $file);
+
+        # Check if error comme from LuckyPhp
+        if(strpos($file, "/vendor/kekefreedog/luckyphp/") !== false){
+
+            # Set source
+            $this->source = 'luckyphp';
+
+        }else
+        # Check if error comme from Vendor
+        if(strpos($file, "/vendor/") !== false){
+
+            # Set source
+            $this->source = 'vendor';
+
+        }else
+        # Check if error comme from App
+        {
+
+            # Set source
+            $this->source = 'app';
+
+        }
+
+    }
+
+    /** Get Source
+     * 
+     *
+     */
+    public function getSource(){
+
+        # Get source
+        $result = $this->source;
+
+        # Return result
+        return $result;
+
+    }
+
+    /** Display message as error message in javascript console
+     * 
+     */
+    public function consoleError(){
+
         # Put error in console
-        Console::error($message);
+        Console::error($this->__toString());
+
+    }
+
+    /** Log write
+     * 
+     */
+    private function logWrite(){
+
+        # Get source
+        $source = $this->getSource();
+
+        # Check source
+        if($source !== null)
+
+            # Generate log
+            error_log(
+                date("Y-m-d H:i:s", time())." : ".$this->__toString().PHP_EOL,
+                3,
+                __ROOT_APP__."/logs/$source.log"
+            );
 
     }
 

@@ -153,6 +153,8 @@ class Structure{
                         ],
                         'luckyphp.log'  =>  [
                         ],
+                        'vendor.log'  =>  [
+                        ],
                     ]
                 ],
                 # All media
