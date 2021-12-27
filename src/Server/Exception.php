@@ -18,6 +18,8 @@ namespace  LuckyPHP\Server;
  * 
  */
 use LuckyPHP\Interface\Exception as InterfaceException;
+use LuckyPHP\Front\Console;
+use LuckyPHP\Kit\StatusCodes;
 
 /** Class for error
  * 
@@ -57,6 +59,41 @@ class Exception extends \Exception implements InterfaceException{
             " '{$this->message}' in {$this->file}({$this->line})\n".
             "{$this->getTraceAsString()}"
         ;
+
+    }
+
+    /** Display message as error message in javascript console
+     * 
+     * @return void
+     */
+    public function consoleError():void{
+
+        # Code
+        $code = $this->getCode();
+
+        # File
+        $file =
+        implode( 
+            '/',
+            array_slice(
+                explode(
+                    '/', 
+                    str_replace(
+                        ['\\', '.php'], 
+                        ['/', ''], 
+                        $this->getFile()
+                    )
+                ),
+                -2
+            )
+        );
+
+        # Set message
+        $message = "⚠️ [Error $code : ".StatusCodes::GET[$code]['title']."] ".
+            $this->getMessage()." (on the file ../$file line ".$this->getLine().")";
+
+        # Put error in console
+        Console::error($message);
 
     }
 
