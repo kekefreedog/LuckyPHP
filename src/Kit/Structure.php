@@ -40,10 +40,9 @@ class Structure{
                         ],
                         'index.php' =>  [
                             'source'    =>  'src/Kit/Php/index.php',
-                        ]
-
+                        ],
+                        'manifest.json' =>  [],
                     ]
-
                 ],
                 # Ressources in css, js, hbs, md... or any other language
                 'resources' =>  [
@@ -139,11 +138,10 @@ class Structure{
                             ],
                         ],
                         # Routes of the app
-                        'routes.yml' =>  [
-                            'function'  =>  [
-                                'name'      =>  'routesWrite',
-                            ],
+                        'routes.yml' =>  [],
                         ],
+                        # Page of the app
+                        'page.yml'  =>  []
                     ]
                 ],
                 # Documentation of the app

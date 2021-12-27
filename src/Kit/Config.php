@@ -50,6 +50,18 @@ class Config{
                 'process'   =>  'url',
                 'default'   =>  '',
             ],
+            # Charset
+            [
+                'name'      =>  'app_charset',
+                'type'      =>  'VARCHAR',
+                'default'   =>  'utf-8"',
+            ],
+            # Indexing
+            [
+                'name'      =>  'app_indexing',
+                'type'      =>  'VARCHAR',
+                'default'   =>  'noindex, nofollow',
+            ],
             # Admin
                 # Email
                 [

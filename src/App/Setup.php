@@ -17,15 +17,16 @@ namespace  LuckyPHP\App;
 /** Use other library
  * 
  */
-use LuckyPHP\File\Files;
-use LuckyPHP\Code\Forms;
-use LuckyPHP\Code\Arrays;
-use LuckyPHP\Server\Config;
-use LuckyPHP\File\Structure;
-use Symfony\Component\Yaml\Yaml;
-use LuckyPHP\Kit\Config as ConfigKit;
 use LuckyPHP\Kit\Structure as StructureKit;
 use LuckyPHP\Kit\Routes as RoutesKit;
+use LuckyPHP\Kit\Config as ConfigKit;
+use LuckyPHP\Kit\Page as PageKit;
+use Symfony\Component\Yaml\Yaml;
+use LuckyPHP\File\Structure;
+use LuckyPHP\Server\Config;
+use LuckyPHP\Code\Arrays;
+use LuckyPHP\File\Files;
+use LuckyPHP\Code\Forms;
 
 /** Class Setup
  * 
@@ -59,11 +60,14 @@ class Setup{
         # Structure Setup
         $this->structureSetup();
 
-        # Set up config
+        # Write app condig
         $this->configSetup($input);
 
-        # Write routes
+        # Write routes config
         $this->routesWrite();
+
+        # Write page config
+        $this->pageWrite();
 
         # Database Setup
         # $this->databaseSetup();
@@ -118,7 +122,7 @@ class Setup{
         # Convert _ to multidimensional array
         $this->input = Arrays::stretch($this->input, "_");
 
-        # Wrtie input in config > app.yml
+        # Write input in config > app.yml
         file_put_contents(__ROOT_APP__.'config/app.yml', "# Configuration of the app".PHP_EOL.Yaml::dump($this->input, 10));
 
     }
@@ -128,7 +132,7 @@ class Setup{
      */
     private function routesWrite(){
 
-        # Wrtie input in config > app.yml
+        # Write input in config > app.yml
         file_put_contents(__ROOT_APP__.'config/routes.yml', "# Rootes of the app".PHP_EOL.Yaml::dump(RoutesKit::DEFAULT, 10));
 
         # Check RoutesKit::DEFAULT routes
@@ -143,9 +147,20 @@ class Setup{
                 'route_'.$key :
                     $route['name'];
 
+            # Write controller of the current route
             Files::controllerWrite($route);
 
         endforeach;
+
+    }
+
+    /** Config Set
+     * 
+     */
+    private function pageWrite(){
+
+        # Write input in config > page.yml
+        file_put_contents(__ROOT_APP__.'config/page.yml', "# Page of the app".PHP_EOL.Yaml::dump(PageKit::DEFAULT, 10));
 
     }
 
