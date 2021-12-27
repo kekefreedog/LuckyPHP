@@ -29,20 +29,8 @@ class Exception extends \Exception implements InterfaceException{
     // Exception message
     protected $message = 'Unknown exception';
 
-    // Unknown
-    private $string;
-
     // User-defined exception code                       
     protected $code = 0;
-
-    // Source filename of exception
-    protected $file;
-
-    // Source line of exception
-    protected $line;
-
-    // Unknown
-    private $trace;
 
     /** Construct
      * 
