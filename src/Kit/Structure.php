@@ -139,7 +139,6 @@ class Structure{
                         ],
                         # Routes of the app
                         'routes.yml' =>  [],
-                        ],
                         # Page of the app
                         'page.yml'  =>  []
                     ]
