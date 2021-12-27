@@ -94,7 +94,15 @@ class Structure{
                                 ],
                             ]
                         ],
-                        'hbs'       =>  [],
+                        'hbs'       =>  [
+                            'folders'   =>  [
+                                'miscellaneous' =>  [
+                                    'files'       =>  [
+                                        'error.hbs' =>  []
+                                    ]
+                                ]
+                            ]
+                        ],
                         'md'        =>  [],
                     ],
                 ],

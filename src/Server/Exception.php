@@ -18,8 +18,8 @@ namespace  LuckyPHP\Server;
  * 
  */
 use LuckyPHP\Interface\Exception as InterfaceException;
-use LuckyPHP\Front\Console;
 use LuckyPHP\Kit\StatusCodes;
+use LuckyPHP\Front\Console;
 
 /** Class for error
  * 
