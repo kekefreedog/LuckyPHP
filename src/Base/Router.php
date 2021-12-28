@@ -12,7 +12,7 @@
 /** Namespace
  * 
  */
-namespace  LuckyPHP\Server;
+namespace  LuckyPHP\Base;
 
 /** Dependance
  * 
