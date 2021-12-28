@@ -31,11 +31,7 @@ class Structure{
                 'config'    =>  [
                     'files'      =>  [
                         # Settings of the app
-                        'app.yml' =>  [
-                            'function'  =>  [
-                                'name'      =>  'configWrite',
-                            ],
-                        ],
+                        'app.yml' =>  [],
                         # Routes of the app
                         'routes.yml' =>  [],
                         # Page of the app

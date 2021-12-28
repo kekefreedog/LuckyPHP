@@ -112,8 +112,11 @@ class Structure extends Files{
 
                         }else{
 
-                            # Create empty file
-                            file_put_contents($filepath, '');
+                            # Check file no exist
+                            if(!file_exists($filepath))
+
+                                # Create empty file
+                                file_put_contents($filepath, '');
 
                         }
 
