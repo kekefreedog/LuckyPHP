@@ -8,20 +8,13 @@
  * permission of Kévin Zarshenas @kekefreedog
  *******************************************************/
 
+/* Import JS */
+window.$ = window.jQuery = require('jquery/dist/jquery.js');
+window.PerfectScrollbar = require('perfect-scrollbar').default;
+require('materialize-css/dist/js/materialize.js')
+require('Kmaterialize/src/js/plugins.js');
+require("Kmaterialize/src/js/search.js");
+
 /* Import CSS */
-import('./style/framework');
-import('./style/style');
-
-/* Vendors */
-import * as $ from 'jquery';
-import 'materialize-css';
-import Prism from 'prismjs';
-import 'perfect-scrollbar';
-
-/* Import Kmaterial */
-import "Kmaterialize/src/js/materialize.js"
-import "Kmaterialize/src/js/plugins.js"
-import "Kmaterialize/src/js/search.js"
-
-/* Script JS */
-console.log('Welcome in your app !');
+import './style/framework';
+import './style/style';
