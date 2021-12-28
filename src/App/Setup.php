@@ -57,11 +57,11 @@ class Setup{
             'luckyphp'  =>  $directory.'vendor/kekefreedog/luckyphp/',
         ]);
 
-        # Structure Setup
-        $this->structureSetup();
-
         # Write app condig
         $this->configSetup($input);
+
+        # Structure Setup
+        $this->structureSetup();
 
         # Write routes config
         $this->routesWrite();
