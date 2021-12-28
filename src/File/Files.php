@@ -260,8 +260,7 @@ class Files{
         # Check theme and package
         if(
             !$theme ||
-            !$package ||
-            !file_exists($result)
+            !$package
         )
             $result = "";
 
