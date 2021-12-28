@@ -18,5 +18,10 @@ import 'materialize-css';
 import Prism from 'prismjs';
 import 'perfect-scrollbar';
 
+/* Import Kmaterial */
+import "Kmaterialize/src/js/materialize.js"
+import "Kmaterialize/src/js/plugins.js"
+import "Kmaterialize/src/js/search.js"
+
 /* Script JS */
 console.log('Welcome in your app !');
