@@ -17,9 +17,9 @@ require __DIR__.'/../vendor/autoload.php';
 /** Use extra classes
  * 
  */
+use App\Controller;
 use App\Kernel;
 use App\Viewer;
-use App\Controller;
 
 /** Class for manage the workflow of the app
  * 
