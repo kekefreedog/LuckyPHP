@@ -27,6 +27,21 @@ class Structure{
 
         "/" =>  [
             'folders'=>  [
+                # Config of your app
+                'config'    =>  [
+                    'files'      =>  [
+                        # Settings of the app
+                        'app.yml' =>  [
+                            'function'  =>  [
+                                'name'      =>  'configWrite',
+                            ],
+                        ],
+                        # Routes of the app
+                        'routes.yml' =>  [],
+                        # Page of the app
+                        'page.yml'  =>  []
+                    ]
+                ],
                 # Public folder
                 'www'   =>  [
                     'files'      =>  [
@@ -116,21 +131,6 @@ class Structure{
                     'folders'   =>  [
                         'Controllers'   =>  []
                     ],
-                ],
-                # Config of your app
-                'config'    =>  [
-                    'files'      =>  [
-                        # Settings of the app
-                        'app.yml' =>  [
-                            'function'  =>  [
-                                'name'      =>  'configWrite',
-                            ],
-                        ],
-                        # Routes of the app
-                        'routes.yml' =>  [],
-                        # Page of the app
-                        'page.yml'  =>  []
-                    ]
                 ],
                 # Documentation of the app
                 'docs'      =>  [
