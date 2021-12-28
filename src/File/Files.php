@@ -17,7 +17,7 @@ namespace  LuckyPHP\File;
 /** Dependance
  * 
  */
-use LuckyPHP\Server\Router;
+use LuckyPHP\Base\Router;
 
 /** Class Files
  * 

@@ -3,7 +3,7 @@
 ## Info
 
 ```php
-namespace  LuckyPHP\Server\Router;  # Name Space
+namespace  LuckyPHP\Base\Router;    # Name Space
 class Router{}                      # Class name
 ```
 

@@ -17,7 +17,7 @@ namespace App;
 /** Dependances
  * 
  */
-use LuckyPHP\Server\Router;
+use LuckyPHP\Base\Router;
 use LuckyPHP\Http\Request;
 
 /** Class of the controller

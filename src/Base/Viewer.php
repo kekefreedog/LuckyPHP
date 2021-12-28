@@ -47,6 +47,9 @@ abstract class Viewer{
         # Ingest arguments
         $this->argumentsIngest($arguments);
 
+        # ResponsePrepare
+        $this->responsePrepare();
+
         try{
 
             # Redirect to the constructor depending reponse type
@@ -62,8 +65,8 @@ abstract class Viewer{
 
         }
 
-        # ResponsePrepare
-        $this->responsePrepare();
+        # Fill content in response
+        $this->setResponseContent();
 
     }
 
@@ -137,7 +140,20 @@ abstract class Viewer{
             ->build()
         ;
 
+        # Set global content
+        $this->content = $content;
+
+    }
+
+    /** Json constructor
+     * 
+     */
+    private function constructorJson(){
+
         # Set content
+        $content = json_encode(['message'=>'hello']);
+
+        # Set global content
         $this->content = $content;
 
     }
@@ -187,7 +203,7 @@ abstract class Viewer{
 
         # Execute callback if not null
         if($this->callback !== null)
-            ($this->callback)();
+            ($this->callback)($this->getResponseType());
 
         # Prepare response
         $this->response->send();

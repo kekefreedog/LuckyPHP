@@ -50,15 +50,18 @@ class Kernel{
     }
 
     /** Get Time execution
-     * 
+     * @param any $flag null | json | html
      */
-    public function chronoStop(){
+    public function chronoStop($flag = null){
 
         # Stop chrono
         $this->chrono->stop();
 
-        # Get time clean
-        Console::info('Page loaded in '.$this->chrono->getTime());
+        # If html
+        if($flag == "html")
+
+            # Get time clean
+            Console::info('Page loaded in '.$this->chrono->getTime());
 
     }
 
