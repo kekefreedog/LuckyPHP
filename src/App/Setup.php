@@ -104,6 +104,9 @@ class Setup{
      */
     private function configSetup($input = []){
 
+        # Check config folder exists
+        if(!is_dir(__ROOT_APP__.'config')) mkdir(__ROOT_APP__.'config', 0777, true);
+
         # Iteration de $this->default
         foreach (ConfigKit::CONFIG AS $content)
 
