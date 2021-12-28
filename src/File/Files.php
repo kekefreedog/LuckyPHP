@@ -255,7 +255,7 @@ class Files{
         # Get theme and package
         $theme = $config['app']['css']['framework']['theme'] ?? "";
         $package = $config['app']['css']['framework']['package'] ?? "";
-        $result = "./../../../node_modules/$package/dist/css/$theme/kmaterial.css";
+        $result = "./../../../node_modules/$package/dist/css/$theme/kmaterial.min.css";
 
         # Check theme and package
         if(
