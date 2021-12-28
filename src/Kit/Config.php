@@ -112,6 +112,7 @@ class Config{
                         'type'      =>  'VARCHAR',
                         'default'   =>  null,
                         //'default'   =>  'advanced',
+                    ],
                     # Theme
                     [
                         'name'      =>  'app_css_framework_theme',
