@@ -62,18 +62,7 @@ class Structure{
                                     'files'     => [
                                         'framework.js' =>  [
                                             'function'  =>  [
-                                                'name'      =>  'jsImportWrite',
-                                                'arguments'=>  [
-                                                    "./../../../node_modules/Kmaterialize/dist/css/materialize-vd1-min.css"
-                                                ],
-                                            ],
-                                        ],
-                                        'components.js' =>  [
-                                            'function'  =>  [
-                                                'name'      =>  'jsImportWrite',
-                                                'arguments'=>  [
-                                                    "./../../../node_modules/Kmaterialize/dist/css/materialize-vd2-min.css"
-                                                ],
+                                                'name'      =>  'jsImportFrameworkWrite',
                                             ],
                                         ],
                                         'style.js' =>  [

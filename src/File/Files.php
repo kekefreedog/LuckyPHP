@@ -17,6 +17,7 @@ namespace  LuckyPHP\File;
 /** Dependance
  * 
  */
+use LuckyPHP\Server\Config;
 use LuckyPHP\Base\Router;
 
 /** Class Files
@@ -233,7 +234,43 @@ class Files{
         # Prepare result
         $result =
             $this->header().
-            $import ? "import \"$import\";" : ""
+            $import ? 
+                "import \"$import\";" 
+                    : ""
+        ;
+
+        # Return result
+        return $result;
+
+    }
+
+    /** Js Import Framwork Css
+     * 
+     */
+    public function jsImportFrameworkWrite($filepath){
+
+        # Read config app
+        $config = Config::read('app');
+
+        # Get theme and package
+        $theme = $config['app']['css']['framework']['theme'] ?? "";
+        $package = $config['app']['css']['framework']['package'] ?? "";
+        $result = "./../../../node_modules/$package/dist/css/$theme/kmaterial.css";
+
+        # Check theme and package
+        if(
+            !$theme ||
+            !$package ||
+            !file_exists($result)
+        )
+            $result = "";
+
+        # Prepare result
+        $result =
+            $this->header().
+            $result ? 
+                "import \"$result\";" :
+                    ""
         ;
 
         # Return result

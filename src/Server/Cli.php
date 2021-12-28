@@ -187,6 +187,46 @@ class Cli{
 
         }
 
+        # Check if users want use Kmaterialize
+        if($this->data['app_css_framework_branch'] == 'advanced'){
+
+            # Theme possible
+            $themes = [
+                0   =>  'sample',
+                1   =>  'vertical-dark-menu',
+                2   =>  'vertical-gradient-menu',
+                3   =>  'vertical-modern-menu',
+                4   =>  'vertical-menu-nav-dark',
+                5   =>  'horizontal-menu'
+            ];
+
+            # Echo message
+            echo  '2-3. Which theme use ?'.PHP_EOL;
+
+            # Iteration des themes
+            foreach($themes as $keyTheme => $valueTheme)
+                
+                # Dsiplay choice
+                echo "      - $valueTheme [$keyTheme]".PHP_EOL;
+
+            # 2-2. Ask if user wants use Kmaterialize basic or advanced
+            while( 
+                !in_array(
+                    (
+                        $this->data['app_css_framework_theme'] = 
+                            readline('[0], [1], [2], [3], [4] or [5] : ')
+                        ),
+                    ['0', 0, '1', 1, '2', 2, '3', 3, '4', 4, '5', 5]
+                )
+            )
+                        
+                echo '"'.$this->data['app_css_framework_theme'].'" is not valid ! ⚠️'.PHP_EOL;
+
+            # Set css framwork branch (depending of the precedent answer)
+            $this->data['app_css_framework_theme'] = $themes[$this->data['app_css_framework_theme']];
+
+        }
+
         # 3. Ask if you want to use interal auth
         while( 
             !in_array(

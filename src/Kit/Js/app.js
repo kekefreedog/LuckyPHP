@@ -10,8 +10,13 @@
 
 /* Import CSS */
 import('./style/framework');
-import('./style/components');
 import('./style/style');
+
+/* Vendors */
+import * as $ from 'jquery';
+import 'materialize-css';
+import Prism from 'prismjs';
+import 'perfect-scrollbar';
 
 /* Script JS */
 console.log('Welcome in your app !');
