@@ -45,6 +45,16 @@ class Page{
                                 'charset'   =>  "{{app.charset}}",
                             ]
                         ],
+                        /** <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                         * 
+                         */
+                        [
+                            'tag'       =>  'meta',
+                            'attributes'=>  [
+                                'http-equiv'    =>  "X-UA-Compatible",
+                                'content'       =>  "IE=edge",
+                            ]
+                        ],
                         /** <meta name="viewport" content="width=device-width, initial-scale=1">
                          *  - meta name="viewport" - viewport settings related to mobile responsiveness
                          *  - width=device-width - use the physical width of the device (great for mobile!)
@@ -56,7 +66,9 @@ class Page{
                                 'name'   =>  "viewport",
                                 'content'=> [
                                     'width'         =>  "device-width",
-                                    'initial-scale' =>  1
+                                    'initial-scale' =>  1.0,
+                                    'user-scalable' =>  0,
+                                    'minimal-ui'    =>  null
                                 ]
                             ]
                         ],
@@ -75,7 +87,7 @@ class Page{
                          *  - Name of web application
                          */
                         [
-                            'tag'       =>  'application-name',
+                            'tag'       =>  'meta',
                             'attributes'=>  [
                                 'name'      =>  'application-name',
                                 'content'   =>  '{{app.name}}'
@@ -153,11 +165,6 @@ class Page{
                                 'rel'       =>  'manifest',
                                 'href'      =>  'manifest.json'
                             ],
-                        ],
-                        /* Title */
-                        [
-                            'tag'       =>  'title',
-                            'value'     =>  "{{app.name}} // "
                         ]
                     ]
                 ]

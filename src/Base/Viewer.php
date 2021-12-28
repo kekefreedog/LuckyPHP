@@ -23,6 +23,7 @@ use LuckyPHP\Server\Exception;
  * 
  */
 use Symfony\Component\HttpFoundation\Response;
+use LuckyPHP\Front\Template;
 use LuckyPHP\File\Json;
 
 /** Class Viewer
@@ -36,6 +37,7 @@ abstract class Viewer{
     public $content = null;
     public $response = null;
     public $callback = null;
+    public $constructor = null;
 
     /** Constructor
      * 
@@ -44,6 +46,21 @@ abstract class Viewer{
 
         # Ingest arguments
         $this->argumentsIngest($arguments);
+
+        try{
+
+            # Redirect to the constructor depending reponse type
+            $this->getConstructor();
+
+            # Execute constructor of current type
+            $this->{$this->constructor}();
+
+        }catch(Exception $e){
+
+            # Mettre en place redirection
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+
+        }
 
         # ResponsePrepare
         $this->responsePrepare();
@@ -71,9 +88,61 @@ abstract class Viewer{
         $this->cache = $arguments[2] ?? [];
 
         # Ingest callback
-        $this->callback = $arguments[4] ?? null;
+        $this->callback = $arguments[3];
 
     }
+
+    /** Get name of to constructor depending of type of file
+     * 
+     */
+    private function getConstructor(){
+
+        # Get type
+        $type = ucfirst($this->getResponseType());
+
+        # Set name of the constructor
+        $name = "constructor$type";
+
+        # check methods exist
+        if(!method_exists($this, $name))
+
+            # Set exception
+            throw new Exception("No constructor associate to \"$type\"", 500);
+
+        # Set constructor
+        $this->constructor = $name;
+
+    }
+
+    ##########################################################################
+
+    /** Html constructor
+     * 
+     */
+    private function constructorHtml(){
+
+        # New template
+        $template = new Template();
+
+        $content = $template
+            ->addDoctype()
+            ->addHtmlStart()
+                ->addHeadStart()
+                    ->addHeadMeta()
+                    ->setTitle()
+                ->addHeadEnd()
+                ->addBodyStart()
+                ->addBodyEnd()
+            ->addHtmlEnd()
+            ->build()
+        ;
+
+        # Set content
+        $this->content = $content;
+
+    }
+
+    ##########################################################################
 
     /** Prepare Response
      * 
@@ -86,8 +155,6 @@ abstract class Viewer{
             Response::HTTP_OK,
             ['content-type' => $this->getContentType()]
         );
-
-        print_r($this->getContentType());
 
     }
 

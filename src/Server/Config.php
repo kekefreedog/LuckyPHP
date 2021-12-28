@@ -45,7 +45,7 @@ class Config{
             
         }else
         # If input is the name of the config
-        if($input && in_array($input, self::CONFIG_PATH)){
+        if($input && array_key_exists($input, self::CONFIG_PATH)){
 
             # Set path
             $path = __ROOT_APP__.self::CONFIG_PATH[$input];

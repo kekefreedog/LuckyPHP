@@ -23,7 +23,7 @@ use LuckyPHP\Server\Config;
 /** Class for generate Template
  * 
  */
-abstract class Template{
+class Template{
     
     # Config
     private $config = null;
@@ -51,15 +51,52 @@ abstract class Template{
 
     }
 
+    /** Add Doctype
+     * 
+     */
+    public function addDoctype(){
+
+        # Add head start
+        $this->result .=  "<!DOCTYPE html>";
+
+        # Return this
+        return $this;
+
+    }
+
+    /** Add Html
+     * 
+     */
+    public function addHtmlStart(){
+
+        # Add head start
+        $this->result .=  '<html class="loading" lang="en" data-textdirection="ltr">';
+
+        # Return this
+        return $this;
+
+    }
+
+    /** Head Start
+     * 
+     */
+    public function addHeadStart(){
+
+        # Add head start
+        $this->result .=  "<head>";
+
+        # Return this
+        return $this;
+
+    }
 
     /** Add Head Tag
      * 
      * - Read config/page.yml
      * 
      * @param string $branch Branch of the head to load
-     * @return void
      */
-    public function addHead($branch = ""):void {
+    public function addHeadMeta($branch = "") {
 
         # Declare result
         $result = "";
@@ -117,8 +154,12 @@ abstract class Template{
                             # Push in elements
                             $elementValue .= 
                                 ($elementValue ? ", " : "").
-                                "$valueKey=$valueName"
+                                $valueKey
                             ;
+
+                            # Check value name
+                            if($valueName !== null)
+                                $elementValue .= "=$valueName";
 
                         # Check element value
                         if($elementValue)
@@ -148,6 +189,98 @@ abstract class Template{
 
         # Push result in global result
         $this->result .= "<head>$result</head>";
+
+        # Return this
+        return $this;
+
+    }
+
+    /** Set title
+     * 
+     * @param string $title title of the page
+     * @param bool $dispalyAppName Display name of the app in the page title
+     */
+    public function setTitle(string $title = "", bool $dispalyAppName = true) {
+
+        # Declare result
+        $result = "<title>";
+
+        # Push title
+        $result = $title;
+
+        # Check $dispalyAppName
+        if($dispalyAppName){
+
+            # Get app name
+            $appName = $this->config['app']['name'];
+
+            # Check appname and push it
+            if($appName)
+                $result .= ($title ? " // " : "").$appName;
+
+
+        }
+
+        # Set end of tag
+        $result = "</title>";
+
+        # Push result in global result
+        $this->result .= $result;
+
+        # Return this
+        return $this;
+
+    }
+
+    /** Head Start
+     * 
+     */
+    public function addHeadEnd(){
+
+        # Add head end
+        $this->result .= "</head>";
+
+        # Return this
+        return $this;
+
+    }
+
+    /** Body Start
+     * 
+     */
+    public function addBodyStart(){
+
+        # Add head end
+        $this->result .= "<body>";
+
+        # Return this
+        return $this;
+
+    }
+
+    /** Body End
+     * 
+     */
+    public function addBodyEnd(){
+
+        # Add head end
+        $this->result .= "</body>";
+
+        # Return this
+        return $this;
+
+    }
+
+    /** Html End
+     * 
+     */
+    public function addHtmlEnd(){
+
+        # Add head end
+        $this->result .= "</html>";
+
+        # Return this
+        return $this;
 
     }
 
