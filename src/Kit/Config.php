@@ -145,7 +145,7 @@ class Config{
                 [
                     'name'      =>  'app_template_root',
                     'type'      =>  'VARCHAR',
-                    'default'   =>  '/resources/hbs',
+                    'default'   =>  'resources/hbs',
                 ],
                 # ressources
                 [

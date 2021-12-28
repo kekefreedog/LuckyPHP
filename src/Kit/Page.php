@@ -76,13 +76,14 @@ class Page{
                          *  - Allows control over where resources are loaded from. 
                          *  - All content have to come from the same origin
                          */
-                        [
+                        /* [
                             'tag'       =>  'meta',
                             'attributes'=>  [
                                 'http-equiv'    =>  'Content-Security-Policy',
                                 'content'       =>  "default-src 'self'"
+                                'content'       =>  "default-src 'self' '; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' 'unsafe-eval';"
                             ]
-                        ],
+                        ], */
                         /** <meta name="application-name" content="Application Name">
                          *  - Name of web application
                          */

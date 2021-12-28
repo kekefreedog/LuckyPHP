@@ -32,9 +32,21 @@ class Viewer extends ViewerBase implements ViewerInterface {
 
         /** Parent constructor
          * 
+         * - Ingest arguments
+         * - Create response object
+         * - Define constructor depending of the type of content
+         * 
          */
         parent::__construct(...$arguments);
 
+        /** Set global content in response 
+         * 
+         */
+        $this->setResponseContent();
+
+        /** Send the response to the client
+         * 
+         */
         $this->reponseExecute();
 
     } 

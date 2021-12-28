@@ -17,6 +17,7 @@ namespace  LuckyPHP\Front;
 /** Depedences
  * 
  */
+use Symfony\Component\Finder\Finder;
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Server\Config;
 
@@ -251,7 +252,88 @@ class Template{
     public function addBodyStart(){
 
         # Add head end
-        $this->result .= "<body>";
+        $this->result .= '<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-dark-menu 2-columns" data-open="click" data-menu="vertical-dark-menu" data-col="2-columns">';
+
+        # Return this
+        return $this;
+
+    }
+
+    /** Load layout
+     * 
+     * @param array $layouts All layout to load
+     * @param string|null $templateRoot Root of the template ressources
+     */
+    public function loadLayouts(array $layouts = [], string|null $templateRoot = null){
+
+        # 1. Check templates Root
+        if($templateRoot === null){
+
+            # Check root exist in config
+            if(!isset($this->config['app']['template']['root']))
+
+               # Set exception
+               throw new Exception("The root of templates ressources is missing in config file.", 500);
+
+            # Set root
+            $root = __ROOT_APP__.$this->config['app']['template']['root'];
+
+        }else
+
+            # Set custom root
+            $root = __ROOT_APP__.$templateRoot;
+
+        # 2. Check layouts given
+        if(empty($layouts))
+            return $this;
+
+        # Declare
+        $result = "";
+        $names = [];
+
+        # Get extension from app config
+        $ext = $this->config['app']['template']['extension'] ?? "*";
+
+        # New finder
+        $finder = new Finder();
+
+        # Prepare names
+        foreach($layouts as $layout){
+
+            # Check if layout value is string
+            if(is_string($layout))
+
+                # Push in names
+                $names[] = "*$layout.$ext";
+
+        }
+
+        # Search all file
+        $finder->files()->name($names)->in($root);
+
+        # Iteration des fichiers trouvés
+        foreach ($finder as $file){
+
+            # Push content in result
+            $result .= $file->getContents();
+
+        }
+
+        # Set global result
+        $this->result .= $result;
+
+        # Return this
+        return $this;
+
+    }
+
+    /** Add index Js
+     * 
+     */
+    public function addIndexJs(){
+
+        # Add script to global result
+        $this->result .= '<script type="application/javascript" src="js/index.js"></script>';
 
         # Return this
         return $this;

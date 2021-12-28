@@ -65,9 +65,6 @@ abstract class Viewer{
 
         }
 
-        # Fill content in response
-        $this->setResponseContent();
-
     }
 
     /** Ingest Arguments
