@@ -116,10 +116,16 @@ abstract class Viewer{
 
     ##########################################################################
 
+
+
     /** Html constructor
      * 
      */
     private function constructorHtml(){
+
+        $layouts = [
+            "test"
+        ];
 
         # New template
         $template = new Template();
@@ -132,6 +138,8 @@ abstract class Viewer{
                     ->setTitle()
                 ->addHeadEnd()
                 ->addBodyStart()
+                    ->loadLayouts($layouts)
+                    ->addIndexJs()
                 ->addBodyEnd()
             ->addHtmlEnd()
             ->build()
