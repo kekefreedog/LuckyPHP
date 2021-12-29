@@ -7,10 +7,10 @@
  * This code can not be copied and/or distributed without the express
  * permission of Kévin Zarshenas @kekefreedog
  *******************************************************/
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const RemovePlugin = require('remove-files-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
  const path = require('path');
- const TerserPlugin = require("terser-webpack-plugin");
- const RemovePlugin = require('remove-files-webpack-plugin');
- const MiniCssExtractPlugin = require("mini-css-extract-plugin");
  module.exports = {
      /* Main js file */
      entry: {

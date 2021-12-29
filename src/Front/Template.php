@@ -196,6 +196,41 @@ class Template{
 
     }
 
+    /** Get style
+     * - Search global style in www/css/
+     * - And specific style for the current page
+     */
+    public function addStylesheet(){
+
+        # Set result
+        $result = "";
+
+        # New finder
+        $finder = new Finder();
+
+        /* Global css */
+
+        # Search all css at the root of www/css
+        $finder->files()->name('*.css')->in(__ROOT_APP__.'www/css/')->depth('== 0');
+
+        foreach ($finder as $file){
+
+            # Get file name
+            $filename = $file->getFilename();
+
+            # Push file name in result
+            $result .= "<link rel=\"stylesheet\" href=\"css/$filename\">";
+
+        }
+
+        # Pus result in global result
+        $this->result .= $result;
+
+        # Return this
+        return $this;
+
+    }
+
     /** Set title
      * 
      * @param string $title title of the page

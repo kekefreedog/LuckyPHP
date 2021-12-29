@@ -26,19 +26,23 @@ This class contains lots of usefull methods for build a template
 - If no given branch, it will takes the default in page.yml
 - Then it creates all the tags from page.yml
 
-### 5. public ***function*** **setTitle**
+### 5. public ***function*** **addStylesheet**
+- Add globale style find in ``www/css/``
+- Add specific style of the current page
+
+### 6. public ***function*** **setTitle**
 - Set title depending of the title given
 - It is possible to disply name of the app
 
-### 6. public ***function*** **addHeadEnd**
+### 7. public ***function*** **addHeadEnd**
 - Close head tag
 
-### 7. public ***function*** **addBodyStart**
+### 8. public ***function*** **addBodyStart**
 - Close head tag
 
-### 8. public ***function*** **addBodyEnd**
+### 9. public ***function*** **addBodyEnd**
 - Close head tag
 
-### 9. public ***function*** **build**
+### 10. public ***function*** **build**
 - Build the template
 - Return the result
