@@ -210,7 +210,7 @@ class Files{
         $object["devDependencies"]["css-loader"]="^6.5.1";
         $object["devDependencies"]["file-loader"]="^6.2.0";
         $object["devDependencies"]["mini-css-extract-plugin"]="^1.5.0";
-        $object["devDependencies"]["remove-files-webpack-plugin"]="^2.4.5";
+        $object["devDependencies"]["remove-files-webpack-plugin"]="^1.5.0";
         $object["devDependencies"]["sass"]="^1.45.1";
         $object["devDependencies"]["sass-loader"]="^12.4.0";
         $object["devDependencies"]["style-loader"]="^3.3.1";
