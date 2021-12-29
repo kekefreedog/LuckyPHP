@@ -10,10 +10,13 @@
  const path = require('path');
  const TerserPlugin = require("terser-webpack-plugin");
  const RemovePlugin = require('remove-files-webpack-plugin');
+ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
  module.exports = {
      /* Main js file */
      entry: {
-         "app":'./resources/js/app.js',
+         "app": [
+             './resources/js/app.js'
+         ],
      },
      /* Output for www */
      output: {
@@ -22,12 +25,29 @@
      },
      module: {
          rules: [
-             /* Css */
+             /* Scss | Css */
              {
-                 test: /\.css$/i,
-                 use: ['style-loader', 'css-loader'],
-             },    
-             /* Fonts */  
+                 test: /\.(sa|sc|c|le)ss$/,
+                 use: [
+                     MiniCssExtractPlugin.loader,
+                     {
+                         loader: "css-loader",
+                         options: {
+                             sourceMap: true,
+                         },
+                     },
+                     {
+                         loader: "sass-loader",
+                         options: {
+                             sourceMap: true,
+                             sassOptions: {
+                                 outputStyle: "compressed",
+                             },
+                         },
+                     },
+                 ],
+             },
+             /* Fonts */
              {
                  test: /\.(woff|woff2)$/,
                  type: 'asset/resource',
@@ -35,14 +55,14 @@
                      filename: './../fonts/[name][ext]',
                  },
              },
-             /* Svg */  
+             /* Svg */
              {
                  test: /\.svg$/,
                  generator: {
                      filename: './../svg/[name]-[id][ext]',
                  },
              },
-             /* Txt */  
+             /* Txt */
              {
                  test: /\.txt$/,
                  generator: {
@@ -57,31 +77,41 @@
              parallel: true,
              terserOptions: {
                  format: {
-                   comments: false,
+                     comments: false,
                  },
              },
              extractComments: {
                  condition: true,
                  filename: (fileData) => {
-                   return `licences.txt${fileData.query}`;
+                     return `licences.txt${fileData.query}`;
                  },
              },
          })],
      },
      plugins: [
+         new MiniCssExtractPlugin({
+             filename: "../css/[name].[contenthash].css",
+             chunkFilename: "../css/[id].[contenthash].css",
+         }),
          /* Clean js with hash */
          new RemovePlugin({
-             before: { 
+             before: {
                  include: [
                      './www/js',
+                     './www/css',
+                     './www/svg',
+                     './www/fonts',
                  ],
              },
-             watch: { 
+             watch: {
                  include: [
                      './www/js',
+                     './www/css',
+                     './www/svg',
+                     './www/fonts',
                  ],
              },
-             after: { }
+             after: {}
          })
      ],
  };

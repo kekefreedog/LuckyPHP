@@ -209,7 +209,10 @@ class Files{
         # Set dev dependencies
         $object["devDependencies"]["css-loader"]="^6.5.1";
         $object["devDependencies"]["file-loader"]="^6.2.0";
-        $object["devDependencies"]["remove-files-webpack-plugin"]="^1.5.0";
+        $object["devDependencies"]["mini-css-extract-plugin"]="^1.5.0";
+        $object["devDependencies"]["remove-files-webpack-plugin"]="^2.4.5";
+        $object["devDependencies"]["sass"]="^1.45.1";
+        $object["devDependencies"]["sass-loader"]="^12.4.0";
         $object["devDependencies"]["style-loader"]="^3.3.1";
         $object["devDependencies"]["url-loader"]="^4.1.1";
         $object["devDependencies"]["webpack"]="^5.65.0";
@@ -229,15 +232,23 @@ class Files{
      * 
      * Write simple js file with one import
      */
-    public function jsImportWrite($filepath, $import){
+    public function jsImportWrite($filepath, $imports){
 
-        # Prepare result
-        $result =
-            $this->header().
-            $import ? 
-                "import \"$import\";" 
-                    : ""
-        ;
+        # Convert $import to array
+        if(!is_array($imports))
+            $imports = [$imports];
+        
+        # Add header in $result
+        $result = $this->header();
+
+        # Check import not empty
+        if(!empty($imports))
+
+            # Iteration import
+            foreach($imports as $import)
+
+                # Prepare result
+                $result .= "import \"$import\";".PHP_EOL;
 
         # Return result
         return $result;

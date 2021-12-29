@@ -58,9 +58,18 @@ class Structure{
                 # Ressources in css, js, hbs, md... or any other language
                 'resources' =>  [
                     'folders'   =>  [
-                        'css'       =>  [
+                        'scss'      =>  [
                             'files'   =>  [
-                                'style.css' =>  [
+                                'style.scss'=>  [
+                                    'function'  =>  [
+                                        'name'      =>  'header',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        'css'      =>  [
+                            'files'   =>  [
+                                'style.css'=>  [
                                     'function'  =>  [
                                         'name'      =>  'header',
                                     ],
@@ -80,7 +89,10 @@ class Structure{
                                             'function'  =>  [
                                                 'name'      =>  'jsImportWrite',
                                                 'arguments'=>  [
-                                                    "./../../css/style.css"
+                                                    [
+                                                        "./../../css/style.css",
+                                                        "./../../scss/style.scss",
+                                                    ]
                                                 ],
                                             ],
                                         ],
