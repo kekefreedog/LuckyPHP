@@ -88,4 +88,21 @@ class StatusCodes{
 
     ];
 
+    /** Default
+     * 
+     */
+    const DEFAULT = [
+        "title" =>  "Error",
+        "style" =>  [
+            "color" =>  [
+                "text"  =>  "white",
+                "fill"  =>  "grey darken-1"
+            ],
+            "icon"  =>  [
+                "class" =>  "material-icons",
+                "text"  =>  "error"
+            ]
+        ]
+    ]
+
 }

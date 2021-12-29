@@ -15,8 +15,11 @@ This class contains lots of usefull methods for determine root of the current pa
 
 ## Methods
 
-### 1. private ***function*** **read**
+### 1. public static ***function*** **read**
 - Read settings file with path or name
+
+### 2. public static ***function*** **exists**
+- Check if a config file exists in ``/config``
 
 ### 2. public static ***function*** **defineRoots**
 - Define root as global variable
@@ -42,6 +45,7 @@ __ROOT_LUCKYPHP__
 ```php
 [
     'app'   =>  'config/app.yml',
-    'routes'=>  'config/routes.yml'
+    'routes'=>  'config/routes.yml',
+    'page'  =>  'config/page.yml'
 ]
 ```

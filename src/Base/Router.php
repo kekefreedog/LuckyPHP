@@ -20,6 +20,7 @@ namespace  LuckyPHP\Base;
 use Mezon\Router\Router AS MezonRouter;
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Server\Config;
+use LuckyPHP\Http\Request;
 use LuckyPHP\Code\Strings;
 
 /** Class page
@@ -36,7 +37,7 @@ class Router{
     /** Constructor
      * 
      */
-    public function __construct($request){
+    public function __construct(Request $request){
 
         # New Rooter
         $this->instanceCreate();
@@ -60,7 +61,7 @@ class Router{
      */
     private function instanceCreate(){
         
-        # Set instance
+        # Set rooter instance
         $this->instance = new MezonRouter();
 
     }
@@ -92,7 +93,7 @@ class Router{
     /** Set request
      * 
      */
-    private function requestSet($request){
+    private function requestSet(Request $request){
 
         # Set request
         $this->request = $request;

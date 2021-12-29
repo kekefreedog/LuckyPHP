@@ -18,7 +18,6 @@ namespace  LuckyPHP\Base;
  * 
  */
 use LuckyPHP\Http\Header;
-use Symfony\Component\HttpFoundation\Response;
 
 /** Class Controller
  * 

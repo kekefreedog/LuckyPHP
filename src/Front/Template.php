@@ -19,6 +19,7 @@ namespace  LuckyPHP\Front;
  */
 use Symfony\Component\Finder\Finder;
 use LuckyPHP\Server\Exception;
+use LightnCandy\LightnCandy;
 use LuckyPHP\Server\Config;
 
 /** Class for generate Template
@@ -32,6 +33,9 @@ class Template{
     # Result
     private $result = "";
 
+    # private finder componeent
+    private $finder = null;
+
     /** Constructor
      * 
      */
@@ -39,6 +43,9 @@ class Template{
 
         # Read config
         $this->configRead();
+
+        # Init light candy
+        $this->lightnCandyInit();
         
     }
 
@@ -49,6 +56,62 @@ class Template{
 
         /* Read config */
         $this->config = Config::read('app') + Config::read('page');
+
+    }
+
+    /** Lightcandy ini
+     * 
+     */
+    public static function lightnCandyInit(){
+
+        /* Prepare main config */
+        return [
+			'flags' => LightnCandy::FLAG_HANDLEBARSJS,
+			'helpers' => [
+				'ifEquals' => function ($arg1, $arg2, $options) {
+					return ($arg1 === $arg2) ? $options['fn']() : $options['inverse']();
+				},
+				'cleanString' => function ($string) {
+					if($string && is_string($string)):
+						/* Reg Ex */
+                        $utf8 = [
+                            '/[áàâãªä]/u'   =>   'a',
+                            '/[ÁÀÂÃÄ]/u'    =>   'a',
+                            '/[ÍÌÎÏ]/u'     =>   'i',
+                            '/[íìîï]/u'     =>   'i',
+                            '/[éèêë]/u'     =>   'e',
+                            '/[ÉÈÊË]/u'     =>   'e',
+                            '/[óòôõºö]/u'   =>   'o',
+                            '/[ÓÒÔÕÖ]/u'    =>   'o',
+                            '/[úùûü]/u'     =>   'u',
+                            '/[ÚÙÛÜ]/u'     =>   'u',
+                            '/ç/'           =>   'c',
+                            '/Ç/'           =>   'c',
+                            '/ñ/'           =>   'n',
+                            '/Ñ/'           =>   'n',
+                            '/\s+/'         =>   '_',
+                            '/–/'           =>   '-', // UTF-8 hyphen to "normal" hyphen
+                            '/[’‘‹›‚]/u'    =>   ' ', // Literally a single quote
+                            '/[“”«»„]/u'    =>   ' ', // Double quote
+                            '/ /'           =>   ' ', // nonbreaking space (equiv. to 0x160),
+                            '/[(]/'			=>	 '',  // Round brackets
+                            '/[)]/'			=>	 '',  // Round brackets
+                        ];
+						/* Return value */
+						$string = strtolower(preg_replace(array_keys($utf8), array_values($utf8), $string));
+					endif;
+					return $string;
+				},
+				'colorText' => function ($string) {
+					return (strpos(trim($string), ' ') !== false) ? 
+						str_replace(' ', '-text text-', trim($string)) :
+							trim($string).'-text';
+				},
+				'count' => function ($array = []) {
+					return count($array);
+				},
+			],
+		];
 
     }
 
@@ -206,14 +269,14 @@ class Template{
         $result = "";
 
         # New finder
-        $finder = new Finder();
+        $this->finder = new Finder();
 
         /* Global css */
 
         # Search all css at the root of www/css
-        $finder->files()->name('*.css')->in(__ROOT_APP__.'www/css/')->depth('== 0');
+        $this->finder->files()->name('*.css')->in(__ROOT_WWW__.'css/')->depth('== 0');
 
-        foreach ($finder as $file){
+        foreach ($this->finder as $file){
 
             # Get file name
             $filename = $file->getFilename();
@@ -296,10 +359,10 @@ class Template{
 
     /** Load layout
      * 
-     * @param array $layouts All layout to load
+     * @param array|string $layouts All layout to load
      * @param string|null $templateRoot Root of the template ressources
      */
-    public function loadLayouts(array $layouts = [], string|null $templateRoot = null){
+    public function loadLayouts(array|string $layouts = [], string|null $templateRoot = null){
 
         # 1. Check templates Root
         if($templateRoot === null){
@@ -322,6 +385,10 @@ class Template{
         if(empty($layouts))
             return $this;
 
+        # Convert layouts to array if string
+        if(!is_array($layouts))
+            $layouts = [$layouts];
+
         # Declare
         $result = "";
         $names = [];
@@ -330,7 +397,7 @@ class Template{
         $ext = $this->config['app']['template']['extension'] ?? "*";
 
         # New finder
-        $finder = new Finder();
+        $this->finder = new Finder();
 
         # Prepare names
         foreach($layouts as $layout){
@@ -344,10 +411,10 @@ class Template{
         }
 
         # Search all file
-        $finder->files()->name($names)->in($root);
+        $this->finder->files()->name($names)->in($root);
 
         # Iteration des fichiers trouvés
-        foreach ($finder as $file){
+        foreach ($this->finder as $file){
 
             # Push content in result
             $result .= $file->getContents();
@@ -367,8 +434,29 @@ class Template{
      */
     public function addIndexJs(){
 
-        # Add script to global result
-        $this->result .= '<script type="application/javascript" src="js/index.js"></script>';
+        # Set result
+        $result = "";
+
+        # New finder
+        $this->finder = new Finder();
+
+        /* Global js */
+
+        # Search all css at the root of www/css
+        $this->finder->files()->name('*.js')->in(__ROOT_WWW__.'js/')->depth('== 0');
+
+        foreach ($this->finder as $file){
+
+            # Get file name
+            $filename = $file->getFilename();
+
+            # Push file name in result
+            $result .= "<script type=\"application/javascript\" src=\"js/$filename\"></script>";
+
+        }
+
+        # Pus result in global result
+        $this->result .= $result;
 
         # Return this
         return $this;

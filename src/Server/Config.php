@@ -70,6 +70,23 @@ class Config{
 
     }
 
+    /** Check if config exists
+     * @param string $configName
+     */
+    public static function exists(string $configName = ""):bool{
+
+        # Check if false
+        if(
+            !$configName ||
+            !file_exists(__ROOT_APP__."config/$configName.yml")
+        )
+            return false;
+
+        # Return true
+        return true;
+
+    }
+
     /** Define roots
      * 
      * Define root from array

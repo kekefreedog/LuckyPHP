@@ -12,40 +12,26 @@
 /** Namespace
  * 
  */
-namespace  LuckyPHP\Http;
+namespace App;
 
-/** Dependance
+/** Dependances
  * 
  */
-use Symfony\Component\HttpFoundation\Request as RequestSymfony;
+use LuckyPHP\Interface\Model as ModelInterface;
+use LuckyPHP\Base\Model as ModelBase;
 
-/** Class page
- * 
- * @dependance root 
+/** Class of the viewer
  * 
  */
-class Request{
-
-    # Data
-    public $data;
+class Model extends ModelBase implements ModelInterface {
 
     /** Constructor
      * 
      */
     public function __construct(){
 
-        /* Get request and put in data */
-        $this->data = RequestSymfony::createFromGlobals();
-        
-    }
-
-    /** Get data
-     * @return RequestSymfony
-     */
-    public function getData():RequestSymfony{
-
-        # Return object
-        return $this->data;
+        # Parent constructor
+        // parent::__construct();
 
     }
 

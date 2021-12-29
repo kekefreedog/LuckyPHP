@@ -17,3 +17,7 @@ This class contains all status codes supports by the application
     - 401 : Unauthorized
     - 500 : Internal Server Error
     - 501 : Not Implemented
+
+### 2. public ***const*** **DEFAULT**
+- Default status code parameters
+- Usefull when error whithout code

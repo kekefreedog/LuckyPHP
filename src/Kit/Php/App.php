@@ -68,6 +68,7 @@ class App extends Kernel{
         parent::__construct();
 
         /** Execute the controller
+         *  - Construct and register modal & middleware action
          * 
          */
         $this->controller = new Controller(

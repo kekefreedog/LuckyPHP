@@ -14,17 +14,15 @@
  */
 namespace  LuckyPHP\Base;
 
-/** Dependances
- * 
- */
-use LuckyPHP\Server\Exception;
-
 /** Dependance
  * 
  */
 use Symfony\Component\HttpFoundation\Response;
+use LuckyPHP\Server\Exception;
+use LightnCandy\LightnCandy;
 use LuckyPHP\Front\Template;
 use LuckyPHP\File\Json;
+
 
 /** Class Viewer
  * 
@@ -34,6 +32,7 @@ abstract class Viewer{
     /** Parameters
      * 
      */
+    public $render = null;
     public $content = null;
     public $response = null;
     public $callback = null;
@@ -130,6 +129,7 @@ abstract class Viewer{
         # New template
         $template = new Template();
 
+        # Build content of template
         $content = $template
             ->addDoctype()
             ->addHtmlStart()
@@ -146,8 +146,33 @@ abstract class Viewer{
             ->build()
         ;
 
-        # Set global content
-        $this->content = $content;
+        # Compile template
+        if(!$compile = LightnCandy::compile($content, Template::lightnCandyInit()))
+        
+            # Set exception
+            throw new Exception("Compilation of the html template failed", 500);
+
+        # Prepare render
+        $render = LightnCandy::prepare($compile);
+
+        # Set global render
+        $this->render = $render;
+
+    }
+
+    /** Renderer Html
+     * 
+     */
+    public function rendererHtml(){
+
+        # Check render
+        if($this->render === null && $this->getResponseType() == "html")
+
+            # Set exception
+            throw new Exception("Template render failed. You must prepare your html template before render it.", 500);
+
+        # Push render result in content
+        $this->content = ($this->render)();
 
     }
 

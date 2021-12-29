@@ -8,7 +8,7 @@ class Router{}                      # Class name
 ```
 
 ## Description
-- Define the rooter workflow af the framework
+- Define the rooter workflow of the framework
 
 ## Methods
 
