@@ -135,6 +135,7 @@ abstract class Viewer{
             ->addHtmlStart()
                 ->addHeadStart()
                     ->addHeadMeta()
+                    ->addStylesheet()
                     ->setTitle()
                 ->addHeadEnd()
                 ->addBodyStart()
