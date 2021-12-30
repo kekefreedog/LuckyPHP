@@ -158,6 +158,9 @@ abstract class Viewer{
         # Set global render
         $this->render = $render;
 
+        # Render html
+        $this->rendererHtml();
+
     }
 
     /** Renderer Html
