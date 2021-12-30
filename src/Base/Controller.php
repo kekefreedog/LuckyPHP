@@ -18,6 +18,7 @@ namespace  LuckyPHP\Base;
  * 
  */
 use LuckyPHP\Http\Header;
+use App\Model;
 
 /** Class Controller
  * 
