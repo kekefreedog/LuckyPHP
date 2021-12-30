@@ -152,20 +152,20 @@ abstract class Controller{
     }
 
     /**********************************************************************************
-     * Modal
+     * Model
      */
 
-    # Parameters for modal
-    protected $modal;
+    # Parameters for model
+    public $model;
 
-    /** New Modal
-     * Create new modal object
+    /** New Model
+     * Create new model object
      * @return null
      */
-    public function newModal(){
+    public function newModel(){
 
-        # Set modal
-        $this->modal = new Model();
+        # Set model
+        $this->model = new Model();
 
     }
 

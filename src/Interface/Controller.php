@@ -74,6 +74,6 @@ interface Controller{
      * Create new modal object
      * @return null
      */
-    public function newModal():void;
+    public function newModel():void;
 
 }
