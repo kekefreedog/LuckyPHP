@@ -103,6 +103,6 @@ class StatusCodes{
                 "text"  =>  "error"
             ]
         ]
-    ]
+    ];
 
 }

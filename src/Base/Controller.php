@@ -150,4 +150,22 @@ abstract class Controller{
         return $this->route['config']['response']['Content-Type'];
     }
 
+    /**********************************************************************************
+     * Modal
+     */
+
+    # Parameters for modal
+    protected $modal;
+
+    /** New Modal
+     * Create new modal object
+     * @return null
+     */
+    public function newModal(){
+
+        # Set modal
+        $this->modal = new Model();
+
+    }
+
 }

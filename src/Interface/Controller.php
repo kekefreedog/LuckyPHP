@@ -66,4 +66,14 @@ interface Controller{
      */
     public function getResponseType():string;
 
+    /**********************************************************************************
+     * Modal
+     */
+
+    /** New Modal
+     * Create new modal object
+     * @return null
+     */
+    public function newModal():void;
+
 }

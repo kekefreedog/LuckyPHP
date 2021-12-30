@@ -123,9 +123,9 @@ class Structure{
                         'Kernel.php'         =>  [
                             'source'    =>  'src/Kit/Php/Kernel.php',
                         ],
-                        /* 'Model.php'         =>  [
-                            'source'    =>  '/src/Kit/Php/Kernel.php',
-                        ], */
+                        'Model.php'         =>  [
+                            'source'    =>  '/src/Kit/Php/Modal.php',
+                        ],
                         'Viewer.php'          =>  [
                             'source'    =>  'src/Kit/Php/Viewer.php',
                         ],
