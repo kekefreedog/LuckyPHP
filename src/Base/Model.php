@@ -34,6 +34,21 @@ class Model{
     protected $data = [];
 
     /**********************************************************************************
+     * Data
+     */
+
+    /** Execute Model
+     * - Return data
+     * @return array
+     */
+    public function execute():array{
+
+        # Return data
+        return $this->data;
+
+    }
+
+    /**********************************************************************************
      * Errors
      */
 

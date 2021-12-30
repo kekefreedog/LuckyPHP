@@ -20,6 +20,16 @@ namespace  LuckyPHP\Interface;
 interface Model{
 
     /**********************************************************************************
+     * Data
+     */
+
+    /** Execute Model
+     * - Return data
+     * @return array
+     */
+    public function execute():array;
+
+    /**********************************************************************************
      * Errors
      */
 

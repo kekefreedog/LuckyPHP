@@ -10,6 +10,12 @@ class Model{}                   # Class name
 ## Description
 - Define the model workflow of the framework
 
+## Methods about **Data**
+
+### 1. public ***function*** **execute**
+- Execute model
+- Return value
+
 ## Methods about **Errors**
 
 ### 1. public ***function*** **pushErrors**
