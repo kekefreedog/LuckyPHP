@@ -185,6 +185,7 @@ class Model{
      * @param array|string $config
      *  - "App"
      *  - ["App", "Routes"]
+     *  - * for load all config in Config::CONFIG_PATH
      * @return void
      * 
      */
@@ -196,6 +197,10 @@ class Model{
 
         # Declare result
         $results = [];
+
+        # Check if configs is "*"
+        if($configs == "*")
+            $configs = Config::CONFIG_PATH;
 
         # Convert configs in array
         if(!is_array($configs))

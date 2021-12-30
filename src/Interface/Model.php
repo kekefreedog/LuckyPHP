@@ -64,6 +64,7 @@ interface Model{
      * @param array|string $config
      *  - "App"
      *  - ["App", "Routes"]
+     *  - * for load all config in Config::CONFIG_PATH
      * @return void
      * 
      */

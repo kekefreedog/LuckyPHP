@@ -162,7 +162,7 @@ abstract class Controller{
      * Create new model object
      * @return null
      */
-    public function newModel(){
+    public function newModel():void{
 
         # Set model
         $this->model = new Model();
