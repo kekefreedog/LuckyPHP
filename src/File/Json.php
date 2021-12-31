@@ -85,7 +85,7 @@ class Json{
             throw new Exception("Content of \"$filename\" is not a valid Json.", 500);
 
         # Decode content
-        $result = json_encode($content, $arrayFormat ? 1 : 0);
+        $result = json_decode($content, $arrayFormat);
 
         # Return result
         return $result;

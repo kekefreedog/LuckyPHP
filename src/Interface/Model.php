@@ -14,6 +14,11 @@
  */
 namespace  LuckyPHP\Interface;
 
+/** Dependance
+ * 
+ */
+use LuckyPHP\Base\Model as ModelBase;
+
 /** Interface Controller
  * 
  */
@@ -42,9 +47,9 @@ interface Model{
      *  - 0 : Auto
      *  - 1 : true
      *  - 2 : false
-     * @return model
+     * @return ModelBase
      */
-    public function pushErrors(array $errors, int $flag = 0):Model;
+    public function pushErrors(array $errors, int $flag = 0):ModelBase;
 
     /** Get Errors
      * 
@@ -53,9 +58,9 @@ interface Model{
     public function getErrors():array;
 
     /** Reset Errors
-     * @return model
+     * @return ModelBase
      */
-    public function resetErrors():Model;
+    public function resetErrors():ModelBase;
 
     /**********************************************************************************
      * Config
@@ -65,9 +70,9 @@ interface Model{
      * @param array $config
      *  - Push custom config
      *  - Keys on the root should be string
-     * @return model
+     * @return ModelBase
      */
-    public function pushConfig(array $configs):Model;
+    public function pushConfig(array $configs):ModelBase;
 
     /** Load config
      *  - load application config by name
@@ -75,10 +80,10 @@ interface Model{
      *  - "App"
      *  - ["App", "Routes"]
      *  - * for load all config in Config::CONFIG_PATH
-     * @return model
+     * @return ModelBase
      * 
      */
-    public function loadConfig(array|string $configs):Model;
+    public function loadConfig(array|string $configs):ModelBase;
 
     /** Get Config
      * 
@@ -92,8 +97,8 @@ interface Model{
 
     /** set Framwork Extra
      * - Set extra data for some framwork
-     * @return model
+     * @return ModelBase
      */
-    public function setFrameworkExtra():model;
+    public function setFrameworkExtra():ModelBase;
 
 }
