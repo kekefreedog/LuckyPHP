@@ -169,4 +169,14 @@ abstract class Controller{
 
     }
 
+    /** Get Model Result
+     * @return array
+     */
+    public function getModelResult():array{
+
+        # Return model result
+        return (array)$this->model->execute();
+
+    }
+
 }

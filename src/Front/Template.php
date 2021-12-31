@@ -110,6 +110,16 @@ class Template{
 				'count' => function ($array = []) {
 					return count($array);
 				},
+                "setAttributes" => function ($array = []) {
+                    $result = "";
+                    if(is_array($array))
+                        foreach ($array as $k => $v){
+                            $result .= " $k"; // Push key
+                            if(!empty($v))
+                                $result .= "=\"".(is_array($v)?implode(" ",$v):$v)."\"";
+                        }
+                    return $result;
+                }
 			],
 		];
 
@@ -134,7 +144,7 @@ class Template{
     public function addHtmlStart(){
 
         # Add head start
-        $this->result .=  '<html class="loading" lang="en" data-textdirection="ltr">';
+        $this->result .=  '<html{{#if _user_interface.framework.html.attributes}} {{{setAttributes _user_interface.framework.html.attributes}}}{{/if}}>';
 
         # Return this
         return $this;
@@ -350,7 +360,7 @@ class Template{
     public function addBodyStart(){
 
         # Add head end
-        $this->result .= '<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-dark-menu 2-columns" data-open="click" data-menu="vertical-dark-menu" data-col="2-columns">';
+        $this->result .= '<body{{#if _user_interface.framework.body.attributes}} {{{setAttributes _user_interface.framework.body.attributes}}}{{/if}}>';
 
         # Return this
         return $this;

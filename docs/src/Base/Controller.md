@@ -35,3 +35,12 @@ This class contains methods that extend controller of routes
     ]
 ]
 ```
+
+## Methods for Model
+
+### 1. public ***function*** **newModel**
+- Create new model
+
+### 2. public ***function*** **getModelResult**
+- Execute model
+- Return his value as array

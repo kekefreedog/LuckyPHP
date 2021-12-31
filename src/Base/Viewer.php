@@ -175,7 +175,7 @@ abstract class Viewer{
             throw new Exception("Template render failed. You must prepare your html template before render it.", 500);
 
         # Push render result in content
-        $this->content = ($this->render)();
+        $this->content = ($this->render)($this->controller->callback->getModelResult());
 
     }
 

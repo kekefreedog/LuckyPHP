@@ -76,4 +76,9 @@ interface Controller{
      */
     public function newModel():void;
 
+    /** Get Model Result
+     * @return array
+     */
+    public function getModelResult():array;
+
 }
