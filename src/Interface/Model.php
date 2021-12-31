@@ -42,9 +42,9 @@ interface Model{
      *  - 0 : Auto
      *  - 1 : true
      *  - 2 : false
-     * @return void
+     * @return model
      */
-    public function pushErrors(array $errors, int $flag = 0):void;
+    public function pushErrors(array $errors, int $flag = 0):Model;
 
     /** Get Errors
      * 
@@ -53,9 +53,9 @@ interface Model{
     public function getErrors():array;
 
     /** Reset Errors
-     * @return void
+     * @return model
      */
-    public function resetErrors():void;
+    public function resetErrors():Model;
 
     /**********************************************************************************
      * Config
@@ -65,9 +65,9 @@ interface Model{
      * @param array $config
      *  - Push custom config
      *  - Keys on the root should be string
-     * @return void
+     * @return model
      */
-    public function pushConfig(array $configs):void;
+    public function pushConfig(array $configs):Model;
 
     /** Load config
      *  - load application config by name
@@ -75,15 +75,25 @@ interface Model{
      *  - "App"
      *  - ["App", "Routes"]
      *  - * for load all config in Config::CONFIG_PATH
-     * @return void
+     * @return model
      * 
      */
-    public function loadConfig(array|string $configs):void;
+    public function loadConfig(array|string $configs):Model;
 
     /** Get Config
      * 
      * @return array
      */
     public function getConfig():array;
+
+    /**********************************************************************************
+     * _user_interface
+     */
+
+    /** set Framwork Extra
+     * - Set extra data for some framwork
+     * @return model
+     */
+    public function setFrameworkExtra():model;
 
 }

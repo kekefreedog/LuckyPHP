@@ -45,4 +45,7 @@ class Model{}                   # Class name
 ### 3. public ***function*** **getConfig**
 - Get all configs from data
 
+## Methods about **_user_interface**
+- Set framwork extra data
+
 

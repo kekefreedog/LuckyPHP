@@ -30,7 +30,7 @@ abstract class Console{
                 'console.debug("'.
                     (
                         is_array($message) ?
-                            json_encode($message) :
+                            addslashes(json_encode($message)) :
                                 $message
                     ).
                 '");'.
@@ -50,7 +50,7 @@ abstract class Console{
                 'console.info("'.
                     (
                         is_array($message) ?
-                            json_encode($message) :
+                            addslashes(json_encode($message)) :
                                 $message
                     ).
                 '");'.
@@ -70,7 +70,7 @@ abstract class Console{
                 'console.log("'.
                     (
                         is_array($message) ?
-                            json_encode($message) :
+                            addslashes(json_encode($message)) :
                                 $message
                     ).
                 '");'.
@@ -90,7 +90,7 @@ abstract class Console{
                 'console.error("'.
                     (
                         is_array($message) ?
-                            json_encode($message) :
+                            addslashes(json_encode($message)) :
                                 $message
                     ).
                 '");'.
@@ -110,7 +110,7 @@ abstract class Console{
                 'console.warn("'.
                     (
                         is_array($message) ?
-                            json_encode($message) :
+                            addslashes(json_encode($message)) :
                                 $message
                     ).
                 '");'.

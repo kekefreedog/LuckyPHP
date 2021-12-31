@@ -17,3 +17,8 @@ This class contains methods for process Json.
 
 ### 2. public ***function*** **check**
 - Check if given array is a Json
+
+### 3. public ***function*** **open**
+- Check and Open Json File
+- Return its content decode
+- Content decode can be an object of full array

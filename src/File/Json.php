@@ -58,4 +58,38 @@ class Json{
 		return (json_last_error() == JSON_ERROR_NONE);
 	}
 
+    /** Open Json File
+     * Open json file and return its content decodes
+     * @param string $filename
+     * @param bool $arrayFormat decode as array (else as object)
+     */
+    public static function open(string $filename = "", bool $arrayFormat = true):array|null{
+
+        # Check filename
+        if(!$filename)
+            return null;
+        
+        # Check if file exist
+        if(!file_exists($filename))
+
+            # Set exception
+            throw new Exception("Json file \"$filename\" doesn't exists.", 404);
+
+        # Get content of file
+        $content = file_get_contents($filename);
+
+        # Check if content is json
+        if(!Json::check($content))
+
+            # Set exception
+            throw new Exception("Content of \"$filename\" is not a valid Json.", 500);
+
+        # Decode content
+        $result = json_encode($content, $arrayFormat ? 1 : 0);
+
+        # Return result
+        return $result;
+        
+    }
+
 }

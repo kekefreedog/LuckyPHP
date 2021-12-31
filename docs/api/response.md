@@ -71,6 +71,28 @@
         }
     },
     "_user_interface": {
+        "framework" : {
+            "html": {
+                "attributes": {
+                    "class": "loading",
+                    "data-textdirection": "ltr"
+                }
+            },
+            "body": {
+                "attributes": {
+                    "class": [
+                        "vertical-layout",
+                        "page-header-light",
+                        "vertical-menu-collapsible",
+                        "preload-transitions",
+                        "2-columns"
+                    ],
+                    "data-open": "click",
+                    "data-menu": "vertical-dark-menu",
+                    "data-col": "2-columns"
+                }
+            }
+        },
         "action" : [
             {
                 "type": "update",

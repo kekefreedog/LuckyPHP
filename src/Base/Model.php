@@ -20,6 +20,7 @@ namespace  LuckyPHP\Base;
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Kit\StatusCodes;
 use LuckyPHP\Server\Config;
+use LuckyPHP\File\Json;
 
 /** Class page
  * 
@@ -32,6 +33,9 @@ class Model{
 
     # Data
     protected $data = [];
+
+    # Config
+    private $config = [];
 
     /**********************************************************************************
      * Data
@@ -63,7 +67,7 @@ class Model{
      *  - 2 : false
      * @return void
      */
-    public function pushErrors(array $errors, int $flag = 0):void{
+    public function pushErrors(array $errors, int $flag = 0):Model{
 
         # Check errors
         if(!is_array($errors))
@@ -105,6 +109,8 @@ class Model{
                     # Push error
                     $this->pushError($error, $statusCode);
 
+        # Return Model
+        return $this;
 
     }
     /** Push error
@@ -153,10 +159,13 @@ class Model{
     /** Reset Errors
      * @return void
      */
-    public function resetErrors():void{
+    public function resetErrors():Model{
 
         # Unset errors
         unset($this->data['errors']);
+
+        # Return Model
+        return $this;
 
     }
 
@@ -170,7 +179,7 @@ class Model{
      *  - Keys on the root should be string
      * @return void
      */
-    public function pushConfig(array $configs):void{
+    public function pushConfig(array $configs):Model{
 
         # Check keys are note int
         foreach($configs as $k => $v)
@@ -193,6 +202,9 @@ class Model{
                 # Push config
                 $this->data['_config'][$k] = $v;
 
+        # Return Model
+        return $this;
+
     }
 
     /** Load config
@@ -204,11 +216,11 @@ class Model{
      * @return void
      * 
      */
-    public function loadConfig(array|string $configs):void{
+    public function loadConfig(array|string $configs):Model{
 
         # Check configs
         if(empty($configs))
-            return;
+            return $this;
 
         # Declare result
         $results = [];
@@ -246,6 +258,9 @@ class Model{
 
                 # Push config
                 $this->data['_config'][$k] = $v;
+
+        # Return Model
+        return $this;
         
 
     }
@@ -258,6 +273,58 @@ class Model{
 
         # Return config
         return $this->data['_config'] ?? [];
+
+    }
+
+    /**********************************************************************************
+     * _user_interface
+     */
+
+    /** set Framwork Extra
+     * - Set extra data for some framwork
+     * @return model
+     */
+    public function setFrameworkExtra():model{
+        
+
+        # Load config app
+        if(!isset($this->config['app']))
+            $this->config = array_merge($this->config, Config::read("app"));
+
+        # Check if isset app css framework package
+        if(!isset($this->config['app']['css']['framework']['package']))
+            return $this;
+
+        # check if match with Kmaterialize
+        if($this->config['app']['css']['framework']['package'] == "Kmaterialize"){
+
+            # Theme to check
+            $themeToCheck = $this->config['app']['css']['framework']['theme'] ?? "";
+
+            # File to check
+            $fileTocheck = __ROOT_APP__."node_modules/Kmaterialize/dist/css/$themeToCheck/kmaterial.json";
+
+            # Check if theme set and folder associate exists
+            if(
+                $themeToCheck &&
+                file_exists($fileTocheck)
+            ){
+
+                # Open json file
+                $content = Json::open($fileTocheck);
+
+                # Check content to push
+                if(isset($content['template']) && !empty($content['template']))
+
+                    # Open the file and push it on data _user_interface > framework
+                    $this->data['_user_interface']['framework'] = $content['template'];
+
+            }
+
+        }
+
+        # Return Model
+        return $this;
 
     }
 
