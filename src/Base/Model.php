@@ -65,7 +65,7 @@ class Model{
      *  - 0 : Auto
      *  - 1 : true
      *  - 2 : false
-     * @return void
+     * @return Model
      */
     public function pushErrors(array $errors, int $flag = 0):Model{
 
