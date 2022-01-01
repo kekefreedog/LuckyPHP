@@ -17,9 +17,9 @@ namespace  LuckyPHP\Base;
 /** Dependance
  * 
  */
+use Symfony\Component\Finder\Finder;
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Kit\StatusCodes;
-use Symfony\Component\Finder;
 use LuckyPHP\Server\Config;
 use LuckyPHP\File\Json;
 
