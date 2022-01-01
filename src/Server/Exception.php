@@ -218,7 +218,7 @@ class Exception extends \Exception implements InterfaceException{
                     ->setTitle("Error $code")
                 ->addHeadEnd()
                 ->addBodyStart([
-                    'class' =>  "{{_user_interface.style.color.text}}}"
+                    'class' =>  "{{_user_interface.style.color.text}}"
                 ])
                     ->loadLayouts('error')
                 ->addBodyEnd()
