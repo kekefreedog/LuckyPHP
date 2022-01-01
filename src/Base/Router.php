@@ -147,8 +147,17 @@ class Router{
                 # Iteration des methods
                 foreach ($route['methods'] as $method) {
 
-                    # Check if call back exist
-                    $callbackName = $this->routeCallbackCheck($route['name']);
+                    try{
+
+                        # Check if call back exist
+                        $callbackName = $this->routeCallbackCheck($route['name']);
+
+                    }catch(Exception $e){
+
+                        # Mettre en place redirection
+                        $e->getHtml();
+            
+                    }
 
                     # Add Route in Router
                     $this->instance->addRoute(

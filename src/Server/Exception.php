@@ -232,6 +232,9 @@ class Exception extends \Exception implements InterfaceException{
         # Echo render
         echo $render($parmeters);
 
+        # Exit
+        exit();
+
     }
 
 }
