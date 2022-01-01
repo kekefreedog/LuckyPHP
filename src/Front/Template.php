@@ -120,6 +120,31 @@ class Template{
                                 $result .= "=\"".(is_array($v)?implode(" ",$v):$v)."\"";
                         }
                     return $result;
+                },
+                /** To Js
+                 * 
+                 * @source https://stackoverflow.com/questions/1500260/detect-urls-in-text-with-javascript
+                 * 
+                 * function urlify(text) {
+                 *   var urlRegex = /(https?:\/\/[^\s]+)/g;
+                 *   return text.replace(urlRegex, function(url) {
+                 *       return '<a href="' + url + '">' + url + '</a>';
+                 *   })
+                 *    // or alternatively
+                 *    // return text.replace(urlRegex, '<a href="$1">$1</a>')
+                 *    }
+                 * 
+                 */
+                "urlify" => function ($string = ''){
+                   $regex = "/(https?:\/\/[^\s]+)/g";
+                   return preg_replace_callback(
+                        $regex,
+                        function ($url){
+                            $url = $url[0];
+                            return "<a href=\"$url\" target=\"_blank\">$url</a>";
+                        },
+                        $string
+                   );
                 }
 			],
 		];
