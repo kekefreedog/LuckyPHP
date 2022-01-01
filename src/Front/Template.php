@@ -21,6 +21,7 @@ use Symfony\Component\Finder\Finder;
 use LuckyPHP\Server\Exception;
 use LightnCandy\LightnCandy;
 use LuckyPHP\Server\Config;
+use LuckyPHP\Code\Arrays;
 
 /** Class for generate Template
  * 
@@ -139,12 +140,21 @@ class Template{
     }
 
     /** Add Html
-     * 
+     * @param array $attributes Custom attributes to add on this tags
+     * - Noticed that attributes bypass _user_interface
      */
-    public function addHtmlStart(){
+    public function addHtmlStart(array $attributes = []){
+
+        # Convert attributes to string
+        $attributes = Arrays::to_string_attributes($attributes);
+
+        # Set attribute
+        $attribute = $attributes ? 
+            " ".$attributes : 
+                "{{#if _user_interface.framework.html.attributes}} {{{setAttributes _user_interface.framework.html.attributes}}}{{/if}}"; 
 
         # Add head start
-        $this->result .=  '<html{{#if _user_interface.framework.html.attributes}} {{{setAttributes _user_interface.framework.html.attributes}}}{{/if}}>';
+        $this->result .=  "<html$attribute>";
 
         # Return this
         return $this;
@@ -355,12 +365,21 @@ class Template{
     }
 
     /** Body Start
-     * 
+     * @param array $attributes Custom attributes to add on this tags
+     * - Noticed that attributes bypass _user_interface
      */
-    public function addBodyStart(){
+    public function addBodyStart(array $attributes = []){
+
+        # Convert attributes to string
+        $attributes = Arrays::to_string_attributes($attributes);
+
+        # Set attribute
+        $attribute = $attributes ? 
+            " ".$attributes : 
+                "{{#if _user_interface.framework.body.attributes}} {{{setAttributes _user_interface.framework.body.attributes}}}{{/if}}"; 
 
         # Add head end
-        $this->result .= '<body{{#if _user_interface.framework.body.attributes}} {{{setAttributes _user_interface.framework.body.attributes}}}{{/if}}>';
+        $this->result .= "<body$attribute>";
 
         # Return this
         return $this;

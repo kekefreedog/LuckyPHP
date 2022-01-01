@@ -35,3 +35,13 @@ stretch([
     ]
 ]
 ```
+
+### 4. public static ***function*** **to_string_attributes**
+- Convert array with attributes to string
+- Exemple :
+```php
+# Input
+$input = ["class"=>["red", "big"],"id"=>"user"];
+# Output
+$output = 'class="ref big" id="user"';
+```

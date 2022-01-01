@@ -97,4 +97,19 @@ class Arrays{
 	
 	}
 
+	/** Convert array with attributes to string
+	 * @param array $array
+	 * @return string
+	 */
+	public static function to_string_attributes($array = []):string {
+		$result = "";
+		if(is_array($array))
+			foreach ($array as $k => $v){
+				$result .= " $k"; // Push key
+				if(!empty($v))
+					$result .= "=\"".(is_array($v)?implode(" ",$v):$v)."\"";
+			}
+		return $result;
+	}
+
 }

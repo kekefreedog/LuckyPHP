@@ -19,6 +19,8 @@ namespace  LuckyPHP\Server;
  */
 use LuckyPHP\Interface\Exception as InterfaceException;
 use LuckyPHP\Kit\StatusCodes;
+use LuckyPHP\Front\Template;
+use LightnCandy\LightnCandy;
 use LuckyPHP\Front\Console;
 
 /** Class for error
@@ -167,6 +169,53 @@ class Exception extends \Exception implements InterfaceException{
                 3,
                 __ROOT_APP__."/logs/$source.log"
             );
+
+    }
+
+    /** Display Html Response
+     * 
+     */
+    public function getHtml(){
+
+        # Get code
+        $code = $this->getCode();
+
+        # Parameters
+        $parmeters = [
+            '_user_interface'   =>  [
+                'message'   =>  $this->getMessage()
+            ]
+        ];
+        # Add details
+        $parmeters['_user_interface'] = 
+            $parmeters['_user_interface'] +
+            ((StatusCodes::GET[$this->code] ?? StatusCodes::DEFAULT))
+        ;
+
+        # Prepare template
+        $template = New Template();
+        $content = $template
+            ->addDoctype()
+            ->addHtmlStart()
+                ->addHeadStart()
+                    ->addStylesheet()
+                    ->setTitle("Error $code")
+                ->addHeadEnd()
+                ->addBodyStart()
+                    ->loadLayouts('error')
+                ->addBodyEnd()
+            ->addHtmlEnd()
+            ->build()
+        ;
+
+        # Compile template
+        $compile = LightnCandy::compile($content, Template::lightnCandyInit());
+
+        # Prepare render
+        $render = LightnCandy::prepare($compile);
+
+        # Echo render
+        echo $render($parmeters);
 
     }
 
