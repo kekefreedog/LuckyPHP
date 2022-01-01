@@ -136,7 +136,7 @@ class Template{
                  * 
                  */
                 "urlify" => function ($string = ''){
-                   $regex = "/(https?:\/\/[^\s]+)/g";
+                   $regex = "/(https?:\/\/[^\s]+)/";
                    return preg_replace_callback(
                         $regex,
                         function ($url){
