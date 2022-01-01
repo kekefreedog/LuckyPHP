@@ -48,4 +48,11 @@ class Model{}                   # Class name
 ## Methods about **_user_interface**
 - Set framwork extra data
 
+### 1. public ***function*** **setFrameworkExtra**
+- Push custom data depending of the framework set on the config
+
+### 2. public ***function*** **pushDataInUserInterface**
+- Push custom array data in ***_user_interface***
+- Option allow to push data recursively
+
 

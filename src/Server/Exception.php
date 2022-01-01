@@ -192,6 +192,21 @@ class Exception extends \Exception implements InterfaceException{
             ((StatusCodes::GET[$this->code] ?? StatusCodes::DEFAULT))
         ;
 
+        /** Exemple of parameters
+         * 
+         * Array ( 
+         *    [_user_interface] => Array ( 
+         *        [message] => Please donwload Oauth json from https://console.cloud.google.com 
+         *        [code] => 401 
+         *        [title] => Unauthorized 
+         *        [style] => Array ( 
+         *            [color] => Array ( [text] => black [fill] => red ) 
+         *            [icon] => Array ( [class] => material-icons [text] => block ) 
+         *        ) 
+         *    ) 
+         * )
+         */
+
         # Prepare template
         $template = New Template();
         $content = $template

@@ -101,4 +101,11 @@ interface Model{
      */
     public function setFrameworkExtra():ModelBase;
 
+    /** Push data in _user_interface
+     * @param array $data Data to push in use interface
+     * @param bool $recursive Merge recursively ?
+     * @return ModelBase
+     */
+    public function pushDataInUserInterface(array $data = [], bool $recursive = false):ModelBase;
+
 }

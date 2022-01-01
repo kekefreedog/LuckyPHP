@@ -328,4 +328,24 @@ class Model{
 
     }
 
+    /** Push data in _user_interface
+     * @param array $data Data to push in use interface
+     * @param bool $recursive Merge recursively ?
+     * @return model
+     */
+    public function pushDataInUserInterface(array $data = [], bool $recursive = false):model{
+
+        # Chec if isset and not empty user interface
+        if(isset($this->data['_user_interface']) && !empty($this->data['_user_interface']))
+
+            # Check recursive
+            $this->data['_user_interface'] = $recursive ? 
+                array_merge_recursive($this->data['_user_interface'], $data) :
+                    array_merge($this->data['_user_interface'], $data);
+
+        # Return Model
+        return $this;
+
+    }
+
 }
