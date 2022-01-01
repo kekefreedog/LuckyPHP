@@ -108,4 +108,20 @@ interface Model{
      */
     public function pushDataInUserInterface(array $data = [], bool $recursive = false):ModelBase;
 
+    /**********************************************************************************
+     * file (data)
+     */
+    
+    /** Get File
+     * @param string $name Name of the file your are looking for
+     * @param string $path Path of the file
+     * @param array $ext Extensions of the file
+     * @param bool $recursive Determine if finder search in subfolder
+     * @return ModelBase Return first file it finds
+     *  - path
+     *  - header
+     *      - Content-Type : "text/plain"
+     */
+    public function getFile(string $name = "", string $path = "", array $ext = [], bool $recursive = true):ModelBase;
+
 }

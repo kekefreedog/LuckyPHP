@@ -103,7 +103,7 @@ abstract class Controller{
     private function parametersPrepare($array){
 
         # Set route
-        $this->request = $array;
+        $this->parameters = $array;
 
     }
 

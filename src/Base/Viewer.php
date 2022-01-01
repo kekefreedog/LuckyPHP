@@ -17,6 +17,7 @@ namespace  LuckyPHP\Base;
 /** Dependance
  * 
  */
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
 use LuckyPHP\Server\Exception;
 use LightnCandy\LightnCandy;
@@ -106,7 +107,7 @@ abstract class Viewer{
         if(!method_exists($this, $name))
 
             # Set exception
-            throw new Exception("No constructor associate to \"$type\"", 500);
+            throw new Exception("No viewer constructor associate to \"$type\"", 500);
 
         # Set constructor
         $this->constructor = $name;
@@ -179,6 +180,36 @@ abstract class Viewer{
 
     }
 
+    /** Data render
+     * 
+     */
+    private function constructorData(){
+
+        # Get result of modal
+        $file = $this->controller->callback->getModelResult();
+
+        # Check data response
+        if(
+            !$file['path'] ||
+            !file_exists($file['path'])
+        )
+            # Generate empty error result depending of content type
+            return;
+
+        # Prepare file response
+        $this->response = new BinaryFileResponse($file['path']);
+
+        # Check header
+        if($file['header'])
+
+            # Iteration header
+            foreach ($file['header'] as $name => $value)
+
+                # Set Content Type
+                $this->response->headers->set($name, $value);
+
+    }
+
     /** Json constructor
      * 
      */
@@ -213,8 +244,11 @@ abstract class Viewer{
      */
     public function setResponseContent(){
 
-        # Set content
-        $this->response->setContent($this->content);
+        # Check no data
+        if($this->getResponseType() != "data")
+
+            # Set content
+            $this->response->setContent($this->content);
 
     }
 

@@ -154,7 +154,7 @@ class Router{
 
                     }catch(Exception $e){
 
-                        # Mettre en place redirection
+                        # Message html
                         $e->getHtml();
             
                     }

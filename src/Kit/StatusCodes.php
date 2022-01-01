@@ -48,7 +48,22 @@ class StatusCodes{
                     ]
                 ]
             ],
-
+        
+            # Request not find
+            404 =>  [
+                "code"  =>  404,
+                "title" =>  "Not Found",
+                "style" =>  [
+                    "color" =>  [
+                        "text"  =>  "black",
+                        "fill"  =>  "orange"
+                    ],
+                    "icon"  =>  [
+                        "class" =>  "material-icons",
+                        "text"  =>  "power"
+                    ]
+                ]
+            ],
 
         # 500
 

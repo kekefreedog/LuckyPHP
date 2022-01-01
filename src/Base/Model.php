@@ -19,6 +19,7 @@ namespace  LuckyPHP\Base;
  */
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Kit\StatusCodes;
+use Symfony\Component\Finder;
 use LuckyPHP\Server\Config;
 use LuckyPHP\File\Json;
 
@@ -342,6 +343,100 @@ class Model{
             $this->data['_user_interface'] = $recursive ? 
                 array_merge_recursive($this->data['_user_interface'], $data) :
                     array_merge($this->data['_user_interface'], $data);
+
+        # Return Model
+        return $this;
+
+    }
+
+    /**********************************************************************************
+     * file (data)
+     */
+
+    /** Get File
+     * @param string $name Name of the file your are looking for
+     * @param string $path Path of the file
+     * @param array $ext Extensions of the file
+     * @param bool $recursive Determine if finder search in subfolder
+     * @return Model Return first file it finds
+     *  - path
+     *  - header
+     *      - Content-Type : "text/plain"
+     */
+    public function getFile(string $name = "", string $path = "", array $ext = [], bool $recursive = true):Model{
+
+        # Check $name
+        if(!$name)
+
+            # Set exception
+            throw new Exception("If you want get file for data response, you have to indicate its name !", 500);
+
+        # Declare filename
+        $filename = [];
+
+        # Declare result
+        $result = [
+            "path"  =>  null,
+            "header"=>  [
+                "Content-Type"  =>  null
+            ]
+        ];
+
+        # New finder
+        $finder = new Finder();
+
+        # Check $ext
+        if(empty($ext))
+
+            # Set filename
+            $filename = $name;
+
+        else
+
+            # Iteration ext
+            foreach ($ext as $extension)
+                
+                $filename[] = "$name.$extension";
+
+        # Set up finder
+        $finder->files()->name($filename);
+
+        # Check path
+        if($path){
+
+            $finder->in($path);
+
+            # Check recursive
+            if(!$recursive)
+
+                # Set no depth
+                $finder->depth('== 0');
+
+        }
+
+        # Check if finder are result
+        if(!$finder->hasResults())
+
+            # Set exception
+            throw new Exception("No file finds for the current request... Sorry", 404);
+
+        # Get first file find
+        foreach ($finder as $file){
+
+            # Set file
+            $file = $file;
+
+            # Break
+            break;
+
+        }
+
+        # Set response
+        $result['path'] = $file->getRealPath();
+        $result['header']['Content-Type'] = mime_content_type($result['path']);
+
+        # Set data
+        $this->data = $result;
 
         # Return Model
         return $this;
