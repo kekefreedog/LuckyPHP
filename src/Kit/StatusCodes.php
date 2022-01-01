@@ -73,8 +73,8 @@ class StatusCodes{
                 "title" =>  "Internal Server Error",
                 "style" =>  [
                     "color" =>  [
-                        "text"  =>  "white",
-                        "fill"  =>  "black"
+                        "text"  =>  "black",
+                        "fill"  =>  "orange"
                     ],
                     "icon"  =>  [
                         "class" =>  "material-icons",
