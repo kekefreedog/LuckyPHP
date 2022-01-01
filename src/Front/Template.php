@@ -327,7 +327,7 @@ class Template{
             $filename = $file->getFilename();
 
             # Push file name in result
-            $result .= "<link rel=\"stylesheet\" href=\"css/$filename\">";
+            $result .= "<link rel=\"stylesheet\" href=\"/css/$filename\">";
 
         }
 
@@ -505,7 +505,7 @@ class Template{
             $filename = $file->getFilename();
 
             # Push file name in result
-            $result .= "<script type=\"application/javascript\" src=\"js/$filename\"></script>";
+            $result .= "<script type=\"application/javascript\" src=\"/js/$filename\"></script>";
 
         }
 
