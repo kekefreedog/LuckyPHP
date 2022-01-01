@@ -173,9 +173,10 @@ class Exception extends \Exception implements InterfaceException{
     }
 
     /** Display Html Response
-     * 
+     * @param bool $exit Exit php execution or not
+     * @return void
      */
-    public function getHtml(){
+    public function getHtml(bool $exit = true):void {
 
         # Get code
         $code = $this->getCode();
@@ -232,8 +233,11 @@ class Exception extends \Exception implements InterfaceException{
         # Echo render
         echo $render($parmeters);
 
-        # Exit
-        exit();
+        # Check exit
+        if($exit)
+
+            # Exit
+            exit();
 
     }
 

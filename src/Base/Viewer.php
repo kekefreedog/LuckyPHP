@@ -60,7 +60,7 @@ abstract class Viewer{
         }catch(Exception $e){
 
             # Mettre en place redirection
-            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+            $e->getHtml();
 
         }
 

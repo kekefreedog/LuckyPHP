@@ -45,4 +45,10 @@ interface Exception{
     public function __toString();
     public function __construct($message = null, $code = 0);
 
+    /** Methods add
+     * 
+     */
+    // Display Html Response
+    public function getHtml(bool $exit = true):void;
+
 }
