@@ -161,7 +161,18 @@ class Exception extends \Exception implements InterfaceException{
         $source = $this->getSource();
 
         # Check source
-        if($source !== null)
+        if($source !== null){
+
+            # Check log file exists
+            if(!file_exists(__ROOT_APP__."/logs/$source.log")){
+
+                # Create log folder
+                mkdir(__ROOT_APP__."/logs/", 0777, true);
+
+                # Create file
+                file_put_contents(__ROOT_APP__."/logs/$source.log", "");
+
+            }
 
             # Generate log
             error_log(
@@ -169,6 +180,8 @@ class Exception extends \Exception implements InterfaceException{
                 3,
                 __ROOT_APP__."/logs/$source.log"
             );
+
+        }
 
     }
 
