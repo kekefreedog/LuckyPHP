@@ -182,6 +182,9 @@ abstract class Controller{
     /**********************************************************************************
      * Layouts (html constructor)
      */
+
+    # Parameters for layouts
+    private $layouts = [];
     
     /** Set Layouts to load
      * 
