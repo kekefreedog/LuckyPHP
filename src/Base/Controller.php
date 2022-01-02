@@ -179,4 +179,38 @@ abstract class Controller{
 
     }
 
+    /**********************************************************************************
+     * Layouts (html constructor)
+     */
+    
+    /** Set Layouts to load
+     * 
+     */
+    public function setLayouts(string|array $input = [], bool $merge = true):void{
+
+        # Check input
+        if(empty($input))
+            return;
+
+        # Convert input to array if not
+        if(!is_array($input))
+            $input = [$input];
+
+        # Set layouts
+        $this->layouts = $merge ?
+            $this->layouts + $input :
+                $input;
+
+    }
+
+    /** Get Layouts to load
+     * @return array
+     */
+    public function getLayouts():array{
+
+        # Return model result
+        return (array)$this->layouts ?? [];
+
+    }
+
 }

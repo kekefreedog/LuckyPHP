@@ -64,6 +64,22 @@ class StatusCodes{
                     ]
                 ]
             ],
+        
+            # Conflict
+            409 =>  [
+                "code"  =>  409,
+                "title" =>  "Not Found",
+                "style" =>  [
+                    "color" =>  [
+                        "text"  =>  "purple",
+                        "fill"  =>  "white"
+                    ],
+                    "icon"  =>  [
+                        "class" =>  "material-icons",
+                        "text"  =>  "sports_mma"
+                    ]
+                ]
+            ],
 
         # 500
 

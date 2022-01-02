@@ -81,4 +81,20 @@ interface Controller{
      */
     public function getModelResult():array;
 
+    /**********************************************************************************
+     * Layouts (html constructor)
+     */
+
+    /** Set Layouts
+     * @param string|array $input templates layouts to load
+     * @param bool $merge Merge or replace
+     * @return void
+     */
+    public function setLayouts(string|array $input = [], bool $merge = true):void;
+
+    /** Get Layouts
+     * @return array Return values in layouts
+     */
+    public function getLayouts():array;
+
 }
