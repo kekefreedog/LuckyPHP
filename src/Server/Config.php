@@ -17,6 +17,8 @@ namespace  LuckyPHP\Server;
 /** Dependance
  * 
  */
+use LuckyPHP\Http\Header;
+use LuckyPHP\Code\Strings;
 use LuckyPHP\Server\Exception;
 use Symfony\Component\Yaml\Yaml;
 
@@ -143,11 +145,15 @@ class Config{
             # Get config routes
             $rootes = Config::read("routes");
 
+            # Get current route
+            $currentRoute = strtok($_SERVER["REQUEST_URI"], '?');
+
             # Set context
             $ctx = [
                 # Root
                 "route"  =>  [
-                    "current"   =>  strtok($_SERVER["REQUEST_URI"], '?')
+                    "current"   =>  $currentRoute,
+                    "parents"   =>  Strings::decomposeRoute($currentRoute)
                 ]
             ];
 

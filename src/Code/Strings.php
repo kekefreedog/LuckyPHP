@@ -127,6 +127,40 @@ class Strings{
 		return filter_var($bool, FILTER_VALIDATE_BOOL) ? true : false;
 
 	}
-	
+
+	/** Decompose Route
+	 * "/toto/titi/tata" => ["/toto/", "/toto/titi/",  ]
+	 * 
+	 */
+	public static function decomposeRoute(string $route = "", string $delimiter = "/"):array{
+
+		# Check string
+		if(!$route || !$delimiter)
+			return [];
+
+		# Explode string
+		$explode = explode($delimiter, trim($route, $delimiter));
+
+		# Declare result
+		$result = [];
+
+		# Remove last value in array
+		array_pop($explode);
+
+		# Boucle
+		while(!empty($explode)):
+
+			# Push value in result
+			$result[] = $delimiter.implode($delimiter, $explode).$delimiter;
+
+			# Remove last value in array
+			array_pop($explode);
+
+		endwhile;
+
+		# Return result 
+		return $result;
+
+	}
 
 }

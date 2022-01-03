@@ -34,3 +34,17 @@ This class contains methods for process strings
 ### 6. public static ***function*** **process_bool**
 - Check if value given is boolean
 - If boolean type true return true else return false
+
+### 7. public static ***function*** **decomposeRoute**
+- Decompose router in array
+- Exemple :
+```php
+# Input
+$input = "/toto/titi/tata/tonton/";
+# Output
+$output = [
+    "/toto/titi/tata/",
+    "/toto/titi/",
+    "/toto/",
+];
+```
