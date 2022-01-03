@@ -120,6 +120,41 @@ class Config{
 
     }
 
+    /** Define context
+     * @param array $data Data to push in context
+     * @param bool $merge Merge or replace current data in context
+     * @param void
+     */
+    public static function defineContext(array $data = [], bool $merge = true):void {
+
+        # Get current context or define it
+        $ctx = constant(__CONTEXT__) ? __CONTEXT__ : [];
+
+        # Check data
+        if(!empty($data)){
+
+            # Set ctx
+            $ctx = $merge ?
+                array_merge($ctx, $data) :
+                    $data;
+
+        }else{
+
+            # Set context
+            $ctx = [
+                # Root
+                "root"  =>  [
+                    "pattern"   =>  strtok($_SERVER["REQUEST_URI"], '?')
+                ]
+            ];
+
+        }
+
+        # Set globale context
+        define(__CONTEXT__, $ctx);
+
+    }
+
     /** Default file config
      * 
      */

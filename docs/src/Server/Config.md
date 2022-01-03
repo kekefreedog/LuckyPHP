@@ -38,6 +38,9 @@ __ROOT_WWW__
 __ROOT_LUCKYPHP__
 ```
 
+### 3. public static ***function*** **defineContext**
+- Set context data and push them in ``__CONTEXT__`` global variablee
+
 ## Constants
 
 ### 1. public ***const*** **CONFIG_PATH**

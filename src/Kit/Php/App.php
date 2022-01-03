@@ -59,6 +59,12 @@ class App extends Kernel{
          */
         $this->configSet();
 
+        /** Set context
+         * - Set context of the current request in __CONTEXT__
+         * 
+         */
+        $this->contextSet();
+
         /** Read the application kernel
          * (search cache or generate it)
          *  - Execute the construct function in parent

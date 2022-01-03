@@ -107,8 +107,10 @@
 
         },
     },
-    "_info": {
-        
+    "_context": {
+        "root": {
+            "pattern": "/page/[i:toto]/"
+        }
     }
 }
 ```

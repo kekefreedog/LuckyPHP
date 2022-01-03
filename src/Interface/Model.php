@@ -92,6 +92,15 @@ interface Model{
     public function getConfig():array;
 
     /**********************************************************************************
+     * _context
+     */
+
+    /** Push info
+     * @return ModelBase
+     */
+    public function pushContext():ModelBase;
+
+    /**********************************************************************************
      * _user_interface
      */
 

@@ -278,6 +278,20 @@ class Model{
     }
 
     /**********************************************************************************
+     * _context
+     */
+
+    /** Push info
+     * @return model
+     */
+    public function pushContext():model{
+
+        # Return Model
+        return $this;
+
+    }
+
+    /**********************************************************************************
      * _user_interface
      */
 
