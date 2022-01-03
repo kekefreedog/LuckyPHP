@@ -286,6 +286,14 @@ class Model{
      */
     public function pushContext():model{
 
+        # Set result
+        $result = defined("__CONTEXT__") ? 
+            __CONTEXT__ :
+                [];
+
+        # Push result in global data
+        $this->data['_context'] = $result;
+
         # Return Model
         return $this;
 

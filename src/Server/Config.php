@@ -128,7 +128,7 @@ class Config{
     public static function defineContext(array $data = [], bool $merge = true):void {
 
         # Get current context or define it
-        $ctx = constant(__CONTEXT__) ? __CONTEXT__ : [];
+        $ctx = defined("__CONTEXT__") ? __CONTEXT__ : [];
 
         # Check data
         if(!empty($data)){
@@ -140,18 +140,57 @@ class Config{
 
         }else{
 
+            # Get config routes
+            $rootes = Config::read("routes");
+
             # Set context
             $ctx = [
                 # Root
-                "root"  =>  [
-                    "pattern"   =>  strtok($_SERVER["REQUEST_URI"], '?')
+                "route"  =>  [
+                    "current"   =>  strtok($_SERVER["REQUEST_URI"], '?')
                 ]
             ];
+
+            # Set current pattern
+            $current = ($ctx["route"]["current"] == "/") ?
+                [$ctx["route"]["current"], "/index/"] :
+                    [$ctx["route"]["current"]];
+
+            # Check if isset routes routes
+            if(
+                isset($rootes['routes']) &&
+                !empty($rootes['routes'])
+            )
+
+                # Iteration des routes
+                foreach ($rootes['routes'] as $key => $route)
+
+                    # Check pattern
+                    if(
+                        isset($route['patterns']) &&
+                        (
+                            in_array($current[0], $route['patterns']) ||
+                            in_array($current[1] ?? null, $route['patterns'])
+                        )
+                    )
+                            # Merge route info in ctx
+                            $ctx['route'] = array_merge(
+                                $ctx['route'], 
+                                $route, 
+                                [
+                                    "Content-Type" => (
+                                        isset($route['response']) &&
+                                        !empty($route['response'])
+                                    ) ? 
+                                        Header::getContentType($route['response']) :
+                                            null
+                                ]
+                            );
 
         }
 
         # Set globale context
-        define(__CONTEXT__, $ctx);
+        define("__CONTEXT__", $ctx);
 
     }
 
