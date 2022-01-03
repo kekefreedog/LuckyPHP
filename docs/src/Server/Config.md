@@ -39,7 +39,23 @@ __ROOT_LUCKYPHP__
 ```
 
 ### 3. public static ***function*** **defineContext**
-- Set context data and push them in ``__CONTEXT__`` global variablee
+- Set context data and push them in ``__CONTEXT__`` global variable
+```php
+__CONTEXTE__ = [
+    "route" =>  [
+        "current"       =   "/",
+        "name"          =>  "Home",
+        "patterns"      =>  [
+            "/index/"
+        ],
+        "methods"       =>  [
+            "get"
+        ],
+        "response"      =>  "html",
+        "Content-Type"  =>  "text\/html"
+    ]
+];
+```
 
 ## Constants
 

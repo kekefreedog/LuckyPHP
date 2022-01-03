@@ -107,9 +107,18 @@
 
         },
     },
-    "_context": {
-        "root": {
-            "pattern": "/page/[i:toto]/"
+    "_context":{
+        "route":{
+            "current": "/",
+            "name": "Home",
+            "patterns" :[
+                "/index/"
+            ],
+            "methods":[
+                "get"
+            ],
+            "response": "html",
+            "Content-Type": "text\/html"
         }
     }
 }

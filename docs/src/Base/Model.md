@@ -45,6 +45,11 @@ class Model{}                   # Class name
 ### 3. public ***function*** **getConfig**
 - Get all configs from data
 
+## Methods about **_context**
+
+### 1. public ***function*** **pushContext**
+- Push context in data
+
 ## Methods about **_user_interface**
 - Set framwork extra data
 
@@ -54,5 +59,3 @@ class Model{}                   # Class name
 ### 2. public ***function*** **pushDataInUserInterface**
 - Push custom array data in ***_user_interface***
 - Option allow to push data recursively
-
-
