@@ -350,7 +350,7 @@ class Template{
         $result = "<title>";
 
         # Push title
-        $result = $title;
+        $result .= $title;
 
         # Check $dispalyAppName
         if($dispalyAppName){
@@ -360,13 +360,12 @@ class Template{
 
             # Check appname and push it
             if($appName)
-                $result .= ($title ? " // " : "").$appName;
-
+                $result .= ($title ? " // " : "").ucwords(str_replace(["_","-"], " ", $appName));
 
         }
 
         # Set end of tag
-        $result = "</title>";
+        $result .= "</title>";
 
         # Push result in global result
         $this->result .= $result;
