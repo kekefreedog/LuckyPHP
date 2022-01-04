@@ -500,7 +500,7 @@ class Template{
         /* Global js */
 
         # Search all css at the root of www/css
-        $this->finder->files()->name("$name.*.js")->in(__ROOT_WWW__.'js/')->depth('== 0');
+        $this->finder->files()->name("$name.js")->in(__ROOT_WWW__.'js/')->depth('== 0');
 
         foreach ($this->finder as $file){
 
