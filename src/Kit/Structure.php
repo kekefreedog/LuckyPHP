@@ -98,10 +98,17 @@ class Structure{
                                         ],
                                     ]
                                 ],
+                                'module'    =>  []
                             ],
                             'files'     =>  [
-                                'app.js'         =>  [
+                                'app.js'    =>  [
                                     'source'    =>  'src/Kit/Js/app.js',
+                                ],
+                                'css.js'    =>  [
+                                    'source'    =>  'src/Kit/Js/css.js',
+                                ],
+                                'bundle.js'    =>  [
+                                    'source'    =>  'src/Kit/Js/bundle.js',
                                 ],
                             ]
                         ],

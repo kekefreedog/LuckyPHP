@@ -1,4 +1,3 @@
-"use strict";
 /*******************************************************
  * Copyright (C) 2019-2021 Kévin Zarshenas
  * kevin.zarshenas@gmail.com
@@ -9,25 +8,9 @@
  * permission of Kévin Zarshenas @kekefreedog
  *******************************************************/
 
-/** Dependances
- * 
- */
+/* Import CSS */
+import './style/framework';
+import './style/style';
 
-/** Page functions
- * 
- */
-export class App{
-
-    /** Constructor
-     * 
-     */
-    constructor(){
-
-        /** Set modules of the app
-         *  
-         */
-        console.log('Hello');
-
-    }
-
-}
+/* Icons */
+import './../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
