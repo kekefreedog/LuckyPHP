@@ -133,4 +133,10 @@ interface Model{
      */
     public function getFile(string $name = "", string $path = "", array $ext = [], bool $recursive = true):ModelBase;
 
+    /** Push file content
+     * @param string $path Path of the file
+     * @param array $header custom data to push in header
+     */
+    function pushFile(string $path = "", array $header = []):Model;
+
 }

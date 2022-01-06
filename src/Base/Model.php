@@ -465,4 +465,41 @@ class Model{
 
     }
 
+    /** Push file content
+     * @param string $path Path of the file
+     * @param array $header custom data to push in header
+     */
+    function pushFile(string $path = "", array $header = []):Model{
+
+        # check file exist
+        if(!$path || !file_exists($path))
+
+            # New error
+            throw new Exception("No file named \"".end(explode("/", $path))."\" found", 404);
+
+        # Declare result
+        $result = [
+            "path"  =>  null,
+            "header"=>  [
+                "Content-Type"  =>  null
+            ]
+        ];
+
+        # Set response
+        $result['path'] = $path;
+        $result['header']['Content-Type'] = mime_content_type($path);
+
+        # Push array header in result
+        if(count($header))
+
+            $result['header'] = $result['header'] + $header;
+
+        # Set data
+        $this->data = $result;
+
+        # Return Model
+        return $this;
+
+    }
+
 }
