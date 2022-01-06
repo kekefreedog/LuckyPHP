@@ -507,8 +507,11 @@ class Template{
             # Get file name
             $filename = $file->getFilename();
 
+            # Random (for avoid cache)
+            $random = uniqid();
+
             # Push file name in result
-            $result .= "<script type=\"application/javascript\" src=\"/js/$filename\"></script>";
+            $result .= "<script type=\"application/javascript\" src=\"/js/$filename?$random\"></script>";
 
         }
 
