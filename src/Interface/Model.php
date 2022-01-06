@@ -136,7 +136,8 @@ interface Model{
     /** Push file content
      * @param string $path Path of the file
      * @param array $header custom data to push in header
+     * @return ModelBase
      */
-    function pushFile(string $path = "", array $header = []):Model;
+    function pushFile(string $path = "", array $header = []):ModelBase;
 
 }
