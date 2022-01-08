@@ -1,7 +1,7 @@
 # ***Api*** **Schema of response**
 
 ## Description
-- Full details and good practive on how parameters available in api response.
+- Full details and good practice on how parameters available in api response.
 
 ## Response Json
 ```json

@@ -173,13 +173,16 @@ class Template{
         # Convert attributes to string
         $attributes = Arrays::to_string_attributes($attributes);
 
+        # Page name
+        $pageName = "{{#if _context.route.name}} data-context-route-name={{_context.route.name}}{{/if}}";
+
         # Set attribute
         $attribute = $attributes ? 
             " ".$attributes : 
                 "{{#if _user_interface.framework.html.attributes}} {{{setAttributes _user_interface.framework.html.attributes}}}{{/if}}"; 
 
         # Add head start
-        $this->result .=  "<html$attribute>";
+        $this->result .=  "<html$pageName$attribute>";
 
         # Return this
         return $this;
@@ -507,11 +510,8 @@ class Template{
             # Get file name
             $filename = $file->getFilename();
 
-            # Random (for avoid cache)
-            $random = uniqid();
-
             # Push file name in result
-            $result .= "<script type=\"application/javascript\" src=\"/js/$filename?$random\"></script>";
+            $result .= "<script type=\"application/javascript\" src=\"/js/$filename\"></script>";
 
         }
 
