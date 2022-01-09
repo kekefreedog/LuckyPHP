@@ -469,13 +469,18 @@ class Template{
         # Search all file
         $this->finder->files()->name($names)->in($root);
 
-        # Iteration des fichiers trouvés
-        foreach ($this->finder as $file){
+        # Iteration des layout
+        foreach($layouts as $layout)
 
-            # Push content in result
-            $result .= $file->getContents();
+            # Iteration des fichiers trouvés
+            foreach ($this->finder as $file)
 
-        }
+                # Check in current file is current layout
+                if($file->getFilenameWithoutExtension() == $layout)
+
+                    # Push content in result
+                    $result .= $file->getContents();
+
 
         # Set global result
         $this->result .= $result;
