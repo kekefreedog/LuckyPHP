@@ -257,7 +257,7 @@ abstract class Viewer{
     /** Set response content
      * 
      */
-    public function setResponseCookies(){
+    public function setResponseCookies():void{
 
         # Check response type and if cookie not null
         if(in_array($this->getResponseType(), ["json"]) && !empty($this->cookie))
