@@ -220,7 +220,7 @@ abstract class Viewer{
         $this->content = $content;
 
         # Check cookie
-        if(!empty($cookies = $this->controller->getCookie('*')))
+        if(!empty($cookies = $this->controller->callback->getCookie('*')))
             $this->cookie = $cookies;
 
     }
