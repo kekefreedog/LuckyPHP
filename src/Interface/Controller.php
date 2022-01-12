@@ -109,9 +109,9 @@ interface Controller{
 
     /** Get Cookie
      * @param string|array $input for cookie
-     * @return void
+     * @return array
      */
-    public function getCookie(string|array $input = []):void;
+    public function getCookie(string|array $input = []):array;
 
     /** Remove Cookie
      * @param string|array $input for cookie
