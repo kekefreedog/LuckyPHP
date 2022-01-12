@@ -33,6 +33,7 @@ abstract class Viewer{
     /** Parameters
      * 
      */
+    public $cookie = null;
     public $render = null;
     public $content = null;
     public $response = null;
@@ -218,6 +219,10 @@ abstract class Viewer{
         # Set global content
         $this->content = $content;
 
+        # Check cookie
+        if(!empty($cookies = $this->controller->getCookie('*')))
+            $this->cookie = $cookies;
+
     }
 
     ##########################################################################
@@ -246,6 +251,22 @@ abstract class Viewer{
 
             # Set content
             $this->response->setContent($this->content);
+
+    }
+
+    /** Set response content
+     * 
+     */
+    public function setResponseCookies(){
+
+        # Check response type and if cookie not null
+        if(in_array($this->getResponseType(), ["json"]) && !empty($this->cookie))
+
+            # Iteration cookies
+            foreach($this->cookie as $cookie)
+
+                # Push un response
+                $this->response->setCookie($cookie);
 
     }
 

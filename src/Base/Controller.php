@@ -17,6 +17,7 @@ namespace  LuckyPHP\Base;
 /** Dependance
  * 
  */
+use Symfony\Component\HttpFoundation\Cookie;
 use LuckyPHP\Http\Header;
 use App\Model;
 
@@ -213,6 +214,125 @@ abstract class Controller{
 
         # Return model result
         return (array)$this->layouts ?? [];
+
+    }
+
+    /**********************************************************************************
+     * Cookie
+     */
+
+    # Cookie
+    private $cookie = [];
+
+    /** Set Cookie
+     * @param string|array $input for cookie
+     * @return void
+     */
+    public function setCookie(string|array $input = []):void{
+
+        # Check name and value is set
+        if(
+            !isset($input['name']) ||
+            !$input['name']
+        )
+            return;
+
+        # Create cookie
+        $cookie = Cookie::create($input['name']);
+
+        # Set value if set
+        if(isset($input['value']))
+            $cookie->withValue($input['value']);
+
+        # Set domain
+        if(isset($input['domain']))
+            $cookie->withValuewithDomain($input['domain']);
+
+        # Set secure
+        if(isset($input['secure']))
+            $cookie->withSecure($input['secure']);
+
+        # Push coolie to globam cookie
+        $this->cookie[] = $cookie;
+
+
+    }
+
+    /** Get Cookie
+     * @param string|array $input for cookie
+     * @return array
+     */
+    public function getCookie(string|array $input = []):array{
+
+        # Set result
+        $result = [];
+
+        # Check cookie
+        if($this->cookie === null)
+            return $result;
+
+        # Check if input is *
+        if($input == "*" || in_array("*", $input))
+            return $this->cookie;
+
+        # Convert input string to array
+        if(is_string($input))
+            $input = [$input];
+
+        # Iteration des cookie
+        foreach($this->cookie as $cookie)
+
+            # Iteration input
+            foreach($input as $current => $needle)
+
+                # Check if name match
+                if($cookie->getName() == $needle){
+
+                    # Push cookie in result
+                    $result[] = $cookie; 
+
+                    # Remove current needle
+                    unset($input[$current]);
+
+                }
+
+    }
+
+    /** Remove Cookie
+     * @param string|array $input for cookie
+     * @return void
+     */
+    public function removeCookie(string|array $input = []):void{
+
+        # Check cookie
+        if($this->cookie === null || empty($input))
+            return;
+
+        # Convert input string to array
+        if(is_string($input))
+            $input = [$input];
+
+        # Iteration des cookie
+        foreach($this->cookie as $key => $cookie)
+
+            # Iteration input
+            foreach($input as $current => $needle)
+
+                # Check if name match
+                if($cookie->getName() == $needle)
+
+                    # Remove cookie and needle
+                    unset($this->cookie[$key], $input[$current]);
+
+    }
+
+    /** Clear cookie
+     * @return void
+     */
+    public function clearCookie():void{
+
+        # Set cookie null
+        $this->cookie = null;
 
     }
 

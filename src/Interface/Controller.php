@@ -97,4 +97,31 @@ interface Controller{
      */
     public function getLayouts():array;
 
+    /**********************************************************************************
+     * Cookie
+     */
+
+    /** Set Cookie
+     * @param string|array $input for cookie
+     * @return void
+     */
+    public function setCookie(string|array $input = []):void;
+
+    /** Get Cookie
+     * @param string|array $input for cookie
+     * @return void
+     */
+    public function getCookie(string|array $input = []):void;
+
+    /** Remove Cookie
+     * @param string|array $input for cookie
+     * @return void
+     */
+    public function removeCookie(string|array $input = []):void;
+
+    /** Clear cookie
+     * @return void
+     */
+    public function clearCookie():void;
+
 }

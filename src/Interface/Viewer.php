@@ -42,6 +42,11 @@ interface Viewer{
      */
     public function setResponseContent();
 
+    /** Set response content
+     * @return void
+     */
+    public function setResponseCookies():void;
+
     /** Response Execute
      * 
      */
