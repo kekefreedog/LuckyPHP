@@ -20,6 +20,7 @@ namespace  LuckyPHP\Base;
 use Symfony\Component\HttpFoundation\Cookie;
 use LuckyPHP\Http\Header;
 use App\Model;
+use JetBrains\PhpStorm\Internal\ReturnTypeContract;
 
 /** Class Controller
  * 
@@ -218,6 +219,68 @@ abstract class Controller{
     }
 
     /**********************************************************************************
+     * Data
+     */
+
+    # Data
+    private $data = [];
+
+    /** Set Data
+     * @param any $data
+     * @return void
+     */
+    public function setData($data):void{
+
+        # Set data
+        $this->data = $data;
+
+    }
+
+    /** Push Data
+     * @param any $data
+     * @param bool $recursive
+     * @return void
+     */
+    public function pushData($data, bool $recursive = false):void{
+
+        # Check recursive
+        $recursive ?
+
+            # Merge with recursive
+            $this->data = array_merge_recursive(
+                $this->data,
+                $data
+            ) : 
+                
+                # Merge
+                $this->data = array_merge(
+                    $this->data,
+                    $data
+                );
+
+    }
+
+    /** Push Data
+     * @param string $name
+     * @return array|bool|null|string
+     */
+    public function getData($name = "*"){
+
+        # Check name
+        if(!$name)
+            return null;
+
+        # Check if name is *
+        if($name == "*")
+            return $this->data;
+
+        # Else check if key match to name
+        return $this->data[$name] ?? null;
+        
+
+    }
+
+    /**********************************************************************************
      * Cookie
      */
 
@@ -246,7 +309,7 @@ abstract class Controller{
 
         # Set domain
         if(isset($input['domain']))
-            $cookie->withValuewithDomain($input['domain']);
+            $cookie->withDomain($input['domain']);
 
         # Set secure
         if(isset($input['secure']))

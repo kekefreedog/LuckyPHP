@@ -214,7 +214,7 @@ abstract class Viewer{
     private function constructorJson(){
 
         # Set content
-        $content = json_encode(['message'=>'hello']);
+        $content = json_encode($this->controller->callback->getData());
 
         # Set global content
         $this->content = $content;
@@ -266,7 +266,7 @@ abstract class Viewer{
             foreach($this->cookie as $cookie)
 
                 # Push un response
-                $this->response->setCookie($cookie);
+                $this->response->headers->setCookie($cookie);
 
     }
 

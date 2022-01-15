@@ -98,6 +98,29 @@ interface Controller{
     public function getLayouts():array;
 
     /**********************************************************************************
+     * Data (for json, yaml... response)
+     */
+
+    /** Set Data
+     * @param any $data
+     * @return void
+     */
+    public function setData($data):void;
+
+    /** Push Data
+     * @param any $data
+     * @param bool $recursive
+     * @return void
+     */
+    public function pushData($data, bool $recursive = false):void;
+
+    /** Get Data
+     * @return array|bool|null|string
+     * @param string $name
+     */
+    public function getData($name = "");
+
+    /**********************************************************************************
      * Cookie
      */
 
