@@ -17,6 +17,8 @@ namespace  LuckyPHP\Base;
 /** Dependance
  * 
  */
+
+use LuckyPHP\Code\Arrays;
 use Symfony\Component\Finder\Finder;
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Kit\StatusCodes;
@@ -365,6 +367,34 @@ class Model{
             $this->data['_user_interface'] = $recursive ? 
                 array_merge_recursive($this->data['_user_interface'], $data) :
                     array_merge($this->data['_user_interface'], $data);
+
+        # Return Model
+        return $this;
+
+    }
+    
+    /**********************************************************************************
+    * cookie
+    */
+
+    /** Push Cookies
+     * @param bool $expand Alloew to exepend cookie when they have "_"
+     * @return model
+     */
+    public function pushCookies(bool $expand = false):model{
+
+        # Declare Result
+        $result = [];
+
+        # Check cookies
+        if(!empty($_COOKIE))
+            $result = 
+                $expand ?
+                    Arrays::stretch($_COOKIE) :
+                        $_COOKIE;
+
+        # Push result in global data
+        $this->data['_cookies'] = $result;
 
         # Return Model
         return $this;

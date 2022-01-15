@@ -118,6 +118,16 @@ interface Model{
     public function pushDataInUserInterface(array $data = [], bool $recursive = false):ModelBase;
 
     /**********************************************************************************
+     * cookie
+     */
+
+    /** Push Cookies
+     * @param bool $expand Alloew to exepend cookie when they have "_"
+     * @return ModelBase
+     */
+    public function pushCookies(bool $expand = false):ModelBase;
+
+    /**********************************************************************************
      * file (data)
      */
     

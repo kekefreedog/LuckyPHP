@@ -107,6 +107,9 @@
 
         },
     },
+    "_cookies": {
+
+    },
     "_context":{
         "route":{
             "current": "/",

@@ -300,20 +300,22 @@ abstract class Controller{
         )
             return;
 
+        # Check input and set data
+        $data = [
+            "name"      =>  $input['name'],
+            "value"     =>  $input['value'] ?? [],
+            "domain"    =>  $input['domain'] ?? "fixstudio.wiki",
+            "expires"   =>  $input['expires'] ?? strtotime('+ 1 year'),
+            "secure"    =>  $input['secure'] ?? false,
+        ];
+
         # Create cookie
-        $cookie = Cookie::create($input['name']);
-
-        # Set value if set
-        if(isset($input['value']))
-            $cookie->withValue($input['value']);
-
-        # Set domain
-        if(isset($input['domain']))
-            $cookie->withDomain($input['domain']);
-
-        # Set secure
-        if(isset($input['secure']))
-            $cookie->withSecure($input['secure']);
+        $cookie = Cookie::create($data['name'])
+            ->withValue($data['value'])
+            ->withExpires($data['expires'])
+            ->withDomain($data['domain'])
+            ->withSecure($data['secure'])
+        ;
 
         # Push coolie to globam cookie
         $this->cookie[] = $cookie;
