@@ -214,7 +214,7 @@ abstract class Viewer{
     private function constructorJson(){
 
         # Set content
-        $content = json_encode($this->controller->callback->getData());
+        $content = json_encode($this->controller->callback->getData('*'));
 
         # Set global content
         $this->content = $content;
