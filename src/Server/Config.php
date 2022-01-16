@@ -162,41 +162,141 @@ class Config{
                 [$ctx["route"]["current"], "/index/"] :
                     [$ctx["route"]["current"]];
 
-            # Check if isset routes routes
-            if(
-                isset($rootes['routes']) &&
-                !empty($rootes['routes'])
-            )
+            # Get route
+            $route = self::matchPatternRoute($current);
 
-                # Iteration des routes
-                foreach ($rootes['routes'] as $key => $route)
+            # Check route
+            if($route)
 
-                    # Check pattern
-                    if(
-                        isset($route['patterns']) &&
-                        (
-                            in_array($current[0], $route['patterns']) ||
-                            in_array($current[1] ?? null, $route['patterns'])
-                        )
-                    )
-                            # Merge route info in ctx
-                            $ctx['route'] = array_merge(
-                                $ctx['route'], 
-                                $route, 
-                                [
-                                    "Content-Type" => (
-                                        isset($route['response']) &&
-                                        !empty($route['response'])
-                                    ) ? 
-                                        Header::getContentType($route['response']) :
-                                            null
-                                ]
-                            );
+                # Merge route info in ctx
+                $ctx['route'] = array_merge(
+                    $ctx['route'], 
+                    $route, 
+                    [
+                        "Content-Type" => (
+                            isset($route['response']) &&
+                            !empty($route['response'])
+                        ) ? 
+                            Header::getContentType($route['response']) :
+                                null
+                    ]
+                );
 
         }
 
         # Set globale context
         define("__CONTEXT__", $ctx);
+
+    }
+
+    /** Match Pattern Route
+     * Return route info from the current route pattern given
+     * @param string|array $currentPattern
+     * @param array $config
+     * @return array|bool
+     */
+    public static function matchPatternRoute(string|array $currentPattern, $config = ""):array|bool{
+
+        # Chec currentPattern
+        if(empty($currentPattern))
+            return false;
+
+        # Check current pattern
+        if(!is_array($currentPattern))
+            $currentPattern = [$currentPattern];
+
+        # Declare
+        $result = false;
+        $currentRouteExplode = [];
+        $currentPatternExplode = [];
+
+        # Iteration des current pattern
+        foreach($currentPattern as $value){
+
+            # currentPatternExplode
+            $resultExplode = array_filter(explode("/", trim($value, "/")));
+
+            # Check result not empty
+            if(!empty($resultExplode))
+
+                # Push result in current pattern explode
+                $currentPatternsExplode[] = $resultExplode;
+
+        }
+        
+        # Check config
+        if(empty($config))
+
+            # Set config
+            $config = self::read("routes")['routes'];
+
+        # Iteration des routes
+        foreach($config as $keyRoutes => $routes)
+
+            # Check has patterns
+            if(!empty($routes["patterns"]))
+
+                # Iteration des patterns
+                foreach($routes["patterns"] as $pattern){
+
+                    # explode pattern
+                    $currentRouteExplode = explode("/", trim($pattern, "/"));
+
+                    # Iteration de $currentPatternsExplode
+                    foreach ($currentPatternsExplode as $currentPatternExplode){
+
+                        # Comparaison of count between currentRouteExplode and currentPatternExplode
+                        if(count($currentPatternExplode) !== count($currentRouteExplode))
+                            continue;
+
+                        # Set vResponse
+                        $vResponse = true;
+
+                        # Iteration currentPatternExplode
+                        foreach ($currentPatternExplode as $kCurrent => $v)
+
+                            # Check if same value
+                            if($v = $currentRouteExplode[$kCurrent])
+
+                                # Success
+                                continue;
+
+                            # Check if brack
+                            elseif(
+                                substr($currentRouteExplode[$kCurrent], 1) == "[" && 
+                                substr($currentRouteExplode[$kCurrent], -1) == "]"
+                            ){
+
+                                # Success continue
+                                continue;
+
+                            }else{
+
+                                # Fail
+                                $vResponse = false;
+
+                                # Break
+                                break;
+
+                            }
+
+                        # Check vResponse
+                        if($vResponse){
+
+                            # Set result
+                            $result = $config[$keyRoutes];
+
+                            # Break foreach
+                            break(3);
+
+                        }
+                    
+                    }
+
+                }
+
+        # Return result
+        return $result;
 
     }
 
