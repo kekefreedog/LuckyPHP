@@ -20,7 +20,6 @@ namespace  LuckyPHP\Base;
 use Symfony\Component\HttpFoundation\Cookie;
 use LuckyPHP\Http\Header;
 use App\Model;
-use JetBrains\PhpStorm\Internal\ReturnTypeContract;
 
 /** Class Controller
  * 

@@ -233,7 +233,7 @@ class Exception extends \Exception implements InterfaceException{
                 ->addBodyStart([
                     'class' =>  "{{_user_interface.style.color.text}}"
                 ])
-                    ->loadLayouts('error')
+                    ->loadLayouts('miscellaneous/error')
                 ->addBodyEnd()
             ->addHtmlEnd()
             ->build()

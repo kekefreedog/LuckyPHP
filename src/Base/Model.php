@@ -18,11 +18,11 @@ namespace  LuckyPHP\Base;
  * 
  */
 
-use LuckyPHP\Code\Arrays;
 use Symfony\Component\Finder\Finder;
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Kit\StatusCodes;
 use LuckyPHP\Server\Config;
+use LuckyPHP\Code\Arrays;
 use LuckyPHP\File\Json;
 
 /** Class page
@@ -360,13 +360,16 @@ class Model{
      */
     public function pushDataInUserInterface(array $data = [], bool $recursive = false):model{
 
-        # Chec if isset and not empty user interface
-        if(isset($this->data['_user_interface']) && !empty($this->data['_user_interface']))
+        # Check if isset and not empty user interface
+        if(!isset($this->data['_user_interface']))
 
-            # Check recursive
-            $this->data['_user_interface'] = $recursive ? 
-                array_merge_recursive($this->data['_user_interface'], $data) :
-                    array_merge($this->data['_user_interface'], $data);
+            # Create _user_interface
+            $this->data['_user_interface'] = [];
+
+        # Check recursive
+        $this->data['_user_interface'] = $recursive ? 
+            array_merge_recursive($this->data['_user_interface'], $data) :
+                array_merge($this->data['_user_interface'], $data);
 
         # Return Model
         return $this;

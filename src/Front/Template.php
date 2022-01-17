@@ -448,38 +448,77 @@ class Template{
         # Declare
         $result = "";
         $names = [];
+        $order = [];
+        $symbol = "/";
 
         # Get extension from app config
         $ext = $this->config['app']['template']['extension'] ?? "*";
 
-        # New finder
-        $this->finder = new Finder();
-
         # Prepare names
         foreach($layouts as $layout){
 
+            # Check if "/" in layout name
+            if(strpos($layout, $symbol)){
+
+                # Explode layout
+                $explode = explode($symbol, trim($layout, $symbol));
+
+                # Set layout
+                $layout = array_pop($explode);
+
+                # Set key and layout
+                $key = implode($symbol, $explode);
+
+            }else{
+
+                # Set key
+                $key = "";
+
+            }
+
             # Check if layout value is string
-            if(is_string($layout))
+            if(is_string($layout)){
 
                 # Push in names
-                $names[] = "*$layout.$ext";
+                $names["/$key"][] = "$layout.$ext";
+
+                # Set order
+                $order[] = "$root/$key/$layout";
+
+            }
 
         }
 
-        # Search all file
-        $this->finder->files()->name($names)->in($root);
+        # Check $name
+        if(!empty($names))
 
-        # Iteration des layout
-        foreach($layouts as $layout)
+            # Iteration des names
+            foreach($names as $subFolder => $current)
 
-            # Iteration des fichiers trouvés
-            foreach ($this->finder as $file)
+                # Check current
+                if(!empty($current)){
 
-                # Check in current file is current layout
-                if($file->getFilenameWithoutExtension() == $layout)
+                    # New finder
+                    $this->finder = new Finder();
 
-                    # Push content in result
-                    $result .= $file->getContents();
+                    # Search all file
+                    $this->finder->files()->name($current)->in($root.$subFolder);
+
+                    # Iteration des layout
+                    foreach($order as $currentOrder)
+
+                        # Iteration des fichiers trouvés
+                        foreach ($this->finder as $file){
+
+                            # Check in current file is current layout
+                            if($root.$subFolder."/".$file->getFilenameWithoutExtension() == $currentOrder)
+
+                                # Push content in result
+                                $result .= $file->getContents();
+
+                        }
+
+                }
 
 
         # Set global result
