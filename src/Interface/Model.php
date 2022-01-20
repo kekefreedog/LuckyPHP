@@ -63,6 +63,17 @@ interface Model{
     public function resetErrors():ModelBase;
 
     /**********************************************************************************
+     * Records
+     */
+
+    /** Pushs records
+     * @param array $records Records to push in records
+     * @param string|null $flag Option about records pushed
+     * @return ModelBase
+     */
+    public function pushRecords(array $records = [], string|null $flag = null):ModelBase;
+
+    /**********************************************************************************
      * Config
      */
 

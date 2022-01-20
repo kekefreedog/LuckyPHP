@@ -17,10 +17,10 @@ namespace  LuckyPHP\Server;
 /** Dependance
  * 
  */
-use LuckyPHP\Http\Header;
-use LuckyPHP\Code\Strings;
-use LuckyPHP\Server\Exception;
 use Symfony\Component\Yaml\Yaml;
+use LuckyPHP\Server\Exception;
+use LuckyPHP\Code\Strings;
+use LuckyPHP\Http\Header;
 
 /** Class page
  * 

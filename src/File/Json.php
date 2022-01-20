@@ -50,11 +50,18 @@ class Json{
     }
 
     /** Check if input is json
-     * 
+     * @param mixed $string
+     * @return bool
      */
-    public static function check($string):bool {
-		if(is_array($string)) return false;
-		json_decode($string);
+    public static function check(mixed $string):bool {
+        
+        # Check if is array
+        if(is_array($string)) return false;
+
+        # Decode string
+        json_decode($string);
+
+        # Return error or not
 		return (json_last_error() == JSON_ERROR_NONE);
 	}
 

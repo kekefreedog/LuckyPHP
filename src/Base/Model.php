@@ -173,6 +173,39 @@ class Model{
     }
 
     /**********************************************************************************
+     * Records
+     */
+
+    /** Pushs records
+     * @param array $records Records to push in records
+     * @param string|null $flag Option about records pushed
+     * @return Model
+     */
+    public function pushRecords(array $records = [], string|null $flag = null):Model{
+
+        # Check flags
+        if(!in_array($flag, self::PUSH_RECORDS_FLAG))
+
+            # New exception
+            throw new Exception("Flags in push records is not allowed !", 500);
+
+
+        # Flag null
+        if($flag == null)
+
+            $this->data['records'][] = $records;
+
+        # Return Model
+        return $this;
+
+    }
+
+    /** Push Records flags
+     * 
+     */
+    public const PUSH_RECORDS_FLAG = [null]; 
+
+    /**********************************************************************************
      * Config
      */
 
