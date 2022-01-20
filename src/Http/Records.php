@@ -71,6 +71,9 @@ class Records{
 
         }
 
+        # Return response
+        return $response;
+
     }
 
     /** Format Records
