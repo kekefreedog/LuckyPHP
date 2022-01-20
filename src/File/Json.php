@@ -55,8 +55,8 @@ class Json{
      */
     public static function check(mixed $string):bool {
         
-        # Check if is array
-        if(is_array($string)) return false;
+        # Check if is string
+        if(!is_string($string)) return false;
 
         # Decode string
         json_decode($string);
