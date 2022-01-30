@@ -97,6 +97,7 @@ class Template{
                             '/ /'           =>   ' ', // nonbreaking space (equiv. to 0x160),
                             '/[(]/'			=>	 '',  // Round brackets
                             '/[)]/'			=>	 '',  // Round brackets
+                            '/(_-_)/'		=>	 '_',
                         ];
 						/* Return value */
 						$string = strtolower(preg_replace(array_keys($utf8), array_values($utf8), $string));
