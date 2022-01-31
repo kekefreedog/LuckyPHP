@@ -303,7 +303,7 @@ abstract class Controller{
         $data = [
             "name"      =>  $input['name'],
             "value"     =>  $input['value'] ?? [],
-            "domain"    =>  $input['domain'] ?? "fixstudio.wiki",
+            "domain"    =>  $input['domain'] ?? $_SERVER['HTTP_HOST'],
             "expires"   =>  $input['expires'] ?? strtotime('+ 1 year'),
             "secure"    =>  $input['secure'] ?? false,
         ];
