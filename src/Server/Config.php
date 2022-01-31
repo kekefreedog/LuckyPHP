@@ -250,20 +250,20 @@ class Config{
                             continue;
 
                         # Set vResponse
-                        $vResponse = true;
+                        $vResponse = 1;
 
                         # Iteration currentPatternExplode
-                        foreach ($currentPatternExplode as $kCurrent => $v)
+                        foreach ($currentPatternExplode as $kCurrent => $v):
 
                             # Check if same value
-                            if($v = $currentRouteExplode[$kCurrent])
+                            if($v == $currentRouteExplode[$kCurrent]){
 
                                 # Success
                                 continue;
 
                             # Check if brack
-                            elseif(
-                                substr($currentRouteExplode[$kCurrent], 1) == "[" && 
+                            }elseif(
+                                substr($currentRouteExplode[$kCurrent], 0, 1) == "[" && 
                                 substr($currentRouteExplode[$kCurrent], -1) == "]"
                             ){
 
@@ -273,12 +273,11 @@ class Config{
                             }else{
 
                                 # Fail
-                                $vResponse = false;
-
-                                # Break
-                                break;
+                                $vResponse = 0;
 
                             }
+
+                        endforeach;
 
                         # Check vResponse
                         if($vResponse){
