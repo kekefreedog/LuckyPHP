@@ -164,4 +164,15 @@ class Strings{
 
 	}
 
+	/** Return first character of string
+	 * @param string $string String to process
+	 * @return string
+	 */
+	public static function first_character(string $str = ""):string {
+
+		// Return first character
+		return $str[0] ?? "";
+
+	}
+
 }
