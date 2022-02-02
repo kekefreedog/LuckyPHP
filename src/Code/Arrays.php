@@ -112,4 +112,46 @@ class Arrays{
 		return $result;
 	}
 
+	/** array sort in stretch array
+	 * @param array &$array Array to sort
+	 * @param string $col Col to filter
+	 * @param string $colSub Col child of col
+	 * @param int $dir Direction of sort 
+	 * @return void
+	 */
+	public static function array_sort_by_column(array &$arr = [], string $col = "", string $colSub = "", int $dir = SORT_ASC):void {
+
+		# Declare sort col
+		$sort_col = [];
+		
+		# Delcare k
+		$i = "a";
+
+		# Check array
+		if(empty($arr))
+			return;
+
+		# Iteration array
+		foreach ($arr as $key => $row){
+
+			# Set value
+			$value = $colSub ? 
+			($row[$col][$colSub] ?? $i) : 
+				($row[$col] ?? $i);
+			$value = $value == null ? $i : $value;
+
+			# set col
+			$sort_col[$key] = $value;
+			
+			# Increment i
+			if($value == $i)
+				$i++;
+			
+		}
+
+		# Sort array
+		array_multisort($sort_col, $dir, $arr);
+
+	}
+
 }
