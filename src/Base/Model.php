@@ -193,6 +193,11 @@ class Model{
         # Flag null
         if($flag == null)
 
+            $this->data['records'] = $records;
+        
+        # Single record
+        elseif($flag == "single")
+
             $this->data['records'][] = $records;
 
         # Return Model
@@ -203,7 +208,7 @@ class Model{
     /** Push Records flags
      * 
      */
-    public const PUSH_RECORDS_FLAG = [null]; 
+    public const PUSH_RECORDS_FLAG = [null, "single"]; 
 
     /**********************************************************************************
      * Config
