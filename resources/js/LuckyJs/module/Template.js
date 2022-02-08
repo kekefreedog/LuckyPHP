@@ -1,3 +1,4 @@
+"use strict";
 /*******************************************************
  * Copyright (C) 2019-2021 Kévin Zarshenas
  * kevin.zarshenas@gmail.com
@@ -8,16 +9,9 @@
  * permission of Kévin Zarshenas @kekefreedog
  *******************************************************/
 
-/**
- * Parallelle with file in /ressources/scss/dev/style.scss
+/** Module Template
+ * 
  */
+export default class Template {
 
-/* Import CSS */
-import './style/framework';
-import './style/style';
-
-/* Icons */
-import './../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
-
-/* Tippy Js */
-import 'tippy.js/dist/tippy.css';
+}

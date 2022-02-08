@@ -1,3 +1,4 @@
+"use strict";
 /*******************************************************
  * Copyright (C) 2019-2021 Kévin Zarshenas
  * kevin.zarshenas@gmail.com
@@ -8,16 +9,20 @@
  * permission of Kévin Zarshenas @kekefreedog
  *******************************************************/
 
-/**
- * Parallelle with file in /ressources/scss/dev/style.scss
+/** Module Dom
+ * 
  */
+export default class Url {
 
-/* Import CSS */
-import './style/framework';
-import './style/style';
+    /** Update url
+     * 
+     */
+    static update = (location) => {
 
-/* Icons */
-import './../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+        // Met à jour les paramètres dans l'URL
+        if(location)
+            history.pushState(null, null, location)
 
-/* Tippy Js */
-import 'tippy.js/dist/tippy.css';
+    }
+
+}

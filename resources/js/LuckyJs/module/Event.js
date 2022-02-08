@@ -1,3 +1,4 @@
+"use strict";
 /*******************************************************
  * Copyright (C) 2019-2021 Kévin Zarshenas
  * kevin.zarshenas@gmail.com
@@ -8,16 +9,45 @@
  * permission of Kévin Zarshenas @kekefreedog
  *******************************************************/
 
-/**
- * Parallelle with file in /ressources/scss/dev/style.scss
+/** Module Event
+ * 
  */
+export default class Event {
 
-/* Import CSS */
-import './style/framework';
-import './style/style';
+    /** Add Event
+     * 
+     */
+    add = (o = {}) => {
 
-/* Icons */
-import './../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 
-/* Tippy Js */
-import 'tippy.js/dist/tippy.css';
+
+    }
+
+    /** Remove Event
+     * 
+     */
+    remove = (o = {}) => {
+
+
+
+    }
+
+    /** Replace Event
+     * 
+     */
+    replace = (o = {}) => {
+
+
+
+    }
+
+    /** Clear Events
+     * 
+     */
+    clear = (o = {}) => {
+
+
+
+    }
+
+}

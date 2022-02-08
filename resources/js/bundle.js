@@ -8,16 +8,12 @@
  * permission of Kévin Zarshenas @kekefreedog
  *******************************************************/
 
-/**
- * Parallelle with file in /ressources/scss/dev/style.scss
- */
+/* Import JS */
+window.$ = window.jQuery = require('jquery/dist/jquery.js');
+window.PerfectScrollbar = require('perfect-scrollbar').default;
+require('materialize-css/dist/js/materialize.js')
+require('Kmaterialize/src/js/plugins.js');
+require("Kmaterialize/src/js/search.js");
 
-/* Import CSS */
-import './style/framework';
-import './style/style';
-
-/* Icons */
-import './../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
-
-/* Tippy Js */
-import 'tippy.js/dist/tippy.css';
+/* Import Prism */
+require('prismjs');

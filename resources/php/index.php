@@ -9,16 +9,12 @@
  * permission of Kévin Zarshenas @kekefreedog
  *******************************************************/
 
-/** LuckyPHP
+/** Register The Auto Loader (composer)
  * 
  */
-namespace  LuckyPHP;
+require __DIR__.'/../vendor/autoload.php';
 
-/** Load all component of the current name space
+/** Register Application
  * 
  */
-class AutoInit{
-
-
-
-}
+$app = require_once __DIR__.'/../src/App.php';

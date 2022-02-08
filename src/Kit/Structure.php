@@ -26,7 +26,7 @@ class Structure{
     public const APP = [
 
         "/" =>  [
-            'folders'=>  [
+            'folders'   =>  [
                 # Config of your app
                 'config'    =>  [
                     'files'      =>  [
@@ -39,7 +39,7 @@ class Structure{
                     ]
                 ],
                 # Public folder
-                'www'   =>  [
+                'html'  =>  [
                     'files'      =>  [
                         '.htaccess' =>  [
                             'function'  =>  [

@@ -2,7 +2,6 @@
     "name": "kekefreedog/luckyphp",
     "type": "library",
     "description": "All essential tools in PHP for my own development",
-    "keywords": [],
     "authors": [
         {
             "name": "Kévin Zarshenas",
@@ -18,11 +17,13 @@
         "zordius/lightncandy": "^1.2",
         "symfony/finder": "^6.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    },
 	"autoload": {
 		"psr-4": {
-			"LuckyPHP\\": [
-                "src/"
-            ]
+			"LuckyPHP\\": "src/",
+            "LuckyPHP\\Resources\\": "resources/"
 		}
 	}
 }
