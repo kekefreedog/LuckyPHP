@@ -299,6 +299,51 @@ class Config{
 
     }
 
+    /** Return supposed name for the current application
+     * @return string
+     */
+    public static function supposedNameGet(){
+
+        # Set result
+        $result = self::APP_NAME_DEFAULT;
+
+        # Set folders
+        $folders = [];
+
+        # Explode __file__
+        foreach(['/', '//', '\'', '\\'] AS $value)
+
+            # If current dir includes current value
+            if(strpos(__DIR__, $value) !== false)
+
+                # Explode folders
+                $folders = explode(
+                    $value, 
+                    str_replace(self::APP_NAME_PROHIBITED, "", __DIR__)
+                );
+
+        # Clean empty values in folder
+        $folders = array_filter($folders);
+
+        # Get last name
+        if(!empty($folders))
+            $result = array_pop($folders);
+
+        # Return result
+        return $result;
+
+    }
+
+    /** Prohibited names
+     * 
+     */
+    public const APP_NAME_PROHIBITED = ['Server','src','luckyphp','kekefreedog','vendor','bin'];
+
+    /** Default name of the app
+     * 
+     */
+    public const APP_NAME_DEFAULT = "LuckyApp";
+
     /** Default file config
      * 
      */
