@@ -25,6 +25,7 @@ use Symfony\Component\Yaml\Yaml;
 use LuckyPHP\File\Structure;
 use LuckyPHP\Server\Config;
 use LuckyPHP\Code\Arrays;
+use LuckyPHP\Server\Cli;
 use LuckyPHP\File\Files;
 use LuckyPHP\Code\Forms;
 
@@ -48,29 +49,49 @@ class Setup{
      * 
      * @param array $input input for create app
      */
-    public function __construct($input, $directory = "/"){
+    public function __construct($input, $directory = "/", $cliMessage = true){
 
-        # Define roots
+        /** Define roots
+         * 
+         */
         Config::defineRoots([
             'app'       =>  $directory,
             'www'       =>  $directory.'www/',
             'luckyphp'  =>  $directory.'vendor/kekefreedog/luckyphp/',
         ]);
+        if($cliMessage) Cli::success("Roots defined");
 
-        # Write app condig
+        /** Write Config > App 
+         * 
+         */
         $this->configSetup($input);
+        if($cliMessage) Cli::success("Config ready");
 
-        # Structure Setup
+        /** Structure Folders
+         * 
+         */
         $this->structureSetup();
+        if($cliMessage) Cli::success("Folder structure created");
 
-        # Write routes config
+        /** Write Config > Routes
+         * 
+         */
         $this->routesWrite();
+        if($cliMessage) Cli::success("Site routes defined");
 
-        # Write page config
+        /** Page default information
+         * 
+         */
         $this->pageWrite();
+        if($cliMessage) Cli::success("Page informations defined");
 
-        # Database Setup
+        /** Database setup
+         * 
+         */
         # $this->databaseSetup();
+        # if($cliMessage) Cli::success("Database ready");
+
+        exit();
 
         # Composer Update
         $this->composerUpdate();
@@ -108,7 +129,7 @@ class Setup{
         if(!is_dir(__ROOT_APP__.'config')) mkdir(__ROOT_APP__.'config', 0777, true);
 
         # Iteration de $this->default
-        foreach (ConfigKit::CONFIG AS $content)
+        foreach(ConfigKit::CONFIG AS $content)
 
             # Set input
             $this->input[$content['name']] = 

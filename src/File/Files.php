@@ -138,10 +138,10 @@ class Files{
     /** Update composer.json
      * 
      */
-    public function composerUpdate($filepath){
+    public function composerUpdate($filepath = "/composer.json"){
 
         // Check composer.json exist
-        if(is_file($filepath)){
+        if($filepath && is_file(__ROOT_APP__.$filepath)){
 
             // Get raw data
             $raw = file_get_contents($filepath);
@@ -151,6 +151,10 @@ class Files{
 
         }else
 
+            # Create raw
+            $raw = null;
+
+            # Create object
             $object = [];
 
         /** Update object :

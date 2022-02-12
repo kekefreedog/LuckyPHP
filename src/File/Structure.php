@@ -40,10 +40,15 @@ class Structure extends Files{
         $path = rtrim($path, '/').'/';
 
         # Check arguments
-        if(
-            !in_array($action, ['create', 'update', 'delete'])
-        )
+        if(!in_array($action, ['create', 'update', 'delete']))
             return false;
+
+        # Determine source root
+        $sourceRoot = is_dir(__ROOT_LUCKYPHP__) ?
+            # Root in vendor folder
+            __ROOT_LUCKYPHP__ :
+                # Case where structure is created in sandbox
+                __ROOT_APP__."../../";
 
         # Iteration of folders
         foreach($folders as $folderName => $folderContent):
@@ -77,13 +82,9 @@ class Structure extends Files{
                             $fileContent['source']
                         ){
 
-                            if(file_exists(__ROOT_LUCKYPHP__.$fileContent['source'])){
+                            if(file_exists($sourceRoot.$fileContent['source'])){
 
-                                $filepathsource = __ROOT_LUCKYPHP__.$fileContent['source'];
-
-                            }elseif(file_exists(__ROOT_LUCKYPHP__.'vendor/kekefreedog/luckyphp'.$fileContent['source'])){
-
-                                $filepathsource = __ROOT_LUCKYPHP__.'vendor/kekefreedog/luckyphp'.$fileContent['source'];
+                                $filepathsource = $sourceRoot.$fileContent['source'];
 
                             }else{
 

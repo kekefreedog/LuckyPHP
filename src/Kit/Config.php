@@ -34,7 +34,7 @@ class Config{
             [
                 'name'      =>  'app_description',
                 'type'      =>  'VARCHAR',
-                'default'   =>  '',
+                'default'   =>  'Application created with LuckyPHP',
             ],
             # Website
             [
@@ -48,13 +48,13 @@ class Config{
                 'name'      =>  'app_websiteAlt',
                 'type'      =>  'VARCHAR',
                 'process'   =>  'url',
-                'default'   =>  '',
+                'default'   =>  'https://github.com/kekefreedog/LuckyPHP',
             ],
             # Charset
             [
                 'name'      =>  'app_charset',
                 'type'      =>  'VARCHAR',
-                'default'   =>  'utf-8"',
+                'default'   =>  'utf-8',
             ],
             # Indexing
             [
@@ -62,7 +62,27 @@ class Config{
                 'type'      =>  'VARCHAR',
                 'default'   =>  'noindex, nofollow',
             ],
+            # Darkmode
+                # Theme
+                [
+                    'name'      =>  'app_darkmode_theme',
+                    'type'      =>  'ARRAY',
+                    'default'   =>  ['light', 'dark'],
+                ],
+                # Cookie
+                    # Mode
+                    [
+                        'name'      =>  'app_darkmode_mode',
+                        'type'      =>  'VARCHAR',
+                        'default'   =>  'THEME_MODE',
+                    ],
             # Admin
+                # Fullname
+                [
+                    'name'      =>  'app_admin_fullname',
+                    'type'      =>  'VARCHAR',
+                    'default'   =>  '',
+                ],
                 # Email
                 [
                     'name'      =>  'app_admin_email',
@@ -90,28 +110,24 @@ class Config{
                         'name'      =>  'app_css_framework_source',
                         'type'      =>  'VARCHAR',
                         'default'   =>  null,
-                        //'default'   =>  'github',
                     ],
                     # Author
                     [
                         'name'      =>  'app_css_framework_author',
                         'type'      =>  'VARCHAR',
                         'default'   =>  null,
-                        //'default'   =>  'kekefreedog',
                     ],
                     # Package
                     [
                         'name'      =>  'app_css_framework_package',
                         'type'      =>  'VARCHAR',
                         'default'   =>  null,
-                        //'default'   =>  'Kmaterialize',
                     ],
                     # Branch
                     [
                         'name'      =>  'app_css_framework_branch',
                         'type'      =>  'VARCHAR',
                         'default'   =>  null,
-                        //'default'   =>  'advanced',
                     ],
                     # Theme
                     [

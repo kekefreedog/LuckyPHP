@@ -29,14 +29,6 @@ class Structure{
             'folders'   =>  [
                 # Config of your app
                 'config'    =>  [
-                    'files'      =>  [
-                        # Settings of the app
-                        'app.yml' =>  [],
-                        # Routes of the app
-                        'routes.yml' =>  [],
-                        # Page of the app
-                        'page.yml'  =>  []
-                    ]
                 ],
                 # Public folder
                 'html'  =>  [
@@ -50,7 +42,7 @@ class Structure{
                             ],
                         ],
                         'index.php' =>  [
-                            'source'    =>  'src/Kit/Php/index.php',
+                            'source'    =>  'resources/php/index.php',
                         ],
                         'manifest.json' =>  [],
                     ]
@@ -102,13 +94,13 @@ class Structure{
                             ],
                             'files'     =>  [
                                 'app.js'    =>  [
-                                    'source'    =>  'src/Kit/Js/app.js',
+                                    'source'    =>  'resources/js/app.js',
                                 ],
                                 'css.js'    =>  [
-                                    'source'    =>  'src/Kit/Js/css.js',
+                                    'source'    =>  'resources/js/css.js',
                                 ],
                                 'bundle.js'    =>  [
-                                    'source'    =>  'src/Kit/Js/bundle.js',
+                                    'source'    =>  'resources/js/bundle.js',
                                 ],
                             ]
                         ],
@@ -128,19 +120,19 @@ class Structure{
                 'src' =>  [
                     'files'     =>  [
                         'Kernel.php'         =>  [
-                            'source'    =>  'src/Kit/Php/Kernel.php',
+                            'source'    =>  'resources/php/Kernel.php',
                         ],
                         'Model.php'         =>  [
-                            'source'    =>  '/src/Kit/Php/Model.php',
+                            'source'    =>  '/resources/php/Model.php',
                         ],
                         'Viewer.php'          =>  [
-                            'source'    =>  'src/Kit/Php/Viewer.php',
+                            'source'    =>  'resources/php/Viewer.php',
                         ],
                         'Controller.php'    =>  [
-                            'source'    =>  'src/Kit/Php/Controller.php',
+                            'source'    =>  'resources/php/Controller.php',
                         ],
                         'App.php'           =>  [
-                            'source'    =>  'src/Kit/Php/App.php',
+                            'source'    =>  'resources/php/App.php',
                         ],
                     ],
                     'folders'   =>  [
@@ -183,8 +175,11 @@ class Structure{
                         'name'          =>  'packageUpdate',
                     ]
                 ], 
-                'webpack.config.js' =>  [
-                    'source'    =>  'src/Kit/Js/webpack.config.js',
+                'webpack.prod.js' =>  [
+                    'source'    =>  'resources/js/webpack/webpack.prod.js',
+                ],
+                'webpack.dev.js' =>  [
+                    'source'    =>  'resources/js/webpack/webpack.dev.js',
                 ],
             ]
         ],

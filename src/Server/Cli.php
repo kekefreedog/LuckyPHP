@@ -19,6 +19,7 @@ namespace  LuckyPHP\Server;
  */
 use \LuckyPHP\Server\Config;
 use \League\CLImate\CLImate;
+use \LuckyPHP\App\Setup;
 
 /** Class page
  * 
@@ -59,6 +60,7 @@ class Cli{
         $this->logo();
 
         # Root to action
+        # Depending of the name of the file
         $this->rooting();
         
     }
@@ -502,11 +504,112 @@ class Cli{
         # Execute inputs
         $this->execute($inputs, $this->result);
 
-        # Print result
-        $this->engine->json($this->result);
-        
+        # Now setup the project
+        new Setup($this->result, __DIR__."/../../tests/sandbox");    
 
     }
+
+    /**********************************************************************************
+     * Cli commands
+     */
+
+    /** Display successful message
+     * @param string $message Message to display
+     * @param bool $icon Icon to display before message
+     */
+    public static function success(string $message = "", bool $icon = true){
+
+        # Check message
+        if(!$message && !$icon)
+            return;
+        
+        # Set result
+        $result = "";
+
+        # Push icon
+        if($icon)
+            $result .= "🟢";
+
+        # Push message
+        if($message)
+            $result ?
+                $result .= " $message" :
+                    $result = $message;
+
+        # New instance
+        $instance = new CLImate;
+
+        # Display message
+        $instance->green($result);
+
+
+    }
+
+    /** Display successful message
+     * @param string $message Message to display
+     * @param bool $icon Icon to display before message
+     */
+    public static function error(string $message = "", bool $icon = true){
+
+        # Check message
+        if(!$message && !$icon)
+            return;
+    
+        # Set result
+        $result;
+
+        # Push icon
+        if($icon)
+            $result = "🔴";
+
+        # Push message
+        if($message)
+            $result ?
+                $result .= " $message" :
+                    $result = $message;
+
+        # New instance
+        $instance = new CLImate;
+
+        # Display message
+        $instance->red($result);
+
+    }
+
+    /** Display successful message
+     * @param string $message Message to display
+     * @param bool $icon Icon to display before message
+     */
+    public static function warning(string $message = "", bool $icon = true){
+
+        # Check message
+        if(!$message && !$icon)
+            return;
+    
+        # Set result
+        $result;
+
+        # Push icon
+        if($icon)
+            $result = "🟠";
+
+        # Push message
+        if($message)
+            $result ?
+                $result .= " $message" :
+                    $result = $message;
+
+        # New instance
+        $instance = new CLImate;
+
+        # Display message
+        $instance->orange($result);
+
+    }
+
+    /**********************************************************************************
+     * Constants
+     */
 
     /** Prohibited names
      * 

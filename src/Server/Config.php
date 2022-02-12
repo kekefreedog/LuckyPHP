@@ -112,10 +112,18 @@ class Config{
         foreach($roots as $rootName => $rootValue)
 
             # Check root name and root value
-            if($rootName && $rootValue)
+            if($rootName && $rootValue):
+
+                # Check trailing slash
+                if(substr($rootValue, -1) !== "/")
+
+                    # Add trailing slash
+                    $rootValue .= "/";
 
                 # Define root
                 define('__ROOT_'.strtoupper($rootName).'__', $rootValue);
+
+            endif;
 
         # Return true;
         return true;
@@ -333,6 +341,10 @@ class Config{
         return $result;
 
     }
+
+    /**********************************************************************************
+     * Constants
+     */
 
     /** Prohibited names
      * 
