@@ -179,7 +179,9 @@ class Template{
 
         # Set attribute
         $attribute = $attributes ? 
+            # Overwrite attributes
             " ".$attributes : 
+                # Interface attributes
                 "{{#if _user_interface.framework.html.attributes}} {{{setAttributes _user_interface.framework.html.attributes}}}{{/if}}"; 
 
         # Add head start
