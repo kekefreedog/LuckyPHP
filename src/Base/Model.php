@@ -361,26 +361,36 @@ class Model{
         # check if match with Kmaterialize
         if($this->config['app']['css']['framework']['package'] == "Kmaterialize"){
 
-            # Theme to check
-            $themeToCheck = $this->config['app']['css']['framework']['theme'] ?? "";
-
             # File to check
-            $fileTocheck = __ROOT_APP__."node_modules/Kmaterialize/dist/css/$themeToCheck/kmaterial.json";
+            $fileTocheck = __ROOT_APP__."resources/json/kmaterial.json";
+
+            # Check dark mode
+            $darkmode = 
+                isset($this->config['app']['darkmode']['cookie']['mode']) ?
+                    ($_COOKIE[$this->config['app']['darkmode']['cookie']['mode']] ?? false ):
+                        false;
 
             # Check if theme set and folder associate exists
-            if(
-                $themeToCheck &&
-                file_exists($fileTocheck)
-            ){
+            if(file_exists($fileTocheck)){
 
                 # Open json file
                 $content = Json::open($fileTocheck);
 
                 # Check content to push
-                if(isset($content['template']) && !empty($content['template']))
+                if(isset($content['template']) && !empty($content['template'])){
+
+                    # Check darkmode
+                    if($darkmode && in_array($darkmode, $this->config['app']['darkmode']['theme'] ?? []))
+
+                        # Add theme in html
+                        $content['template']['html']['attributes']['class'] ? 
+                            $content['template']['html']['attributes']['class'] .= " $darkmode-theme" :
+                                $content['template']['html']['attributes']['class'] = "$darkmode-theme";
 
                     # Open the file and push it on data _user_interface > framework
                     $this->data['_user_interface']['framework'] = $content['template'];
+
+                }
 
             }
 
