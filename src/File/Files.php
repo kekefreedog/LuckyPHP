@@ -136,12 +136,17 @@ class Files{
     }
 
     /** Update composer.json
-     * 
+     * @param string $filepath File path of composer file
+     * @return string json content to put into composer.json
      */
-    public function composerUpdate($filepath = "/composer.json"){
+    public function composerUpdate(string $filepath = ""){
 
-        // Check composer.json exist
-        if($filepath && is_file(__ROOT_APP__.$filepath)){
+        # Check filepath
+        if(!$filepath)
+            $filepath = __ROOT_APP__."/composer.json";
+
+        # Check composer.json exist
+        if($filepath && is_file($filepath)){
 
             // Get raw data
             $raw = file_get_contents($filepath);
@@ -149,13 +154,16 @@ class Files{
             // Parse json
             $object = json_decode($raw, true);
 
-        }else
+        # If not file exists
+        }else{
 
             # Create raw
             $raw = null;
 
             # Create object
             $object = [];
+
+        }
 
         /** Update object :
          * 
