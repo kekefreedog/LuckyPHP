@@ -650,10 +650,28 @@ class Cli{
 
     }
 
+    /** Display flanked message
+     * @param string $message Message to display
+     * @param string $flankCharacter Icon to display before message
+     */
+    public static function flank(string $message = "", string $flankCharacter = "#"){
+
+        # Check message
+        if(!$message && !$flankCharacter)
+            return;
+
+        # New instance
+        $instance = new CLImate;
+
+        # Display flanked message
+        $instance->flank($message, $flankCharacter);
+
+    }
+
     /** Breakline
      * 
      */
-    public static function br(string $message = "", bool $icon = true){
+    public static function br(){
 
         # New instance
         $instance = new CLImate;

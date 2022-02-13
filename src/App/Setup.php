@@ -91,19 +91,25 @@ class Setup{
         # $this->databaseSetup();
         # if($cliMessage) Cli::success("Database ready");
 
-        exit();
-
-        # Composer Update
+        /** Start command for install PHP dependancies with Composer
+         * 
+         */
         $this->composerUpdate();
+        if($cliMessage) Cli::success("PHP dependancies installed");
 
-        # Npm Update
+        /** Start command for install JS dependancies with NPM
+         * 
+         */
         $this->npmUpdate();
+        if($cliMessage) Cli::success("JS dependancies installed");
 
         # Web Pack Builder
         $this->webpackBuilder();
+        if($cliMessage) Cli::success("Assets compiled and minimized");
 
-        # App Ready
-        $this->appReady();
+        # Final message
+        if($cliMessage) Cli::flank("Your app is ready for action !", "✨");
+        
         
     }
 
@@ -202,17 +208,8 @@ class Setup{
      */
     private function composerUpdate(){
 
-        # Update composer
-        echo 
-            PHP_EOL.
-            '(📦 )-[ UPDATING COMPOSER ]--------------------------'.
-            PHP_EOL
-        ;
+        # Execute command
         shell_exec('composer update');
-        echo 
-            "------------------------------------------------(✔️ )".
-            PHP_EOL
-        ;
 
     }
 
@@ -221,17 +218,8 @@ class Setup{
      */
     private function npmUpdate(){
 
-        # Update composer
-        echo 
-            PHP_EOL.
-            '(📦 )-[ UPDATING NPM ]-------------------------------'.
-            PHP_EOL
-        ;
+        # Execute command
         shell_exec('npm update');
-        echo 
-            "------------------------------------------------(✔️ )".
-            PHP_EOL
-        ;
 
     }
 
@@ -240,32 +228,8 @@ class Setup{
      */
     private function webpackBuilder(){
 
-        # Update composer
-        echo 
-            PHP_EOL.
-            '(📦 )-[ BULDING PACKAGE WITH WEBPACK ]----------------'.
-            PHP_EOL
-        ;
+        # Execute command
         shell_exec('npm run webpack-build');
-        echo 
-            "------------------------------------------------(✔️ )".
-            PHP_EOL
-        ;
-
-    }
-
-    /** App ready
-     * 
-     */
-    private function appReady(){
-        
-        # Display message
-        echo 
-            PHP_EOL.
-            '✨  Your app is ready for action ! ✨'.
-            PHP_EOL.
-            PHP_EOL
-        ;
 
     }
 
