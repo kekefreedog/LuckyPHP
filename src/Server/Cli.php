@@ -186,6 +186,10 @@ class Cli{
 
     }
 
+    /**********************************************************************************
+     * CLI Message
+     */
+
     /** Display Logo
      * @return void
      */
@@ -227,6 +231,10 @@ class Cli{
 
     }
 
+    /**********************************************************************************
+     * Rooter
+     */
+
     /** Rooting to good action
      * 
      */
@@ -260,6 +268,10 @@ class Cli{
         endif;
 
     }
+
+    /**********************************************************************************
+     * Actions
+     */
 
     /** Setup action
      * 
@@ -360,6 +372,22 @@ class Cli{
 
         # Now setup the project
         new Setup($this->result, __DIR__."/../../../../../");
+
+    }
+
+    /** Delete action
+     * 
+     */
+    private function delete(){
+
+        # Content to keep in the root level
+        $originalContent = [
+            "vendor",
+            "composer.json",
+            "composer.lock",
+        ];
+
+        print_r(__DIR__);
 
     }
     
