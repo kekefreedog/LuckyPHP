@@ -161,6 +161,12 @@ class Config{
                         'type'      =>  'VARCHAR',
                         'default'   =>  null,
                     ],
+                    # Branch
+                    [
+                        'name'      =>  'app_js_framework_branch',
+                        'type'      =>  'VARCHAR',
+                        'default'   =>  null,
+                    ],
                     # Dev
                     [
                         'name'      =>  'app_js_framework_dev',
