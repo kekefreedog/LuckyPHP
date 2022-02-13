@@ -266,162 +266,100 @@ class Cli{
      */
     private function setup(){
 
-        # Diplay welcome message
+        # Welcome
         $this->welcome();
 
-        # Title action
-        echo 
-            "(🚀)-[ SETUP ]--------------------------------------".PHP_EOL,
-            "".PHP_EOL;
-        ;
+        # List of inputs
+        $inputs = [
+            # App Name
+            [
+                "name"      =>  "app_name",
+                "label"     =>  "Name of your application ? [".Config::supposedNameGet()."]",
+                "type"      =>  "input",
+                "accept"    =>  function($response){
+                    return(
+                        in_array($response, Config::APP_NAME_PROHIBITED) ?
+                            false :
+                                true
+                    );
+                },
+                "default"   => Config::APP_NAME_DEFAULT,
+            ],
+            # Framework css
+            [
+                "label"     =>  "Use Kmaterialize ?",
+                "type"      =>  "confirm",
+                "yes"       =>  function(array &$result){
+                    $result['app_css_framework_source'] = "github";
+                    $result['app_css_framework_author'] = "kekefreedog";
+                    $result['app_css_framework_package'] = "Kmaterialize";
+                    $result['app_css_framework_dev'] = true;
+                }, 
+                "no"        =>  function(array &$result){
+                    $result['app_css_framework_source'] = "";
+                    $result['app_css_framework_author'] = "";
+                    $result['app_css_framework_package'] = "";
+                }, 
+            ],
+            # Framework css branch
+            [
+                "name"      =>  "app_css_framework_branch",
+                "label"     =>  "Which branch use ?",
+                "type"      =>  "radio",
+                "options"   =>  ['advanced', 'basic']
+            ],
+            # Framework css theme
+            [
+                "name"      =>  "app_css_framework_theme",
+                "label"     =>  "Which theme use ?",
+                "type"      =>  "radio",
+                "options"   =>  [
+                    'sample',
+                    'vertical-dark-menu',
+                    'vertical-gradient-menu',
+                    'vertical-modern-menu',
+                    'vertical-menu-nav-dark',
+                    'horizontal-menu'
+                ],
+                "parent"    =>  [
+                    "name"      =>  "app_css_framework_branch",
+                    "operator"  =>  "equal",
+                    "value"     =>  "advanced"
+                ]
+            ],
+            # Framework Js
+            [
+                "label"     =>  "Load LuckyJS ? 🐶",
+                "type"      =>  "confirm",
+                "yes"       =>  function(array &$result){
+                    $result['app_js_framework_source'] = "npm";
+                    $result['app_js_framework_author'] = "kekefreedog";
+                    $result['app_js_framework_package'] = "@kekefreedog/luckyjs";
+                    $result['app_js_framework_dev'] = true;
+                }, 
+                "no"        =>  function(array &$result){
+                    $result['app_js_framework_source'] = "";
+                    $result['app_js_framework_author'] = "";
+                    $result['app_js_framework_package'] = "";
+                    $result['app_js_framework_dev'] = "";
+                }, 
+            ],
+            # Ready
+            [
+                "label"     =>  'Press [enter] key and let\'s go ! 🔥🔥🔥',
+                "type"      =>  "confirm",
+                "no"        =>  function(){
+                    exit();
+                }, 
+            ]
 
-        # Set folders
-        $folders = [];
+        ];
 
-        # Explode __file__
-        foreach(['/', '//', '\'', '\\'] AS $value)
+        # Execute inputs
+        $this->execute($inputs, $this->result);
 
-            # If current dir includes current value
-            if(strpos(__DIR__, $value) !== false)
-
-                # Explode folders
-                $folders = explode($value, str_replace(self::NAME_PROHIBITED, "", __DIR__));
-
-        # Clean empty values in folder
-        $folders = array_filter($folders);
-
-        # Get last name
-        $nameSupposed = empty($folders) ? "" : array_pop($folders);
-
-        # 1. Ask name
-        while( 
-            in_array(
-                (
-                    $this->data['app_name'] = 
-                        trim(
-                            readline('1. Name of your application : '.($nameSupposed ? '('.$nameSupposed.') ' : ''))
-                        )
-                    ),
-                self::NAME_PROHIBITED
-            )
-        )
-                    
-            echo '"'.$this->data['app_name'].'" is not allowed ! ⚠️'.PHP_EOL;
-
-        # Check $this->data['name']
-        if(!$this->data['app_name'])
-
-            # Set value
-            $this->data['app_name'] = $nameSupposed ? $nameSupposed : 'LuckyApp';
-
-
-        # 2-1. Ask if you want to use Kmaterialize
-        while( 
-            !in_array(
-                (
-                    $kmaterialize = 
-                        readline('2-1. Do you want use Kmaterialize ? [Yes] or [No] : ')
-                    ),
-                ['Yes', 'No']
-            )
-        )
-                    
-            echo '"'.$kmaterialize.'" is not valid ! ⚠️'.PHP_EOL;
-
-        # Check if users want use Kmaterialize
-        if($kmaterialize == 'Yes'){
-
-            # Set css framework
-            $this->data['app_css_framework_source'] = "github";
-            $this->data['app_css_framework_author'] = "kekefreedog";
-            $this->data['app_css_framework_package'] = "Kmaterialize";
-
-            # 2-2. Ask if user wants use Kmaterialize basic or advanced
-            while( 
-                !in_array(
-                    (
-                        $this->data['app_css_framework_branch'] = 
-                            readline('2-2. Load Kmaterialize Basic [0] or Advanced [1] ? [0] or [1] : ')
-                        ),
-                    ['0', 0, '1', 1]
-                )
-            )
-                        
-                echo '"'.$this->data['app_css_framework_branch'].'" is not valid ! ⚠️'.PHP_EOL;
-
-            # Set css framwork branch (depending of the precedent answer)
-            $this->data['app_css_framework_branch'] = intval($this->data['app_css_framework_branch']) ? 
-                'advanced' : 
-                    'basic'; 
-
-        }
-
-        # Check if users want use Kmaterialize
-        if($this->data['app_css_framework_branch'] == 'advanced'){
-
-            # Theme possible
-            $themes = [
-                0   =>  'sample',
-                1   =>  'vertical-dark-menu',
-                2   =>  'vertical-gradient-menu',
-                3   =>  'vertical-modern-menu',
-                4   =>  'vertical-menu-nav-dark',
-                5   =>  'horizontal-menu'
-            ];
-
-            # Echo message
-            echo  '2-3. Which theme use ?'.PHP_EOL;
-
-            # Iteration des themes
-            foreach($themes as $keyTheme => $valueTheme)
-                
-                # Dsiplay choice
-                echo "      - $valueTheme [$keyTheme]".PHP_EOL;
-
-            # 2-2. Ask if user wants use Kmaterialize basic or advanced
-            while( 
-                !in_array(
-                    (
-                        $this->data['app_css_framework_theme'] = 
-                            readline('[0], [1], [2], [3], [4] or [5] : ')
-                        ),
-                    ['0', 0, '1', 1, '2', 2, '3', 3, '4', 4, '5', 5]
-                )
-            )
-                        
-                echo '"'.$this->data['app_css_framework_theme'].'" is not valid ! ⚠️'.PHP_EOL;
-
-            # Set css framwork branch (depending of the precedent answer)
-            $this->data['app_css_framework_theme'] = $themes[$this->data['app_css_framework_theme']];
-
-        }
-
-        # 3. Ask if you want to use interal auth
-        while( 
-            !in_array(
-                (
-                    $this->data['auth_internal'] = 
-                        readline('3. Use internal auth script ? [Yes] or [No] : ')
-                    ),
-                ['Yes', 'No']
-            )
-        )
-                    
-            echo '"'.$this->data['auth_internal'].'" is not valid ! ⚠️'.PHP_EOL;
-
-        # Echo en
-        echo 
-            PHP_EOL,
-            "------------------------------------------------(✔️ )".PHP_EOL,
-            PHP_EOL,
-            'We are ready to create "'.$this->data['app_name'].'"'.PHP_EOL
-        ;
-
-        # Ready to create 
-        readline('Press [enter] key and let\'s go ! 🔥🔥🔥');
-
-        # Script for setup the project
-        new \LuckyPHP\App\Setup($this->data, __DIR__."/../../../../../");
+        # Now setup the project
+        new Setup($this->result, __DIR__."/../../../../../");
 
     }
     
