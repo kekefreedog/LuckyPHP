@@ -135,15 +135,19 @@ class Files{
 
     }
 
+    /**********************************************************************************
+     * Action about composer.json
+     */
+
     /** Update composer.json
      * @param string $filepath File path of composer file
      * @return string json content to put into composer.json
      */
-    public function composerUpdate(string $filepath = ""){
+    public static function composerUpdate(string $filepath = ""){
 
         # Check filepath
         if(!$filepath)
-            $filepath = __ROOT_APP__."/composer.json";
+            $filepath = self::COMPOSER_DEFAULT_PATH;
 
         # Check composer.json exist
         if($filepath && is_file($filepath)){
@@ -186,6 +190,78 @@ class Files{
         return json_encode($object, JSON_PRETTY_PRINT);
 
     }
+
+    /** Clear composer.json
+     * @param string $filepath File path of composer file
+     * @return string json content to put into composer.json
+     */
+    public static function composerClear(string $filepath = ""){
+
+        # Check filepath
+        if(!$filepath)
+            $filepath = self::COMPOSER_DEFAULT_PATH;
+
+        # Check composer.json exist
+        if($filepath && is_file($filepath)){
+
+            // Get raw data
+            $raw = file_get_contents($filepath);
+
+            // Parse json
+            $object = json_decode($raw, true);
+
+        # If not file exists
+        }else{
+
+            # Create raw
+            $raw = null;
+
+            # Create object
+            $object = [];
+
+        }
+
+        /** Remove that from object :
+         * 
+         *  "autoload": {
+         *      "psr-4": {
+         *          "App\\": [
+         *              "src/"
+         *          ]
+         *      }
+         *  }
+         * 
+         */
+
+        # Set result with difference between twwo array
+        $result = array_diff_key($object, self::COMPOSER_DEFAULT_SETTINGS);
+
+        // Check if update change anything
+        if(json_encode($result) === $raw)
+            return $raw;
+
+        // Return object
+        return json_encode($object, JSON_PRETTY_PRINT);
+
+    }
+
+    # Default composer path
+    private const COMPOSER_DEFAULT_PATH = __ROOT_APP__."/composer.json";
+
+    # Default settings
+    private const COMPOSER_DEFAULT_SETTINGS = [
+        "autoload"  =>  [
+            "psr-4"     =>  [
+                "App\\"     =>  [
+                    "src"
+                ]
+            ]
+        ]
+    ];
+
+    /**********************************************************************************
+     * Action about package.json
+     */
 
     /** Update package.json
      * 

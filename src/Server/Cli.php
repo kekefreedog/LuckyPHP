@@ -19,6 +19,7 @@ namespace  LuckyPHP\Server;
  */
 use \LuckyPHP\Server\Config;
 use \League\CLImate\CLImate;
+use \LuckyPHP\File\Files;
 use \LuckyPHP\App\Setup;
 
 /** Class page
@@ -379,22 +380,75 @@ class Cli{
      * 
      */
     private function delete(){
+        
+        # Break line
+        $this->br();
+
+        # List of inputs
+        $inputs = [
+            [
+                "label"     =>  "Are you sure to delete your application ?",
+                "type"      =>  "confirm",
+                "no"        =>  function(array &$result){
+                    # Message
+                    $this->success("Your application is safe !");
+                    #Exit
+                    exit;
+                }, 
+            ],
+        ];
+
+        # Execute inputs
+        $this->execute($inputs);
 
         # Content to keep in the root level
         $originalContent = [
-            "vendor",
-            "composer.json",
-            "composer.lock",
+            "vendor"        =>  null,
+            "composer.json" =>  function(string $path = ""){
+                $data = Files::composerClear($path);
+                file_put_contents($path, $data);
+                $this->success('Your application has been deleted with success.');
+            },
+            "composer.lock" =>  null,
         ];
 
-        print_r(__DIR__);
+        # Set root
+        $root = __DIR__."/../../../../../";
+        
+        # List items 
+        $items = scandir($root);
+
+        # Check $items
+        if(!empty($items))
+
+            # Iterations des items
+            foreach($items as $item)
+                
+                # Check it's not a file to delete
+                if(array_key_exists($item, $originalContent)){
+
+                    # Check item has custom action callable
+                    if(is_callable($originalContent[$item]))
+
+                        # Execute action with path as argument
+                        $originalContent[$item]("$root/$item");
+
+                }else
+                # Else delete file
+                if(!in_array($item, [".", ".."])){
+
+                    // Delete current item
+                    shell_exec("rm -rf " . "$root/$item");
+
+                }
+        
 
     }
     
     /** Sandbox
      *  
      */
-    public function sandbox(){
+    private function sandbox(){
 
         # Welcome
         $this->welcome();
@@ -588,6 +642,19 @@ class Cli{
 
         # Display message
         $instance->orange($result);
+
+    }
+
+    /** Breakline
+     * 
+     */
+    public static function br(string $message = "", bool $icon = true){
+
+        # New instance
+        $instance = new CLImate;
+
+        # Display message
+        $instance->br();
 
     }
 
