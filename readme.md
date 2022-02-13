@@ -88,11 +88,11 @@ Key features :
 
 Command for install stable version :
 ```php
-composer require kekefreedog/luckyphp:"dev-main" 
+composer require kekefreedog/luckyphp 
 ```
 Command for install beta version
 ```php
-composer require kekefreedog/luckyphp:"dev-main" 
+composer require kekefreedog/luckyphp:"dev-dev" 
 ```
 
 ### Setup
