@@ -449,7 +449,7 @@ class Cli{
                 },
                 "default"   => Config::APP_NAME_DEFAULT,
             ],
-            # Framework
+            # Framework css
             [
                 "label"     =>  "Use Kmaterialize ?",
                 "type"      =>  "confirm",
@@ -457,6 +457,7 @@ class Cli{
                     $result['app_css_framework_source'] = "github";
                     $result['app_css_framework_author'] = "kekefreedog";
                     $result['app_css_framework_package'] = "Kmaterialize";
+                    $result['app_css_framework_dev'] = true;
                 }, 
                 "no"        =>  function(array &$result){
                     $result['app_css_framework_source'] = "";
@@ -464,14 +465,14 @@ class Cli{
                     $result['app_css_framework_package'] = "";
                 }, 
             ],
-            # Framework branch
+            # Framework css branch
             [
                 "name"      =>  "app_css_framework_branch",
                 "label"     =>  "Which branch use ?",
                 "type"      =>  "radio",
                 "options"   =>  ['advanced', 'basic']
             ],
-            # Framwork theme
+            # Framework css theme
             [
                 "name"      =>  "app_css_framework_theme",
                 "label"     =>  "Which theme use ?",
@@ -489,6 +490,23 @@ class Cli{
                     "operator"  =>  "equal",
                     "value"     =>  "advanced"
                 ]
+            ],
+            # Framework Js
+            [
+                "label"     =>  "Load LuckyJS ? 🐶",
+                "type"      =>  "confirm",
+                "yes"       =>  function(array &$result){
+                    $result['app_js_framework_source'] = "npm";
+                    $result['app_js_framework_author'] = "kekefreedog";
+                    $result['app_js_framework_package'] = "@kekefreedog/luckyjs";
+                    $result['app_js_framework_dev'] = true;
+                }, 
+                "no"        =>  function(array &$result){
+                    $result['app_js_framework_source'] = "";
+                    $result['app_js_framework_author'] = "";
+                    $result['app_js_framework_package'] = "";
+                    $result['app_js_framework_dev'] = "";
+                }, 
             ],
             # Ready
             [

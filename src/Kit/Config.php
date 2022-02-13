@@ -135,6 +135,38 @@ class Config{
                         'type'      =>  'VARCHAR',
                         'default'   =>  null,
                     ],
+                    # Dev
+                    [
+                        'name'      =>  'app_css_framework_dev',
+                        'type'      =>  'BOOLEAN',
+                        'default'   =>  false,
+                    ],
+            # Js
+                # Framework
+                    # Source
+                    [
+                        'name'      =>  'app_js_framework_source',
+                        'type'      =>  'VARCHAR',
+                        'default'   =>  null,
+                    ],
+                    # Author
+                    [
+                        'name'      =>  'app_js_framework_author',
+                        'type'      =>  'VARCHAR',
+                        'default'   =>  null,
+                    ],
+                    # Package
+                    [
+                        'name'      =>  'app_js_framework_package',
+                        'type'      =>  'VARCHAR',
+                        'default'   =>  null,
+                    ],
+                    # Dev
+                    [
+                        'name'      =>  'app_js_framework_dev',
+                        'type'      =>  'BOOLEAN',
+                        'default'   =>  false,
+                    ],
             # Templates
                 # Engine
                     # php

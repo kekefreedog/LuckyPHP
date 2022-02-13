@@ -49,6 +49,14 @@ class Forms{
                 $input :
                     [];
 
+        # Type Boolean
+        elseif(substr(trim($params['type']), 0, 4) == "BOOL"):
+
+            # Check & clean array
+            $result['value'] = $input || !in_array($input, ["false", "null"]) ?
+                true :
+                    false;
+
         endif;
 
         # Return reponse
