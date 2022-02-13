@@ -348,12 +348,14 @@ class Cli{
                     $result['app_js_framework_source'] = "npm";
                     $result['app_js_framework_author'] = "kekefreedog";
                     $result['app_js_framework_package'] = "@kekefreedog/luckyjs";
+                    $result['app_js_framework_branch'] = "main";
                     $result['app_js_framework_dev'] = true;
                 }, 
                 "no"        =>  function(array &$result){
                     $result['app_js_framework_source'] = "";
                     $result['app_js_framework_author'] = "";
                     $result['app_js_framework_package'] = "";
+                    $result['app_js_framework_branch'] = "";
                     $result['app_js_framework_dev'] = "";
                 }, 
             ],
@@ -405,8 +407,11 @@ class Cli{
         $originalContent = [
             "vendor"        =>  null,
             "composer.json" =>  function(string $path = ""){
+                # Return data with legacy parameters
                 $data = Files::composerClear($path);
+                # Update file content
                 file_put_contents($path, $data);
+                # Display success response 
                 $this->success('Your application has been deleted with success.');
             },
             "composer.lock" =>  null,

@@ -264,17 +264,17 @@ class Files{
      */
 
     /** Update package.json
-     * 
+     * @param string $filepath File path of package file
+     * @return string
      */
-    public function packageUpdate($filepath){
+    public function packageUpdate(string $filepath = ""){
 
-        /** Info package
-         * 
-         */
-        $source = "github";
-        $author = "kekefreedog";
-        $package = "Kmaterialize";
-        $branch = "advanced";
+        # Set config 
+        $config = Config::read('app');
+
+        # Check filepath
+        if(!$filepath)
+            $filepath = self::COMPOSER_DEFAULT_PATH;
 
         // Check composer.json exist
         if(is_file($filepath)){
@@ -289,10 +289,55 @@ class Files{
 
             $object = [];
 
-        # Set default object
+        /** Set css framework
+         * 
+         */
 
-        # Set dependency
-        $object["dependencies"][$package] = ($source&&$branch?"$source:$author/":"").$package.($branch?"#$branch":"");
+        # Iteration of needed parameters
+        foreach(['source', 'author', 'package', 'branch', 'theme', 'dev'] as $parameter)
+
+            # Set value of parameter
+            $$parameter = $config['app']['css']['framework'][$parameter] ??
+                (
+                    $parameter == "dev" ?
+                        true :
+                            ""
+                );
+
+        # Check the minimum of arguments
+        if($package)
+            
+            # Set dependency
+            $object[($dev?"devD":"d")."ependencies"][$package] = 
+                ($source&&$branch?"$source:$author/":"").$package.($branch?"#$branch":"")
+            ;
+
+        /** Set js framework
+         * 
+         */
+
+        # Iteration of needed parameters
+        foreach(['source', 'author', 'package', 'branch', 'theme', 'dev'] as $parameter)
+
+            # Set value of parameter
+            $$parameter = $config['app']['js']['framework'][$parameter] ??
+                (
+                    $parameter == "dev" ?
+                        true :
+                            ""
+                );
+
+        # Check the minimum of arguments
+        if($package)
+            
+            # Set dependency
+            $object[($dev?"devD":"d")."ependencies"][$package] = 
+                ($source&&$branch?"$source:$author/":"").$package.($branch?"#$branch":"")
+            ;
+
+        /** Set other dependencies
+         * 
+         */
 
         # Set dev dependencies
         $object["devDependencies"]["css-loader"]="^6.5.1";
@@ -315,6 +360,9 @@ class Files{
         return json_encode($object, JSON_PRETTY_PRINT);
 
     }
+
+    # Default package path
+    private const PACKAGE_DEFAULT_PATH = __ROOT_APP__."/package.json";
 
     /** Js Import Write
      * 
