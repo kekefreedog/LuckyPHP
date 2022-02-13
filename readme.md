@@ -84,11 +84,19 @@ Key features :
 
 ## Getting Started
 
-### Setup
+### Install
 
+Command for install stable version :
 ```php
 composer require kekefreedog/luckyphp:"dev-main" 
 ```
+Command for install beta version
+```php
+composer require kekefreedog/luckyphp:"dev-main" 
+```
+
+### Setup
+
 ```php
 php -f vendor/kekefreedog/luckyphp/bin/setup.php
 ```
