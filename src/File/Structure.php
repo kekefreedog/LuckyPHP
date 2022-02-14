@@ -50,6 +50,12 @@ class Structure extends Files{
                 # Case where structure is created in sandbox
                 __ROOT_APP__."../../";
 
+        # Create path if not exists
+        if(!is_dir($path))
+
+            # Create current folder
+            mkdir($path, 0777, true);
+
         # Iteration of folders
         foreach($folders as $folderName => $folderContent):
 
@@ -129,14 +135,6 @@ class Structure extends Files{
                     is_array($folderContent['folders']) &&
                     !empty($folderContent['folders'])
                 ):
-    
-                    # check path exist
-                    #
-                    if(!is_dir($path.$folderName))
-        
-                        # Create current folder
-                        #
-                        mkdir($path.$folderName, 0777, true);
 
                     # Call function
                     $this->treeFolderGenerator($folderContent['folders'], $path.$folderName, $action);
