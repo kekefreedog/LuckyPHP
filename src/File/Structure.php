@@ -40,7 +40,7 @@ class Structure extends Files{
         $path = rtrim($path, '/').'/';
 
         # Check arguments
-        if(!in_array($action, ['create', 'update', 'delete']))
+        if(!in_array($action, self::FOLDER_GENERATOR_ACTION))
             return false;
 
         # Determine source root
@@ -128,10 +128,20 @@ class Structure extends Files{
                     isset($folderContent['folders']) &&
                     is_array($folderContent['folders']) &&
                     !empty($folderContent['folders'])
-                )
+                ):
+    
+                    # check path exist
+                    #
+                    if(!is_dir($path.$folderName))
+        
+                        # Create current folder
+                        #
+                        mkdir($path.$folderName, 0777, true);
 
                     # Call function
                     $this->treeFolderGenerator($folderContent['folders'], $path.$folderName, $action);
+
+                endif;
 
             # Action delete
             }elseif($action == 'delete')
@@ -145,5 +155,10 @@ class Structure extends Files{
         endforeach;
         
     }
+
+    /** Folder Generator Actions
+     * 
+     */
+    public const FOLDER_GENERATOR_ACTION = ['create', 'update', 'delete'];
 
 }
