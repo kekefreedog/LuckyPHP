@@ -92,13 +92,6 @@ class Structure{
                                 ],
                                 'module'    =>  []
                             ],
-                            'json'      =>  [
-                                'folders'   =>  [
-                                    'token'    =>  [
-
-                                    ]
-                                ]
-                            ],
                             'files'     =>  [
                                 'app.js'    =>  [
                                     'source'    =>  'resources/js/app.js',
@@ -109,6 +102,12 @@ class Structure{
                                 'bundle.js'    =>  [
                                     'source'    =>  'resources/js/bundle.js',
                                 ],
+                            ]
+                        ],
+                        'json'      =>  [
+                            'folders'   =>  [
+                                'token'    =>  [
+                                ]
                             ]
                         ],
                         'hbs'       =>  [
