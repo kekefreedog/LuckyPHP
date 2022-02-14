@@ -521,7 +521,7 @@ class Cli{
                 "label"     =>  "Load LuckyJS ? 🐶",
                 "type"      =>  "confirm",
                 "yes"       =>  function(array &$result){
-                    $result['app_js_framework_source'] = "npm";
+                    $result['app_js_framework_source'] = "github";
                     $result['app_js_framework_author'] = "kekefreedog";
                     $result['app_js_framework_package'] = "@kekefreedog/luckyjs";
                     $result['app_js_framework_dev'] = true;
