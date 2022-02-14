@@ -17,6 +17,7 @@ namespace  LuckyPHP\App;
 /** Use other library
  * 
  */
+use LuckyPHP\Extra\Kmaterialize\Setup as KmaterializeSetup;
 use LuckyPHP\Kit\Structure as StructureKit;
 use LuckyPHP\Kit\Routes as RoutesKit;
 use LuckyPHP\Kit\Config as ConfigKit;
@@ -102,6 +103,12 @@ class Setup{
          */
         $this->npmUpdate();
         if($cliMessage) Cli::success("JS dependancies installed");
+
+        /** Load Extra Assets
+         * 
+         */
+        $this->extraAssetsLoad();
+        if($cliMessage) Cli::success("Extra assets loaded");
 
         # Web Pack Builder
         $this->webpackBuilder();
@@ -220,6 +227,16 @@ class Setup{
 
         # Execute command
         shell_exec('npm update');
+
+    }
+
+    /** Extra assets loader
+     * 
+     */
+    private function extraAssetsLoad(){
+
+        # Kmaterialize
+        new KmaterializeSetup();
 
     }
 
