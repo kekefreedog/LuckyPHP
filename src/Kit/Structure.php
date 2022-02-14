@@ -92,6 +92,13 @@ class Structure{
                                 ],
                                 'module'    =>  []
                             ],
+                            'json'      =>  [
+                                'folders'   =>  [
+                                    'token'    =>  [
+
+                                    ]
+                                ]
+                            ],
                             'files'     =>  [
                                 'app.js'    =>  [
                                     'source'    =>  'resources/js/app.js',
@@ -174,7 +181,10 @@ class Structure{
                     'function'      => [
                         'name'          =>  'packageUpdate',
                     ]
-                ], 
+                ],
+                '.gitignore'    =>  [
+                    'source'        =>  'resources/etc/.gitignore',
+                ],
                 'webpack.prod.js' =>  [
                     'source'    =>  'resources/js/webpack/webpack.prod.js',
                 ],

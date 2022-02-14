@@ -457,98 +457,21 @@ class Cli{
 
         # Welcome
         $this->welcome();
+        
+        # New instance
+        $climate = new CLImate;
 
-        # List of inputs
-        $inputs = [
-            # App Name
-            [
-                "name"      =>  "app_name",
-                "label"     =>  "Name of your application ? [".Config::supposedNameGet()."]",
-                "type"      =>  "input",
-                "accept"    =>  function($response){
-                    return(
-                        in_array($response, Config::APP_NAME_PROHIBITED) ?
-                            false :
-                                true
-                    );
-                },
-                "default"   => Config::APP_NAME_DEFAULT,
-            ],
-            # Framework css
-            [
-                "label"     =>  "Use Kmaterialize ?",
-                "type"      =>  "confirm",
-                "yes"       =>  function(array &$result){
-                    $result['app_css_framework_source'] = "github";
-                    $result['app_css_framework_author'] = "kekefreedog";
-                    $result['app_css_framework_package'] = "Kmaterialize";
-                    $result['app_css_framework_dev'] = true;
-                }, 
-                "no"        =>  function(array &$result){
-                    $result['app_css_framework_source'] = "";
-                    $result['app_css_framework_author'] = "";
-                    $result['app_css_framework_package'] = "";
-                }, 
-            ],
-            # Framework css branch
-            [
-                "name"      =>  "app_css_framework_branch",
-                "label"     =>  "Which branch use ?",
-                "type"      =>  "radio",
-                "options"   =>  ['advanced', 'basic']
-            ],
-            # Framework css theme
-            [
-                "name"      =>  "app_css_framework_theme",
-                "label"     =>  "Which theme use ?",
-                "type"      =>  "radio",
-                "options"   =>  [
-                    'sample',
-                    'vertical-dark-menu',
-                    'vertical-gradient-menu',
-                    'vertical-modern-menu',
-                    'vertical-menu-nav-dark',
-                    'horizontal-menu'
-                ],
-                "parent"    =>  [
-                    "name"      =>  "app_css_framework_branch",
-                    "operator"  =>  "equal",
-                    "value"     =>  "advanced"
-                ]
-            ],
-            # Framework Js
-            [
-                "label"     =>  "Load LuckyJS ? 🐶",
-                "type"      =>  "confirm",
-                "yes"       =>  function(array &$result){
-                    $result['app_js_framework_source'] = "github";
-                    $result['app_js_framework_author'] = "kekefreedog";
-                    $result['app_js_framework_package'] = "@kekefreedog/luckyjs";
-                    $result['app_js_framework_dev'] = true;
-                }, 
-                "no"        =>  function(array &$result){
-                    $result['app_js_framework_source'] = "";
-                    $result['app_js_framework_author'] = "";
-                    $result['app_js_framework_package'] = "";
-                    $result['app_js_framework_dev'] = "";
-                }, 
-            ],
-            # Ready
-            [
-                "label"     =>  'Press [enter] key and let\'s go ! 🔥🔥🔥',
-                "type"      =>  "confirm",
-                "no"        =>  function(){
-                    exit();
-                }, 
-            ]
+        # Welcome
+        $this->welcome();
 
-        ];
+        $progress = $climate->progress()->total(100);
 
-        # Execute inputs
-        $this->execute($inputs, $this->result);
+        for ($i = 0; $i <= 100; $i++) {
+        $progress->current($i);
 
-        # Now setup the project
-        new Setup($this->result, __DIR__."/../../tests/sandbox");    
+        // Simulate something happening
+        usleep(80000);
+        } 
 
     }
 
