@@ -74,6 +74,8 @@ class Strings{
 			'/[’‘‹›‚]/u'    =>   ' ', // Literally a single quote
 			'/[“”«»„]/u'    =>   ' ', // Double quote
 			'/ /'           =>   ' ', // nonbreaking space (equiv. to 0x160),
+			'"'		=>   '',
+			"'"		=>   '',	
 			'/[(]/'			=>	 '',  // Round brackets
 			'/[)]/'			=>	 '',  // Round brackets
 			'/(_-_)/'		=>	 '_',
