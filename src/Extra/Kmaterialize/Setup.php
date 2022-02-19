@@ -35,7 +35,7 @@ class Setup{
     public function __construct(){
 
         # Sanity check
-        if(!$this->sanityCheck) return;
+        if(!$this->sanityCheck()) return;
 
         # Set config
         $this->config = Config::read('app');
