@@ -127,17 +127,11 @@ class Setup{
         # Iteration schema
         foreach($schema as $folder => $content):
 
-            # Create folder
-            mkdir($target.$folder, 0777, true);
-
             # Iteration of content
             foreach($content as $file)
 
-                # Check file exist
-                if(!file_exists("$source/$folder/$file"))
-
-                    # Copy
-                    copy("$source.$folder/$file", "$target/$folder/$file");
+                # Copy
+                copy("$source.$folder/$file", "$target/$folder/$file");
 
         endforeach;
 
