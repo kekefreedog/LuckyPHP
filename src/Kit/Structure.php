@@ -162,7 +162,11 @@ class Structure{
                         ],
                     ],
                     'folders'   =>  [
-                        'Controllers'   =>  []
+                        'Controllers'   =>  [
+                            'files'         =>  [
+                                'source'        =>  'resources/php/HomeAction.php',
+                            ]
+                        ]
                     ],
                 ],
                 # Documentation of the app
