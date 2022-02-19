@@ -12,8 +12,8 @@
 /** Dependances
  * 
  */
-import Action from "./LuckyJs/module/Action";
-import LuckyJs from "./LuckyJs/Lucky";
+import Action from "@kekefreedog/luckyjs/module/Action";
+import LuckyJs from "@kekefreedog/luckyjs/Lucky";
 
 /** Actions
  * 

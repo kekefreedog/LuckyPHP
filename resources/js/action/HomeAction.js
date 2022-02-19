@@ -12,7 +12,7 @@
 /** Dependances
  * 
  */
-import PageAction from "../LuckyJs/base/PageAction";
+import PageAction from "@kekefreedog/luckyjs/base/PageAction";
 
 /** Home action
  *  

@@ -70,6 +70,22 @@ class Structure{
                         ],
                         'js'        =>  [
                             'folders'   =>  [
+                                'action'    =>  [
+                                    'files'     => [
+                                        'source'    =>  'resources/js/action/HomeAction.js',
+                                    ]
+                                ],
+                                'component'    =>  [
+                                    'files'     => [
+                                        'source'    =>  'resources/js/component/Header.js',
+                                    ],
+                                    'files'     => [
+                                        'source'    =>  'resources/js/component/Search.js',
+                                    ],
+                                    'files'     => [
+                                        'source'    =>  'resources/js/component/Sidenav.js',
+                                    ],
+                                ],
                                 'style'     =>  [
                                     'files'     => [
                                         'framework.js' =>  [
@@ -90,7 +106,7 @@ class Structure{
                                         ],
                                     ]
                                 ],
-                                'module'    =>  []
+                                'module'    =>  [],
                             ],
                             'files'     =>  [
                                 'app.js'    =>  [
