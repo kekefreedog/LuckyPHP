@@ -12,7 +12,7 @@
 /** Dependances
  * 
  */
-import Dom from "./../src/module/Dom";
+import Dom from "@kekefreedog/luckyjs/module/Dom";
 import tippy from "tippy.js";
 
 /** Page functions

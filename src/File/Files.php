@@ -352,9 +352,9 @@ class Files{
         $object["devDependencies"]["webpack-cli"]="^4.9.1";
 
         # Set scripts
-        $object["scripts"]["webpack-dev"] = "webpack --mode development";
-        $object["scripts"]["webpack-build"] = "webpack --mode production";
-        $object["scripts"]["webpack-watch"] = "webpack --watch --mode=development";
+        $object["scripts"]["webpack-dev"] = "webpack --mode development --config ./webpack.dev.js";
+        $object["scripts"]["webpack-build"] = "webpack --mode production --config ./webpack.prod.js";
+        $object["scripts"]["webpack-watch"] = "webpack --watch --mode=development --config ./webpack.prod.js";
 
         # Return object
         return json_encode($object, JSON_PRETTY_PRINT);
@@ -402,7 +402,7 @@ class Files{
         # Get theme and package
         $theme = $config['app']['css']['framework']['theme'] ?? "";
         $package = $config['app']['css']['framework']['package'] ?? "";
-        $result = "./../../../node_modules/$package/dist/css/$theme/kmaterial.min.css";
+        $result = "$package/dist/css/$theme/kmaterial.min.css";
 
         # Check theme and package
         if(

@@ -12,10 +12,10 @@
 /** Dependances
  * 
  */
-import Action from "./../src/module/Action";
-import Popup from "./../src/module/Popup";
-import Copy from "./../src/module/Copy";
-import Dom from "./../src/module/Dom";
+import Action from "@kekefreedog/luckyjs/module/Action";
+import Popup from "@kekefreedog/luckyjs/module/Popup";
+import Copy from "@kekefreedog/luckyjs/module/Copy";
+import Dom from "@kekefreedog/luckyjs/module/Dom";
 import Swal from 'sweetalert2';
 import tippy from 'tippy.js';
 
