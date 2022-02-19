@@ -79,7 +79,8 @@ class Routes{
                 'methods'   =>  [
                     '*'
                 ],
-                'response'   =>  'html',
+                'response'  =>  'html',
+                'error'     => true,
             ],
 
         ],

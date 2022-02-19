@@ -17,6 +17,7 @@ namespace  LuckyPHP\Server;
 /** Dependancies
  * 
  */
+use \LuckyPHP\File\Controller;
 use \LuckyPHP\Server\Config;
 use \League\CLImate\CLImate;
 use \LuckyPHP\File\Files;
@@ -273,6 +274,37 @@ class Cli{
     /**********************************************************************************
      * Actions
      */
+
+    /** Update Routes
+     * 
+     */
+    private function updateRoutes(){
+
+        # Welcome
+        $this->welcome();
+
+        # List of inputs
+        $inputs = [
+            [
+                "label"     =>  "Update Routes ?",
+                "type"      =>  "confirm",
+                "yes"       =>  function(array &$result){
+                    # Check and update controller
+                    new Controller();
+                    # Message
+                    $this->success("Controllers updated");
+                }, 
+                "no"        =>  function(array &$result){
+                    # Message
+                    $this->success("Controllers not updated");
+                }, 
+            ],
+        ];
+
+        # Execute inputs
+        $this->execute($inputs, $this->result);
+
+    }
 
     /** Setup action
      * 

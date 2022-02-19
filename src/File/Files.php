@@ -34,7 +34,7 @@ class Files{
         # Set result
         $result =
             "/*******************************************************".PHP_EOL.
-            " * Copyright (C) 2019-2021 Kévin Zarshenas".PHP_EOL.
+            " * Copyright (C) 2019-2022 Kévin Zarshenas".PHP_EOL.
             " * kevin.zarshenas@gmail.com".PHP_EOL.
             " *".PHP_EOL.
             " * This file is part of LuckyPHP.".PHP_EOL.
@@ -58,7 +58,7 @@ class Files{
         # Set result
         $result = 
             "# ******************************************************".PHP_EOL.
-            "#  Copyright (C) 2019-2021 Kévin Zarshenas".PHP_EOL.
+            "#  Copyright (C) 2019-2022 Kévin Zarshenas".PHP_EOL.
             "#  kevin.zarshenas@gmail.com".PHP_EOL.
             "#  ".PHP_EOL.
             "#  This file is part of LuckyPHP.".PHP_EOL.

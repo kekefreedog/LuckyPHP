@@ -23,6 +23,7 @@ use LuckyPHP\Kit\Routes as RoutesKit;
 use LuckyPHP\Kit\Config as ConfigKit;
 use LuckyPHP\Kit\Page as PageKit;
 use Symfony\Component\Yaml\Yaml;
+use LuckyPHP\File\Controller;
 use LuckyPHP\File\Structure;
 use LuckyPHP\Server\Config;
 use LuckyPHP\Code\Arrays;
@@ -79,6 +80,12 @@ class Setup{
          */
         $this->routesWrite();
         if($cliMessage) Cli::success("Site routes defined");
+
+        /** Check Controllers
+         * 
+         */
+        $this->controllerCheck();
+        if($cliMessage) Cli::success("Controller created");
 
         /** Page default information
          * 
@@ -188,6 +195,16 @@ class Setup{
         //     Files::controllerWrite($route);
 
         // endforeach;
+
+    }
+
+    /** Controller Creation
+     * 
+     */
+    private function controllerCheck(){
+
+        # Check and generated controller if needed
+        new Controller();
 
     }
 
