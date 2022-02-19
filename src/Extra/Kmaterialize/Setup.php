@@ -137,7 +137,7 @@ class Setup{
                 if(!file_exists("$source.$folder/$file"))
 
                     # Copy
-                    copy("$source.$folder/$file", "$target.$folder/$file");
+                    copy("$source.$folder/$file", "$target/$folder/$file");
 
         endforeach;
 
