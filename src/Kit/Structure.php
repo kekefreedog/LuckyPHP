@@ -73,7 +73,7 @@ class Structure{
                                 'action'    =>  [
                                     'files'     => [
                                         'HomeAction.js' =>  [
-                                            'source'    =>  'resources/js/component/HomeAction.js',
+                                            'source'    =>  'resources/js/action/HomeAction.js',
                                         ],
                                     ]
                                 ],
