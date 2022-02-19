@@ -36,6 +36,9 @@ abstract class Controller{
      */
     public function __construct(...$arguments){
 
+        # Set name
+        $this->name = substr(get_called_class(), 0, -6);
+
         # Ingest arguments
         $this->argumentsIngest($arguments);
         
