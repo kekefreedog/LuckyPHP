@@ -134,7 +134,7 @@ class Setup{
             foreach($content as $file)
 
                 # Check file exist
-                if(!file_exists("$source.$folder/$file"))
+                if(!file_exists("$source/$folder/$file"))
 
                     # Copy
                     copy("$source.$folder/$file", "$target/$folder/$file");
