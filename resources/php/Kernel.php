@@ -73,7 +73,8 @@ class Kernel{
         # Set default root
         Config::defineRoots([
             'app'       =>  __DIR__.'/../',
-            'www'       =>  __DIR__.'/../www/',
+            'www'       =>  __DIR__.'/../html/',
+            'html'      =>  __DIR__.'/../html/',
             'luckyphp'  =>  __DIR__.'/../vendor/kekefreedog/luckyphp/',
         ]);
 
@@ -84,23 +85,10 @@ class Kernel{
      */
     protected static function sanityCheck(){
         
-        try {
-
-            # Check PHP version
-            SanityCheck::checkPHPVersion("7.0.0");
-
-            # Check Host is allowed
-            SanityCheck::checkHost();
-
-            # Check MySQL version
-            SanityCheck::checkMySQLVersion("1.0.0");
-
-        }catch(Exception $e){
-
-            # Mettre en place redirection
-            echo 'Exception reçue : ',  $e->getMessage(), "\n";
-
-        }
+        # Execute sanity check
+        new SanityCheck([
+            # Other checks to call
+        ]);
         
     }
 

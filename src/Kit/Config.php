@@ -103,6 +103,19 @@ class Config{
                     'type'      =>  'ARRAY',
                     'default'   =>  [],
                 ],
+            # Sanity Check
+                # Check Hosts
+                [
+                    'name'      =>  'app_sanity_hosts',
+                    'type'      =>  'BOOLEAN',
+                    'default'   =>  true,
+                ],
+                # Check Assets compilation
+                [
+                    'name'      =>  'app_sanity_assets',
+                    'type'      =>  'BOOLEAN',
+                    'default'   =>  true,
+                ],
             # Css
                 # Framework
                     # Source

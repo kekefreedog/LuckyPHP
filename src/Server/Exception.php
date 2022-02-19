@@ -163,23 +163,29 @@ class Exception extends \Exception implements InterfaceException{
         # Check source
         if($source !== null){
 
+            # Path Log
+            $logPath = __ROOT_APP__."/logs/$source.log";
+
             # Check log file exists
-            if(!file_exists(__ROOT_APP__."/logs/$source.log")){
+            if(!file_exists($logPath)){
 
                 # Create log folder
                 mkdir(__ROOT_APP__."/logs/", 0777, true);
 
                 # Create file
-                file_put_contents(__ROOT_APP__."/logs/$source.log", "");
+                file_put_contents($logPath, "");
 
             }
 
-            # Generate log
-            error_log(
-                date("Y-m-d H:i:s", time())." : ".$this->__toString().PHP_EOL,
-                3,
-                __ROOT_APP__."/logs/$source.log"
-            );
+            # Check file permission
+            if(is_writable($logPath))
+
+                # Generate log
+                error_log(
+                    date("Y-m-d H:i:s", time())." : ".$this->__toString().PHP_EOL,
+                    3,
+                    $logPath
+                );
 
         }
 
