@@ -77,13 +77,15 @@ class Structure{
                                 ],
                                 'component'    =>  [
                                     'files'     => [
-                                        'source'    =>  'resources/js/component/Header.js',
-                                    ],
-                                    'files'     => [
-                                        'source'    =>  'resources/js/component/Search.js',
-                                    ],
-                                    'files'     => [
-                                        'source'    =>  'resources/js/component/Sidenav.js',
+                                        'Header.js' =>  [
+                                            'source'    =>  'resources/js/component/Header.js',
+                                        ],
+                                        'Search.js' =>  [
+                                            'source'    =>  'resources/js/component/Search.js',
+                                        ],
+                                        'Sidenav.js' =>  [
+                                            'source'    =>  'resources/js/component/Sidenav.js',
+                                        ],
                                     ],
                                 ],
                                 'style'     =>  [
