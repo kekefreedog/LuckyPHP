@@ -104,10 +104,10 @@ class Setup{
     private function loadComponents(){
 
         # Source
-        $source = __ROOT_APP__.self::PATH_KMATERIALIZE."dist/hbs/";
+        $source = __ROOT_APP__.self::PATH_KMATERIALIZE."/dist/hbs/";
 
         # Target
-        $target = __ROOT_APP__."resources/hbs/";
+        $target = __ROOT_APP__."/resources/hbs/";
 
         # List of elements to copy
         $schema = [
