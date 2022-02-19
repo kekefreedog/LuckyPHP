@@ -131,13 +131,6 @@ class Structure{
                             ]
                         ],
                         'hbs'       =>  [
-                            'folders'   =>  [
-                                'miscellaneous' =>  [
-                                    'files'       =>  [
-                                        'error.hbs' =>  []
-                                    ]
-                                ]
-                            ]
                         ],
                         'md'        =>  [],
                     ],
