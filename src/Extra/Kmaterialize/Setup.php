@@ -43,6 +43,9 @@ class Setup{
         # Load Kmaterial.json
         $this->loadJson();
 
+        # Load components (hbs...)
+        $this->loadComponents();
+
     }
 
     /** Sanity check
@@ -72,7 +75,23 @@ class Setup{
      */
     private function loadJson(){
 
+        # Set theme
+        $theme = $this->config['app']['css']['framework']['theme'] ?? false;
 
+        # Check theme
+        if(!$theme)
+            # Stop call
+            return;
+
+        # Set json path
+        $jsonPath = __ROOT_APP__.self::PATH_KMATERIALIZE."dist/css/$theme/kmaterial.json";
+
+        # Check file exists
+        if(is_file($jsonPath))
+
+            # Copy file in json
+            copy($jsonPath, __ROOT_APP__."resources/json/kmaterial.json");
+        
 
     }
 
@@ -81,7 +100,43 @@ class Setup{
      */
     private function loadComponents(){
 
+        # Source
+        $source = __ROOT_APP__.self::PATH_KMATERIALIZE."dist/hbs/";
 
+        # Target
+        $target = __ROOT_APP__."resources/hbs/";
+
+        # List of elements to copy
+        $schema = [
+            "miscellaneous" =>  [
+                "error.hbs",
+            ],
+            "page"          =>  [
+                "home.hbs"
+            ],
+            "structure"     =>  [
+                "head.hbs",
+                "main.hbs",
+                "sidenav.hbs"
+            ]
+        ];
+
+        # Iteration schema
+        foreach($schema as $folder => $content):
+
+            # Create folder
+            mkdir($target.$folder, 0777, true);
+
+            # Iteration of content
+            foreach($content as $file)
+
+                # Check file exist
+                if(file_exists("$source.$folder/$file"))
+
+                    # Copy
+                    copy("$source.$folder/$file", "$target.$folder/$file");
+
+        endforeach;
 
     }
 

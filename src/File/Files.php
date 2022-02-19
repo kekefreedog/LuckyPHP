@@ -350,6 +350,7 @@ class Files{
         $object["devDependencies"]["url-loader"]="^4.1.1";
         $object["devDependencies"]["webpack"]="^5.65.0";
         $object["devDependencies"]["webpack-cli"]="^4.9.1";
+        $object["devDependencies"]["@fortawesome/fontawesome-free"]= "^6.0.0";
 
         # Set scripts
         $object["scripts"]["webpack-dev"] = "webpack --mode development --config ./webpack.dev.js";
