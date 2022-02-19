@@ -163,11 +163,6 @@ class Structure{
                     ],
                     'folders'   =>  [
                         'Controllers'   =>  [
-                            'files'         =>  [
-                                'HomeAction.php'    => [
-                                    'source'        =>  'resources/php/HomeAction.php',
-                                ]
-                            ]
                         ]
                     ],
                 ],
