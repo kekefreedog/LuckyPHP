@@ -164,7 +164,9 @@ class Structure{
                     'folders'   =>  [
                         'Controllers'   =>  [
                             'files'         =>  [
-                                'source'        =>  'resources/php/HomeAction.php',
+                                'HomeAction.php'    => [
+                                    'source'        =>  'resources/php/HomeAction.php',
+                                ]
                             ]
                         ]
                     ],

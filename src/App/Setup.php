@@ -177,17 +177,17 @@ class Setup{
             return;
 
         # Iteration of routes
-        foreach(RoutesKit::DEFAULT['routes'] as $key => $route):
+        // foreach(RoutesKit::DEFAULT['routes'] as $key => $route):
 
-            # Check route name
-            $route['name'] = !isset($route['name']) || empty($route['name']) ?
-                'route_'.$key :
-                    $route['name'];
+        //     # Check route name
+        //     $route['name'] = !isset($route['name']) || empty($route['name']) ?
+        //         'route_'.$key :
+        //             $route['name'];
 
-            # Write controller of the current route
-            Files::controllerWrite($route);
+        //     # Write controller of the current route
+        //     Files::controllerWrite($route);
 
-        endforeach;
+        // endforeach;
 
     }
 
