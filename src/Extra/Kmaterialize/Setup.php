@@ -34,11 +34,11 @@ class Setup{
      */
     public function __construct(){
 
-        # Sanity check
-        if(!$this->sanityCheck()) return;
-
         # Set config
         $this->config = Config::read('app');
+
+        # Sanity check
+        if(!$this->sanityCheck()) return;
 
         # Load Kmaterial.json
         $this->loadJson();
@@ -62,7 +62,10 @@ class Setup{
             $result = false;
 
         # Check in config app
-        if($this->config['app']['css']['framework']['package'] != "Kmaterialize")
+        if(
+            !isset($this->config['app']['css']['framework']['package']) ||
+            $this->config['app']['css']['framework']['package'] != "Kmaterialize"
+        )
             $result = false;
 
         # Return result
