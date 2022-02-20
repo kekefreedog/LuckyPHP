@@ -21,6 +21,7 @@ use LuckyPHP\Extra\Kmaterialize\Setup as KmaterializeSetup;
 use LuckyPHP\Kit\Structure as StructureKit;
 use LuckyPHP\Kit\Routes as RoutesKit;
 use LuckyPHP\Kit\Config as ConfigKit;
+use LuckyPHP\Kit\Media as MediaKit;
 use LuckyPHP\Kit\Page as PageKit;
 use Symfony\Component\Yaml\Yaml;
 use LuckyPHP\File\Controller;
@@ -92,6 +93,12 @@ class Setup{
          */
         $this->pageWrite();
         if($cliMessage) Cli::success("Page informations defined");
+
+        /** Media default information
+         * 
+         */
+        $this->mediaWrite();
+        if($cliMessage) Cli::success("Media defined");
 
         /** Database setup
          * 
@@ -195,6 +202,20 @@ class Setup{
         //     Files::controllerWrite($route);
 
         // endforeach;
+
+    }
+
+    /** Config Set
+     * 
+     */
+    private function mediaWrite(){
+
+        # Write input in config > app.yml
+        file_put_contents(__ROOT_APP__.'config/media.yml', "# Media of the app".PHP_EOL.Yaml::dump(MediaKit::DEFAULT, 10));
+
+        # Check RoutesKit::DEFAULT routes
+        if(!isset(RoutesKit::DEFAULT['routes']) || empty(RoutesKit::DEFAULT['routes']))
+            return;
 
     }
 

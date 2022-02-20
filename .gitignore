@@ -9,3 +9,4 @@ sandbox
 
 # Composer
 composer.lock
+.DS_Store

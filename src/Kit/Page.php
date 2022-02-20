@@ -104,6 +104,16 @@ class Page{
                                 'content'   =>  '#2196f3'
                             ]
                         ],
+                        /** <meta name="msapplication-TileColor" content="#9f00a7">
+                         *  - Theme Color for Microsoft App
+                         */
+                        [
+                            'tag'       =>  'meta',
+                            'attributes'=>  [
+                                'name'      =>  'msapplication-TileColor',
+                                'content'   =>  '#2196f3'
+                            ]
+                        ],
                         /** <meta name="description" content="A description of the page">
                          *  - Short description of the document (limit to 150 characters)
                          *  - This content *may* be used as a part of search engine results.
