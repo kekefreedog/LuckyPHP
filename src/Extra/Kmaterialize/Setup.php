@@ -87,13 +87,13 @@ class Setup{
             return;
 
         # Set json path
-        $jsonPath = __ROOT_APP__.self::PATH_KMATERIALIZE."dist/css/$theme/kmaterial.json";
+        $jsonPath = __ROOT_APP__.self::PATH_KMATERIALIZE."/dist/css/$theme/kmaterial.json";
 
         # Check file exists
         if(is_file($jsonPath))
 
             # Copy file in json
-            copy($jsonPath, __ROOT_APP__."resources/json/kmaterial.json");
+            copy($jsonPath, __ROOT_APP__."/resources/json/kmaterial.json");
         
 
     }
