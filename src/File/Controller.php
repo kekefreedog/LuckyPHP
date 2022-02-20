@@ -199,7 +199,7 @@ class Controller{
             "/** Class for manage the workflow of the app".PHP_EOL.
             " *".PHP_EOL.
             " */".PHP_EOL.
-            "class FileDriveAction extends ControllerBase implements ControllerInterface{".PHP_EOL.
+            "class ".$name."Action extends ControllerBase implements ControllerInterface{".PHP_EOL.
             PHP_EOL.
             "    /** Constructor".PHP_EOL.
             "     *".PHP_EOL.
