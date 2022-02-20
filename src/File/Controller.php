@@ -173,7 +173,10 @@ class Controller{
 
     }
 
-    public static function dataGenerator(){
+    /** Data content generator
+     *  @param string $name Name of the root
+     */
+    public static function dataGenerator(string $name = ""){
 
         # Set result
         $result = "";
@@ -183,7 +186,10 @@ class Controller{
 
     }
 
-    public static function jsonGenerator(){
+    /** Json content generator
+     *  @param string $name Name of the root
+     */
+    public static function jsonGenerator(string $name = ""){
 
         # Set result
         $result = "";
@@ -243,7 +249,7 @@ class Controller{
 
     }
 
-    public static function errorGenerator(){
+    public static function errorGenerator(string $name = ""){
 
         # Set content
         $result = "";
@@ -259,7 +265,7 @@ class Controller{
             "/** Class for manage the workflow of the app".PHP_EOL.
             " *".PHP_EOL.
             " */".PHP_EOL.
-            "class PageNotFoundAction extends ControllerBase implements ControllerInterface{".PHP_EOL.
+            "class ".$name."Action extends ControllerBase implements ControllerInterface{".PHP_EOL.
             PHP_EOL.
             "    /** Constructor".PHP_EOL.
             "     *".PHP_EOL.
@@ -268,9 +274,6 @@ class Controller{
             PHP_EOL.
             "        # Parent constructor".PHP_EOL.
             '        parent::__construct(...$arguments);'.PHP_EOL.
-            PHP_EOL.
-            "        # Set name".PHP_EOL.
-            '        $this->name="PageNotFoundAction";'.PHP_EOL.
             PHP_EOL.
             "        # New Exception".PHP_EOL.
             '        $e = new Exception("The page you are looking for doesn\'t exist", 404);'.PHP_EOL.
