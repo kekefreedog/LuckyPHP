@@ -59,8 +59,17 @@ class Controller{
                     "error" :
                         $route['response'];
 
-                # Set method name
-                $methodName = strtolower($context)."Generator";
+                # check if custom controller
+                if(in_array($route['response'], ['favicon']))
+
+                    # Set method name
+                    $methodName = strtolower($route['response'])."Generator";
+
+                # Response controller
+                else
+
+                    # Set method name
+                    $methodName = strtolower($context)."Generator";
                     
                 # Check method exist for get content
                 if(!method_exists($this, $methodName))
@@ -249,6 +258,9 @@ class Controller{
 
     }
 
+    /** Error content generator
+     *  @param string $name Name of the root
+     */
     public static function errorGenerator(string $name = ""){
 
         # Set content
@@ -280,6 +292,70 @@ class Controller{
             PHP_EOL.
             "        # Display html".PHP_EOL.
             '        $e->getHtml();'.PHP_EOL.
+            PHP_EOL.
+            "    }".PHP_EOL.
+            PHP_EOL.
+            "    /** Response".PHP_EOL.
+            "     *".PHP_EOL.
+            "     */".PHP_EOL.
+            "    public function response(){".PHP_EOL.
+            PHP_EOL.
+            "        # Return reponse".PHP_EOL.
+            '        return $this->name;'.PHP_EOL.
+            PHP_EOL.
+            "    }".PHP_EOL.
+            "}".PHP_EOL
+        ;
+
+        # Return result
+        return $result;
+
+    }
+
+    /** Favicon content generator
+     *  @param string $name Name of the root
+     */
+    public static function faviconGenerator(string $name = "favicon"){
+
+        # Set content
+        $result = "";
+
+        # Add header
+        $result .= self::_headerLayout();
+        
+        # Add dependance
+        $result .= self::_dependanceLayout();
+
+        # Set result
+        $result .= 
+            "/** Class for manage the workflow of the app".PHP_EOL.
+            " *".PHP_EOL.
+            " */".PHP_EOL.
+            "class ".$name."Action extends ControllerBase implements ControllerInterface{".PHP_EOL.
+            PHP_EOL.
+            "    /** Constructor".PHP_EOL.
+            "     *".PHP_EOL.
+            "     */".PHP_EOL.
+            '    public function __construct(...$arguments){'.PHP_EOL.
+            PHP_EOL.
+            "        # Parent constructor".PHP_EOL.
+            '        parent::__construct(...$arguments);'.PHP_EOL.
+            PHP_EOL.
+            "        # Prepare modal".PHP_EOL.
+            '        $this->modelAction();'.PHP_EOL.
+            PHP_EOL.
+            "    /** Model action".PHP_EOL.
+            "     * ".PHP_EOL.
+            "     */".PHP_EOL.
+            "    private function modelAction(){".PHP_EOL.
+            PHP_EOL.    
+            "        # New model".PHP_EOL.
+            '        $this->newModel();'.PHP_EOL.
+            PHP_EOL.
+            "        # Set file".PHP_EOL.
+            '        $this->model->getFile($cache[\'name\'], $cache[\'path\']);'.PHP_EOL.
+            PHP_EOL.
+            "    }".PHP_EOL.
             PHP_EOL.
             "    }".PHP_EOL.
             PHP_EOL.

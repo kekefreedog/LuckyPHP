@@ -44,7 +44,11 @@ class Structure{
                         'index.php' =>  [
                             'source'    =>  'resources/php/index.php',
                         ],
-                        'manifest.json' =>  [],
+                        'manifest.json' =>  [
+                            'function'  =>  [
+                                'name'      =>  'manifestWrite',
+                            ],
+                        ],
                     ]
                 ],
                 # Ressources in css, js, hbs, md... or any other language

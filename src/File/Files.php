@@ -113,7 +113,7 @@ class Files{
 
     /** index.php
      * 
-     * Write the index.php file on www folder
+     * Write the index.php file into html folder
      * 
      */
     public function indexWrite(){
@@ -129,6 +129,39 @@ class Files{
             "# New App Initialization ".PHP_EOL.
             "new Init();".PHP_EOL
         ;
+
+        # Return reponse
+        return $reponse;
+
+    }
+
+    /** manifest.json
+     * 
+     * Write the manifest.json file into html folder
+     * 
+     */
+    public function manifestWrite(){
+
+        # Set reponse
+        $response = [
+            "name"              =>  "",
+            "short_name"        =>  "",
+            "icons"             =>  [
+                [
+                    "src"           =>  "/favicon/android-chrome-192x192.png",
+                    "sizes"         =>  "192x192",
+                    "type"          =>  "image/png"
+                ],
+                [
+                    "src"           =>  "/favicon/android-chrome-512x512.png",
+                    "sizes"         =>  "512x512",
+                    "type"          =>  "image/png"
+                ]
+            ],
+            "theme_color"       =>  "#ffffff",
+            "background_color"  =>  "#ffffff",
+            "display"           =>  "standalone"
+        ];
 
         # Return reponse
         return $reponse;
