@@ -240,7 +240,7 @@ class Page{
                             'tag'       =>  'link',
                             'attributes'=>  [
                                 'rel'       =>  'shortcut icon',
-                                'href'      =>  '/favicon/icone-ico'
+                                'href'      =>  '/favicon/icon-ico'
                             ],
                         ],
                     ]
