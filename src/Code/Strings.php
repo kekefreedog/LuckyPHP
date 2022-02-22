@@ -177,4 +177,26 @@ class Strings{
 
 	}
 
+	/** Explode reverse
+	 * @param string $boundary Delimiter
+	 * @param string $string String to process
+	 * @param int $limit Limit of explode
+	 * @return array
+	 */
+	public static function explode_reverse(string $boundary = "_", string $string = "", int $limit = PHP_INT_MAX):array{
+
+		# Explode reverse
+		return array_reverse(
+			array_map(
+				'strrev', 
+				explode(
+					strrev($boundary), 
+					strrev($string), 
+					$limit
+				)
+			)
+		);
+
+	}
+
 }

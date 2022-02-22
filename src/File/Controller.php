@@ -433,16 +433,19 @@ class Controller{
             '        for($i = 0; $i < count($item); $i++)'.PHP_EOL.
             PHP_EOL.
             "            # Seach value".PHP_EOL.
-            '            if(isset($item[$i]) && !empty($item[$i]))'.PHP_EOL.
+            '            if(isset($current[$item[$i]]) && !empty($current[$item[$i]]))'.PHP_EOL.
             PHP_EOL.
-            "                # Push current data in current".PHP_EOL.
-            '                $current = $item[$i];'.PHP_EOL.
+            "                 # Push current data in current".PHP_EOL.
+            '                 $current = $current[$item[$i]];'.PHP_EOL.
             PHP_EOL.
             "        # Check current".PHP_EOL.
-            '        if(!is_string($current) || !$string){ $this->error(); return; }'.PHP_EOL.
+            '        if(!is_string($current) || !$current || !file_exists(__ROOT_APP__.$current)){ $this->error(); return; }'.PHP_EOL.
+            PHP_EOL.
+            "        # Prepare fileInfo".PHP_EOL.
+            '        $fileInfo = Strings::explode_reverse("/", $current, 2);'.PHP_EOL.
             PHP_EOL.
             "        # Set file".PHP_EOL.
-            '        $this->model->getFile($name, __ROOT_APP__.$current);'.PHP_EOL.
+            '        $this->model->getFile($fileInfo[1], __ROOT_APP__.$fileInfo[0]);'.PHP_EOL.
             PHP_EOL.    
             "    }".PHP_EOL.
             PHP_EOL.
@@ -520,6 +523,7 @@ class Controller{
             "use LuckyPHP\Interface\Controller as ControllerInterface;".PHP_EOL.
             "use LuckyPHP\Base\Controller as ControllerBase;".PHP_EOL.
             "use LuckyPHP\Server\Exception;".PHP_EOL.
+            "use LuckyPHP\Server\Config;".PHP_EOL.
             PHP_EOL
         ;
 

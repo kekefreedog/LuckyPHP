@@ -34,7 +34,7 @@ class Media{
             "favicon"=> [
                 "android"   =>  [
                     "192px"     =>  "/vendor/kekefreedog/luckyphp/resources/favicon/android-chrome-192x192.png",
-                    "512"       =>  "/vendor/kekefreedog/luckyphp/resources/favicon/android-chrome-512x512.png",
+                    "512px"       =>  "/vendor/kekefreedog/luckyphp/resources/favicon/android-chrome-512x512.png",
                 ],
                 "apple"     =>  [
                     "57px"      =>  "/vendor/kekefreedog/luckyphp/resources/favicon/apple-touch-icon-57x57.png",
