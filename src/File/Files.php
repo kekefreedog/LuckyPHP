@@ -142,18 +142,21 @@ class Files{
      */
     public function manifestWrite(){
 
+        # Get config
+        $config = Config::read('app');
+
         # Set reponse
         $response = [
-            "name"              =>  "",
-            "short_name"        =>  "",
+            "name"              =>  $config['app']['name'],
+            "short_name"        =>  $config['app']['name'],
             "icons"             =>  [
                 [
-                    "src"           =>  "/favicon/android-chrome-192x192.png",
+                    "src"           =>  "/favicon/android-192px",
                     "sizes"         =>  "192x192",
                     "type"          =>  "image/png"
                 ],
                 [
-                    "src"           =>  "/favicon/android-chrome-512x512.png",
+                    "src"           =>  "/favicon/android-512px",
                     "sizes"         =>  "512x512",
                     "type"          =>  "image/png"
                 ]
