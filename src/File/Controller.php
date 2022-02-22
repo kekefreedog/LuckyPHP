@@ -409,7 +409,7 @@ class Controller{
             '        $this->newModel();'.PHP_EOL.
             PHP_EOL.
             "        # Set media".PHP_EOL.
-            '        $merdia = Config::read("media");'.PHP_EOL.
+            '        $media = Config::read("media");'.PHP_EOL.
             PHP_EOL.
             "        # Set favicons".PHP_EOL.
             '        $favicons = $media[\'media\'][\'favicon\'] ?? [];'.PHP_EOL.
@@ -427,7 +427,7 @@ class Controller{
             '        if(empty($item)){ $this->error(); return; }'.PHP_EOL.
             PHP_EOL.
             "        # Declare current item".PHP_EOL.
-            '        $current;'.PHP_EOL.
+            '        $current = $favicons;'.PHP_EOL.
             PHP_EOL.
             "        # Check if item element exit".PHP_EOL.
             '        for($i = 0; $i < count($item); $i++)'.PHP_EOL.
@@ -524,6 +524,7 @@ class Controller{
             "use LuckyPHP\Base\Controller as ControllerBase;".PHP_EOL.
             "use LuckyPHP\Server\Exception;".PHP_EOL.
             "use LuckyPHP\Server\Config;".PHP_EOL.
+            "use LuckyPHP\Code\Strings;".PHP_EOL.
             PHP_EOL
         ;
 
