@@ -60,7 +60,7 @@ class Controller{
                         $route['response'];
 
                 # check if custom controller
-                if(in_array($route['response'], ['favicon']))
+                if(in_array($route['response'], ['Favicon']))
 
                     # Set method name
                     $methodName = strtolower($route['response'])."Generator";
@@ -211,6 +211,8 @@ class Controller{
             "        # Parent constructor".PHP_EOL.
             '        parent::__construct(...$arguments);'.PHP_EOL.
             PHP_EOL.
+            "    }".PHP_EOL.
+            PHP_EOL.
             "        # Prepare modal".PHP_EOL.
             '        $this->modelAction();'.PHP_EOL.
             PHP_EOL.
@@ -224,8 +226,6 @@ class Controller{
             PHP_EOL.
             "        # Set file".PHP_EOL.
             '        $this->model->getFile("data-error.png", __ROOT_APP__."vendor/kekefreedog/luckyphp/resources/png/Error/");'.PHP_EOL.
-            PHP_EOL.
-            "    }".PHP_EOL.
             PHP_EOL.
             "    }".PHP_EOL.
             PHP_EOL.
