@@ -430,13 +430,15 @@ class Controller{
             '        $current = $favicons;'.PHP_EOL.
             PHP_EOL.
             "        # Check if item element exit".PHP_EOL.
-            '        for($i = 0; $i < count($item); $i++)'.PHP_EOL.
+            '        for($i = 0; $i < count($item); $i++){'.PHP_EOL.
             PHP_EOL.
             "            # Seach value".PHP_EOL.
             '            if(isset($current[$item[$i]]) && !empty($current[$item[$i]]))'.PHP_EOL.
             PHP_EOL.
             "                 # Push current data in current".PHP_EOL.
             '                 $current = $current[$item[$i]];'.PHP_EOL.
+            PHP_EOL.
+            "        }".PHP_EOL.
             PHP_EOL.
             "        # Check current".PHP_EOL.
             '        if(!is_string($current) || !$current || !file_exists(__ROOT_APP__.$current)){ $this->error(); return; }'.PHP_EOL.
