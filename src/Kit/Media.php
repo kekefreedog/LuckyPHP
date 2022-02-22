@@ -33,9 +33,9 @@ class Media{
             ],
             "favicon"=> [
                 "icon"      =>  [
-                    "16px"      =>  "favicon-16x16.png",
-                    "32px"      =>  "favicon-32x32.png",
-                    "ico"      =>  "favicon.ico",
+                    "16px"      =>  "/vendor/kekefreedog/luckyphp/resources/favicon/favicon-16x16.png",
+                    "32px"      =>  "/vendor/kekefreedog/luckyphp/resources/favicon/favicon-32x32.png",
+                    "ico"      =>  "/vendor/kekefreedog/luckyphp/resources/favicon/favicon.ico",
                 ],
                 "android"   =>  [
                     "192px"     =>  "/vendor/kekefreedog/luckyphp/resources/favicon/android-chrome-192x192.png",
