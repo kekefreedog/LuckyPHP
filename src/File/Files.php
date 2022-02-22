@@ -164,7 +164,7 @@ class Files{
         ];
 
         # Return reponse
-        return json_encode($reponse);
+        return json_encode($response);
 
     }
 
