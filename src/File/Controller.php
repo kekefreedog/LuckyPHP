@@ -401,14 +401,60 @@ class Controller{
             "     * ".PHP_EOL.
             "     */".PHP_EOL.
             "    private function modelAction(){".PHP_EOL.
-            PHP_EOL.    
+                PHP_EOL.
+            "        # Declare error".PHP_EOL.
+            '        $error = false;'.PHP_EOL.
+            PHP_EOL.
             "        # New model".PHP_EOL.
             '        $this->newModel();'.PHP_EOL.
+            PHP_EOL.
+            "        # Set media".PHP_EOL.
+            '        $merdia = Config::read("media");'.PHP_EOL.
+            PHP_EOL.
+            "        # Set favicons".PHP_EOL.
+            '        $favicons = $media[\'media\'][\'favicon\'] ?? [];'.PHP_EOL.
+            PHP_EOL.
+            "        # Get parameters name".PHP_EOL.
+            '        $name = $this->parameters[\'name\'] ?? false;'.PHP_EOL.
+            PHP_EOL.
+            "        # Check file is valid".PHP_EOL.
+            '        if(!$name){ $this->error(); return; }'.PHP_EOL.
+            PHP_EOL.
+            "        # Split name by '-'".PHP_EOL.
+            '        $item = explode("-", $name);'.PHP_EOL.
+            PHP_EOL.
+            "        # Check item".PHP_EOL.
+            '        if(empty($item)){ $this->error(); return; }'.PHP_EOL.
+            PHP_EOL.
+            "        # Declare current item".PHP_EOL.
+            '        $current;'.PHP_EOL.
+            PHP_EOL.
+            "        # Check if item element exit".PHP_EOL.
+            '        for($i = 0; $i < count($item); $i++)'.PHP_EOL.
+            PHP_EOL.
+            "            # Seach value".PHP_EOL.
+            '            if(isset($item[$i]) && !empty($item[$i]))'.PHP_EOL.
+            PHP_EOL.
+            "                # Push current data in current".PHP_EOL.
+            '                $current = $item[$i];'.PHP_EOL.
+            PHP_EOL.
+            "        # Check current".PHP_EOL.
+            '        if(!is_string($current) || !$string){ $this->error(); return; }'.PHP_EOL.
+            PHP_EOL.
+            "        # Set file".PHP_EOL.
+            '        $this->model->getFile($name, __ROOT_APP__.$current);'.PHP_EOL.
+            PHP_EOL.    
+            "    }".PHP_EOL.
+            PHP_EOL.
+            "    /** Set error".PHP_EOL.
+            "     * ".PHP_EOL.
+            "     */".PHP_EOL.
+            "    public function error(){".PHP_EOL.
             PHP_EOL.
             "        # Set file".PHP_EOL.
             '        $this->model->getFile("data-error.png", __ROOT_APP__."vendor/kekefreedog/luckyphp/resources/png/Error/");'.PHP_EOL.
             PHP_EOL.
-            "    }".PHP_EOL.
+            '    }'.PHP_EOL.
             PHP_EOL.
             "    /** Response".PHP_EOL.
             "     *".PHP_EOL.
