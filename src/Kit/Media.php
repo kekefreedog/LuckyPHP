@@ -31,6 +31,9 @@ class Media{
                     "2000px"=>  "/vendor/kekefreedog/luckyphp/resources/png/Logo/LuckyPHP-2000px.png"
                 ]
             ],
+            /**
+             * Favicon generated with https://realfavicongenerator.net/
+             */
             "favicon"=> [
                 "icon"      =>  [
                     "16px"      =>  "/vendor/kekefreedog/luckyphp/resources/favicon/favicon-16x16.png",

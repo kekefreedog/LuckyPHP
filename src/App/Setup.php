@@ -211,7 +211,14 @@ class Setup{
     private function mediaWrite(){
 
         # Write input in config > app.yml
-        file_put_contents(__ROOT_APP__.'config/media.yml', "# Media of the app".PHP_EOL.Yaml::dump(MediaKit::DEFAULT, 10));
+        file_put_contents(
+            __ROOT_APP__.'config/media.yml', 
+            "# Media of the app".PHP_EOL.
+            "#".PHP_EOL.
+            "# Favicon generated with https://realfavicongenerator.net/".PHP_EOL.
+            "#".PHP_EOL.
+            Yaml::dump(MediaKit::DEFAULT, 10)
+        );
 
         # Check RoutesKit::DEFAULT routes
         if(!isset(RoutesKit::DEFAULT['routes']) || empty(RoutesKit::DEFAULT['routes']))
