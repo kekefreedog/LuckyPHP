@@ -395,6 +395,8 @@ class Controller{
             "        # Prepare modal".PHP_EOL.
             '        $this->modelAction();'.PHP_EOL.
             PHP_EOL.
+            "    }".PHP_EOL.
+            PHP_EOL.
             "    /** Model action".PHP_EOL.
             "     * ".PHP_EOL.
             "     */".PHP_EOL.
@@ -405,8 +407,6 @@ class Controller{
             PHP_EOL.
             "        # Set file".PHP_EOL.
             '        $this->model->getFile("data-error.png", __ROOT_APP__."vendor/kekefreedog/luckyphp/resources/png/Error/");'.PHP_EOL.
-            PHP_EOL.
-            "    }".PHP_EOL.
             PHP_EOL.
             "    }".PHP_EOL.
             PHP_EOL.
