@@ -60,10 +60,10 @@ class Controller{
                         $route['response'];
 
                 # check if custom controller
-                if(in_array($route['response'], ['Favicon']))
+                if(in_array($route['name'], ['Favicon']))
 
                     # Set method name
-                    $methodName = strtolower($route['response'])."Generator";
+                    $methodName = strtolower($route['name'])."Generator";
 
                 # Response controller
                 else
