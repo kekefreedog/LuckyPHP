@@ -150,7 +150,7 @@ class Router{
                     try{
 
                         # Check if call back exist
-                        $callbackName = $this->routeCallbackCheck($route['name']);
+                        $callbackName = $this->routeCallbackCheck($route);
 
                     }catch(Exception $e){
 
@@ -187,10 +187,13 @@ class Router{
      * 
      * @return string
      */
-    public static function routeCallbackCheck($name, $exception = true){
+    public static function routeCallbackCheck(array $route = [], bool $exception = true){
+        # Check route
+        if(!isset($route['name']) || !$route['name'])
+            return;
 
         # Set name from arguments
-        $name = "\App\Controllers\\".Strings::snakeToCamel(str_replace(" ", "_", $name), true)."Action";
+        $name = "\App\Controllers\\".Strings::snakeToCamel(str_replace(" ", "_", $route['name']), true)."Action";
 
         # Check class of callback exists
         if(!class_exists($name) && $exception)
