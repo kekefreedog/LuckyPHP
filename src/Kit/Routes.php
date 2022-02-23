@@ -67,22 +67,6 @@ class Routes{
             ],
 
             /**
-             * All Favicon
-             */
-
-            /* Favicon */
-            [
-                'name'      =>  'Favicon',
-                'patterns'  =>  [
-                    '/favicon/[a:name]'
-                ],
-                'methods'   =>  [
-                    'get'
-                ],
-                'response'   =>  'data'
-            ],
-
-            /**
              * All the others pages
              */
 
@@ -97,6 +81,22 @@ class Routes{
                 ],
                 'response'  =>  'html',
                 'error'     => true,
+            ],
+
+            /**
+             * All Favicon
+             */
+
+            /* Favicon */
+            [
+                'name'      =>  'Favicon',
+                'patterns'  =>  [
+                    '/_/favicon/[a:name]'
+                ],
+                'methods'   =>  [
+                    'get'
+                ],
+                'response'   =>  'data'
             ],
 
         ],

@@ -151,12 +151,12 @@ class Files{
             "short_name"        =>  $config['app']['name'],
             "icons"             =>  [
                 [
-                    "src"           =>  "/favicon/android-192px",
+                    "src"           =>  "/_/favicon/android-192px",
                     "sizes"         =>  "192x192",
                     "type"          =>  "image/png"
                 ],
                 [
-                    "src"           =>  "/favicon/android-512px",
+                    "src"           =>  "/_/favicon/android-512px",
                     "sizes"         =>  "512x512",
                     "type"          =>  "image/png"
                 ]

@@ -287,7 +287,7 @@ class Controller{
             '        $this->newModel();'.PHP_EOL.
             PHP_EOL.
             "        // Push records".PHP_EOL.
-            '        $this->model->pushRecords("Hello Json");'.PHP_EOL.
+            '        $this->model->pushRecords(["message"=>"Hello Json"], "single");'.PHP_EOL.
             PHP_EOL.
             "    }".PHP_EOL.
             PHP_EOL.

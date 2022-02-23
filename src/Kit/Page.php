@@ -114,14 +114,14 @@ class Page{
                                 'content'   =>  '#2196f3'
                             ]
                         ],
-                        /** meta name="msapplication-config" content="/favicon/windows-xml">
+                        /** meta name="msapplication-config" content="/_/favicon/windows-xml">
                          *  - Theme Color for Microsoft App
                          */
                         [
                             'tag'       =>  'meta',
                             'attributes'=>  [
                                 'name'      =>  'msapplication-config',
-                                'content'   =>  '/favicon/windows-xml'
+                                'content'   =>  '/_/favicon/windows-xml'
                             ]
                         ],
                         /** <meta name="description" content="A description of the page">
@@ -187,7 +187,7 @@ class Page{
                                 'href'      =>  'manifest.json'
                             ],
                         ],
-                        /** <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+                        /** <link rel="apple-touch-icon" sizes="180x180" href="/_/favicon/apple-touch-icon.png">
                          *  Touch icon favicon
                          */
                         [
@@ -195,10 +195,10 @@ class Page{
                             'attributes'=>  [
                                 'rel'       =>  'apple-touch-icon',
                                 'size'      =>  '180x180',
-                                'href'      =>  '/favicon/apple-touch'
+                                'href'      =>  '/_/favicon/apple-touch'
                             ],
                         ],
-                        /** <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+                        /** <link rel="icon" type="image/png" sizes="32x32" href="/_/favicon/_/favicon-32x32.png">
                          *  Basic icon 32px
                          */
                         [
@@ -207,10 +207,10 @@ class Page{
                                 'rel'       =>  'icon',
                                 'type'      =>  'image/png',
                                 'size'      =>  '32x32',
-                                'href'      =>  '/favicon/icon-32px'
+                                'href'      =>  '/_/favicon/icon-32px'
                             ],
                         ],
-                        /** <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+                        /** <link rel="icon" type="image/png" sizes="32x32" href="/_/favicon/_/favicon-32x32.png">
                          *  Basic icon 32px
                          */
                         [
@@ -219,28 +219,28 @@ class Page{
                                 'rel'       =>  'icon',
                                 'type'      =>  'image/png',
                                 'size'      =>  '16x16',
-                                'href'      =>  '/favicon/icon-16px'
+                                'href'      =>  '/_/favicon/icon-16px'
                             ],
                         ],
-                        /** <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#2196f3">
+                        /** <link rel="mask-icon" href="/_/favicon/safari-pinned-tab.svg" color="#2196f3">
                          *  Safari
                          */
                         [
                             'tag'       =>  'link',
                             'attributes'=>  [
                                 'rel'       =>  'mask-icon',
-                                'href'      =>  '/favicon/safari-svg',
+                                'href'      =>  '/_/favicon/safari-svg',
                                 'color'     =>  '#2196f3'
                             ],
                         ],
-                        /** <link rel="shortcut icon" href="/favicon/favicon.ico">
+                        /** <link rel="shortcut icon" href="/_/favicon/_/favicon.ico">
                          *  Safari
                          */
                         [
                             'tag'       =>  'link',
                             'attributes'=>  [
                                 'rel'       =>  'shortcut icon',
-                                'href'      =>  '/favicon/icon-ico'
+                                'href'      =>  '/_/favicon/icon-ico'
                             ],
                         ],
                     ]
