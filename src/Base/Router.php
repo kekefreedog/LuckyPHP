@@ -18,229 +18,239 @@ namespace  LuckyPHP\Base;
  * 
  */
 use Mezon\Router\Router AS MezonRouter;
-use LuckyPHP\Server\Exception;
+use Symfony\Component\Finder\Finder;
 use LuckyPHP\Server\Config;
-use LuckyPHP\Http\Request;
-use LuckyPHP\Code\Strings;
 
-/** Class page
+/** Class route
  * 
  */
-class Router{
+class Router{    
+    
+    /**********************************************************************************
+    * Parameters
+    */
 
-    # Declare instance
+    # Router instance
     private $instance = null;
 
-    # Routes config
-    private $config = [];
+    # Liste of Router
+    private $routerList = [];
 
-    /** Constructor
+    # Path of the router cache
+    private $routerCachePath = null;
+
+    /** Router instance
      * 
      */
-    public function __construct(Request $request){
-
-        # New Rooter
-        $this->instanceCreate();
-
-        # Set Routes Config
-        $this->configRoutesSet();
-
-        # Request set
-        $this->requestSet($request);
-
-        # Push routes in Rooter
-        $this->routerFill();
-
-        # Execute Callback
-        $this->routerExecute();
-
-    }
-
-    /** Create instance
-     *  
-     */
-    private function instanceCreate(){
+    
+    /**********************************************************************************
+    * Constructor
+    */
+    public function __construct(){
         
-        # Set rooter instance
-        $this->instance = new MezonRouter();
+        # Load routers
+        $this->loadRouters();
+
+        # Execute routers
+        $this->setCurrentRouterCallback();
+
+    }
+    
+    /**********************************************************************************
+    * Hooks
+    */
+
+    /** Run call back of current route
+     * 
+     */
+    public function run(){
+
+
+
+    }
+    
+    /**********************************************************************************
+    * Methods
+    */
+
+    /** Load routers
+     * - Check cache
+     * - Write cache if necessary
+     * - Load cache
+     * 
+     */
+    private function loadRouters(){
+
+        # Load router cache is exists
+        $this->_loadRouterCache();
+
+        # Load routers list
+        $this->_loadRoutersList();
 
     }
 
-    /** Set Routes Config
+    /** Set current router callback
+     * - Get call back of current router
      * 
      */
-    private function configRoutesSet(){
-        
-        try {
+    private function setCurrentRouterCallback(){
 
-            # Get routes config
-            $this->config = Config::read(Config::CONFIG_PATH['routes']);
 
-        }catch(Exception $e){
 
-            # Mettre en place redirection
-            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+    }
+    
+    /**********************************************************************************
+    * Children methods
+    */
 
-        }
+    /** Load Router cache
+     * @return void
+     */
+    private function _loadRouterCache():void{
 
-        # Check or fill methods 
-        $this->config['methods'] = isset($this->config['methods']) ?
-            array_map('strtoupper', $this->config['methods']) :
-                [];
+        # Build folder if not exists
+        if(!is_dir(__ROOT_APP__.self::PATH_CACHE))
+            mkdir(__ROOT_APP__.self::PATH_CACHE, 0777, true);
+
+        # Prepare finder search
+        $finder = new Finder();
+        $finder
+            ->files()
+            ->name(['*_cache.php'])
+            ->in(__ROOT_APP__.self::PATH_CACHE)
+            ->sortByName()
+            ->reverseSorting()
+        ;
+
+        # Check if any result
+        if($finder->hasResults())
+
+            # Iteration des fichier
+            foreach($finder as $file){
+
+                # Check router file has been change since last cache
+                $modifiedDateConfig = date("YmdHis", filemtime(__ROOT_APP__."/config/routes.yml"));
+                $modifiedDateCache = explode("_", $file->getFilenameWithoutExtension())[0];
+                if($modifiedDateConfig <= $modifiedDateCache)
+
+                    # Load cache
+                    $this->routerCachePath = $file->getRealPath();
+
+                # Stop after first file
+                break;
+
+            }
 
     }
 
-    /** Set request
-     * 
+    /** Load routers list
+     * @return void
      */
-    private function requestSet(Request $request){
+    private function _loadRoutersList():void {
 
-        # Set request
-        $this->request = $request;
+        # Check if cache path
+        if($this->routerCachePath):
+
+            # Load cache
+            $this->instance->loadFromDisk($this->routerCachePath);
+
+            # Stop loader
+            return;
+
+        endif;
+
+        # Fill routes
+        $this->_fillRoutersList();
+
+        # Save routers in cache
+        $this->_saveRoutersListInCache();
+
 
     }
 
-    /** Put routes in router
-     * 
+    /** Save router list in cache
+     * @return void
      */
-    private function routerFill(){
+    private function _saveRoutersListInCache():void{
+
+        # Set filename
+        $filename = __ROOT_APP__.self::PATH_CACHE."/".date("YmdHis")."_cache.php";
+
+        # Save new cache
+        $this->instance->dumpOnDisk($filename);
+
+    }
+
+    /** Fill routers list
+     * @return void
+     */
+    private function _fillRoutersList(){
 
         # Check methods and routes
-        if(empty($this->config['routes']) || empty($this->config['methods']))
-            return false;
+        $this->routerList = Config::read('routes');
 
         # Iteration des routes
-        foreach($this->config['routes'] as $key => $route){
+        foreach(($this->config['routes'] ?? []) as $key => $route) {
 
             # Check route name
             $route['name'] = !isset($route['name']) || empty($route['name']) ?
-                'route_'.$key :
-                    $route['name'];
+                'route_' . $key :
+                $route['name'];
 
             # Convert route to array if string
-            if(is_string($route['patterns'])) 
+            if (is_string($route['patterns']))
                 $route['patterns'] = [$route['patterns']];
 
             # Convert methods to array if string
-            if(is_string($route['methods']))
+            if (is_string($route['methods']))
                 $route['methods'] = [$route['methods']];
 
             # Check if * in methods
-            if(in_array('*', $route['methods']))
-                $route['methods'] =$this->config['methods'];
+            if (in_array('*', $route['methods']))
+                $route['methods'] = $this->config['methods'];
 
             # Filter methods by methods allowed
             $route['methods'] = array_filter(
-                $route['methods'], 
-                function($v){
+                $route['methods'],
+                function ($v) {
                     return in_array(strtoupper($v), $this->config['methods']);
                 }
             );
 
             # Check route and methods not empty
-            if(empty($route['patterns']) || empty($route['methods']))
+            if (empty($route['patterns']) || empty($route['methods']))
                 continue;
 
+            # Get action class name of the current route
+            $actionNameSpace = _getActionNamespace($route);
+
             # Iteration des routes
-            foreach($route['patterns'] as $pattern)
+            foreach ($route['patterns'] as $pattern)
 
                 # Iteration des methods
-                foreach ($route['methods'] as $method) {
-
-                    try{
-
-                        # Check if call back exist
-                        $callbackName = $this->routeCallbackCheck($route);
-
-                    }catch(Exception $e){
-
-                        # Message html
-                        $e->getHtml();
-            
-                    }
+                foreach ($route['methods'] as $method)
 
                     # Add Route in Router
                     $this->instance->addRoute(
-                        $pattern,
-                        function(string $currentRoute, array $parameters) use ($callbackName, $route){
-
-                            # Execute callback
-                            $this->constroller = new $callbackName(
-                                $this->request,
-                                $parameters,
-                                $route, 
-                                $currentRoute
-                            );
-
-                        },
-                        strtoupper($method),
-                        $route['name']
+                        ############
                     );
 
-                }
-
-        }
-
     }
 
-    /** Check if class callback exists
-     * 
-     * @return string
+    /** Get action Namespace depending of route given
+     * @param array $route
      */
-    public static function routeCallbackCheck(array $route = [], bool $exception = true){
-        # Check route
-        if(!isset($route['name']) || !$route['name'])
-            return;
+    private function _getActionNamespace(array $route = []):string{
 
-        # Set name from arguments
-        $name = "\App\Controllers\\".Strings::snakeToCamel(str_replace(" ", "_", $route['name']), true)."Action";
 
-        # Check class of callback exists
-        if(!class_exists($name) && $exception)
-
-            # Set exception
-            throw new Exception("There is not class assiociate to the current root \"$name\"", 500);
-
-        # Return name of the class
-        return $name;
 
     }
+    
+    /**********************************************************************************
+    * Constant
+    */
 
-    /** Execute callback
-     * 
-     */
-    private function routerExecute($uri = ""){
-
-        # Check current uri
-        if(!$uri)
-            $uri = $_SERVER['REQUEST_URI'];
-
-        # Remove query string in uri
-        $uri = strtok($_SERVER["REQUEST_URI"], '?');
-
-        # Call courrent route
-        $this->instance->callRoute($uri);
-
-    }
-
-    /** Get Reponse
-     * 
-     */
-    public function getResponse(){
-
-        # Return reponse
-        return $this->constroller->response();
-
-    }
-
-    /** Get Reponse
-     * 
-     */
-    public function getCallback(){
-
-        # Return reponse
-        return $this->constroller;
-
-    }
+    # Path of the router cache
+    public const PATH_CACHE = "/cache/routers/";
 
 }
