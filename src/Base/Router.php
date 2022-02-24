@@ -18,6 +18,7 @@ namespace  LuckyPHP\Base;
  * 
  */
 use Mezon\Router\Router AS MezonRouter;
+use Symfony\Component\Finder\Finder;
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Server\Config;
 use LuckyPHP\Http\Request;
@@ -42,14 +43,22 @@ class Router{
         # New Rooter
         $this->instanceCreate();
 
-        # Set Routes Config
-        $this->configRoutesSet();
-
         # Request set
         $this->requestSet($request);
 
-        # Push routes in Rooter
-        $this->routerFill();
+        # Check cache
+        if(!$this->checkCache()){
+
+            # Set Routes Config
+            $this->configRoutesSet();
+
+            # Push routes in Rooter
+            $this->routerFill();
+
+            # Save cache of router
+            $this->saveCache();
+
+        }
 
         # Execute Callback
         $this->routerExecute();
@@ -65,6 +74,91 @@ class Router{
         $this->instance = new MezonRouter();
 
     }
+
+    /**********************************************************************************
+     * Cache
+     */
+
+    /** Check cache is set
+     * @return bool
+     */
+    private function checkCache():bool {
+
+        # Declare result
+        $result = false;
+
+        # Check folder exist
+        if(!is_dir(__ROOT_APP__.self::PATH_CACHE))
+
+            # create folder
+            mkdir(__ROOT_APP__.self::PATH_CACHE, 0777, true);
+
+        # New finder
+        $finder = new Finder();
+
+        # Prepare finder
+        $finder
+            ->files()
+            ->name(['*_cache.php'])
+            ->in(__ROOT_APP__.self::PATH_CACHE)
+            ->sortByName()
+            ->reverseSorting()
+        ;
+
+        # Check if any result
+        if($finder->hasResults())
+
+            # Iteration des fichier
+            foreach($finder as $file){
+
+                # Get last modified date of route
+                $modifiedDateConfig = date("YmdHis", filemtime(__ROOT_APP__."/config/routes.yml"));
+
+                # Get last date of last cache
+                $modifiedDateCache = explode("_", $file->getFilenameWithoutExtension())[0];
+
+                # Compare dates
+                if($modifiedDateConfig <= $modifiedDateCache){
+
+                    # Load cache
+                    $this->instance->loadFromDisk($file->getRealPath());
+
+                        # Set result
+                        $result = true;
+
+                }
+
+                # Stop after first file
+                break;
+
+            }
+
+        # Return result
+        return $result;
+
+    }
+
+    /** Load cache content
+     * @return void
+     */
+    public function saveCache(){
+
+        # Set filename
+        $filename = __ROOT_APP__.self::PATH_CACHE."/".date("YmdHis")."_cache.php";
+
+        # Save new cache
+        $this->instance->dumpOnDisk($filename);
+
+    }
+
+    /** Path of cache
+     * 
+     */
+    public const PATH_CACHE = "/cache/router/";
+
+    /**********************************************************************************
+     * Route from config
+     */
 
     /** Set Routes Config
      * 
