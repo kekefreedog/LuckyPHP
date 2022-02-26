@@ -77,10 +77,7 @@ class App extends Kernel{
          *  - Construct and register modal & middleware action
          * 
          */
-        $this->controller = new Controller(
-            $this->config,
-            $this->cache,
-        );
+        $this->controller = new Controller();
 
         /** Get view
          * 

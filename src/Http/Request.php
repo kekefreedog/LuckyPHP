@@ -26,27 +26,30 @@ use Symfony\Component\HttpFoundation\Request as RequestSymfony;
  */
 class Request{
 
-    # Data
-    public $data;
+    /**********************************************************************************
+    * Parameters
+    */
+
+    /** Instance
+     *  
+     */
+    private $instance = null;
+
+    /**********************************************************************************
+    * Constructor
+    */
 
     /** Constructor
      * 
      */
     public function __construct(){
 
-        /* Get request and put in data */
-        $this->data = RequestSymfony::createFromGlobals();
+        # Get request and put in data
+        $this->instance = RequestSymfony::createFromGlobals();
+
+        # Return instance
+        return $this->instance;
         
-    }
-
-    /** Get data
-     * @return RequestSymfony
-     */
-    public function getData():RequestSymfony{
-
-        # Return object
-        return $this->data;
-
     }
 
 }

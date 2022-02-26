@@ -18,7 +18,6 @@ namespace App;
  * 
  */
 use LuckyPHP\Base\Router;
-use LuckyPHP\Http\Request;
 
 /** Class of the controller
  * 
@@ -28,20 +27,26 @@ class Controller{
     /** Constructor
      * 
      */
-    public function __construct($config = [], $cache = []){
+    public function __construct(){
 
-        # New Request
-        $this->request = new Request();
-
-        # New Rooter
-        $this->router = new Router($this->request);
-
-        # Set response
-        $this->response = $this->router->getResponse();
-
-        # Set callback
-        $this->callback = $this->router->getCallback();
+        /** Router Init
+         * 
+         */
+        $this->routerInit();
 
     } 
+
+    /** Router Init
+     *
+     */
+    private function routerInit(){
+
+        # New router instance
+        $this->router = new Router();
+
+        # Run router
+        $this->router->run();
+
+    }
 
 }

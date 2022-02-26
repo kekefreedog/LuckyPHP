@@ -270,6 +270,14 @@ class Config{
                     'type'      =>  'INT',
                     'default'   =>  '5432'
                 ],
+            # Viewer
+                # Chrono
+                        # Display
+                        [
+                            'name'      =>  'app_viewer_display',
+                            'type'      =>  'BOOLEAN',
+                            'default'   =>  true
+                        ],
     ];
 
 }

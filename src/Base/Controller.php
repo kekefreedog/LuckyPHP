@@ -18,6 +18,7 @@ namespace  LuckyPHP\Base;
  * 
  */
 use Symfony\Component\HttpFoundation\Cookie;
+use LuckyPHP\Http\Request;
 use LuckyPHP\Http\Header;
 use App\Model;
 
@@ -26,94 +27,67 @@ use App\Model;
  */
 abstract class Controller{
 
+    /**********************************************************************************
+    * Parameters
+    */
+
     /** content parameters
      * 
      */
     public $content;
 
+    /** Request
+     * 
+     */
+    public $request = null;
+
+    /**********************************************************************************
+    * Constructor
+    */
+
     /** Constructor
      * 
      */
-    public function __construct(...$arguments){
+    public function __construct(){
+
+        /** Get name of the current controller
+         * 
+         */
+        $this->getName();
+        
+        /** Define request
+         * 
+         */
+        $this->setRequest();
+        
+    }
+
+    /**********************************************************************************
+    * Methods
+    */
+
+    /** Get name
+     * @preturn void
+     */
+    private function getName():void {
 
         # Set name
         $this->name = substr(get_called_class(), 0, -6);
 
-        # Ingest arguments
-        $this->argumentsIngest($arguments);
-        
     }
 
-    /** Ingest arguments
+    /** Set Request
      * 
      */
-    private function argumentsIngest($arguments){
-        
-        # Set request
-        $this->requestPrepare($arguments[0] ?? null);
+    private function setRequest(){
 
-        # Set parameters
-        $this->parametersPrepare([
-            ...$arguments[1]
-        ]);
-
-        # Set route
-        $this->routePrepare([
-            'current' =>  $arguments[3] ?? null,
-            ...$arguments[2] ?? []
-        ]);
+        $this->request = new Request();
 
     }
 
-    /** Prepare route
-     * 
-     */
-    private function routePrepare($array){
-
-        # Set route
-        $this->route = [
-            'current'   =>  [
-                'pattern'   =>  $array['current'] ?? null,
-                'method'    =>  $_SERVER['REQUEST_METHOD'] ?? null,
-                'name'      =>  $array['name'] ?? null,
-            ],
-            'config'    =>  [
-                'methods'   =>  $array['methods'] ?? [],
-                'patterns'  =>  $array['patterns'] ?? [],
-                'response'   =>  [
-                    'default'       =>  $array['response'] ?? null,
-                    'Content-Type'  =>  (!isset($array['response']) || $array['response'] === null) ?
-                        null :
-                            Header::getContentType($array['response'])
-                ]
-            ]
-        ];
-
-    }
-
-    /** Prepare request
-     * 
-     */
-    private function requestPrepare($obj){
-
-        # Set route
-        $this->request = $obj;
-
-    }
-
-    /** Prepare route
-     * 
-     */
-    private function parametersPrepare($array){
-
-        # Set route
-        $this->parameters = $array;
-
-    }
-
-    /**
-     *  Public action
-     */
+    /**********************************************************************************
+    * Hooks
+    */
 
     # Set Get Route Pattern
     public function getRoutePattern():string{

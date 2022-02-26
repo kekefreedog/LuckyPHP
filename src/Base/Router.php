@@ -83,7 +83,7 @@ class Router{
         if($callback)
 
             # Run callback
-            $callback();
+            new $callback();
 
         else
 
@@ -103,6 +103,9 @@ class Router{
      * 
      */
     private function loadRouters(){
+
+        # New router instance
+        $this->instance = new MezonRouter();
 
         # Load router cache is exists
         $this->_loadRouterCache();
@@ -198,8 +201,11 @@ class Router{
         # Check methods and routes
         $this->routerList = Config::read('routes');
 
+        # Get methods
+        $methods = $this->routerList['methods'];
+        
         # Iteration des routes
-        foreach(($this->config['routes'] ?? []) as $key => $route){
+        foreach(($this->routerList['routes'] ?? []) as $key => $route){
 
             # Check route name
             $route['name'] = !isset($route['name']) || empty($route['name']) ?
@@ -220,18 +226,21 @@ class Router{
 
             # Check if * in methods
             if (in_array('*', $route['methods']))
-                $route['methods'] = $this->config['methods'];
+                $route['methods'] = $methods;
 
             # Filter methods by methods allowed
             $route['methods'] = array_filter(
                 $route['methods'],
-                function ($v) {
-                    return in_array(strtoupper($v), $this->config['methods']);
+                function ($v) use ($methods) {
+                    return in_array(strtoupper($v), $methods);
                 }
             );
+            
+            # Get namespace
+            $actionNameSpace = $this->_getActionNamespace($route);
 
             # Get action class name of the current route
-            if($actionNameSpace = $this->_getActionNamespace($route))
+            if($actionNameSpace)
 
                 # Iteration des routes
                 foreach($route['patterns'] as $pattern)
@@ -255,7 +264,7 @@ class Router{
     private function _saveRoutersListInCache():void{
 
         # Set filename
-        $filename = __ROOT_APP__.self::PATH_CACHE."/".date("YmdHis")."_cache.php";
+        $filename = __ROOT_APP__.self::PATH_CACHE.date("YmdHis")."_cache.php";
 
         # Save new cache
         $this->instance->dumpOnDisk($filename);
@@ -294,13 +303,13 @@ class Router{
 
             # Push name of class
             $result .= 
-                "\"".
+                '\\'.
                 trim(
                     Strings::snakeToCamel(
-                        $route['folder'],
+                        $route['name'],
                         true
                     ),
-                    "\""
+                    "\\"
                 ).
                 "Action"
             ;
