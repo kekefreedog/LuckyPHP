@@ -20,6 +20,7 @@ namespace  LuckyPHP\Base;
 use Mezon\Router\Router AS MezonRouter;
 use Symfony\Component\Finder\Finder;
 use LuckyPHP\Server\Config;
+use LuckyPHP\Code\Strings;
 
 /** Class route
  * 
@@ -61,11 +62,33 @@ class Router{
     */
 
     /** Run call back of current route
-     * 
+     * @param string $request_uri Custom request url to call
      */
-    public function run(){
+    public function run(string $request_uri = ""){
 
+        # Set request depending of request uri given
+        $request = $request_uri ?
+            $request_uri :
+                $_SERVER['REQUEST_URI'];
 
+        # Clean get variables
+        $request = strtok($request, '?');
+
+        # $this->instance->callRoute('/index/');
+
+        # Get callback
+        $callback = $this->instance->getCallback($request);
+
+        # Check callback
+        if($callback)
+
+            # Run callback
+            $callback();
+
+        else
+
+            # return false
+            return false;
 
     }
     
@@ -165,20 +188,6 @@ class Router{
         # Save routers in cache
         $this->_saveRoutersListInCache();
 
-
-    }
-
-    /** Save router list in cache
-     * @return void
-     */
-    private function _saveRoutersListInCache():void{
-
-        # Set filename
-        $filename = __ROOT_APP__.self::PATH_CACHE."/".date("YmdHis")."_cache.php";
-
-        # Save new cache
-        $this->instance->dumpOnDisk($filename);
-
     }
 
     /** Fill routers list
@@ -190,16 +199,20 @@ class Router{
         $this->routerList = Config::read('routes');
 
         # Iteration des routes
-        foreach(($this->config['routes'] ?? []) as $key => $route) {
+        foreach(($this->config['routes'] ?? []) as $key => $route){
 
             # Check route name
             $route['name'] = !isset($route['name']) || empty($route['name']) ?
                 'route_' . $key :
-                $route['name'];
+                    $route['name'];
 
             # Convert route to array if string
             if (is_string($route['patterns']))
                 $route['patterns'] = [$route['patterns']];
+
+            # Check route and methods not empty
+            if (empty($route['patterns']) || empty($route['methods']))
+                continue;
 
             # Convert methods to array if string
             if (is_string($route['methods']))
@@ -217,23 +230,35 @@ class Router{
                 }
             );
 
-            # Check route and methods not empty
-            if (empty($route['patterns']) || empty($route['methods']))
-                continue;
-
             # Get action class name of the current route
-            $actionNameSpace = _getActionNamespace($route);
+            if($actionNameSpace = $this->_getActionNamespace($route))
 
-            # Iteration des routes
-            foreach ($route['patterns'] as $pattern)
+                # Iteration des routes
+                foreach($route['patterns'] as $pattern)
 
-                # Iteration des methods
-                foreach ($route['methods'] as $method)
+                    # Iteration des methods
+                    foreach($route['methods'] as $method)
 
-                    # Add Route in Router
-                    $this->instance->addRoute(
-                        ############
-                    );
+                        # Add Route in Router
+                        $this->instance->addRoute(
+                            $pattern,
+                            $actionNameSpace
+                        );
+
+        }
+
+    }
+
+    /** Save router list in cache
+     * @return void
+     */
+    private function _saveRoutersListInCache():void{
+
+        # Set filename
+        $filename = __ROOT_APP__.self::PATH_CACHE."/".date("YmdHis")."_cache.php";
+
+        # Save new cache
+        $this->instance->dumpOnDisk($filename);
 
     }
 
@@ -242,7 +267,52 @@ class Router{
      */
     private function _getActionNamespace(array $route = []):string{
 
+        # Set result
+        $result = "";
 
+        # Check required value in route
+        if(isset($route['name']) && $route['name']){
+
+            # Push namespace origin
+            $result = "App\Controllers";
+
+            # Check if folder
+            if(isset($route['folder']))
+
+                # Add name in result
+                $result .= 
+                    "\"".
+                    trim(
+                        ucfirst(
+                            strtolower(
+                                $route['folder']
+                            )
+                        ),
+                        "\""
+                    );
+                ;
+
+            # Push name of class
+            $result .= 
+                "\"".
+                trim(
+                    Strings::snakeToCamel(
+                        $route['folder'],
+                        true
+                    ),
+                    "\""
+                ).
+                "Action"
+            ;
+
+        }
+
+        # Check result exist
+        /* if(!$result)
+            $result = ""; */
+
+        # Return result
+        return $result;
 
     }
     
