@@ -17,11 +17,11 @@ namespace App;
 /** Dependance
  * 
  */
-use LuckyPHP\Date\Chrono;
-use LuckyPHP\Front\Console;
-use LuckyPHP\Server\Config;
-use LuckyPHP\Server\Exception;
 use LuckyPHP\Server\SanityCheck;
+use LuckyPHP\Server\Exception;
+use LuckyPHP\Server\Config;
+use LuckyPHP\Front\Console;
+use LuckyPHP\Date\Chrono;
 
 
 /** Class for manage the workflow of the app
@@ -117,7 +117,18 @@ class Kernel{
     protected function contextSet(){
 
         # Set context
-        Config::defineContext();
+        Config::defineContext(
+            [
+                # Chrono
+                "script"    =>  [
+                    'chrono'     => [
+                        'start'     =>  $this->chrono->getStart()
+                    ],
+                ]
+            ],
+            true,
+            true
+        );
         
     }
 

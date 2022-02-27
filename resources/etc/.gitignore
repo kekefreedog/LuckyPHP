@@ -14,11 +14,13 @@ logs/*
 
 # Hide cache
 cache/*
-www/.DS_Store
-.DS_Store
 
 # Composer
 composer.lock
 
 # Npm
 package-lock.json
+
+# Mac residue
+www/.DS_Store
+.DS_Store

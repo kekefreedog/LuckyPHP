@@ -19,12 +19,17 @@ namespace  LuckyPHP\Date;
  */
 class Chrono{
 
-    /** Parameters
-     * 
-     */
+    /**********************************************************************************
+    * Parameters
+    */
+
     public $start;
     public $end;
     public $time;
+
+    /**********************************************************************************
+    * Constructor
+    */
 
     /** Constructor
      * 
@@ -40,20 +45,37 @@ class Chrono{
         
     }
 
+    /**********************************************************************************
+    * Hooks
+    */
+
     /** Start chrono
-     * 
+     * @return void
      */
-    public function start(){
+    public function start():void {
 
         # Start
         $this->start = microtime(true); 
 
     }
+
+    /** Get start time
+     * @return float
+     */
+    public function getStart():float{
+
+        # Set result
+        $result = $this->start;
+
+        # Return result
+        return $result;
+
+    }
     
     /** Stop chrono
-     * 
+     * @return float
      */
-    public function stop(){
+    public function stop():float{
 
         # End
         $this->end = microtime(true);
@@ -67,7 +89,6 @@ class Chrono{
     }
 
     /** Get clean time
-     * 
      * @param bool Raw or Clean time
      */
     public function getTime(bool $raw = false){

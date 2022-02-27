@@ -133,15 +133,16 @@ class Config{
     /** Define context
      * @param array $data Data to push in context
      * @param bool $merge Merge or replace current data in context
+     * @param bool $first_time First time we defined the context
      * @param void
      */
-    public static function defineContext(array $data = [], bool $merge = true):void {
+    public static function defineContext(array $data = [], bool $merge = true, $first_time = false):void {
 
         # Get current context or define it
         $ctx = defined("__CONTEXT__") ? __CONTEXT__ : [];
 
         # Check data
-        if(!empty($data)){
+        if(!empty($data) && !$first_time){
 
             # Set ctx
             $ctx = $merge ?
@@ -150,20 +151,21 @@ class Config{
 
         }else{
 
-            # Get config routes
-            $rootes = Config::read("routes");
-
             # Get current route
             $currentRoute = strtok($_SERVER["REQUEST_URI"], '?');
 
             # Set context
-            $ctx = [
-                # Root
-                "route"  =>  [
-                    "current"   =>  $currentRoute,
-                    "parents"   =>  Strings::decomposeRoute($currentRoute)
-                ]
-            ];
+            $ctx = array_merge_recursive(
+                [
+                    # Root
+                    "route"  =>  [
+                        "current"   =>  $currentRoute,
+                        "parents"   =>  Strings::decomposeRoute($currentRoute),
+                        "method"    =>  strtolower($_SERVER['REQUEST_METHOD']),
+                    ]
+                ],
+                $data   
+            );
 
             # Set current pattern
             $current = ($ctx["route"]["current"] == "/") ?
@@ -177,7 +179,7 @@ class Config{
             if($route)
 
                 # Merge route info in ctx
-                $ctx['route'] = array_merge(
+                $ctx['route'] = array_merge_recursive(
                     $ctx['route'], 
                     $route, 
                     [

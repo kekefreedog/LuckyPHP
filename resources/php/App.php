@@ -53,12 +53,6 @@ class App extends Kernel{
          */
         self::sanityCheck();
 
-        /** Read the config of the app
-         * - Set config in $this->config
-         * 
-         */
-        $this->configSet();
-
         /** Set context
          * - Set context of the current request in __CONTEXT__
          * 
@@ -77,19 +71,12 @@ class App extends Kernel{
          *  - Construct and register modal & middleware action
          * 
          */
-        $this->controller = new Controller();
+        $package = new Controller();
 
         /** Get view
          * 
          */
-        $this->viewer = new Viewer(
-            $this->controller,
-            $this->config,
-            $this->cache,
-            function($p){
-                $this->chronoStop($p);
-            }
-        );
+        new Viewer($package);
 
     }
 

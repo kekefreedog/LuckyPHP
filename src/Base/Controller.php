@@ -19,7 +19,6 @@ namespace  LuckyPHP\Base;
  */
 use Symfony\Component\HttpFoundation\Cookie;
 use LuckyPHP\Http\Request;
-use LuckyPHP\Http\Header;
 use App\Model;
 
 /** Class Controller
