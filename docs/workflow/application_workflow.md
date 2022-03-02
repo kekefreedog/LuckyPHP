@@ -20,7 +20,7 @@ Index of html folder redirect to `App.php`. Bellow listing of its actions :
 | \_\_ROOT_WWW\_\_ | `__DIR__.'/../html/'` | Root of the html (alternative) |
 | \_\_ROOT_LUCKYPHP\_\_ | `__DIR__.'/../vendor/kekefreedog/luckyphp/'` | Root of the framework |
 
-> We supposed \_\_DIR\_\_ is pointing the html folder
+> We supposed \_\_DIR\_\_ is pointing to html folder
 
 ### 3. Validation Sanity Check
 
@@ -72,9 +72,50 @@ Here the data include in the context by default.
 
 ### 5. Controller
 
-Return a package which contains :
-- Data
-- Info for viewer
+- First time, controller will generate the model schema and cache it if necessary
+
+#### I. Model
+
+- Controller will return the modal schema wich will be executed in viewer
+
+**Errors**
+
+- Error by pass others parameters of data in user interface.
+
+**Records**
+
+- Records are all the data that depending of the query.
+- Records can be organized with children for complex query.
+
+**Metadata**
+
+- Metedata is parameters that contains informations about current records. 
+    - It's possible to define pagination for exemple.
+
+**User Interface**
+
+- Contains all data for web the application :
+    - Information about current framework used.
+    - List of actions for front end.
+
+**Config**
+
+- Parameters the portion of the config
+
+**Cookies**
+
+- Return all the current cookies
+
+**Context**
+
+- Return the current context
+
+**Records**
+
+#### II. Action
+
+- Viewer will analyse the query information for determine the result.
+- However it is possible to set additionnal settings.
 
 ### 6. Initialize View
 

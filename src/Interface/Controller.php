@@ -18,6 +18,10 @@ namespace  LuckyPHP\Interface;
  * 
  */
 interface Controller{
+    
+    /****************************************************************
+    * Hooks
+    */
 
     /** Get current route pattern
      * 
@@ -66,8 +70,8 @@ interface Controller{
      */
     public function getResponseType():string;
 
-    /**********************************************************************************
-     * Modal
+    /****************************************************************
+     * > Modal
      */
 
     /** New Modal
@@ -81,8 +85,8 @@ interface Controller{
      */
     public function getModelResult():array;
 
-    /**********************************************************************************
-     * Layouts (html constructor)
+    /****************************************************************
+     * > Layouts (html constructor)
      */
 
     /** Set Layouts
@@ -97,8 +101,8 @@ interface Controller{
      */
     public function getLayouts():array;
 
-    /**********************************************************************************
-     * Data (for json, yaml... response)
+    /****************************************************************
+     * > Data (for json, yaml... response)
      */
 
     /** Set Data
@@ -120,8 +124,8 @@ interface Controller{
      */
     public function getData($name = "");
 
-    /**********************************************************************************
-     * Cookie
+    /****************************************************************
+     * > Cookie
      */
 
     /** Set Cookie

@@ -23,22 +23,30 @@ use LuckyPHP\Base\Model as ModelBase;
  * 
  */
 interface Model{
-
-    /**********************************************************************************
-     * Data
-     */
+    
+    /****************************************************************
+    * Hooks
+    */
 
     /** Execute Model
      * - Return data
      * @return array
+     * @deprecated
      */
     public function execute():array;
 
-    /**********************************************************************************
-     * Errors
+    /** Run Model
+     * - Run modal structure and return reponse
+     * @return array
+     */
+    public function run():array;
+
+    /****************************************************************
+     * > Errors
      */
 
     /** Push Errors
+     * Add errors in modal
      * @param array $errors
      *  - One error : [ "code" => 500, "type" => "warn", "detail" => "Oups..." ]
      *  - Multiple errors [ [ "detail" => "Oups..." ], [ "detail" => "Oups..." ] ]  
@@ -47,34 +55,126 @@ interface Model{
      *  - 0 : Auto
      *  - 1 : true
      *  - 2 : false
+     * @param bool $exit_error Stop the script and return error
      * @return ModelBase
      */
-    public function pushErrors(array $errors, int $flag = 0):ModelBase;
+    public function pushErrors(array $errors, int $flag = 0, bool $exit_error = false):ModelBase;
 
     /** Get Errors
-     * 
+     * Get the list of all errors in the modal
      * @return array
      */
     public function getErrors():array;
 
     /** Reset Errors
+     * Delete all errors in modal
      * @return ModelBase
      */
     public function resetErrors():ModelBase;
 
-    /**********************************************************************************
-     * Records
+    /****************************************************************
+     * > Records
      */
 
     /** Pushs records
      * @param array $records Records to push in records
-     * @param string|null $flag Option about records pushed
+     * @param string|null $flag Option about records pushed :
+     *  - null : Push all records
+     *  - "single" : Push only one record
      * @return ModelBase
      */
     public function pushRecords(array $records = [], string|null $flag = null):ModelBase;
 
-    /**********************************************************************************
-     * Config
+    /** Pushs records
+     * @param string $records String for the query in bdd
+     * @param string $database If empty take the dafault bdd
+     * @return ModelBase
+     */
+    public function pushRecordsQuery(array $sql_query = "", string $database = ""):ModelBase;
+
+    /****************************************************************
+     * > File
+     */
+    
+    /** Get File
+     * Exemple of response :
+     * [
+     *      "path"  =>  "/img/toto.png"
+     *      "header =>  [
+     *          "Content-Type"  =>  "text/plain"
+     *      ]
+     * ]
+     * @param string $name Name of the file your are looking for
+     * @param string $path Path of the file
+     * @param array $ext Extensions of the file
+     * @param bool $recursive Determine if finder search in subfolder
+     * @return ModelBase - Return first file found
+     */
+    public function getFile(string $name = "", string $path = "", array $ext = [], bool $recursive = true):ModelBase;
+
+    /** Read File
+     * Exemple of response :
+     * [
+     *      "path"  =>  "/img/toto.png"
+     *      "header =>  [
+     *          "Content-Type"  =>  "text/plain"
+     *      ]
+     * ]
+     * @param string $path Path of the file
+     * @return ModelBase - Return first file found
+     */
+
+    /** Push file content
+     * @param string $path Exemple : "/img/toto.png"
+     * @param array $header custom data to push in header. Exemple : 
+     *  [
+     *      "Content-Type"  =>  "text/plain"
+     *  ]
+     * @return ModelBase
+     */
+    function pushFile(string $path = "", array $header = []):ModelBase;
+
+    /****************************************************************
+     * > Metadata
+     */
+
+    /** Set Pagination
+     * @param int $page Current page
+     * @param int $pagination Number of records by page
+     * @return ModelBase
+     */
+    public function setRecordsPagination(int $page = 1, int $pagination = 25):ModelBase;
+
+    /****************************************************************
+     * > User Interface
+     */
+
+    /** set Framwork Extra
+     * - Set extra data of framework framwork
+     * @return ModelBase
+     */
+    public function setFrameworkExtra():ModelBase;
+
+    /** Push data in _user_interface
+     * @param array $data Data to push in use interface
+     * @param bool $recursive Merge recursively ?
+     * @deprecateds
+     * @return ModelBase
+     */
+    public function pushDataInUserInterface(array $data = [], bool $recursive = false):ModelBase;
+
+    /** Push Action
+     * @param string $type Type of action :
+     *  - Update
+     *  - Delete
+     *  - Add
+     * @param array|string $target Target of the action (css selector) 
+     * @return ModelBase
+     */
+    public function pushAction(string $type = "update", array|string $target = "#main"):ModelBase;
+
+    /****************************************************************
+     * > Config
      */
 
     /** Push confg
@@ -102,63 +202,23 @@ interface Model{
      */
     public function getConfig():array;
 
-    /**********************************************************************************
-     * _context
+    /****************************************************************
+     * > Cookies
+     */
+
+    /** Push Cookies
+     * @param bool $expand Allow to expend cookie when they have "_"
+     * @return ModelBase
+     */
+    public function pushCookies(bool $expand = false):ModelBase;
+
+    /****************************************************************
+     * > Context
      */
 
     /** Push info
      * @return ModelBase
      */
     public function pushContext():ModelBase;
-
-    /**********************************************************************************
-     * _user_interface
-     */
-
-    /** set Framwork Extra
-     * - Set extra data for some framwork
-     * @return ModelBase
-     */
-    public function setFrameworkExtra():ModelBase;
-
-    /** Push data in _user_interface
-     * @param array $data Data to push in use interface
-     * @param bool $recursive Merge recursively ?
-     * @return ModelBase
-     */
-    public function pushDataInUserInterface(array $data = [], bool $recursive = false):ModelBase;
-
-    /**********************************************************************************
-     * cookie
-     */
-
-    /** Push Cookies
-     * @param bool $expand Alloew to exepend cookie when they have "_"
-     * @return ModelBase
-     */
-    public function pushCookies(bool $expand = false):ModelBase;
-
-    /**********************************************************************************
-     * file (data)
-     */
-    
-    /** Get File
-     * @param string $name Name of the file your are looking for
-     * @param string $path Path of the file
-     * @param array $ext Extensions of the file
-     * @param bool $recursive Determine if finder search in subfolder
-     * @return ModelBase Return first file it finds
-     *  - path
-     *  - header
-     *      - Content-Type : "text/plain"
-     */
-    public function getFile(string $name = "", string $path = "", array $ext = [], bool $recursive = true):ModelBase;
-
-    /** Push file content
-     * @param string $path Path of the file
-     * @param array $header custom data to push in header
-     * @return ModelBase
-     */
-    function pushFile(string $path = "", array $header = []):ModelBase;
 
 }
