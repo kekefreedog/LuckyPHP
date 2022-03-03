@@ -28,18 +28,20 @@ interface Model{
     * Hooks
     */
 
-    /** Execute Model
-     * - Return data
-     * @return array
-     * @deprecated
-     */
-    public function execute():array;
-
     /** Run Model
      * - Run modal structure and return reponse
      * @return array
      */
     public function run():array;
+
+    /** Lock model schema
+     * @param bool|null $flag Value :
+     *  - null : Return current lock status
+     *  - true : Lock schema
+     *  - false : Unlock schema
+     * @return bool
+     */
+    public function lock(bool|null $flag = null):bool;
 
     /****************************************************************
      * > Errors
@@ -109,6 +111,9 @@ interface Model{
      * @param array $ext Extensions of the file
      * @param bool $recursive Determine if finder search in subfolder
      * @return ModelBase - Return first file found
+     *  - path
+     *  - header
+     *      - Content-Type : "text/plain"
      */
     public function getFile(string $name = "", string $path = "", array $ext = [], bool $recursive = true):ModelBase;
 
@@ -123,6 +128,7 @@ interface Model{
      * @param string $path Path of the file
      * @return ModelBase - Return first file found
      */
+    public function readFile(string $path = ""):ModelBase;
 
     /** Push file content
      * @param string $path Exemple : "/img/toto.png"

@@ -60,6 +60,36 @@ abstract class Header{
 
     }
 
+    /** Check if header of url exists
+     * @param string $url Needle url
+     * @return bool
+     */
+    public static function exist(string $url = ""):bool{
+
+        # Check if external url
+        $external_url = (strpos("://", $url) !== false) ?
+            true :
+                false;
+
+        # Get url header
+        $url_headers = @get_headers((
+            $external_url ? "" : __ROOT_APP__ ).$url
+        );
+
+        # Check url header result and set result
+        $result = (
+            !$url_headers || 
+            strpos('404 Not Found', $url_headers[0]) !== false
+        ) ?
+            false : 
+                true;
+
+        # Return result
+        return $result;
+
+    }
+
+
     /** Constant where is stored content type
      * 
      */
