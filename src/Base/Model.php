@@ -70,7 +70,7 @@ class Model{
     public function run():array{
 
         # Set result
-        $result = [];
+        $result = $this->schema;
 
         # Return result
         return $result;
@@ -243,7 +243,7 @@ class Model{
      * @param PDO $database If empty take the dafault bdd
      * @return Model
      */
-    public function pushRecordsQuery(array $sql_query = "", PDO $database):Model{
+    public function pushRecordsQuery(string $sql_query = "", PDO $database):Model{
 
         # Check lock
         if($this->lock()) return $this;
@@ -809,6 +809,6 @@ class Model{
         "header"=>  [
             "Content-Type"  =>  null
         ]
-    ]
+    ];
 
 }
