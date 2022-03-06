@@ -32,17 +32,21 @@ use LuckyPHP\Base\Model;
 class ModelTest extends TestCase{
 
     /** 
-     * 
+     * @author @kekefreedog
      */
     public function testContext(){
 
         # Set context
         Config::defineContext([],true,true);
 
+        # Check route key in context
+        $this->assertArrayHasKey('route', \__CONTEXT__);
+
     }
 
     /** 
      * @author @kekefreedog
+     * @depends testContext
      */
     public function testPushAndPop(){
 

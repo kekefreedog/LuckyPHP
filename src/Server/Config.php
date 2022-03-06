@@ -152,7 +152,11 @@ class Config{
         }else{
 
             # Get current route
-            $currentRoute = strtok($_SERVER["REQUEST_URI"], '?');
+            $currentRoute = strtok(
+                $_SERVER["REQUEST_URI"] ??
+                    basename($_SERVER['SCRIPT_FILENAME'], '.php'),
+                '?'
+            );
 
             # Set context
             $ctx = array_merge_recursive(
@@ -161,7 +165,8 @@ class Config{
                     "route"  =>  [
                         "current"   =>  $currentRoute,
                         "parents"   =>  Strings::decomposeRoute($currentRoute),
-                        "method"    =>  strtolower($_SERVER['REQUEST_METHOD']),
+                        "method"    =>  isset($_SERVER['REQUEST_METHOD']) ?     strtolower($_SERVER['REQUEST_METHOD']) :
+                            null,
                     ]
                 ],
                 $data   
