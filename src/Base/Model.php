@@ -240,10 +240,10 @@ class Model{
 
     /** Pushs records
      * @param string $records String for the query in bdd
-     * @param PDO $database If empty take the dafault bdd
+     * @param PDO|null $database If empty take the dafault bdd
      * @return Model
      */
-    public function pushRecordsQuery(string $sql_query = "", PDO $database):Model{
+    public function pushRecordsQuery(string $sql_query = "", PDO|null $database = null):Model{
 
         # Check lock
         if($this->lock()) return $this;
@@ -436,6 +436,25 @@ class Model{
 
         # Set data
         $this->schema = $result;
+
+        # Return Model
+        return $this;
+
+    }
+
+    /****************************************************************
+     * > Metadata
+     */
+
+    /** Set Pagination
+     * @param int $page Current page
+     * @param int $pagination Number of records by page
+     * @return model
+     */
+    public function setRecordsPagination(int $page = 1, int $pagination = 25):model{
+
+        # Check lock
+        if($this->lock()) return $this;
 
         # Return Model
         return $this;

@@ -92,7 +92,7 @@ interface Model{
      * @param string $database If empty take the dafault bdd
      * @return ModelBase
      */
-    public function pushRecordsQuery(array $sql_query = "", string $database = ""):ModelBase;
+    public function pushRecordsQuery(string $sql_query = "", \PDO|null $database = null):ModelBase;
 
     /****************************************************************
      * > File

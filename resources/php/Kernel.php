@@ -29,16 +29,6 @@ use LuckyPHP\Date\Chrono;
  */
 class Kernel{
 
-    /** Constructor
-     * 
-     */
-    public function __construct(){
-        
-        # Init cache
-        $this->cacheInit();
-
-    }
-
     /** Define Chrono
      * 
      */
@@ -130,16 +120,6 @@ class Kernel{
             true
         );
         
-    }
-
-    /** Initialisation of the cache
-     * 
-     */
-    private function cacheInit(){
-
-        # Set cache
-        $this->cache = null;
-
     }
 
 }

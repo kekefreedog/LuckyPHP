@@ -59,14 +59,6 @@ class App extends Kernel{
          */
         $this->contextSet();
 
-        /** Read the application kernel
-         * (search cache or generate it)
-         *  - Execute the construct function in parent
-         *  - Set cache in $this->cache
-         * 
-         */
-        parent::__construct();
-
         /** Execute the controller
          *  - Construct and register modal & middleware action
          * 
