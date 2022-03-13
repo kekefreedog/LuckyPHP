@@ -59,6 +59,9 @@ class Router{
      */
     public function run(string $request_uri = ""){
 
+        # Set result
+        $result = null;
+
         # Set request depending of request uri given
         $request = $request_uri ?
             $request_uri :
@@ -76,12 +79,10 @@ class Router{
         if($callback)
 
             # Run callback
-            new $callback();
+            $result = new $callback();
 
-        else
-
-            # return false
-            return false;
+        # return false
+        return $result;
 
     }
     

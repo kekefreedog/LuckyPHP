@@ -63,7 +63,7 @@ class App extends Kernel{
          *  - Construct and register modal & middleware action
          * 
          */
-        $package = new Controller();
+        $package = (new Controller())->package();
 
         /** Get view
          * 

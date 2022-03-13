@@ -7,6 +7,7 @@ Then just add router following bellow code :
 ```yml
 -
     name: Home
+    description: ""
     redirect: Help
     patterns:
         - /index/

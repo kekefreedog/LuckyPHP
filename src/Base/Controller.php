@@ -19,6 +19,7 @@ namespace  LuckyPHP\Base;
  */
 use Symfony\Component\HttpFoundation\Cookie;
 use LuckyPHP\Http\Request;
+use LuckyPHP\Code\Objects;
 use App\Model;
 
 /** Class Controller
@@ -27,349 +28,73 @@ use App\Model;
 abstract class Controller{
 
     /****************************************************************
-    * Parameters
-    */
+     * Hooks
+     */
 
-    /** content parameters
+    /** Run Package
      * 
      */
-    public $content;
+    public function run(){
 
-    /** Request
-     * 
-     */
-    public $request = null;
-
-    /****************************************************************
-    * Constructor
-    */
-    public function __construct(){
-
-        /** Get name of the current controller
-         * 
-         */
-        $this->getName();
-        
-        /** Define request
-         * 
-         */
-        $this->setRequest();
-        
-    }
-
-    /****************************************************************
-    * Methods
-    */
-
-    /** Get name
-     * @preturn void
-     */
-    private function getName():void {
-
-        # Set name
-        $this->name = substr(get_called_class(), 0, -6);
-
-    }
-
-    /** Set Request
-     * 
-     */
-    private function setRequest(){
-
-        $this->request = new Request();
+        # Read Push action
+        $this->readPush();
 
     }
 
     /****************************************************************
-    * Hooks
-    */
-
-    # Set Get Route Pattern
-    public function getRoutePattern():string{
-        return $this->route['current']['pattern'] ?? "";
-    }
-
-    # Set Get Route Method
-    public function getRouteMethod():string{
-        return $this->route['current']['method'] ?? "";
-    }
-
-    # Set Get Route Method
-    public function getRouteName():string{
-        return $this->route['current']['name'] ?? "";
-    }
-
-    # Set Get All Method Allowed
-    public function getRouteMethods():array{
-        return $this->route['config']['methods'] ?? [];
-    }
-
-    # Set Get All Patterns Allowed for the current root
-    public function getRoutePatterns():array{
-        return $this->route['config']['patterns'] ?? [];
-    }
-
-    # Get Content
-    public function getContent(){
-        return $this->content;
-    }
-
-    # Get Content Type
-    public function getResponseType():string{
-        return $this->route['config']['response']['default'];
-    }
-
-    # Get Content Type
-    public function getContentType():string{
-        return $this->route['config']['response']['Content-Type'];
-    }
-
-    /****************************************************************
-     * Model
+     * Methods
      */
-
-    # Parameters for model
-    public $model;
-
-    /** New Model
-     * Create new model object
-     * @return null
-     */
-    public function newModel():void{
-
-        # Set model
-        $this->model = new Model();
-
-    }
-
-    /** Get Model Result
-     * @return array
-     */
-    public function getModelResult():array{
-
-        # Return model result
-        return (array)$this->model->execute();
-
-    }
-
-    /****************************************************************
-     * Layouts (html constructor)
-     */
-
-    # Parameters for layouts
-    private $layouts = [];
     
-    /** Set Layouts to load
+    /** Read Push
      * 
      */
-    public function setLayouts(string|array $input = [], bool $merge = true):void{
+    public function readPush(){
 
-        # Check input
-        if(empty($input))
-            return;
-
-        # Convert input to array if not
-        if(!is_array($input))
-            $input = [$input];
-
-        # Set layouts
-        $this->layouts = $merge ?
-            $this->layouts + $input :
-                $input;
-
-    }
-
-    /** Get Layouts to load
-     * @return array
-     */
-    public function getLayouts():array{
-
-        # Return model result
-        return (array)$this->layouts ?? [];
-
-    }
-
-    /****************************************************************
-     * Data
-     */
-
-    # Data
-    private $data = [];
-
-    /** Set Data
-     * @param any $data
-     * @return void
-     */
-    public function setData($data):void{
-
-        # Set data
-        $this->data = $data;
-
-    }
-
-    /** Push Data
-     * @param any $data
-     * @param bool $recursive
-     * @return void
-     */
-    public function pushData($data, bool $recursive = false):void{
-
-        # Check recursive
-        $recursive ?
-
-            # Merge with recursive
-            $this->data = array_merge_recursive(
-                $this->data,
-                $data
-            ) : 
-                
-                # Merge
-                $this->data = array_merge(
-                    $this->data,
-                    $data
-                );
-
-    }
-
-    /** Push Data
-     * @param string $name
-     * @return array|bool|null|string
-     */
-    public function getData($name = "*"){
-
-        # Check name
-        if(!$name)
-            return null;
-
-        # Check if name is *
-        if($name == "*")
-            return $this->data;
-
-        # Else check if key match to name
-        return $this->data[$name] ?? null;
+        # Read all methods
+        $methods = Objects::get_class_methods($this);
         
+        # Iteration des methods
+        foreach($methods as $method):
+
+            # Set prefix
+            $method_prefix = substr($method->name, 0, 4);
+
+            # Set name
+            $method_name = substr($method->name, 4);
+
+            # Check if name has push and push is allowed
+            if($method_prefix == "push" && in_array($method_name, self::PUSH_ALLOWED))
+
+                # Ingest push
+                $this->_ingestPush($method_name);
+
+        endforeach;
+                
 
     }
 
     /****************************************************************
-     * Cookie
+     * Methods extra
      */
-
-    # Cookie
-    private $cookie = [];
-
-    /** Set Cookie
-     * @param string|array $input for cookie
-     * @return void
+    
+    /** Ingest push
+     * 
      */
-    public function setCookie(string|array $input = []):void{
-
-        # Check name and value is set
-        if(
-            !isset($input['name']) ||
-            !$input['name']
-        )
-            return;
-
-        # Check input and set data
-        $data = [
-            "name"      =>  $input['name'],
-            "value"     =>  $input['value'] ?? [],
-            "domain"    =>  $input['domain'] ?? $_SERVER['HTTP_HOST'],
-            "expires"   =>  $input['expires'] ?? strtotime('+ 1 year'),
-            "secure"    =>  $input['secure'] ?? false,
-        ];
-
-        # Create cookie
-        $cookie = Cookie::create($data['name'])
-            ->withValue($data['value'])
-            ->withExpires($data['expires'])
-            ->withDomain($data['domain'])
-            ->withSecure($data['secure'])
-        ;
-
-        # Push coolie to globam cookie
-        $this->cookie[] = $cookie;
-
-
-    }
-
-    /** Get Cookie
-     * @param string|array $input for cookie
-     * @return array
-     */
-    public function getCookie(string|array $input = []):array{
+    private function _ingestPush(string $method_name = ""){
 
         # Set result
-        $result = [];
-
-        # Check cookie
-        if($this->cookie === null)
-            return $result;
-
-        # Check if input is *
-        if($input == "*" || in_array("*", $input))
-            return $this->cookie;
-
-        # Convert input string to array
-        if(is_string($input))
-            $input = [$input];
-
-        # Iteration des cookie
-        foreach($this->cookie as $cookie)
-
-            # Iteration input
-            foreach($input as $current => $needle)
-
-                # Check if name match
-                if($cookie->getName() == $needle){
-
-                    # Push cookie in result
-                    $result[] = $cookie; 
-
-                    # Remove current needle
-                    unset($input[$current]);
-
-                }
+        $result = $this->{$method_name}();
 
     }
 
-    /** Remove Cookie
-     * @param string|array $input for cookie
-     * @return void
+    /****************************************************************
+     * Constants
      */
-    public function removeCookie(string|array $input = []):void{
 
-        # Check cookie
-        if($this->cookie === null || empty($input))
-            return;
-
-        # Convert input string to array
-        if(is_string($input))
-            $input = [$input];
-
-        # Iteration des cookie
-        foreach($this->cookie as $key => $cookie)
-
-            # Iteration input
-            foreach($input as $current => $needle)
-
-                # Check if name match
-                if($cookie->getName() == $needle)
-
-                    # Remove cookie and needle
-                    unset($this->cookie[$key], $input[$current]);
-
-    }
-
-    /** Clear cookie
-     * @return void
+    /** List of push methods allowed
+     * 
      */
-    public function clearCookie():void{
+    private const PUSH_ALLOWED = ["Records", "Context", "Cookies", "Config", "UserInterface", "Errors", "File"];
 
-        # Set cookie null
-        $this->cookie = null;
-
-    }
 
 }

@@ -72,7 +72,7 @@ Here the data include in the context by default.
 
 ### 5. Controller
 
-- First time, controller will generate the model schema and cache it if necessary
+- First time, controller will call the router and ask him what the action associate to the current request.
 
 #### I. Model
 

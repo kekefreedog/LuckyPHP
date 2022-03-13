@@ -9,4 +9,7 @@ sandbox
 
 # Composer
 composer.lock
+node_modules/.package-lock.json
+
+# Mac residue
 .DS_Store
