@@ -63,6 +63,48 @@ class Model{
     * Hooks
     */
 
+    /** Ingest data
+     * @param string|array|bool|null $data to ingest in schema
+     * @param string $folder folder where processed data
+     * @param string $action defines how processed input data :
+     *  - overwrite
+     *  - add
+     *  - remove
+     * @param bool $recursive Action recusively or note
+     * @return void
+     */
+    public function ingest(string|array|bool|null $data = [], string $folder = "", string $action = "overwrite", bool $recursive = true):void{
+
+        # Check action
+        if(!in_array($action, ["overwrite", "add", "remove"]))
+            return;
+
+        # Overwrite
+        if($action == "overwrite"){
+
+            # Set data
+            $this->schema[$folder] = $data;
+
+        }else
+        # Add
+        if($action == "add"){
+
+            # Merge data
+            $this->schema[$folder] = $recursive ?
+                array_merge_recursive($this->schema[$folder], $data) :
+                    array_merge($this->schema[$folder], $data);
+
+        }else
+        # Remove
+        if($action == "remove"){
+
+            # Remove folder from schema
+            unset($this->schema[$folder]);
+
+        }
+
+    }
+
     /** Run Model
      * - Run modal structure and return reponse
      * @return array

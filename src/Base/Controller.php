@@ -18,6 +18,7 @@ namespace  LuckyPHP\Base;
  * 
  */
 use Symfony\Component\HttpFoundation\Cookie;
+use ReflectionClassConstant;
 use LuckyPHP\Http\Request;
 use LuckyPHP\Code\Objects;
 use App\Model;
@@ -36,19 +37,69 @@ abstract class Controller{
      */
     public function run(){
 
+        # New model
+        $this->newModel();
+
+        # Read info
+        $this->readDetails();
+
         # Read Push action
         $this->readPush();
+
+        echo "<pre>";
+        print_r($this->model->run());
+        echo "</pre>";
 
     }
 
     /****************************************************************
      * Methods
      */
+
+    /** New model
+     * @param bool $force model to create new instance
+     */
+    private function newModel(bool $force = false){
+
+        # Check model is not valid
+        if( 
+            (
+                !isset($this->model) || 
+                !$this->model
+            ) ||
+            $force
+        )
+
+            # New model instance
+            $this->model = new Model();
+
+    }
+
+    /** Read info
+     * 
+     */
+    private function readDetails(){
+
+        # New reflection
+        $reflection = new ReflectionClassConstant($this, "DETAILS");
+
+        # Read constant
+        $constant = constant($reflection->class."::".$reflection->name);
+
+        # Check contant 
+        if(!$constant)
+            return;
+
+        /**
+         * Read info
+         */
+
+    }
     
     /** Read Push
      * 
      */
-    public function readPush(){
+    private function readPush(){
 
         # Read all methods
         $methods = Objects::get_class_methods($this);
@@ -78,12 +129,39 @@ abstract class Controller{
      */
     
     /** Ingest push
-     * 
+     * @param string $method_name NAme of the method to call
+     * @return void
      */
-    private function _ingestPush(string $method_name = ""){
+    private function _ingestPush(string $method_name = ""):void{
 
         # Set result
-        $result = $this->{$method_name}();
+        $result = $this->{"Push$method_name"}();
+
+        # Check result
+        if(!empty($result))
+
+            # Process data and check not false
+            if(
+                ($result = $this->_checkAndProcessPushData($result, $method_name)) !== false|null
+            )
+
+                # Push value in schema
+                $this->model->ingest($result, strtolower($method_name));
+
+    }
+
+    /** Check And Process Push Data
+     * @param string|array $data to check and process
+     * @param string $entity Type of data to processed
+     * @return string|array|bool|null
+     */
+    private function _checkAndProcessPushData(string|array $data = [], string $entity = ""):string|array|bool|null{
+
+        # Set result
+        $result = $data;
+
+        # Return result@
+        return $result;
 
     }
 
@@ -94,7 +172,7 @@ abstract class Controller{
     /** List of push methods allowed
      * 
      */
-    private const PUSH_ALLOWED = ["Records", "Context", "Cookies", "Config", "UserInterface", "Errors", "File"];
+    private const PUSH_ALLOWED = ["Records", "Errors", "File"];
 
 
 }

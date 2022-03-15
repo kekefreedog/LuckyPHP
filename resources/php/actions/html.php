@@ -38,7 +38,15 @@ class /**|name|**/Action extends ControllerBase implements ControllerInterface{
             'description'   =>  "/**|description|**/",
             'favicon'       =>  null
         ],
-        # 
+        # Extra
+        'extra' =>  [
+            'context'           =>  true,
+            'user_interface'    =>  true,
+            'cookies'           =>  true,
+            'config'            =>  [
+                'black_list'        =>  []
+            ],
+        ]
     ];
 
     /****************************************************************
@@ -57,54 +65,18 @@ class /**|name|**/Action extends ControllerBase implements ControllerInterface{
     /** Push records
      * 
      */
-    private function pushRecords(){
+    public function pushRecords(){
 
+        # Set result
+        $result = [
+            "entity"        =>  "message",
+            "attributes"    =>  [
+                'content'       =>  "Hello World !"
+            ]
+        ];
 
-
-    }
-
-    /** Push Context
-     * 
-     */
-    private function pushContext(){
-
-
-
-    }
-
-    /** Push Cookies
-     * 
-     */
-    private function pushCookies(){
-
-
-
-    }
-
-    /** Push Config
-     * 
-     */
-    private function pushConfig(){
-
-
-
-    }
-
-    /** Push UserInterface
-     * 
-     */
-    private function pushUserInterface(){
-
-
-
-    }
-
-    /** Push Errors
-     * 
-     */
-    private function pushErrors(){
-
-
+        # Return result
+        return $result;
 
     }
 
