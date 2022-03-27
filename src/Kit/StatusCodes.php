@@ -22,10 +22,14 @@ namespace  LuckyPHP\Kit;
  */
 class StatusCodes{
 
+    /****************************************************************
+     * Constants
+     */
+
     /** Constant wich list all errors
      * 
      */
-    const GET = [
+    public const GET = [
 
         # 200
 
@@ -122,7 +126,7 @@ class StatusCodes{
     /** Default
      * 
      */
-    const DEFAULT = [
+    public const DEFAULT = [
         "title" =>  "Error",
         "style" =>  [
             "color" =>  [

@@ -19,6 +19,10 @@ namespace  LuckyPHP\Kit;
  */
 class Config{
 
+    /****************************************************************
+     * Constants
+     */
+
     /** Default input
      * 
      */

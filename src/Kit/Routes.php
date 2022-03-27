@@ -19,6 +19,10 @@ namespace  LuckyPHP\Kit;
  */
 class Routes{
 
+    /****************************************************************
+     * Constants
+     */
+
     /** All the default routes
      *      
      */

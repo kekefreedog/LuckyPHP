@@ -28,8 +28,12 @@ use LuckyPHP\Server\Config;
  */
 class SanityCheck{
 
+    /****************************************************************
+     * Constructor
+     */
+
     /** Constructor
-     * @* @param Array $others Others checks to execute
+     * @param Array $others Others methods to call for sanity checks
      */
     public function __construct(array $others = []){
 
@@ -94,13 +98,13 @@ class SanityCheck{
     }
 
     /****************************************************************
-     * Check Methods
+     * Static methods
      */
 
     /** Check if the current host is allowed
-     * 
+     * @return void
      */
-    public static function checkHosts(){
+    public static function checkHosts():void{
 
         # Get server name
         $serverName = $_SERVER['SERVER_NAME'];
@@ -218,7 +222,7 @@ class SanityCheck{
         $finder = new Finder();
 
         # List of folder to check
-        $list = [ "css","js" ];
+        # $list = [ "css","js" ];
 
         # Push folders
         $folders = [];

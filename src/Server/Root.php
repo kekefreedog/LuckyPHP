@@ -20,6 +20,10 @@ namespace  LuckyPHP\Server;
  */
 class Root{
 
+    /****************************************************************
+     * Parameters
+     */
+
     /** serverRoot
      * 
      *  [
@@ -31,6 +35,31 @@ class Root{
      * 
      */
     private $serverRoot = [];
+
+    /****************************************************************
+     * Hooks
+     */
+
+    /** Get root
+     * 
+	 * @deprecated
+     */
+    public function get():array {
+
+        # Check serverRoot
+        if(empty($this->serverRoot))
+
+            # Set root
+            $this->set();
+
+        # Return root
+        return $this->serverRoot;
+
+    }
+
+    /****************************************************************
+     * Methods
+     */
 
     /** Set root
      *  
@@ -87,23 +116,6 @@ class Root{
 		$this->serverRoot['path'] = strpos($this->serverRoot['url'], 'localhost') !== false ?
 			'/'.explode('/', $_SERVER['REQUEST_URI'])[1] :
 				'';
-
-    }
-
-    /** Get root
-     * 
-	 * @deprecated
-     */
-    public function get():array {
-
-        # Check serverRoot
-        if(empty($this->serverRoot))
-
-            # Set root
-            $this->set();
-
-        # Return root
-        return $this->serverRoot;
 
     }
 

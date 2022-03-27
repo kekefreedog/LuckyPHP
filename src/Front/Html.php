@@ -14,15 +14,26 @@
  */
 namespace  LuckyPHP\Front;
 
+/** Dependances
+ * 
+ */
+use LuckyPHP\Http\Header;
+use LuckyPHP\File\Json;
+
 /** Class page
  * 
  */
 class Html{
 
-    /** Print Message
-     * 
+    /****************************************************************
+     * Static methods
      */
-    public static function print($message){
+
+    /** Print Message
+     * @param string $message Message to print
+     * @return void
+     */
+    public static function print(string $message = ""):void{
 
         # Start tag
         echo '<pre>';
@@ -34,4 +45,43 @@ class Html{
         echo '</pre>';
 
     }
+
+    /** Echo message
+     * @param string $message Message to echo
+     * @return void
+     */
+    public static function echo(string $message = ""):void{
+
+        # Start tag
+        echo '<pre>';
+
+        # Print message
+        echo($message);
+
+        # End tag
+        echo '</pre>';
+
+    }
+
+    /** Echo json message
+     * @param string $message Message to echo as json 
+     *  - if string given isn't a json, it will convert it
+     * @return void
+     */
+    public static function echoJson(string $message = "", bool $exit = false):void {
+
+        # Set header
+        header(Header::CONTENT_TYPE['json']);
+
+        # Echo message
+        echo Json::check($message) ?
+            $message :
+                json_encode($message);
+
+        # Check if exit
+        if($exit)
+            exit;
+
+    }
+
 }

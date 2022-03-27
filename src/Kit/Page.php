@@ -22,6 +22,10 @@ use Attribute;
  */
 class Page{
 
+    /****************************************************************
+     * Constants
+     */
+
     /** Default page config
      * 
      */

@@ -19,8 +19,11 @@ namespace  LuckyPHP\Kit;
  */
 class Structure{
 
+    /****************************************************************
+     * Constants
+     */
+
     /** Application structure
-     * 
      * 
      */
     public const APP = [

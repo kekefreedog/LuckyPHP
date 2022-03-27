@@ -30,6 +30,10 @@ use LuckyPHP\Front\Console;
  */
 class Exception extends \Exception implements InterfaceException{
 
+    /****************************************************************
+     * Parameters
+     */
+
     // Exception message
     protected $message = 'Unknown exception';
 
@@ -39,10 +43,15 @@ class Exception extends \Exception implements InterfaceException{
     // Source of the error LuckyPHP or App or Vendor
     public $source = null;
 
-    /** Construct
-     * 
+    /****************************************************************
+     * Constructor
      */
-    public function __construct($message = null, $code = 0){
+
+    /** Construct
+     * @param string|null $message Message for Exception
+     * @param int $code Code Http of the error
+     */
+    public function __construct(string|null $message = null, int $code = 0){
 
         // Check message
         if (!$message)
@@ -58,11 +67,15 @@ class Exception extends \Exception implements InterfaceException{
         $this->logWrite();
 
     }
+
+    /****************************************************************
+     * Hooks
+     */
    
     /** Convert to string
-     * 
+     * @return string
      */
-    public function __toString(){
+    public function __toString():string{
 
         # Code
         $code = $this->getCode();
@@ -93,46 +106,10 @@ class Exception extends \Exception implements InterfaceException{
 
     }
 
-    /** Set Source
-     * 
-     */
-    private function setSource(){
-
-        # Get file
-        $file = $this->getFile();
-
-        # Replace antislash
-        $file = str_replace('\\', '/', $file);
-
-        # Check if error comme from LuckyPhp
-        if(strpos($file, "/vendor/kekefreedog/luckyphp/") !== false){
-
-            # Set source
-            $this->source = 'luckyphp';
-
-        }else
-        # Check if error comme from Vendor
-        if(strpos($file, "/vendor/") !== false){
-
-            # Set source
-            $this->source = 'vendor';
-
-        }else
-        # Check if error comme from App
-        {
-
-            # Set source
-            $this->source = 'app';
-
-        }
-
-    }
-
     /** Get Source
-     * 
-     *
+     * @return string
      */
-    public function getSource(){
+    public function getSource():string{
 
         # Get source
         $result = $this->source;
@@ -143,51 +120,12 @@ class Exception extends \Exception implements InterfaceException{
     }
 
     /** Display message as error message in javascript console
-     * 
+     * @return void
      */
-    public function consoleError(){
+    public function consoleError():void{
 
         # Put error in console
         Console::error($this->__toString());
-
-    }
-
-    /** Log write
-     * 
-     */
-    private function logWrite(){
-
-        # Get source
-        $source = $this->getSource();
-
-        # Check source
-        if($source !== null){
-
-            # Path Log
-            $logPath = __ROOT_APP__."/logs/$source.log";
-
-            # Check log file exists
-            if(!file_exists($logPath)){
-
-                # Create log folder
-                mkdir(__ROOT_APP__."/logs/", 0777, true);
-
-                # Create file
-                file_put_contents($logPath, "");
-
-            }
-
-            # Check file permission
-            if(is_writable($logPath))
-
-                # Generate log
-                error_log(
-                    date("Y-m-d H:i:s", time())." : ".$this->__toString().PHP_EOL,
-                    3,
-                    $logPath
-                );
-
-        }
 
     }
 
@@ -195,7 +133,7 @@ class Exception extends \Exception implements InterfaceException{
      * @param bool $exit Exit php execution or not
      * @return void
      */
-    public function getHtml(bool $exit = true):void {
+    public function getHtml(bool $exit=true):void {
 
         # Get code
         $code = $this->getCode();
@@ -259,6 +197,84 @@ class Exception extends \Exception implements InterfaceException{
 
             # Exit
             exit();
+
+    }
+
+    /****************************************************************
+     * Methods
+     */
+
+    /** Set Source
+     * 
+     */
+    private function setSource(){
+
+        # Get file
+        $file = $this->getFile();
+
+        # Replace antislash
+        $file = str_replace('\\', '/', $file);
+
+        # Check if error comme from LuckyPhp
+        if(strpos($file, "/vendor/kekefreedog/luckyphp/") !== false){
+
+            # Set source
+            $this->source = 'luckyphp';
+
+        }else
+        # Check if error comme from Vendor
+        if(strpos($file, "/vendor/") !== false){
+
+            # Set source
+            $this->source = 'vendor';
+
+        }else
+        # Check if error comme from App
+        {
+
+            # Set source
+            $this->source = 'app';
+
+        }
+
+    }
+
+    /** Log write
+     * @return void
+     */
+    private function logWrite():void{
+
+        # Get source
+        $source = $this->getSource();
+
+        # Check source
+        if($source !== null){
+
+            # Path Log
+            $logPath = __ROOT_APP__."/logs/$source.log";
+
+            # Check log file exists
+            if(!file_exists($logPath)){
+
+                # Create log folder
+                mkdir(__ROOT_APP__."/logs/", 0777, true);
+
+                # Create file
+                file_put_contents($logPath, "");
+
+            }
+
+            # Check file permission
+            if(is_writable($logPath))
+
+                # Generate log
+                error_log(
+                    date("Y-m-d H:i:s", time())." : ".$this->__toString().PHP_EOL,
+                    3,
+                    $logPath
+                );
+
+        }
 
     }
 

@@ -29,8 +29,13 @@ use LuckyPHP\Http\Header;
  */
 class Config{
 
+    /****************************************************************
+     * Static methods
+     */
+
     /** Read config
-     * 
+     * @param $input Config to read
+     * @return array
      */
     public static function read($input = ""):array {
 
@@ -74,6 +79,7 @@ class Config{
 
     /** Check if config exists
      * @param string $configName
+     * @return bool
      */
     public static function exists(string $configName = ""):bool{
 
@@ -100,7 +106,7 @@ class Config{
      * ]
      * 
      * @param array $roots
-     * 
+     * @return bool
      */
     public static function defineRoots(array $roots = []):bool {
 
@@ -134,9 +140,9 @@ class Config{
      * @param array $data Data to push in context
      * @param bool $merge Merge or replace current data in context
      * @param bool $first_time First time we defined the context
-     * @param void
+     * @return void
      */
-    public static function defineContext(array $data = [], bool $merge = true, $first_time = false):void {
+    public static function defineContext(array $data = [], bool $merge = true, bool $first_time = false):void {
 
         # Get current context or define it
         $ctx = defined("__CONTEXT__") ? __CONTEXT__ : [];
@@ -317,7 +323,7 @@ class Config{
     /** Return supposed name for the current application
      * @return string
      */
-    public static function supposedNameGet(){
+    public static function supposedNameGet():string{
 
         # Set result
         $result = self::APP_NAME_DEFAULT;

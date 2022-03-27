@@ -19,6 +19,10 @@ namespace  LuckyPHP\Server;
  */
 abstract class Page{
 
+    /****************************************************************
+     * Parameters
+     */
+
     /** serverPage
      * 
      *  [
@@ -31,8 +35,12 @@ abstract class Page{
      */
     protected $serverPage = [];
 
+	/****************************************************************
+     * Methods
+     */
+
     /** Set Name
-     * 
+     * @deprecated
      */
     protected function nameSet(){
 

@@ -30,6 +30,10 @@ use \LuckyPHP\App\Setup;
  */
 class Cli{
 
+    /****************************************************************
+     * Parameters
+     */
+
     /** Current filename
      * 
      */
@@ -50,6 +54,10 @@ class Cli{
      */
     private $engine = null;
 
+    /****************************************************************
+     * Constructor
+     */
+
     /** Construct
      * 
      */
@@ -67,11 +75,193 @@ class Cli{
         
     }
 
+    /****************************************************************
+     * Hooks | CLI Message
+     */
+
+    /** Display Logo
+     * @return void
+     */
+    public function logo():void{
+
+        # check engine
+        if(!$this->engine)
+            return;
+
+        # Logo
+        $this->engine
+            ->br()
+            ->lightBlue("       __            __        ___  __ _____       ")
+            ->lightBlue("      / /  __ ______/ /____ __/ _ \/ // / _ \      ")
+            ->out      ("     / /__/ // / __/  '_/ // / ___/ _  / ___/      ")
+            ->lightBlue("    /____/\_,_/\__/_/\_\\_,  /_/  /_//_/_/         ")
+            ->lightBlue("                       /___/                       ")
+        ;
+
+    }
+
+    /** Welcome message
+     * @return void
+     */
+    public function welcome():void{
+
+        # check engine
+        if(!$this->engine)
+            return;
+
+        # Logo
+        $this->engine
+            ->br()
+            ->br()
+            ->backgroundLightBlue()->black("👋 Welcome to LuckyPHP, my own development toolkit")
+            ->backgroundLightBlue()->black("for developed beautiful web applications.         ")
+            ->br()
+        ;
+
+    }
+
+    /****************************************************************
+     * Hooks | Cli commands
+     */
+
+    /** Display successful message
+     * @param string $message Message to display
+     * @param bool $icon Icon to display before message
+     * @return void
+     */
+    public static function success(string $message = "", bool $icon = true):void{
+
+        # Check message
+        if(!$message && !$icon)
+            return;
+        
+        # Set result
+        $result = "";
+
+        # Push icon
+        if($icon)
+            $result .= "🟢";
+
+        # Push message
+        if($message)
+            $result ?
+                $result .= " $message" :
+                    $result = $message;
+
+        # New instance
+        $instance = new CLImate;
+
+        # Display message
+        $instance->green($result);
+
+
+    }
+
+    /** Display successful message
+     * @param string $message Message to display
+     * @param bool $icon Icon to display before message
+     * @return void
+     */
+    public static function error(string $message = "", bool $icon = true):void{
+
+        # Check message
+        if(!$message && !$icon)
+            return;
+    
+        # Set result
+        $result = "";
+
+        # Push icon
+        if($icon)
+            $result = "🔴";
+
+        # Push message
+        if($message)
+            $result ?
+                $result .= " $message" :
+                    $result = $message;
+
+        # New instance
+        $instance = new CLImate;
+
+        # Display message
+        $instance->red($result);
+
+    }
+
+    /** Display successful message
+     * @param string $message Message to display
+     * @param bool $icon Icon to display before message
+     * @return void
+     */
+    public static function warning(string $message = "", bool $icon = true):void{
+
+        # Check message
+        if(!$message && !$icon)
+            return;
+    
+        # Set result
+        $result = "";
+
+        # Push icon
+        if($icon)
+            $result = "🟠";
+
+        # Push message
+        if($message)
+            $result ?
+                $result .= " $message" :
+                    $result = $message;
+
+        # New instance
+        $instance = new CLImate;
+
+        # Display message
+        $instance->orange($result);
+
+    }
+
+    /** Display flanked message
+     * @param string $message Message to display
+     * @param string $flankCharacter Icon to display before message
+     * @return void
+     */
+    public static function flank(string $message = "", string $flankCharacter = "#"):void {
+
+        # Check message
+        if(!$message && !$flankCharacter)
+            return;
+
+        # New instance
+        $instance = new CLImate;
+
+        # Display flanked message
+        $instance->flank($message, $flankCharacter);
+
+    }
+
+    /** Breakline
+     * @return void
+     */
+    public static function br():void{
+
+        # New instance
+        $instance = new CLImate;
+
+        # Display message
+        $instance->br();
+
+    }
+
+    /****************************************************************
+     * Methods
+     */
+
     /** Initialize engine
      * Start CLI engine
      * @return void
      */
-    private function engineInit(){
+    private function engineInit():void {
 
         # Check if engine is already set
         if($this->engine == null)
@@ -89,7 +279,7 @@ class Cli{
      * @param array $result
      * @return void
      */
-    private function execute(array $inputs = [], array &$result = []):void{
+    private function execute(array $inputs = [], array &$result = []):void {
 
         # Check inputs not empty
         if(!empty($inputs))
@@ -189,58 +379,13 @@ class Cli{
     }
 
     /****************************************************************
-     * CLI Message
-     */
-
-    /** Display Logo
-     * @return void
-     */
-    public function logo():void{
-
-        # check engine
-        if(!$this->engine)
-            return;
-
-        # Logo
-        $this->engine
-            ->br()
-            ->lightBlue("       __            __        ___  __ _____       ")
-            ->lightBlue("      / /  __ ______/ /____ __/ _ \/ // / _ \      ")
-            ->out      ("     / /__/ // / __/  '_/ // / ___/ _  / ___/      ")
-            ->lightBlue("    /____/\_,_/\__/_/\_\\_,  /_/  /_//_/_/         ")
-            ->lightBlue("                       /___/                       ")
-        ;
-
-    }
-
-    /** Welcome message
-     * 
-     */
-    public function welcome(){
-
-        # check engine
-        if(!$this->engine)
-            return;
-
-        # Logo
-        $this->engine
-            ->br()
-            ->br()
-            ->backgroundLightBlue()->black("👋 Welcome to LuckyPHP, my own development toolkit")
-            ->backgroundLightBlue()->black("for developed beautiful web applications.         ")
-            ->br()
-        ;
-
-    }
-
-    /****************************************************************
-     * Rooter
+     * Methods | Rooter
      */
 
     /** Rooting to good action
-     * 
+     * @return void
      */
-    private function rooting(){
+    private function rooting():void {
 
         # Get current filename
         $this->filename = basename($_SERVER['SCRIPT_FILENAME'], '.php');
@@ -272,13 +417,13 @@ class Cli{
     }
 
     /****************************************************************
-     * Actions
+     * Methods | Actions
      */
 
     /** Update Routes
-     * 
+     * @return void
      */
-    private function updateRoutes(){
+    private function updateRoutes():void {
 
         # Welcome
         $this->welcome();
@@ -307,9 +452,9 @@ class Cli{
     }
 
     /** Setup action
-     * 
+     * @return void
      */
-    private function setup(){
+    private function setup():void {
 
         # Welcome
         $this->welcome();
@@ -411,9 +556,9 @@ class Cli{
     }
 
     /** Delete action
-     * 
+     * @return void
      */
-    private function delete(){
+    private function delete():void{
         
         # Break line
         $this->br();
@@ -483,9 +628,9 @@ class Cli{
     }
     
     /** Sandbox
-     *  
+     *  @return void
      */
-    private function sandbox(){
+    private function sandbox():void{
 
         # Welcome
         $this->welcome();
@@ -498,141 +643,16 @@ class Cli{
 
         $progress = $climate->progress()->total(100);
 
+        # Loop from 1 to 100 increment by 1
         for ($i = 0; $i <= 100; $i++) {
-        $progress->current($i);
 
-        // Simulate something happening
-        usleep(80000);
+            # Progress
+            $progress->current($i);
+
+            # Simulate something happening
+            usleep(80000);
+
         } 
-
-    }
-
-    /****************************************************************
-     * Cli commands
-     */
-
-    /** Display successful message
-     * @param string $message Message to display
-     * @param bool $icon Icon to display before message
-     */
-    public static function success(string $message = "", bool $icon = true){
-
-        # Check message
-        if(!$message && !$icon)
-            return;
-        
-        # Set result
-        $result = "";
-
-        # Push icon
-        if($icon)
-            $result .= "🟢";
-
-        # Push message
-        if($message)
-            $result ?
-                $result .= " $message" :
-                    $result = $message;
-
-        # New instance
-        $instance = new CLImate;
-
-        # Display message
-        $instance->green($result);
-
-
-    }
-
-    /** Display successful message
-     * @param string $message Message to display
-     * @param bool $icon Icon to display before message
-     */
-    public static function error(string $message = "", bool $icon = true){
-
-        # Check message
-        if(!$message && !$icon)
-            return;
-    
-        # Set result
-        $result;
-
-        # Push icon
-        if($icon)
-            $result = "🔴";
-
-        # Push message
-        if($message)
-            $result ?
-                $result .= " $message" :
-                    $result = $message;
-
-        # New instance
-        $instance = new CLImate;
-
-        # Display message
-        $instance->red($result);
-
-    }
-
-    /** Display successful message
-     * @param string $message Message to display
-     * @param bool $icon Icon to display before message
-     */
-    public static function warning(string $message = "", bool $icon = true){
-
-        # Check message
-        if(!$message && !$icon)
-            return;
-    
-        # Set result
-        $result;
-
-        # Push icon
-        if($icon)
-            $result = "🟠";
-
-        # Push message
-        if($message)
-            $result ?
-                $result .= " $message" :
-                    $result = $message;
-
-        # New instance
-        $instance = new CLImate;
-
-        # Display message
-        $instance->orange($result);
-
-    }
-
-    /** Display flanked message
-     * @param string $message Message to display
-     * @param string $flankCharacter Icon to display before message
-     */
-    public static function flank(string $message = "", string $flankCharacter = "#"){
-
-        # Check message
-        if(!$message && !$flankCharacter)
-            return;
-
-        # New instance
-        $instance = new CLImate;
-
-        # Display flanked message
-        $instance->flank($message, $flankCharacter);
-
-    }
-
-    /** Breakline
-     * 
-     */
-    public static function br(){
-
-        # New instance
-        $instance = new CLImate;
-
-        # Display message
-        $instance->br();
 
     }
 

@@ -19,6 +19,10 @@ namespace  LuckyPHP\Kit;
  */
 class Media{
 
+    /****************************************************************
+     * Constants
+     */
+
     /** Default page config
      * 
      */
