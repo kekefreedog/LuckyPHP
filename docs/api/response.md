@@ -91,6 +91,27 @@
                     "data-menu": "vertical-dark-menu",
                     "data-col": "2-columns"
                 }
+            },
+            "popup": {
+                "header": {
+                    "logo": {
+                        "img": null,
+                        "color": null
+                    },
+                    "content": {
+                        icon: {
+                            "class": null,
+                            "text": null
+                        },
+                        text: null,
+                        description: null
+                    },
+                    "actions": {
+                        "refresh": true,
+                        "options": true,
+                        "close": true
+                    }
+                }
             }
         },
         "action" : [
