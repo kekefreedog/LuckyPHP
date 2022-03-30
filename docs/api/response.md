@@ -99,12 +99,12 @@
                         "color": null
                     },
                     "content": {
-                        icon: {
+                        "icon": {
                             "class": null,
                             "text": null
                         },
-                        text: null,
-                        description: null
+                        "text": null,
+                        "description": null
                     },
                     "actions": {
                         "refresh": true,
