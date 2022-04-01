@@ -36,6 +36,7 @@ abstract class Viewer{
     public $cookie = null;
     public $render = null;
     public $content = null;
+    private $toDelete = [];
     public $response = null;
     public $callback = null;
     public $constructor = null;
@@ -206,6 +207,9 @@ abstract class Viewer{
                 # Set Content Type
                 $this->response->headers->set($name, $value);
 
+        # Item to delete
+        $this->toDelete[] = $file['path'];
+
     }
 
     /** Json constructor
@@ -293,6 +297,19 @@ abstract class Viewer{
 
         # Prepare response
         $this->response->send();
+
+        # Check to Delete 
+        if(!empty($this->toDelete));
+
+            # Iteration to delete
+            foreach($this->toDelete as $item)
+
+                # Check file
+                if(is_file($item))
+
+                    # Delete file
+                    unlink($item);
+            
 
     }
 
