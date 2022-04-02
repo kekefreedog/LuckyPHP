@@ -30,10 +30,10 @@ class Html{
      */
 
     /** Print Message
-     * @param string $message Message to print
+     * @param string|array $message Message to print
      * @return void
      */
-    public static function print(string $message = ""):void{
+    public static function print(string|array $message = ""):void{
 
         # Start tag
         echo '<pre>';

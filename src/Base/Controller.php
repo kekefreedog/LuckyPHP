@@ -59,7 +59,7 @@ abstract class Controller{
     /** New model
      * @param bool $force model to create new instance
      */
-    private function newModel(bool $force = false){
+    public function newModel(bool $force = false){
 
         # Check model is not valid
         if( 

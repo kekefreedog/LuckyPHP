@@ -42,8 +42,12 @@ interface Exception{
      * 
      */
     // formated string for display
-    public function __toString();
-    public function __construct($message = null, $code = 0);
+    public function __toString();    
+    /** Construct
+    * @param string|null $message Message for Exception
+    * @param int $code Code Http of the error
+    */
+    public function __construct(string|null $message = null, int $code = 0);
 
     /** Methods add
      * 

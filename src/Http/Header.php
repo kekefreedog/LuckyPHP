@@ -101,7 +101,10 @@ abstract class Header{
         # Json
         'json'  =>  'application/json',
         # Yaml
-        'yml'   =>  'application/x-yaml'
+        'yml'   =>  'application/x-yaml',
+        'yaml'  =>  'application/x-yaml',
+        # Yaml
+        'xml'   =>  'text/xml'
     ];
 
 }
