@@ -31,43 +31,47 @@
             }
         }
     ],
-    "records": [
-        {
-            "id": 1,
-            "entity": "project",
-            "attributes": {
-                "name": "Nom",
-                "description": "Description"
-            },
-            "relationships": {
-                "equipe": {
-                    "records": [
-                        {
-                            "id": 1,
-                            "entity": "equipe",
-                            "attributes": {
-                                "name": "Nom",
-                                "description": "Description"
-                            },
-                            "relationships": {}
-                        }
-                    ]
+    "records": {
+        "moduleName": [
+            {
+                "id": 1,
+                "entity": "project",
+                "attributes": {
+                    "name": "Nom",
+                    "description": "Description"
+                },
+                "relationships": {
+                    "equipe": {
+                        "records": [
+                            {
+                                "id": 1,
+                                "entity": "equipe",
+                                "attributes": {
+                                    "name": "Nom",
+                                    "description": "Description"
+                                },
+                                "relationships": {}
+                            }
+                        ]
+                    }
                 }
             }
-        }
-    ],
+        ]
+    },
     "_metadata": {
-        "page": 1,
-        "pagination": 25,
-        "page_count": 10,
-        "records_count": 10,
-        "records_total": 200,
-        "Links": {
-            "self": "/project?page=5&per_page=20",
-            "first": "/project?page=0&per_page=20",
-            "previous": "/project?page=4&per_page=20",
-            "next": "/project?page=6&per_page=20",
-            "last": "/project?page=26&per_page=20",
+        "moduleName": {
+            "page": 1,
+            "pagination": 25,
+            "page_count": 10,
+            "records_count": 10,
+            "records_total": 200,
+            "Links": {
+                "self": "/project?page=5&per_page=20",
+                "first": "/project?page=0&per_page=20",
+                "previous": "/project?page=4&per_page=20",
+                "next": "/project?page=6&per_page=20",
+                "last": "/project?page=26&per_page=20",
+            }
         }
     },
     "_user_interface": {
@@ -114,9 +118,10 @@
                 }
             }
         },
-        "action" : [
+        "actions" : [
             {
                 "type": "update",
+                "module": "moduleName",
                 "target": [
                     "#id.class", "span"
                 ]
