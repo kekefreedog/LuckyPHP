@@ -43,18 +43,21 @@ root:
     # All js vendors
     node_modules:
     # Differents assets organized by language of format 
-        css:
+    ressources:
             # Css files
-        hbs:
+        css:
             # Handlebarjs files
-        js:
+        hbs:
             # Js files
-        json:
+        js:
             # Json files
-        md:
+        json:
             # Markdown files
-        scss:
+        md:
             # Scss files
+        scss:
+            # Yaml files
+        yml:
     # Storage placed for compilated media with differents size or format...
     storage:
     # Stored all php script files; and js files which be compilated
@@ -68,13 +71,14 @@ root:
                 model.php # Workflow of models
                 viewer.php # Workflow of viewers
             # Component scr (for popup, module...)
-            component:
+            components:
                 login:
                     config.yml # Config which defined the dependances, specific information about the current component..
                     template.hbs # Template of html for front side
-                    style.scss # Template of css for front side
-                    style.css # Template of css for front side
-                    controller.php # Controlleur defining specific service for the current item
+                    styles.scss # Template of css for front side
+                    styles.css # Template of css for front side
+                    services.php # Controlleur defining specific service for back end link to current component
+                    events.js # List of events of component
                     extra:
                         placeholder.hbs # Placeholder when loading for front side
                         error.hbs # Error template response for front side
@@ -83,9 +87,10 @@ root:
                 home:
                     config.yml
                     template.hbs
-                    style.scss
-                    style.css
-                    controller.php
+                    styles.scss
+                    styles.css
+                    services.php
+                    events.js
                     extra:
                         placeholder.hbs
                         error.hbs
@@ -94,9 +99,10 @@ root:
                 header:
                     config.yml
                     template.hbs
-                    style.scss
-                    style.css
-                    controller.php
+                    styles.scss
+                    styles.css
+                    services.php
+                    events.js
                     extra:
                         placeholder.hbs
                         error.hbs
