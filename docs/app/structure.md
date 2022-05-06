@@ -1,4 +1,4 @@
-# ***Apip*** **Folder Structure**
+# ***App*** **Folder Structure**
 
 ## Description
 - Full details and good practice about how is organized your app.
