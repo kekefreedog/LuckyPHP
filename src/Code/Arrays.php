@@ -67,7 +67,7 @@ class Arrays{
 	
 		# Check array
 		if(is_array($array) && !empty($array))
-	;
+		
 			# Iteration
 			foreach($array as $k => $v)
 
