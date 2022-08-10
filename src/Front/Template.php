@@ -366,7 +366,7 @@ class Template{
 
             # Check appname and push it
             if($appName)
-                $result .= ($title ? " // " : "").ucwords(str_replace(["_","-"], " ", $appName));
+                $result .= ($title ? " | " : "").ucwords(str_replace(["_","-"], " ", $appName));
 
         }
 
