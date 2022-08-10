@@ -136,7 +136,7 @@ abstract class Viewer{
                     ->addHeadMeta()
                     ->addStylesheet()
                     ->addScriptJs("app")
-                    ->setTitle()
+                    ->setTitle($this->controller->callback->response())
                 ->addHeadEnd()
                 ->addBodyStart()
                     ->loadLayouts($this->controller->callback->getLayouts())
