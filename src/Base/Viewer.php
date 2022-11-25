@@ -305,7 +305,7 @@ abstract class Viewer{
             foreach($this->toDelete as $item)
 
                 # Check file
-                if(is_file($item))
+                if(is_file($item) && strpo($item, "resources/") === false)
 
                     # Delete file
                     unlink($item);
