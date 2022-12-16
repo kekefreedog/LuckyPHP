@@ -79,8 +79,10 @@ class Config{
 
         # Check if false
         if(
-            !$configName ||
-            !file_exists(__ROOT_APP__."config/$configName.yml")
+            !$configName || (
+                !file_exists(__ROOT_APP__."config/$configName.yml") &&
+                !file_exists(__ROOT_APP__.$configName)
+            )
         )
             return false;
 

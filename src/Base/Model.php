@@ -275,13 +275,27 @@ class Model{
             $configs = [$configs];
 
         # Iteration des configs
-        foreach($configs as $config)
+        foreach($configs as $config){
 
             # Check config exists
-            if(Config::exists($config))
+            if(Config::exists($config)){
 
-                # Get value of config file
-                $results[] = array_merge_recursive(Config::read($config), $results);
+                # Config content
+                $content = Config::read($config);
+
+                # Check $config
+                if(is_array($content) && !empty(array_keys($content)))
+
+                    # Iteration
+                    foreach($content as $k => $v)
+
+                        # Get value of config file
+                        $results[$k] = $content[$k];
+
+            }
+
+
+        }
                 
         # Check results
         if(!empty($results))
